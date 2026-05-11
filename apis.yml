@@ -1,0 +1,67 @@
+aid: clockify
+name: Clockify
+description: >-
+  Clockify is a time tracking and timesheet platform used by teams to track
+  work hours across projects with a timer, manual timesheets, kiosk
+  check-in, scheduling, expense tracking, invoicing, and reporting. The
+  Clockify REST API exposes workspaces, users, projects, tasks, tags,
+  clients, time entries, reports, and webhooks, and authenticates with an
+  X-Api-Key header.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Time Tracking
+  - Timesheets
+  - Productivity
+  - Project Management
+  - Reporting
+  - Invoicing
+  - Workforce
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/clockify/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: clockify:rest-api
+    name: Clockify REST API
+    description: >-
+      REST API for Clockify providing access to workspaces, users, groups,
+      projects, tasks, clients, tags, time entries, reports, webhooks, and
+      approvals. Authentication uses the X-Api-Key request header with a key
+      generated from a user's Profile Settings; the API enforces a 10
+      requests per second per key rate limit and regional URL prefixes for
+      EU and other workspaces.
+    humanURL: https://docs.clockify.me/
+    baseURL: https://api.clockify.me/api/v1
+    tags:
+      - Time Entries
+      - Workspaces
+      - Projects
+      - Tasks
+      - Users
+      - Reports
+      - Webhooks
+      - API Key
+    properties:
+      - type: Documentation
+        url: https://docs.clockify.me/
+      - type: API Overview
+        url: https://clockify.me/help/getting-started/clockify-api-overview
+      - type: Authentication
+        url: https://clockify.me/help/troubleshooting/general-api-troubleshooting/where-to-generate-api-key-for-account
+
+common:
+  - type: Website
+    url: https://clockify.me
+  - type: Documentation
+    url: https://docs.clockify.me/
+  - type: Pricing
+    url: https://clockify.me/pricing
+  - type: Sign Up
+    url: https://app.clockify.me/en/signup
+  - type: Help Center
+    url: https://clockify.me/help
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
