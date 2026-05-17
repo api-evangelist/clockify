@@ -58,7 +58,7 @@ common:
     url: https://docs.clockify.me/
   - type: Pricing
     url: https://clockify.me/pricing
-  - type: Sign Up
+  - type: SignUp
     url: https://app.clockify.me/en/signup
   - type: Help Center
     url: https://clockify.me/help
