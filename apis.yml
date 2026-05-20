@@ -52,6 +52,10 @@ apis:
         url: https://clockify.me/help/troubleshooting/general-api-troubleshooting/where-to-generate-api-key-for-account
 
 common:
+  - type: GitHubOrganization
+    url: https://github.com/clockify
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/clockify
   - type: Website
     url: https://clockify.me
   - type: Documentation
