@@ -66,6 +66,8 @@ common:
     url: https://app.clockify.me/en/signup
   - type: Help Center
     url: https://clockify.me/help
+  - type: LLMsTxt
+    url: https://api.clockify.me/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
