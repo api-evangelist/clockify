@@ -62,11 +62,11 @@ common:
     url: https://docs.clockify.me/
   - type: Pricing
     url: https://clockify.me/pricing
-  - type: SignUp
+  - type: Signup
     url: https://app.clockify.me/en/signup
   - type: Help Center
     url: https://clockify.me/help
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://api.clockify.me/llms.txt
 maintainers:
   - FN: Kin Lane
