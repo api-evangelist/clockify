@@ -52,6 +52,14 @@ apis:
         url: https://clockify.me/help/troubleshooting/general-api-troubleshooting/where-to-generate-api-key-for-account
 
 common:
+  - type: TrustCenter
+    url: security/clockify-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/clockify-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/clockify-domain-security.yml
+  - type: Authentication
+    url: authentication/clockify-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/clockify
   - type: LinkedIn
@@ -68,6 +76,8 @@ common:
     url: https://clockify.me/help
   - type: LlmsText
     url: https://api.clockify.me/llms.txt
+  - url: https://clockify.me/blog/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
