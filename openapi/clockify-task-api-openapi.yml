@@ -1,0 +1,743 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Task API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Task
+  x-displayName: Task
+paths:
+  /v1/workspaces/{workspaceId}/projects/{projectId}/tasks:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getTasks
+      parameters:
+      - description: Represents a project identifier across the system.
+        example: 25b687e29ae1f428e7ebe123
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: If provided, you'll get a filtered list of tasks that matches the provided string in their name.
+        example: Bugfixing
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+          description: If provided, you'll get a filtered list of tasks that matches the provided string in their name.
+          example: Bugfixing
+      - description: Flag to toggle on/off strict search mode. When set to true, search by name only will return tasks whose name exactly matches the string value given for the 'name' parameter. When set to false, results will also include tasks whose name contain the string value, but could be longer than the string value itself. For example, if there is a task with the name 'applications', and the search value is 'app', setting strict-name-search to true will not return that task in the results, whereas setting it to false will.
+        in: query
+        name: strict-name-search
+        required: false
+        schema:
+          type: boolean
+          description: Flag to toggle on/off strict search mode. When set to true, search by name only will return tasks whose name exactly matches the string value given for the 'name' parameter. When set to false, results will also include tasks whose name contain the string value, but could be longer than the string value itself. For example, if there is a task with the name 'applications', and the search value is 'app', setting strict-name-search to true will not return that task in the results, whereas setting it to false will.
+          default: false
+      - description: Filters search results whether task is active or not.
+        in: query
+        name: is-active
+        required: false
+        schema:
+          type: boolean
+          description: Filters search results whether task is active or not.
+          default: false
+      - description: Page number.
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+      - description: Page size.
+        example: 50
+        in: query
+        name: page-size
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      - description: Represents the column as criteria for sorting tasks.
+        example: ID
+        in: query
+        name: sort-column
+        required: false
+        schema:
+          type: string
+          enum:
+          - ID
+          - NAME
+      - description: Sorting mode.
+        example: ASCENDING
+        in: query
+        name: sort-order
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASCENDING
+          - DESCENDING
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskDtoV1'
+          description: OK
+      summary: Find tasks on a project
+      tags:
+      - Task
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: createTask
+      parameters:
+      - description: Represents a project identifier across the system.
+        example: 25b687e29ae1f428e7ebe123
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+      - description: Flag to set whether task will have assignee or none.
+        in: query
+        name: contains-assignee
+        required: false
+        schema:
+          type: boolean
+          description: Flag to set whether task will have assignee or none.
+          default: true
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskRequestV1'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDtoV1'
+          description: Created
+      summary: Add a new task on a project
+      tags:
+      - Task
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/tasks/{id}/cost-rate:
+    servers:
+    - url: https://api.clockify.me/api
+    put:
+      operationId: setTaskCostRate
+      parameters:
+      - description: Represents a project identifier across the system.
+        example: 25b687e29ae1f428e7ebe123
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a task identifier across the system.
+        example: 57a687e29ae1f428e7ebe107
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostRateRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDtoV1'
+          description: OK
+      summary: Update a task's cost rate
+      tags:
+      - Task
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/tasks/{id}/hourly-rate:
+    servers:
+    - url: https://api.clockify.me/api
+    put:
+      operationId: setTaskHourlyRate
+      parameters:
+      - description: Represents a project identifier across the system.
+        example: 25b687e29ae1f428e7ebe123
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a task identifier across the system.
+        example: 57a687e29ae1f428e7ebe107
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HourlyRateRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDtoV1'
+          description: OK
+      summary: Update a task's billable rate
+      tags:
+      - Task
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/tasks/{taskId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deleteTask
+      parameters:
+      - description: Represents a task identifier across the system.
+        example: 57a687e29ae1f428e7ebe107
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 25b687e29ae1f428e7ebe123
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDtoV1'
+          description: OK
+      summary: Delete a task from a project
+      tags:
+      - Task
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    get:
+      operationId: getTask
+      parameters:
+      - description: Represents a task identifier across the system.
+        example: 57a687e29ae1f428e7ebe107
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+      - description: Represents a project identifier across the system.
+        example: 25b687e29ae1f428e7ebe123
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDtoV1'
+          description: OK
+      summary: Get a task by id
+      tags:
+      - Task
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updateTask
+      parameters:
+      - description: Represents a task identifier across the system.
+        example: 57a687e29ae1f428e7ebe107
+        in: path
+        name: taskId
+        required: true
+        schema:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 25b687e29ae1f428e7ebe123
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+      - description: Flag to set whether task will have assignee or none.
+        in: query
+        name: contains-assignee
+        required: false
+        schema:
+          type: boolean
+          description: Flag to set whether task will have assignee or none.
+          default: true
+      - description: Represents a membership status.
+        example: ACTIVE
+        in: query
+        name: membership-status
+        required: false
+        schema:
+          type: string
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDtoV1'
+          description: OK
+      summary: Update a task on a project
+      tags:
+      - Task
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    RateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
+    UpdateTaskRequest:
+      required:
+      - name
+      type: object
+      properties:
+        assigneeId:
+          type: string
+          deprecated: true
+        assigneeIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of assignee ids for the task.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of assignee ids for the task.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+        billable:
+          type: boolean
+          description: Indicates whether a task is billable or not.
+          default: false
+        budgetEstimate:
+          minimum: 0
+          type: integer
+          description: Represents a task budget estimate as integer.
+          format: int64
+          example: 10000
+        estimate:
+          type: string
+          description: Represents a task duration estimate.
+          example: PT1H30M
+        name:
+          maxLength: 1000
+          minLength: 1
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+        status:
+          type: string
+          description: Represents task status.
+          example: DONE
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of user group ids for the task.
+          example:
+          - 67b687e29ae1f428e7ebe123
+          - 12s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of user group ids for the task.
+            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+    CostRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    TaskStatus:
+      type: object
+      description: Represents task status.
+      example: DONE
+      oneOf:
+      - type: string
+        enum:
+        - ACTIVE
+        - DONE
+        - ALL
+      properties:
+        ACTIVE:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        ALL:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        DONE:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        active:
+          type: boolean
+    HourlyRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an hourly rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    TaskRequestV1:
+      required:
+      - name
+      type: object
+      properties:
+        assigneeId:
+          type: string
+          deprecated: true
+        assigneeIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of assignee ids for the task.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of assignee ids for the task.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+        budgetEstimate:
+          minimum: 0
+          type: integer
+          description: Represents a task budget estimate as long.
+          format: int64
+          example: 10000
+        estimate:
+          type: string
+          description: Represents a task duration estimate in ISO-8601 format.
+          example: PT1H30M
+        id:
+          type: string
+          description: Represents task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+        name:
+          maxLength: 1000
+          minLength: 1
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+        status:
+          type: string
+          description: Represents task status.
+          example: DONE
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of user group ids for the task.
+          example:
+          - 67b687e29ae1f428e7ebe123
+          - 12s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of user group ids for the task.
+            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+    TaskDtoV1:
+      type: object
+      properties:
+        assigneeId:
+          type: string
+          deprecated: true
+        assigneeIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of assignee ids for the task.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of assignee ids for the task.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+        billable:
+          type: boolean
+          description: Indicates whether a task is billable or not.
+          default: false
+        budgetEstimate:
+          type: integer
+          description: Represents a task budget estimate as long.
+          format: int64
+          example: 10000
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        duration:
+          type: string
+          description: Represents a task duration.
+          example: PT1H30M
+        estimate:
+          type: string
+          description: Represents a task duration estimate.
+          example: PT1H30M
+        hourlyRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        id:
+          type: string
+          description: Represents task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+        name:
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of user group ids for the task.
+          example:
+          - 67b687e29ae1f428e7ebe123
+          - 12s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of user group ids for the task.
+            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

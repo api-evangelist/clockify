@@ -1,0 +1,1621 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Project API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Project
+  x-displayName: Project
+paths:
+  /v1/workspaces/{workspaceId}/projects:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getProjects
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: If provided, you'll get a filtered list of projects that contains the provided string in the project name.
+        example: Software Development
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+          description: If provided, you'll get a filtered list of projects that contains the provided string in the project name.
+          example: Software Development
+      - description: Flag to toggle on/off strict search mode. When set to true, search by name will only return projects whose name exactly matches the string value given for the 'name' parameter. When set to false, results will also include projects whose name contain the string value, but could be longer than the string value itself. For example, if there is a project with the name 'applications', and the search value is 'app', setting strict-name-search to true will not return that project in the results, whereas setting it to false will.
+        in: query
+        name: strict-name-search
+        required: false
+        schema:
+          type: boolean
+          description: Flag to toggle on/off strict search mode. When set to true, search by name will only return projects whose name exactly matches the string value given for the 'name' parameter. When set to false, results will also include projects whose name contain the string value, but could be longer than the string value itself. For example, if there is a project with the name 'applications', and the search value is 'app', setting strict-name-search to true will not return that project in the results, whereas setting it to false will.
+          default: false
+      - description: If provided and set to true, you'll only get archived projects. If omitted, you'll get both archived and non-archived projects.
+        in: query
+        name: archived
+        required: false
+        schema:
+          type: boolean
+          description: If provided and set to true, you'll only get archived projects. If omitted, you'll get both archived and non-archived projects.
+          default: false
+      - description: If provided and set to true, you'll only get billable projects. If omitted, you'll get both billable and non-billable projects.
+        in: query
+        name: billable
+        required: false
+        schema:
+          type: boolean
+          description: If provided and set to true, you'll only get billable projects. If omitted, you'll get both billable and non-billable projects.
+          default: false
+      - description: If provided, you'll get a filtered list of projects that contain clients which match any of the provided ids.
+        example:
+        - 5a0ab5acb07987125438b60f
+        - 64c777ddd3fcab07cfbb210c
+        in: query
+        name: clients
+        required: false
+        schema:
+          uniqueItems: true
+          type: array
+          description: If provided, you'll get a filtered list of projects that contain clients which match any of the provided ids.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: If provided, you'll get a filtered list of projects that contain clients which match any of the provided ids.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+      - description: If set to true, you'll get a filtered list of projects that contain clients which match the provided id(s) in 'clients' field. If set to false, you'll get a filtered list of projects which do NOT contain clients that match the provided id(s) in 'clients' field.
+        in: query
+        name: contains-client
+        required: false
+        schema:
+          type: boolean
+          description: If set to true, you'll get a filtered list of projects that contain clients which match the provided id(s) in 'clients' field. If set to false, you'll get a filtered list of projects which do NOT contain clients that match the provided id(s) in 'clients' field.
+          default: true
+      - description: Filters projects based on client status provided.
+        example: ACTIVE
+        in: query
+        name: client-status
+        required: false
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+      - description: If provided, you'll get a filtered list of projects that contain users which match any of the provided ids.
+        example:
+        - 5a0ab5acb07987125438b60f
+        - 64c777ddd3fcab07cfbb210c
+        in: query
+        name: users
+        required: false
+        schema:
+          uniqueItems: true
+          type: array
+          description: If provided, you'll get a filtered list of projects that contain users which match any of the provided ids.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: If provided, you'll get a filtered list of projects that contain users which match any of the provided ids.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+      - description: If set to true, you'll get a filtered list of projects that contain users which match the provided id(s) in 'users' field. If set to false, you'll get a filtered list of projects which do NOT contain users which match the provided id(s) in 'users' field.
+        in: query
+        name: contains-user
+        required: false
+        schema:
+          type: boolean
+          description: If set to true, you'll get a filtered list of projects that contain users which match the provided id(s) in 'users' field. If set to false, you'll get a filtered list of projects which do NOT contain users which match the provided id(s) in 'users' field.
+          default: true
+      - description: Filters projects based on user status provided.
+        example: ALL
+        in: query
+        name: user-status
+        required: false
+        schema:
+          type: string
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+      - description: Filters projects based on whether they are used as a template or not.
+        in: query
+        name: is-template
+        required: false
+        schema:
+          type: boolean
+          description: Filters projects based on whether they are used as a template or not.
+          default: false
+      - description: Sorts the results by the given column/field.
+        example: NAME
+        in: query
+        name: sort-column
+        required: false
+        schema:
+          type: string
+          enum:
+          - ID
+          - NAME
+          - CLIENT_NAME
+          - DURATION
+          - BUDGET
+          - PROGRESS
+      - description: Sorting mode.
+        example: ASCENDING
+        in: query
+        name: sort-order
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASCENDING
+          - DESCENDING
+      - description: If set to true, results will contain additional information about the project.
+        in: query
+        name: hydrated
+        required: false
+        schema:
+          type: boolean
+          description: If set to true, results will contain additional information about the project.
+          default: false
+      - description: Page number.
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+      - description: Page size.
+        example: 50
+        in: query
+        name: page-size
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      - description: Valid set of string(s). If provided, you'll get a filtered list of projects that matches the provided access.
+        example: PUBLIC
+        in: query
+        name: access
+        required: false
+        schema:
+          type: string
+          enum:
+          - PUBLIC
+          - PRIVATE
+      - description: Represents the maximum number of expenses to fetch.
+        example: 10
+        in: query
+        name: expense-limit
+        required: false
+        schema:
+          type: integer
+          description: Represents the maximum number of expenses to fetch.
+          format: int32
+          example: 10
+          default: 20
+      - description: If provided, you will get expenses dated before the provided value in yyyy-MM-dd format.
+        example: '2024-12-31'
+        in: query
+        name: expense-date
+        required: false
+        schema:
+          type: string
+          description: If provided, you will get expenses dated before the provided value in yyyy-MM-dd format.
+          example: '2024-12-31'
+      - description: If provided, you'll get a filtered list of projects that contain groups which match any of the provided ids.
+        example:
+        - 5a0ab5acb07987125438b60f
+        - 64c777ddd3fcab07cfbb210c
+        in: query
+        name: userGroups
+        required: false
+        schema:
+          uniqueItems: true
+          type: array
+          description: If provided, you'll get a filtered list of projects that contain groups which match any of the provided ids.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: If provided, you'll get a filtered list of projects that contain groups which match any of the provided ids.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+      - description: If set to true, you'll get a filtered list of projects that contain groups which match the provided id(s) in 'userGroups' field. If set to false, you'll get a filtered list of projects which do NOT contain groups which match the provided id(s) in 'userGroups' field.
+        in: query
+        name: contains-group
+        required: false
+        schema:
+          type: boolean
+          description: If set to true, you'll get a filtered list of projects that contain groups which match the provided id(s) in 'userGroups' field. If set to false, you'll get a filtered list of projects which do NOT contain groups which match the provided id(s) in 'userGroups' field.
+          default: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectDtoV1'
+          description: OK
+      summary: Get all projects on a workspace
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: createNewProject
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: Created
+      summary: Add a new project
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/from-template:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: createProjectFromTemplate
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectFromTemplateV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Create project from a template
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deleteProject
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Delete a project from a workspace
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    get:
+      operationId: getProject
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      - description: If set to true, results will contain additional information about the project
+        in: query
+        name: hydrated
+        required: false
+        schema:
+          type: boolean
+          description: If set to true, results will contain additional information about the project
+          default: false
+      - description: If provided, you'll get a filtered list of custom fields that matches the provided string with the custom field entity type.
+        example: TIMEENTRY
+        in: query
+        name: custom-field-entity-type
+        required: false
+        schema:
+          type: string
+          default: TIMEENTRY
+      - description: Represents the maximum number of expenses to fetch.
+        example: 10
+        in: query
+        name: expense-limit
+        required: false
+        schema:
+          type: integer
+          description: Represents the maximum number of expenses to fetch.
+          format: int32
+          example: 10
+          default: 20
+      - description: If provided, you will get expenses dated before the provided value in yyyy-MM-dd format.
+        example: '2024-12-31'
+        in: query
+        name: expense-date
+        required: false
+        schema:
+          type: string
+          description: If provided, you will get expenses dated before the provided value in yyyy-MM-dd format.
+          example: '2024-12-31'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoV1'
+          description: OK
+      summary: Find a project by ID
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updateProject
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Update a project on a workspace
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/estimate:
+    servers:
+    - url: https://api.clockify.me/api
+    patch:
+      operationId: updateEstimate
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectEstimateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Update project estimate
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/memberships:
+    servers:
+    - url: https://api.clockify.me/api
+    patch:
+      operationId: updateMemberships
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectMembershipsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Update project memberships
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: addUsersToProject
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddUsersToProjectRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Assign/remove users to/from the project
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/template:
+    servers:
+    - url: https://api.clockify.me/api
+    patch:
+      operationId: updateIsProjectTemplate
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchProjectTemplateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Update a project template
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/users/{userId}/cost-rate:
+    servers:
+    - url: https://api.clockify.me/api
+    put:
+      operationId: addUsersCostRate
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      - description: Represents a user identifier across the system.
+        example: 4a0ab5acb07987125438b60f
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+          description: Represents a user identifier across the system.
+          example: 4a0ab5acb07987125438b60f
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostRateRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Update project user's cost rate
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/projects/{projectId}/users/{userId}/hourly-rate:
+    servers:
+    - url: https://api.clockify.me/api
+    put:
+      operationId: addUsersHourlyRate
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a project identifier across the system.
+        example: 5b641568b07987035750505e
+        in: path
+        name: projectId
+        required: true
+        schema:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+      - description: Represents a user identifier across the system.
+        example: 4a0ab5acb07987125438b60f
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+          description: Represents a user identifier across the system.
+          example: 4a0ab5acb07987125438b60f
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostRateRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDtoImplV1'
+          description: OK
+      summary: Update a project user's billable rate
+      tags:
+      - Project
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    PatchProjectTemplateRequest:
+      type: object
+      properties:
+        isTemplate:
+          type: boolean
+          description: Indicates whether project is a template or not.
+          default: false
+    CostRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    ProjectRequest:
+      required:
+      - name
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether project is billable or not.
+          default: false
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 9t641568b07987035750704
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        costRate:
+          $ref: '#/components/schemas/CostRateRequestV1'
+        estimate:
+          $ref: '#/components/schemas/EstimateRequest'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequestV1'
+        isPublic:
+          type: boolean
+          description: Indicates whether project is public or not.
+          default: false
+        memberships:
+          type: array
+          description: Represents a list of membership request objects.
+          items:
+            $ref: '#/components/schemas/MembershipRequest'
+        name:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        note:
+          maxLength: 16384
+          type: string
+          description: Represents project note.
+          example: This is a sample note for the project.
+        tasks:
+          type: array
+          description: Represents a list of task request objects.
+          items:
+            $ref: '#/components/schemas/TaskRequest'
+    TimeEstimateDto:
+      type: object
+      properties:
+        active:
+          type: boolean
+        estimate:
+          type: string
+          description: Represents project duration in milliseconds.
+          example: '60000'
+        includeNonBillable:
+          type: boolean
+        resetOption:
+          type: string
+          description: Represents a reset option enum.
+          example: WEEKLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents a project time estimate object.
+    EstimateWithOptionsRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Flag whether to set estimate as active or not.
+          default: false
+        estimate:
+          minimum: 0
+          type: integer
+          description: Represents an estimate as long.
+          format: int64
+          example: 10000
+        includeExpenses:
+          type: boolean
+          description: Flag whether to include billable expenses.
+          default: false
+        resetOption:
+          type: string
+          description: Represents a reset option enum.
+          example: MONTHLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents estimate with options request object.
+    CreateProjectFromTemplateV1:
+      required:
+      - name
+      - templateProjectId
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Represents a client identifier across the system.
+          example: 9t641568b07987035750704
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        isPublic:
+          type: boolean
+          description: Indicates whether the project is public or not.
+          default: false
+        name:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        templateProjectId:
+          minLength: 1
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+    CostRateRequest:
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 2000
+        since:
+          type: string
+          description: Represents a datetime in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+        sinceAsInstant:
+          type: string
+          format: date-time
+      description: Represents a cost rate request object.
+    RateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
+    TimeEstimateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Flag whether to include only active or inactive estimates.
+          default: false
+        estimate:
+          type: string
+          description: Represents a time duration in ISO-8601 format.
+          example: PT1H30M
+        includeNonBillable:
+          type: boolean
+          description: Flag whether to include non-billable expenses.
+          default: false
+        resetOption:
+          type: string
+          description: Represents a reset option enum.
+          example: MONTHLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents project time estimate request object.
+    EstimateDtoV1:
+      type: object
+      properties:
+        estimate:
+          type: string
+          description: Represents a task duration estimate.
+          example: PT1H30M
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents a project estimate object.
+    HourlyRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an hourly rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    UpdateProjectRequest:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether project is archived or not.
+          default: false
+        billable:
+          type: boolean
+          description: Indicates whether project is billable or not.
+          default: false
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 9t641568b07987035750704
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        costRate:
+          $ref: '#/components/schemas/CostRateRequestV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequestV1'
+        isPublic:
+          type: boolean
+          description: Indicates whether project is public or not.
+          default: false
+        name:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        note:
+          maxLength: 16384
+          type: string
+          description: Represents project note.
+          example: This is a sample note for the project.
+    UpdateProjectMembershipsRequest:
+      required:
+      - memberships
+      type: object
+      properties:
+        memberships:
+          type: array
+          description: Represents a list of users with id and rates request objects.
+          items:
+            $ref: '#/components/schemas/UserIdWithRatesRequest'
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+    UserGroupIdsSchema:
+      type: object
+      properties:
+        contains:
+          type: string
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents ids upon which filtering is performed.
+          example:
+          - 5b715612b079875110791111
+          - 5b715612b079875110791222
+          items:
+            type: string
+            description: Represents ids upon which filtering is performed.
+            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
+        status:
+          type: string
+          description: Represents user status.
+          example: ALL
+          enum:
+          - ALL
+          - ACTIVE
+          - INACTIVE
+      description: Provide list with user group ids and corresponding status.
+    TaskRequest:
+      required:
+      - name
+      type: object
+      properties:
+        assigneeId:
+          type: string
+          deprecated: true
+        assigneeIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of assignee ids for the task.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of assignee ids for the task.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+        billable:
+          type: boolean
+          description: Flag to set whether task is billable or not
+          default: false
+        budgetEstimate:
+          minimum: 0
+          type: integer
+          format: int64
+          example: 10000
+        costRate:
+          $ref: '#/components/schemas/CostRateRequest'
+        estimate:
+          type: string
+          description: Represents a task duration estimate.
+          example: PT1H30M
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequest'
+        id:
+          type: string
+          description: Represents task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+        name:
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        status:
+          type: string
+          example: DONE
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of user group ids for the task.
+          example:
+          - 67b687e29ae1f428e7ebe123
+          - 12s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of user group ids for the task.
+            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+      description: Represents a list of task request objects.
+    MembershipRequest:
+      type: object
+      properties:
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequest'
+        membershipStatus:
+          type: string
+          description: Represents a membership status enum.
+          example: PENDING
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
+          type: string
+          description: Represents membership type enum.
+          example: PROJECT
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 12t687e29ae1f428e7ebe202
+      description: Represents a list of membership request objects.
+    EstimateResetDto:
+      type: object
+      properties:
+        dayOfMonth:
+          type: integer
+          format: int32
+        dayOfWeek:
+          type: string
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        hour:
+          type: integer
+          format: int32
+        interval:
+          type: string
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        month:
+          type: string
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+      description: Represents project estimate reset object
+    HourlyRateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents an hourly rate object.
+    UserIdWithRatesRequest:
+      required:
+      - userId
+      type: object
+      properties:
+        costRate:
+          $ref: '#/components/schemas/CostRateRequestV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequestV1'
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 12t687e29ae1f428e7ebe202
+      description: Represents a list of users with id and rates request objects.
+    EstimateResetRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+        dayOfMonth:
+          maximum: 31
+          minimum: 1
+          type: integer
+          description: Represents a day of the month.
+          format: int32
+          example: 20
+        dayOfWeek:
+          type: string
+          description: Represents a day of the week.
+          example: MONDAY
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        hour:
+          maximum: 23
+          minimum: 0
+          type: integer
+          description: Represents an hour of the day in 24 hour time format.
+          format: int32
+          example: 15
+        interval:
+          type: string
+          description: Represents a reset option enum.
+          example: MONTHLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        isActive:
+          type: boolean
+          writeOnly: true
+        month:
+          type: string
+          description: Represents a month enum.
+          example: FEBRUARY
+          enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+      description: Represents estimate reset request object.
+    MembershipDtoV1:
+      type: object
+      properties:
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateDtoV1'
+        membershipStatus:
+          type: string
+          description: Represents a membership status enum.
+          example: PENDING
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
+          type: string
+          description: Represents membership type enum.
+          example: PROJECT
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        targetId:
+          type: string
+          description: Represents target identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+      description: Represents a list of membership objects.
+    ProjectEstimateRequest:
+      type: object
+      properties:
+        budgetEstimate:
+          $ref: '#/components/schemas/EstimateWithOptionsRequest'
+        estimateReset:
+          $ref: '#/components/schemas/EstimateResetRequest'
+        timeEstimate:
+          $ref: '#/components/schemas/TimeEstimateRequest'
+    HourlyRateRequest:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents a cost rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a datetime in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+      description: Represents an hourly rate request object.
+    ProjectDtoV1:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether project is archived or not.
+          default: false
+        billable:
+          type: boolean
+          description: Indicates whether project is billable or not.
+          default: false
+        budgetEstimate:
+          $ref: '#/components/schemas/EstimateWithOptionsDto'
+        color:
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        duration:
+          type: string
+          description: Represents project duration in milliseconds.
+          example: '60000'
+        estimate:
+          $ref: '#/components/schemas/EstimateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        id:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        memberships:
+          type: array
+          description: Represents a list of membership objects.
+          items:
+            $ref: '#/components/schemas/MembershipDtoV1'
+        name:
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        note:
+          type: string
+          description: Represents project note.
+          example: This is a sample note for the project.
+        public:
+          type: boolean
+          description: Indicates whether project is public or not.
+          default: false
+        template:
+          type: boolean
+          description: Indicates whether project is a template or not.
+          default: false
+        timeEstimate:
+          $ref: '#/components/schemas/TimeEstimateDto'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    AddUsersToProjectRequestV1:
+      type: object
+      properties:
+        remove:
+          type: boolean
+          description: Setting this flag to 'true' will remove the given users from the project.
+          default: false
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+        userIds:
+          type: array
+          description: Represents array of user ids which should be added/removed.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents array of user ids which should be added/removed.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+    EstimateWithOptionsDto:
+      type: object
+      properties:
+        active:
+          type: boolean
+        estimate:
+          type: integer
+          description: Represents an estimate as long.
+          format: int64
+          example: 600000
+        includeExpenses:
+          type: boolean
+          description: Indicates whether estimate includes non-billable or not.
+          default: false
+        resetOption:
+          type: string
+          description: Represents a reset option enum.
+          example: WEEKLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents a project budget estimate object.
+    ProjectDtoImplV1:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether project is archived or not.
+          default: false
+        billable:
+          type: boolean
+          description: Indicates whether project is billable or not.
+          default: false
+        budgetEstimate:
+          $ref: '#/components/schemas/EstimateWithOptionsDto'
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 9t641568b07987035750704
+        clientName:
+          type: string
+          description: Represents client name.
+          example: Client X
+        color:
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        duration:
+          type: string
+          description: Represents project duration in milliseconds.
+          example: '60000'
+        estimate:
+          $ref: '#/components/schemas/EstimateDtoV1'
+        estimateReset:
+          $ref: '#/components/schemas/EstimateResetDto'
+        hourlyRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        id:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        isPublic:
+          type: boolean
+          writeOnly: true
+        isTemplate:
+          type: boolean
+          writeOnly: true
+        memberships:
+          type: array
+          description: Represents a list of membership objects.
+          items:
+            $ref: '#/components/schemas/MembershipDtoV1'
+        name:
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        note:
+          type: string
+          description: Represents project note.
+          example: This is a sample note for the project.
+        public:
+          type: boolean
+          description: Indicates whether project is public or not.
+          default: false
+        template:
+          type: boolean
+          description: Indicates whether project is a template or not.
+          default: false
+        timeEstimate:
+          $ref: '#/components/schemas/TimeEstimateDto'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    EstimateRequest:
+      type: object
+      properties:
+        estimate:
+          type: string
+          description: Represents a time duration in ISO-8601 format.
+          example: PT1H30M
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents an estimate request object.
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

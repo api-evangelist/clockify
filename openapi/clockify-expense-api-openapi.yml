@@ -1,0 +1,990 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Expense API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Expense
+  x-displayName: Expense
+paths:
+  /v1/workspaces/{workspaceId}/expenses:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getExpenses
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Page number.
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+      - description: Page size.
+        example: 50
+        in: query
+        name: page-size
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      - description: If provided, you'll get a filtered list of expenses which match the provided string in the user ID linked to the expense.
+        example: 5a0ab5acb07987125438b60f
+        in: query
+        name: user-id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpensesAndTotalsDtoV1'
+          description: OK
+      summary: Get all expenses on a workspace
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: createExpense
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseV1Request'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDtoV1'
+          description: Created
+      summary: Create an expense
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/expenses/categories:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getCategories
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents the column name to be used as sorting criteria.
+        example: NAME
+        in: query
+        name: sort-column
+        required: false
+        schema:
+          type: string
+          enum:
+          - NAME
+      - description: Represents the sorting order.
+        example: ASCENDING
+        in: query
+        name: sort-order
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASCENDING
+          - DESCENDING
+      - description: Page number.
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+      - description: Page size.
+        example: 50
+        in: query
+        name: page-size
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      - description: Flag to filter results based on whether category is archived or not.
+        example: true
+        in: query
+        name: archived
+        required: false
+        schema:
+          type: boolean
+          description: Flag to filter results based on whether category is archived or not.
+          example: true
+          default: false
+      - description: If provided, you'll get a filtered list of expense categories that matches the provided string in their name.
+        example: procurement
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+          description: If provided, you'll get a filtered list of expense categories that matches the provided string in their name.
+          example: procurement
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCategoriesWithCountDtoV1'
+          description: OK
+      summary: Get all expense categories
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: createExpenseCategory
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseCategoryV1Request'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCategoryDtoV1'
+          description: Created
+      summary: Add an expense category
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/expenses/categories/{categoryId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deleteCategory
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a category identifier across the system.
+        example: 89a687e29ae1f428e7ebe567
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+          description: Represents a category identifier across the system.
+          example: 89a687e29ae1f428e7ebe567
+      responses:
+        '204':
+          description: No Content
+      summary: Delete an expense category
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updateCategory
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a category identifier across the system.
+        example: 89a687e29ae1f428e7ebe567
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+          description: Represents a category identifier across the system.
+          example: 89a687e29ae1f428e7ebe567
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseCategoryV1Request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCategoryDtoV1'
+          description: OK
+      summary: Update an expense category
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/expenses/categories/{categoryId}/status:
+    servers:
+    - url: https://api.clockify.me/api
+    patch:
+      operationId: updateExpenseCategoryStatus
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a category identifier across the system.
+        example: 89a687e29ae1f428e7ebe567
+        in: path
+        name: categoryId
+        required: true
+        schema:
+          type: string
+          description: Represents a category identifier across the system.
+          example: 89a687e29ae1f428e7ebe567
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseCategoryArchiveV1Request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCategoryDtoV1'
+          description: OK
+      summary: Archive an expense category
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/expenses/{expenseId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deleteExpense
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an expense identifier across the system.
+        example: 64c777ddd3fcab07cfbb210c
+        in: path
+        name: expenseId
+        required: true
+        schema:
+          type: string
+          description: Represents an expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+      responses:
+        '200':
+          description: OK
+      summary: Delete an expense
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    get:
+      operationId: getExpense
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an expense identifier across the system.
+        example: 64c777ddd3fcab07cfbb210c
+        in: path
+        name: expenseId
+        required: true
+        schema:
+          type: string
+          description: Represents an expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDtoV1'
+          description: OK
+      summary: Get an expense by ID
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updateExpense
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an expense identifier across the system.
+        example: 64c777ddd3fcab07cfbb210c
+        in: path
+        name: expenseId
+        required: true
+        schema:
+          type: string
+          description: Represents an expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseV1Request'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDtoV1'
+          description: OK
+      summary: Update an expense
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/expenses/{expenseId}/files/{fileId}:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: downloadFile
+      parameters:
+      - description: Represents a file identifier across the system.
+        example: 745687e29ae1f428e7ebe890
+        in: path
+        name: fileId
+        required: true
+        schema:
+          type: string
+          description: Represents a file identifier across the system.
+          example: 745687e29ae1f428e7ebe890
+      - description: Represents an expense identifier across the system.
+        example: 64c777ddd3fcab07cfbb210c
+        in: path
+        name: expenseId
+        required: true
+        schema:
+          type: string
+          description: Represents an expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+          description: OK
+      summary: Download a receipt
+      tags:
+      - Expense
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    ExpensesAndTotalsDtoV1:
+      type: object
+      properties:
+        dailyTotals:
+          type: array
+          description: Represents a list of expense daily total data transfer objects.
+          items:
+            $ref: '#/components/schemas/ExpenseDailyTotalsDtoV1'
+        expenses:
+          $ref: '#/components/schemas/ExpensesWithCountDtoV1'
+        weeklyTotals:
+          type: array
+          description: Represents a list of expense weekly total data transfer objects.
+          items:
+            $ref: '#/components/schemas/ExpenseWeeklyTotalsDtoV1'
+    CreateExpenseV1Request:
+      required:
+      - amount
+      - categoryId
+      - date
+      - file
+      - projectId
+      - userId
+      type: object
+      properties:
+        amount:
+          maximum: 92233720368547760
+          type: number
+          description: Represents an expense amount as the double data type.
+          format: double
+          example: 99.5
+        billable:
+          type: boolean
+          description: Indicates whether expense is billable or not.
+          default: false
+        categoryId:
+          type: string
+          description: Represents a category identifier across the system.
+          example: 45y687e29ae1f428e7ebe890
+        date:
+          type: string
+          description: Provides a valid yyyy-MM-ddThh:mm:ssZ format date.
+          format: date-time
+          example: '2020-01-01T00:00:00Z'
+        file:
+          type: string
+          format: binary
+        notes:
+          maxLength: 3000
+          minLength: 0
+          type: string
+          description: Represents notes for an expense.
+          example: This is a sample note for this expense.
+        projectId:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        taskId:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+        userId:
+          minLength: 1
+          type: string
+          description: Represents a user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+    ExpenseCategoriesWithCountDtoV1:
+      type: object
+      properties:
+        categories:
+          type: array
+          description: Represents a list of expense categories data transfer object.
+          items:
+            $ref: '#/components/schemas/ExpenseCategoryDtoV1'
+        count:
+          type: integer
+          description: Indicates the number of expense categories returned.
+          format: int32
+          example: 20
+    ExpenseCategoryV1Request:
+      required:
+      - name
+      type: object
+      properties:
+        hasUnitPrice:
+          type: boolean
+          description: Flag whether expense category has unit price or none.
+          default: false
+        name:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Represents a valid expense category name.
+          example: Procurement
+        priceInCents:
+          type: integer
+          description: Represents price in cents as integer.
+          format: int32
+          example: 1000
+        unit:
+          type: string
+          description: Represents a valid expense category unit.
+          example: piece
+    ProjectInfoDto:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        clientName:
+          type: string
+          description: Represents client name.
+          example: Client X
+        color:
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        id:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        name:
+          type: string
+          description: Represents a project name.
+          example: Software Development
+      description: Represents a project info object.
+    UpdateExpenseV1Request:
+      required:
+      - amount
+      - categoryId
+      - changeFields
+      - date
+      - file
+      - userId
+      type: object
+      properties:
+        amount:
+          maximum: 92233720368547760
+          minimum: 0
+          type: number
+          description: Represents an expense amount as the double data type.
+          format: double
+          example: 99.5
+        billable:
+          type: boolean
+          description: Indicates whether expense is billable or not.
+          default: false
+        categoryId:
+          type: string
+          description: Represents a category identifier across the system.
+          example: 45y687e29ae1f428e7ebe890
+        changeFields:
+          type: array
+          description: Represents a list of expense change fields.
+          example:
+          - USER
+          - DATE
+          - PROJECT
+          items:
+            type: string
+            description: Represents a list of expense change fields.
+            example: '["USER","DATE","PROJECT"]'
+            enum:
+            - USER
+            - DATE
+            - PROJECT
+            - TASK
+            - CATEGORY
+            - NOTES
+            - AMOUNT
+            - BILLABLE
+            - FILE
+        date:
+          type: string
+          description: Provides a valid yyyy-MM-ddThh:mm:ssZ format date.
+          format: date-time
+          example: '2020-01-01T00:00:00Z'
+        file:
+          type: string
+          format: binary
+        notes:
+          maxLength: 3000
+          minLength: 0
+          type: string
+          description: Represents notes for an expense.
+          example: This is a sample note for this expense.
+        projectId:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        taskId:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        userId:
+          minLength: 1
+          type: string
+          description: Represents a user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+    ExpensesWithCountDtoV1:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Represent result count.
+          format: int32
+          example: 25
+        expenses:
+          type: array
+          description: Represent a list of hydrated expense objects.
+          items:
+            $ref: '#/components/schemas/ExpenseHydratedDtoV1'
+      description: Represents an expense with count data transfer object.
+    ExpenseDailyTotalsDtoV1:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        dateAsInstant:
+          type: string
+          format: date-time
+        total:
+          type: number
+          description: Represents expense total.
+          format: double
+          example: 1500.75
+      description: Represents a list of expense daily total data transfer objects.
+    ExpenseWeeklyTotalsDtoV1:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        total:
+          type: number
+          description: Represents expense total.
+          format: double
+          example: 20000.75
+      description: Represents a list of expense weekly total data transfer objects.
+    ExpenseHydratedDtoV1:
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether expense is billable or not.
+          default: false
+        category:
+          $ref: '#/components/schemas/ExpenseCategoryDto'
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: 89b687e29ae1f428e7ebe912
+        fileId:
+          type: string
+          description: Represents file identifier across the system.
+          example: 745687e29ae1f428e7ebe890
+        fileName:
+          type: string
+          description: Represents file name.
+          example: expense_20200101
+        id:
+          type: string
+          description: Represents expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        isLocked:
+          type: boolean
+          writeOnly: true
+        locked:
+          type: boolean
+        notes:
+          type: string
+          description: Represents notes for an expense.
+          example: This is a sample note for this expense.
+        project:
+          $ref: '#/components/schemas/ProjectInfoDto'
+        quantity:
+          type: number
+          description: Represents expense quantity as double data type.
+          format: double
+        task:
+          $ref: '#/components/schemas/TaskInfoDto'
+        total:
+          type: number
+          description: Represents expense total as double data type.
+          format: double
+          example: 10500.5
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represent a list of hydrated expense objects.
+    ExpenseCategoryArchiveV1Request:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Flag whether to archive the expense category or not.
+          default: false
+    ExpenseCategoryDto:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Flag that indicates whether the expense category is archived or not.
+          default: false
+        hasUnitPrice:
+          type: boolean
+          description: Represents whether expense category has unit price or none.
+          default: false
+        id:
+          type: string
+          description: Represents expense category identifier across the system.
+          example: 89a687e29ae1f428e7ebe303
+        name:
+          type: string
+          description: Represents expense category name.
+          example: Procurement
+        priceInCents:
+          type: integer
+          description: Represents price in cents as integer.
+          format: int32
+          example: 1000
+        unit:
+          type: string
+          description: Represents expense category unit.
+          example: piece
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents an expense category object.
+    ExpenseDtoV1:
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether expense is billable or not.
+          default: false
+        categoryId:
+          type: string
+          description: Represents category identifier across the system.
+          example: 45y687e29ae1f428e7ebe890
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        fileId:
+          type: string
+          description: Represents file identifier across the system.
+          example: 745687e29ae1f428e7ebe890
+        id:
+          type: string
+          description: Represents expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        isLocked:
+          type: boolean
+          writeOnly: true
+        locked:
+          type: boolean
+        notes:
+          type: string
+          description: Represents notes for an expense.
+          example: This is a sample note for this expense.
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        quantity:
+          type: number
+          description: Represents expense quantity as double data type.
+          format: double
+        taskId:
+          type: string
+          description: Represents task identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        total:
+          type: number
+          description: Represents expense total as double data type.
+          format: double
+          example: 10500.5
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    TaskInfoDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Represents task identifier across the system.
+          example: 5b715448b0798751107918ab
+        name:
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+      description: Represents a project info object.
+    ExpenseCategoryDtoV1:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Flag that indicates whether the expense category is archived or not.
+          default: false
+        hasUnitPrice:
+          type: boolean
+          description: Represents whether expense category has unit price or none.
+          default: false
+        id:
+          type: string
+          description: Represents expense category identifier across the system.
+          example: 89a687e29ae1f428e7ebe303
+        name:
+          type: string
+          description: Represents expense category name.
+          example: Procurement
+        priceInCents:
+          type: integer
+          description: Represents price in cents as integer.
+          format: int32
+          example: 1000
+        unit:
+          type: string
+          description: Represents expense category unit.
+          example: piece
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents a list of expense categories data transfer object.
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

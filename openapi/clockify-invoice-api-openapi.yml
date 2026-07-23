@@ -1,0 +1,2151 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Invoice API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Invoice
+  x-displayName: Invoice
+paths:
+  /v1/workspaces/{workspaceId}/invoices:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getInvoices
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Page number.
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+      - description: Page size.
+        example: 50
+        in: query
+        name: page-size
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      - description: If provided, you'll get a filtered result of invoices that matches the provided string in the user ID linked to the expense.
+        example:
+        - UNSENT
+        - PAID
+        in: query
+        name: statuses
+        required: false
+        schema:
+          type: string
+          enum:
+          - UNSENT
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          - VOID
+          - OVERDUE
+      - description: 'Valid column name as sorting criteria. Default: ID'
+        example: CLIENT
+        in: query
+        name: sort-column
+        required: false
+        schema:
+          type: string
+          enum:
+          - ID
+          - CLIENT
+          - DUE_ON
+          - ISSUE_DATE
+          - AMOUNT
+          - BALANCE
+      - description: 'Sort order. Default: ASCENDING'
+        example: ASCENDING
+        in: query
+        name: sort-order
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASCENDING
+          - DESCENDING
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoicesListDtoV1'
+          description: OK
+      summary: Get all invoices on a workspace
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: createInvoice
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvoiceRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInvoiceDtoV1'
+          description: Created
+      summary: Add an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/info:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: getInvoicesInfo
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceFilterRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceInfoResponseDtoV1'
+          description: OK
+      summary: Filter out invoices
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/settings:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getInvoiceSettings
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceSettingsDtoV1'
+          description: OK
+      summary: Get an invoice in another language
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updateInvoiceSettings
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInvoiceSettingsRequestV1'
+        required: true
+      responses:
+        '200':
+          description: OK
+      summary: Change an invoice language
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deleteInvoice
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      responses:
+        '200':
+          description: OK
+      summary: Delete an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    get:
+      operationId: getInvoice
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 83q687e29ae1f428e7ebe195
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 83q687e29ae1f428e7ebe195
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: OK
+      summary: Get an invoice by ID
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updateInvoice
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInvoiceRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: OK
+      summary: Update an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/duplicate:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: duplicateInvoice
+      parameters:
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: Created
+      summary: Duplicate an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/export:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: exportInvoice
+      parameters:
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a locale.
+        example: en
+        in: query
+        name: userLocale
+        required: true
+        schema:
+          type: string
+          description: Represents a locale.
+          example: en
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: byte
+          description: OK
+      summary: Export an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/items:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: addInvoiceItem
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 83q687e29ae1f428e7ebe195
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 83q687e29ae1f428e7ebe195
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvoiceItemRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: OK
+      summary: Add item to an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/items/import:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: importTimeEntriesAndExpenses
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 83q687e29ae1f428e7ebe195
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 83q687e29ae1f428e7ebe195
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportTimeEntriesAndExpensesRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: OK
+      summary: Import time entries and expenses to an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/items/{order}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: removeInvoiceItem
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 83q687e29ae1f428e7ebe195
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 83q687e29ae1f428e7ebe195
+      - description: Represents an invoice item order.
+        example: 3
+        in: path
+        name: order
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          description: Represents an invoice item order.
+          format: int32
+          example: 3
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: OK
+      summary: Delete item from an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/payments:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getPaymentsForInvoice
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      - description: Page number.
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+      - description: Page size.
+        example: 50
+        in: query
+        name: page-size
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoicePaymentDtoV1'
+          description: OK
+      summary: Get payments for an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: createInvoicePayment
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvoicePaymentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: Created
+      summary: Add payment to an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/payments/{paymentId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deletePaymentById
+      parameters:
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a payment identifier across the system.
+        example: 56p687e29ae1f428e7ebe456
+        in: path
+        name: paymentId
+        required: true
+        schema:
+          type: string
+          description: Represents a payment identifier across the system.
+          example: 56p687e29ae1f428e7ebe456
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceOverviewDtoV1'
+          description: OK
+      summary: Delete payment from an invoice
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/invoices/{invoiceId}/status:
+    servers:
+    - url: https://api.clockify.me/api
+    patch:
+      operationId: changeInvoiceStatus
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an invoice identifier across the system.
+        example: 78a687e29ae1f428e7ebe303
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+          description: Represents an invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeInvoiceStatusRequestV1'
+        required: true
+      responses:
+        '200':
+          description: OK
+      summary: Change an invoice status
+      tags:
+      - Invoice
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    InvoiceInfoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an invoice amount as long.
+          format: int64
+          example: 100
+        balance:
+          type: integer
+          description: Represents an invoice balance amount as long.
+          format: int64
+          example: 50
+        billFrom:
+          type: string
+          description: Represents to whom an invoice is billed from.
+          example: Company XYZ
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 98h687e29ae1f428e7ebe707
+        clientName:
+          type: string
+          description: Represents client name for an invoice.
+          example: Client X
+        currency:
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        daysOverdue:
+          type: integer
+          description: Represents the number of days an invoice is overdue.
+          format: int64
+          example: 10
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        id:
+          type: string
+          description: Represents invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        number:
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+        paid:
+          type: integer
+          description: Represents an invoice paid amount as long.
+          format: int64
+          example: 50
+        status:
+          type: string
+          description: Represents the status of an invoice.
+          example: PAID
+          enum:
+          - UNSENT
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          - VOID
+          - OVERDUE
+        visibleZeroFields:
+          $ref: '#/components/schemas/VisibleZeroFieldsInvoice'
+      description: Represents a list of invoice info.
+    TaxType:
+      type: object
+      description: Represents an invoice taxation type.
+      example: SIMPLE
+      oneOf:
+      - type: string
+        enum:
+        - COMPOUND
+        - SIMPLE
+        - NONE
+      properties:
+        COMPOUND:
+          type: string
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+        NONE:
+          type: string
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+        SIMPLE:
+          type: string
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+        value:
+          type: string
+    BaseFilterRequest:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Filter type.
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents a list of filter identifiers.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: Represents a list of filter identifiers.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+      description: Represents a company filter object. If provided, you'll get a filtered list of invoices that matches the specified company filter.
+    UpdateInvoiceRequestV1:
+      required:
+      - currency
+      - discountPercent
+      - dueDate
+      - issuedDate
+      - number
+      - tax2Percent
+      - taxPercent
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 98h687e29ae1f428e7ebe707
+        companyId:
+          type: string
+          description: Represents company identifier across the system.
+          example: 04g687e29ae1f428e7ebe123
+        currency:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        discountPercent:
+          type: number
+          description: Represents an invoice discount percent as double.
+          format: double
+          example: 1.5
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        note:
+          type: string
+          description: Represents an invoice note.
+          example: This is a sample note for this invoice.
+        number:
+          minLength: 1
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+        subject:
+          type: string
+          description: Represents an invoice subject.
+          example: January salary
+        tax2Percent:
+          type: number
+          description: Represents an invoice tax 2 percent as double.
+          format: double
+          example: 0
+        taxPercent:
+          type: number
+          description: Represents an invoice tax percent as double.
+          format: double
+          example: 0.5
+        taxType:
+          $ref: '#/components/schemas/TaxType'
+        visibleZeroFields:
+          type: string
+          description: Represents a list of zero value invoice fields that will be visible.
+          example: '["TAX","TAX_2","DISCOUNT"]'
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+    UpdateInvoiceSettingsRequestV1:
+      required:
+      - labels
+      type: object
+      properties:
+        defaults:
+          $ref: '#/components/schemas/InvoiceDefaultSettingsRequestV1'
+        exportFields:
+          $ref: '#/components/schemas/InvoiceExportFieldsRequest'
+        labels:
+          $ref: '#/components/schemas/LabelsCustomizationRequest'
+    CreateInvoiceItemRequestV1:
+      required:
+      - applyTaxes
+      - description
+      - itemType
+      - quantity
+      - unitPrice
+      type: object
+      properties:
+        applyTaxes:
+          type: string
+          description: Represents taxes applied to the invoice item. Applies only when the specified taxes are active on the invoice.
+          example: TAX1TAX2
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        description:
+          type: string
+          description: Represents an invoice item description.
+          example: This is a description of an invoice item.
+        itemType:
+          minLength: 1
+          type: string
+          description: Represents an item type.
+          example: Service
+        quantity:
+          type: integer
+          description: Represents an item quantity.
+          format: int64
+          example: 10000
+        unitPrice:
+          type: integer
+          description: Represents an item unit price.
+          format: int64
+          example: 500
+    InvoiceFilterRequestV1:
+      type: object
+      properties:
+        clients:
+          $ref: '#/components/schemas/ContainsArchivedFilterRequest'
+        companies:
+          $ref: '#/components/schemas/BaseFilterRequest'
+        exactAmount:
+          type: integer
+          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has the equal amount as specified.
+          format: int64
+          example: 1000
+        exactBalance:
+          type: integer
+          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has the equal balance as specified.
+          format: int64
+          example: 1000
+        greaterThanAmount:
+          type: integer
+          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has amount greater than specified.
+          format: int64
+          example: 500
+        greaterThanBalance:
+          type: integer
+          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has balance greater than specified.
+          format: int64
+          example: 500
+        invoiceNumber:
+          type: string
+          description: If provided, you'll get a filtered list of invoices that contain the provided string in their invoice number.
+          example: Invoice-01
+        issueDate:
+          $ref: '#/components/schemas/TimeRangeRequestDtoV1'
+        lessThanAmount:
+          type: integer
+          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has amount less than specified.
+          format: int64
+          example: 500
+        lessThanBalance:
+          type: integer
+          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has balance less than specified.
+          format: int64
+          example: 500
+        page:
+          type: integer
+          description: Page number.
+          format: int32
+          default: 1
+        pageSize:
+          type: integer
+          description: Page size.
+          format: int32
+          default: 50
+        sortColumn:
+          type: string
+          description: Represents the column name to be used as sorting criteria.
+          example: ID
+          enum:
+          - ID
+          - CLIENT
+          - DUE_ON
+          - ISSUE_DATE
+          - AMOUNT
+          - BALANCE
+        sortOrder:
+          type: string
+          description: Represents the sorting order.
+          example: ASCENDING
+          enum:
+          - ASCENDING
+          - DESCENDING
+        statuses:
+          type: array
+          description: Represents a list of invoice statuses. If provided, you'll get a filtered list of invoices that matches any of the invoice status provided.
+          example:
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          items:
+            type: string
+            description: Represents a list of invoice statuses. If provided, you'll get a filtered list of invoices that matches any of the invoice status provided.
+            example: '["SENT","PAID","PARTIALLY_PAID"]'
+            enum:
+            - UNSENT
+            - SENT
+            - PAID
+            - PARTIALLY_PAID
+            - VOID
+            - OVERDUE
+        strictSearch:
+          type: boolean
+          description: Flag to toggle on/off strict search mode. When set to true, search by invoice number only will return invoices whose number exactly matches the string value given for the 'invoiceNumber' parameter. When set to false, results will also include invoices whose number contain the string value, but could be longer than the string value itself. For example, if there is an invoice with the number '123456', and the search value is '123', setting strict-name-search to true will not return that invoice in the results, whereas setting it to false will.
+          default: false
+    ImportTimeEntriesAndExpensesRequestV1:
+      required:
+      - from
+      - importExpenses
+      - projectFilter
+      - timeEntryGroupType
+      - to
+      type: object
+      properties:
+        expenseFieldsForDetailedGroup:
+          uniqueItems: true
+          type: array
+          description: Represents a set of expense fields to include when using the DETAILED expense grouping type.
+          example:
+          - NOTE
+          items:
+            type: string
+            description: Represents a set of expense fields to include when using the DETAILED expense grouping type.
+            example: '["NOTE"]'
+            enum:
+            - PROJECT
+            - TASK
+            - CATEGORY
+            - NOTE
+            - DATE
+            - USER
+            default: NOTE
+          default: NOTE
+        expensesGroupBy:
+          type: string
+          description: Represents a group field when using the GROUPED expense group type.
+          example: CATEGORY
+          enum:
+          - CATEGORY
+          - PROJECT
+          - USER
+          default: PROJECT
+        expensesGroupType:
+          type: string
+          description: Represents an expense group type.
+          enum:
+          - GROUPED
+          - DETAILED
+          default: DETAILED
+        from:
+          type: string
+          description: Represents date and time in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-06-01T00:00:00Z'
+        importExpenses:
+          type: boolean
+          description: Indicates if billable expenses should be imported alongside time entries.
+          default: false
+        projectFilter:
+          $ref: '#/components/schemas/ContainsArchivedFilterRequest'
+        roundTimeEntryDuration:
+          type: boolean
+          description: Indicates if imported time entry durations should be rounded to the nearest 15 minute interval.
+          default: false
+        timeEntryFieldsForDetailedGroup:
+          uniqueItems: true
+          type: array
+          description: Represents a set of time entry fields to include when using DETAILED time entry grouping type.
+          example:
+          - PROJECT
+          - DESCRIPTION
+          items:
+            type: string
+            description: Represents a set of time entry fields to include when using DETAILED time entry grouping type.
+            example: '["PROJECT","DESCRIPTION"]'
+            enum:
+            - PROJECT
+            - TASK
+            - TAGS
+            - DESCRIPTION
+            - DATE
+            - USER
+        timeEntryGroupType:
+          type: string
+          description: Represents a time entry group type.
+          example: GROUPED
+          enum:
+          - SINGLE_ITEM
+          - GROUPED
+          - DETAILED
+        timeEntryPrimaryGroupBy:
+          type: string
+          description: Represents a primary group field when using the GROUPED time entry grouping type.
+          example: PROJECT
+          enum:
+          - USER
+          - PROJECT
+          - DATE
+        timeEntrySecondaryGroupBy:
+          type: string
+          description: Represents a secondary group field when using the GROUPED time entry grouping type. Should not have the same grouping type as the primary group field.
+          example: TASK
+          enum:
+          - PROJECT
+          - USER
+          - TASK
+          - DATE
+          - DESCRIPTION
+          - NONE
+        to:
+          type: string
+          description: Represents date and time in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-06-07T00:00:00Z'
+    InvoiceDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an invoice amount as long.
+          format: int64
+          example: 100
+        balance:
+          type: integer
+          description: Represents an invoice balance amount as long.
+          format: int64
+          example: 50
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 98h687e29ae1f428e7ebe707
+        clientName:
+          type: string
+          description: Represents client name for an invoice.
+          example: Client X
+        currency:
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        id:
+          type: string
+          description: Represents invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        number:
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+        paid:
+          type: integer
+          description: Represents an invoice paid amount as long.
+          format: int64
+          example: 50
+        status:
+          type: string
+          description: Represents the status of an invoice.
+          example: PAID
+          enum:
+          - UNSENT
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          - VOID
+          - OVERDUE
+      description: Represents a list of invoices.
+    InvoiceExportFields:
+      type: object
+      properties:
+        RTL:
+          type: boolean
+          writeOnly: true
+        itemType:
+          type: boolean
+        quantity:
+          type: boolean
+        rtl:
+          type: boolean
+        tax:
+          type: boolean
+        tax2:
+          type: boolean
+        unitPrice:
+          type: boolean
+      description: Represents an invoice export fields object.
+    InvoiceOverviewDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an invoice amount as long.
+          format: int64
+          example: 100
+        balance:
+          type: integer
+          description: Represents an invoice balance amount as long.
+          format: int64
+          example: 50
+        billFrom:
+          type: string
+          description: Represents to whom the invoice should be billed from.
+          example: Business X
+        calculationType:
+          $ref: '#/components/schemas/CalculationType'
+        clientAddress:
+          type: string
+          description: Represents client address.
+          example: Ground Floor, ABC Bldg., Palo Alto, California, USA 94020
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 98h687e29ae1f428e7ebe707
+        clientName:
+          type: string
+          description: Represents client name for an invoice.
+          example: Client X
+        companyId:
+          type: string
+          description: Represents company identifier across the system.
+          example: 04g687e29ae1f428e7ebe123
+        containsImportedExpenses:
+          type: boolean
+          description: Indicates whether invoice contains imported expenses.
+          default: false
+        containsImportedTimes:
+          type: boolean
+          description: Indicates whether invoice contains imported items.
+          default: false
+        currency:
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        discount:
+          type: number
+          description: Represents an invoice discount amount as double.
+          format: double
+          example: 10.5
+        discountAmount:
+          type: integer
+          description: Represents an invoice discount amount as long.
+          format: int64
+          example: 11
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        id:
+          type: string
+          description: Represents invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        items:
+          type: array
+          description: Represents a list of invoice item datatransfer objects.
+          items:
+            $ref: '#/components/schemas/InvoiceItemDto'
+        note:
+          type: string
+          description: Represents an invoice note.
+          example: This is a sample note for this invoice.
+        number:
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+        paid:
+          type: integer
+          description: Represents an invoice paid amount as long.
+          format: int64
+          example: 50
+        status:
+          type: string
+          description: Represents the status of an invoice.
+          example: PAID
+          enum:
+          - UNSENT
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          - VOID
+          - OVERDUE
+        subject:
+          type: string
+          description: Represents an invoice subject.
+          example: January salary
+        subtotal:
+          type: integer
+          description: Represents an invoice subtotal as long.
+          format: int64
+          example: 5000
+        tax:
+          type: number
+          description: Represents an invoice tax amount as double.
+          format: double
+          example: 1.5
+        tax2:
+          type: number
+          description: Represents an invoice tax amount as double.
+          format: double
+          example: 0
+        tax2Amount:
+          type: integer
+          description: Represents an invoice tax amount as long.
+          format: int64
+          example: 0
+        taxAmount:
+          type: integer
+          description: Represents an invoice tax amount as long.
+          format: int64
+          example: 1
+        taxType:
+          $ref: '#/components/schemas/TaxType'
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 12t687e29ae1f428e7ebe202
+        visibleZeroFields:
+          $ref: '#/components/schemas/VisibleZeroFieldsInvoice'
+    InvoicesListDtoV1:
+      type: object
+      properties:
+        invoices:
+          type: array
+          description: Represents a list of invoices.
+          items:
+            $ref: '#/components/schemas/InvoiceDtoV1'
+        total:
+          type: integer
+          description: Represents the total invoice count.
+          format: int64
+          example: 100
+    InvoiceDefaultSettingsRequestV1:
+      required:
+      - notes
+      - subject
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Represents company identifier across the system.
+          example: 34a687e29ae1f428e7ebe101
+        dueDays:
+          type: integer
+          description: Represents an invoice number of due days.
+          format: int32
+          example: 2
+        itemTypeId:
+          type: string
+          description: Represents item type identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        notes:
+          type: string
+          description: Represents an invoice note.
+          example: This is a sample note for this invoice.
+        subject:
+          type: string
+          description: Represents an invoice subject.
+          example: January salary
+        tax2Percent:
+          type: number
+          description: Represents a tax amount in percentage.
+          format: double
+          example: 5
+        taxPercent:
+          type: number
+          description: Represents a tax amount in percentage.
+          format: double
+          example: 5
+        taxType:
+          type: string
+          description: Represents a tax type.
+          example: COMPOUND
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+      description: Represents an invoice default settings object.
+    CalculationType:
+      type: object
+      description: Represents an enum if tax is calculated as item based or invoice based.
+      example: INVOICE_BASED
+      oneOf:
+      - type: string
+        enum:
+        - INVOICE_BASED
+        - ITEM_BASED
+      properties:
+        INVOICE_BASED:
+          type: string
+          enum:
+          - INVOICE_BASED
+          - ITEM_BASED
+        ITEM_BASED:
+          type: string
+          enum:
+          - INVOICE_BASED
+          - ITEM_BASED
+        value:
+          type: string
+    InvoicePaymentDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an invoice payment amount as long.
+          format: int64
+          example: 100
+        author:
+          type: string
+          description: Represents an invoice payment author.
+          example: John Doe
+        date:
+          type: string
+          description: Represents an invoice payment date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2021-01-01T12:00:00Z'
+        id:
+          type: string
+          description: Represents invoice payment identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        note:
+          type: string
+          description: Represents an invoice payment note.
+          example: This is a sample note for this invoice payment.
+    InvoiceExportFieldsRequest:
+      type: object
+      properties:
+        itemType:
+          type: boolean
+          description: Indicates whether to export item type.
+          default: false
+        quantity:
+          type: boolean
+          description: Indicates whether to export quantity.
+          default: false
+        rtl:
+          type: boolean
+          description: Indicates whether to export RTL.
+          default: false
+        tax:
+          type: boolean
+          description: Indicates whether to export tax.
+          default: false
+        tax2:
+          type: boolean
+          description: Indicates whether to export tax2.
+          default: false
+        unitPrice:
+          type: boolean
+          description: Indicates whether to export unit price.
+          default: false
+      description: Represents an invoice export fields object.
+    ApplyTaxes:
+      type: object
+      description: Represents item applyTaxes type.
+      example: TAX1TAX2
+      oneOf:
+      - type: string
+        enum:
+        - TAX1
+        - TAX2
+        - TAX1TAX2
+        - NONE
+      properties:
+        NONE:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        TAX1:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        TAX1TAX2:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        TAX2:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        value:
+          type: string
+    CreateInvoicePaymentRequest:
+      type: object
+      properties:
+        amount:
+          minimum: 1
+          type: integer
+          description: Represents an invoice payment amount as long.
+          format: int64
+          example: 100
+        note:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          description: Represents an invoice payment note.
+          example: This is a sample note for this invoice payment.
+        paymentDate:
+          type: string
+          description: Represents an invoice payment date in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2021-01-01T12:00:00Z'
+    VisibleZeroFieldsInvoice:
+      type: object
+      description: Represents a list of zero value invoice fields that will be visible.
+      example:
+      - TAX
+      - TAX_2
+      - DISCOUNT
+      oneOf:
+      - type: string
+        enum:
+        - TAX
+        - TAX_2
+        - DISCOUNT
+      properties:
+        DISCOUNT:
+          type: string
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+        TAX:
+          type: string
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+        TAX_2:
+          type: string
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+    ChangeInvoiceStatusRequestV1:
+      type: object
+      properties:
+        invoiceStatus:
+          type: string
+          description: Represents the invoice status to be set.
+          example: PAID
+          enum:
+          - UNSENT
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          - VOID
+          - OVERDUE
+    InvoiceItemDto:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents item amount.
+          format: int64
+          example: 5000
+        applyTaxes:
+          $ref: '#/components/schemas/ApplyTaxes'
+        description:
+          type: string
+          description: Represents an invoice item description.
+          example: This is a description of an invoice item.
+        expenseIds:
+          type: array
+          description: Represents a list of imported expense ids.
+          example: []
+          items:
+            type: string
+            description: Represents a list of imported expense ids.
+            example: '[]'
+        importType:
+          type: string
+          description: Represents the invoice item import type.
+          example: NOT_IMPORTED
+          enum:
+          - NOT_IMPORTED
+          - TIME_ENTRY_IMPORT
+          - EXPENSE_IMPORT
+        itemType:
+          type: string
+          description: Represents item type.
+          example: Goods
+        order:
+          type: integer
+          description: Represents an integer.
+          format: int32
+          example: 100
+        quantity:
+          type: integer
+          description: Represents item quantity.
+          format: int64
+          example: 10
+        timeEntryIds:
+          type: array
+          description: Represents a list of imported time entry ids.
+          example: []
+          items:
+            type: string
+            description: Represents a list of imported time entry ids.
+            example: '[]'
+        unitPrice:
+          type: integer
+          description: Represents item unit price.
+          format: int64
+          example: 500
+      description: Represents a list of invoice item datatransfer objects.
+    CreateInvoiceRequest:
+      required:
+      - clientId
+      - currency
+      - dueDate
+      - issuedDate
+      - number
+      type: object
+      properties:
+        clientId:
+          minLength: 1
+          type: string
+          description: Represents a client identifier across the system.
+          example: 98h687e29ae1f428e7ebe707
+        currency:
+          minLength: 1
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        number:
+          minLength: 1
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+        timeViewMode:
+          type: string
+          enum:
+          - TIME_SENSITIVE_VIEW
+          - AGGREGATED_TIME_VIEW
+    TimeRangeRequestDtoV1:
+      type: object
+      properties:
+        issue-date-end:
+          type: string
+          description: Represents a date in yyyy-MM-dd format. This is the lower bound of the time range.
+          example: '2020-01-01'
+        issue-date-start:
+          type: string
+          description: Represents a date in yyyy-MM-dd format. This is the lower bound of the time range.
+          example: '2020-01-01'
+      description: Represents a time range object. If provided, you'll get a filtered list of invoices that has issue date within the time range specified.
+    CreateInvoiceDtoV1:
+      type: object
+      properties:
+        billFrom:
+          type: string
+          description: Represents to whom the invoice should be billed from.
+          example: Business X
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 34p687e29ae1f428e7ebe562
+        currency:
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        id:
+          type: string
+          description: Represents invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        number:
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+    LabelsCustomizationRequest:
+      required:
+      - amount
+      - billFrom
+      - billTo
+      - description
+      - discount
+      - dueDate
+      - issueDate
+      - itemType
+      - notes
+      - paid
+      - quantity
+      - subtotal
+      - tax
+      - tax2
+      - total
+      - totalAmountDue
+      - unitPrice
+      type: object
+      properties:
+        amount:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice amount label.
+          example: AMOUNT
+        billFrom:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice bill from label.
+          example: BILL FROM
+        billTo:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice bill to label.
+          example: BILL TO
+        description:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice description label.
+          example: DESCRIPTION
+        discount:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice discount amount label.
+          example: DISCOUNT
+        dueDate:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice due date label.
+          example: DUE DATE
+        issueDate:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice issue date label.
+          example: ISSUE DATE
+        itemType:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice item type label.
+          example: ITEM TYPE
+        notes:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice notes label.
+          example: NOTES
+        paid:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice paid amount label.
+          example: PAID
+        quantity:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice quantity label.
+          example: QUANTITY
+        subtotal:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice subtotal label.
+          example: SUBTOTAL
+        tax:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice tax amount label.
+          example: TAX
+        tax2:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice tax 2 amount label.
+          example: TAX2
+        total:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice total amount label.
+          example: AMOUNT
+        totalAmountDue:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice total amount due label.
+          example: TOTAL AMOUNT DUE
+        unitPrice:
+          maxLength: 20
+          minLength: 0
+          type: string
+          description: Represents invoice unit price label.
+          example: UNIT PRICE
+      description: Represents a label customization object.
+    InvoiceSettingsDtoV1:
+      type: object
+      properties:
+        defaults:
+          $ref: '#/components/schemas/InvoiceDefaultSettingsDto'
+        exportFields:
+          $ref: '#/components/schemas/InvoiceExportFields'
+        labels:
+          $ref: '#/components/schemas/LabelsCustomization'
+    InvoiceInfoResponseDtoV1:
+      type: object
+      properties:
+        invoices:
+          type: array
+          description: Represents a list of invoice info.
+          items:
+            $ref: '#/components/schemas/InvoiceInfoV1'
+        total:
+          type: integer
+          description: Represents the total invoice count.
+          format: int64
+          example: 100
+    LabelsCustomization:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Represents invoice amount.
+          example: '1000'
+        billFrom:
+          type: string
+          description: Represents a string an invoice is billed from.
+          example: Entity A
+        billTo:
+          type: string
+          description: Represents a string an invoice is billed to.
+          example: Entity B
+        description:
+          type: string
+          description: Represents a description of an invoice.
+          example: This is a sample description for this invoice.
+        discount:
+          type: string
+          description: Represents invoice discount amount.
+          example: '0'
+        dueDate:
+          type: string
+          description: Represents a due date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        issueDate:
+          type: string
+          description: Represents an issue date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        itemType:
+          type: string
+          description: Represents an item type.
+          example: Service
+        notes:
+          type: string
+          description: Represents notes for an invoice.
+          example: This is a sample note for this invoice.
+        paid:
+          type: string
+          description: Represents invoice paid amount.
+          example: '1000'
+        quantity:
+          type: string
+          description: Represents quantity.
+          example: '10'
+        subtotal:
+          type: string
+          description: Represents invoice subtotal.
+          example: '1000'
+        tax:
+          type: string
+          description: Represents invoice tax amount.
+          example: '10'
+        tax2:
+          type: string
+          description: Represents invoice tax amount.
+          example: '0'
+        total:
+          type: string
+          description: Represents invoice total amount.
+          example: '1010'
+        totalAmount:
+          type: string
+          description: Represents invoice total amount.
+          example: '1010'
+        unitPrice:
+          type: string
+          description: Represents unit price.
+          example: '100'
+      description: Represents a label customization object.
+    ContainsArchivedFilterRequest:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Filter type.
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents a list of filter identifiers.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: Represents a list of filter identifiers.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+        status:
+          type: string
+          description: Filters entities by status.
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+      description: Represents a project filter for imported items.
+    InvoiceDefaultSettingsDto:
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Represents company identifier across the system.
+          example: 34a687e29ae1f428e7ebe101
+        defaultImportExpenseItemTypeId:
+          type: string
+          description: Represents item type identifier across the system.
+          example: 88a687e29ae1f428e7ebe303
+        defaultImportTimeItemTypeId:
+          type: string
+          description: Represents item type identifier across the system.
+          example: 18a687e29ae1f428e7ebe303
+        dueDays:
+          type: integer
+          description: Represents an invoice number of due days.
+          format: int32
+          example: 2
+        itemType:
+          type: string
+          writeOnly: true
+        itemTypeId:
+          type: string
+          description: Represents item type identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        notes:
+          type: string
+          description: Represents an invoice note.
+          example: This is a sample note for this invoice.
+        subject:
+          type: string
+          description: Represents an invoice subject.
+          example: January salary
+        tax:
+          type: integer
+          format: int64
+          deprecated: true
+        tax2:
+          type: integer
+          format: int64
+          deprecated: true
+        tax2Percent:
+          type: number
+          description: Represents a tax amount in percentage.
+          format: double
+          example: 1
+        taxPercent:
+          type: number
+          description: Represents a tax amount in percentage.
+          format: double
+          example: 5
+        taxType:
+          type: string
+          description: Represents a tax type.
+          example: COMPOUND
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+      description: Represents an invoice default settings object.
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

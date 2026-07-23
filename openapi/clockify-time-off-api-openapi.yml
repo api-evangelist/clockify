@@ -1,0 +1,600 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Time Off API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Time Off
+  x-displayName: Time Off
+paths:
+  /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: createTimeOffRequest
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTimeOffRequestV1Request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffRequestFullV1Dto'
+          description: OK
+      summary: Create a time off request
+      tags:
+      - Time Off
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests/{requestId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deleteTimeOffRequest
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      - description: Represents a time off request identifier across the system.
+        example: 6308850156b7d75ea8fd3fbd
+        in: path
+        name: requestId
+        required: true
+        schema:
+          type: string
+          description: Represents a time off request identifier across the system.
+          example: 6308850156b7d75ea8fd3fbd
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffRequestV1Dto'
+          description: OK
+      summary: Delete a time off request
+      tags:
+      - Time Off
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    patch:
+      operationId: changeTimeOffRequestStatus
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      - description: Represents a time off request identifier across the system.
+        example: 6308850156b7d75ea8fd3fbd
+        in: path
+        name: requestId
+        required: true
+        schema:
+          type: string
+          description: Represents a time off request identifier across the system.
+          example: 6308850156b7d75ea8fd3fbd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusTimeOffRequestV1Request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffRequestV1Dto'
+          description: OK
+      summary: Change a time off request status
+      tags:
+      - Time Off
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/users/{userId}/requests:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: createTimeOffRequestForOther
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      - description: Represents a user identifier across the system.
+        example: 60f924bafdaf031696ec6218
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+          description: Represents a user identifier across the system.
+          example: 60f924bafdaf031696ec6218
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTimeOffRequestV1Request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffRequestFullV1Dto'
+          description: OK
+      summary: Create a time off request for a user
+      tags:
+      - Time Off
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/time-off/requests:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: getTimeOffRequest
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTimeOffRequestsV1Request'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeOffRequestsWithCountV1Dto'
+          description: OK
+      summary: Get all time off requests on a workspace
+      tags:
+      - Time Off
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    TimeOffRequestPeriodV1Request:
+      required:
+      - period
+      type: object
+      properties:
+        halfDayPeriod:
+          type: string
+          description: Represents the half day period.
+          example: NOT_DEFINED
+          enum:
+          - FIRST_HALF
+          - SECOND_HALF
+          - NOT_DEFINED
+        isHalfDay:
+          type: boolean
+          description: Indicates whether time off is half day.
+          example: false
+          default: false
+        period:
+          $ref: '#/components/schemas/PeriodV1Request'
+        timeOffHalfDayPeriod:
+          type: string
+          enum:
+          - FIRST_HALF
+          - SECOND_HALF
+          - NOT_DEFINED
+      description: Provide the period you would like to use for creating the time off request. If `timeZone` isn't set, should be aligned with time zone for user in settings. Can be shifted from user time zone with explicit setting of `timeZone`.
+    TimeOffRequestsWithCountV1Dto:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total count of time off requests.
+          format: int32
+          example: 1
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeOffRequestFullV1Dto'
+    TimeOffRequestPeriodDto:
+      type: object
+      properties:
+        halfDay:
+          type: boolean
+        halfDayHours:
+          $ref: '#/components/schemas/Period'
+        halfDayPeriod:
+          type: string
+        period:
+          $ref: '#/components/schemas/Period'
+      description: Represents the period the time off request.
+    Period:
+      type: object
+      properties:
+        end:
+          type: string
+          format: date-time
+        start:
+          type: string
+          format: date-time
+    TimeOffRequestFullV1Dto:
+      type: object
+      properties:
+        balance:
+          type: number
+          description: Represents the time off balance.
+          format: double
+          example: 10
+        balanceDiff:
+          type: number
+          description: Represents the balance difference.
+          format: double
+          example: 1
+        createdAt:
+          type: string
+          description: Represents the date when time off request is created. It is in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          format: date-time
+          example: '2022-08-26T08:32:01.640708Z'
+        id:
+          type: string
+          description: Represents time off requester identifier across the system.
+          example: 5b715612b079875110791111
+        note:
+          type: string
+          description: Represents the note of the time off request.
+          example: Time Off Request Note
+        policyId:
+          type: string
+          description: Represents policy identifier across the system.
+          example: 5b715612b079875110792333
+        policyName:
+          type: string
+          description: Represents the policy name of the time off request.
+          example: Days
+        requesterUserId:
+          type: string
+          description: Represents requester user's id.
+          example: 5b715612b0798751107925555
+        requesterUserName:
+          type: string
+          description: Represents requester user's username.
+          example: John
+        status:
+          $ref: '#/components/schemas/TimeOffRequestStatus'
+        timeOffPeriod:
+          $ref: '#/components/schemas/TimeOffRequestPeriodDto'
+        timeUnit:
+          type: string
+          description: Represents the time unit of the time off request.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+        userEmail:
+          type: string
+          description: Represents user's email
+          example: nicholas@clockify.com
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5b715612b079875110794444
+        userName:
+          type: string
+          description: Represents user's username.
+          example: Nicholas
+        userTimeZone:
+          type: string
+          description: Represents user's time zone
+          example: Europe/Budapest
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 5b715612b079875110792222
+      description: Represents the array of time off requests.
+    CreateTimeOffRequestV1Request:
+      required:
+      - timeOffPeriod
+      type: object
+      properties:
+        note:
+          type: string
+          description: Provide the note you would like to use for creating the time off request.
+          example: Create Time Off Note
+        timeOffPeriod:
+          $ref: '#/components/schemas/TimeOffRequestPeriodV1Request'
+    PeriodV1Request:
+      type: object
+      properties:
+        days:
+          maximum: 999
+          minimum: 1
+          type: integer
+          description: Provide number of days.
+          format: int32
+          example: 3
+        end:
+          type: string
+          description: Provide end date in YYYY-MM-DD format.
+          example: '2021-12-25'
+        start:
+          type: string
+          description: Provide start date in YYYY-MM-DD format.
+          example: '2021-12-23'
+      description: Represents period of time off request including start and end date.
+    TimeOffRequestStatus:
+      type: object
+      properties:
+        changedAt:
+          type: string
+          format: date-time
+        changedByUserId:
+          type: string
+        changedByUserName:
+          type: string
+        changedForUserName:
+          type: string
+        note:
+          type: string
+        statusType:
+          type: string
+          enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+          - ALL
+      description: Represents the status the time off request.
+    StatusTimeOffRequestV1Request:
+      type: object
+      properties:
+        note:
+          type: string
+          description: Provide the note you would like to use for changing the time off request.
+          example: Time Off Request Note
+        status:
+          type: string
+          description: Provide the status you would like to use for changing the time off request.
+          example: APPROVED
+          enum:
+          - APPROVED
+          - REJECTED
+    TimeOffRequestV1Dto:
+      type: object
+      properties:
+        balanceDiff:
+          type: number
+          description: Represents the balance difference
+          format: double
+          example: 1
+        createdAt:
+          type: string
+          description: Represents the date when time off request is created. Date is in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          format: date-time
+          example: '2022-08-26T08:32:01.640708Z'
+        id:
+          type: string
+          description: Represents time off requester identifier across the system.
+          example: 5b715612b079875110791111
+        note:
+          type: string
+          description: Represents the note of the time off request.
+          example: Time Off Request Note
+        policyId:
+          type: string
+          description: Represents policy identifier across the system.
+          example: 5b715612b079875110792333
+        status:
+          $ref: '#/components/schemas/TimeOffRequestStatus'
+        timeOffPeriod:
+          $ref: '#/components/schemas/TimeOffRequestPeriodDto'
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5b715612b079875110794444
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 5b715612b079875110792222
+    GetTimeOffRequestsV1Request:
+      type: object
+      properties:
+        end:
+          type: string
+          description: Return time off requests created before the specified time in requester's time zone. Provide end in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          format: date-time
+          example: '2022-08-26T23:55:06.281873Z'
+        page:
+          maximum: 1000
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+        pageSize:
+          maximum: 200
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+        start:
+          type: string
+          description: Return time off requests created after the specified time in requester's time zone. Provide start in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          format: date-time
+          example: '2022-08-26T08:00:06.281873Z'
+        statuses:
+          uniqueItems: true
+          type: array
+          description: Filters time off requests by status.
+          example:
+          - APPROVED
+          - PENDING
+          items:
+            type: string
+            description: Filters time off requests by status.
+            example: '["APPROVED","PENDING"]'
+            enum:
+            - PENDING
+            - APPROVED
+            - REJECTED
+            - ALL
+        userGroups:
+          uniqueItems: true
+          type: array
+          description: Provide the user group ids of time off requests.
+          example:
+          - 5b715612b079875110791342
+          - 5b715612b079875110791324
+          - 5b715612b079875110793142
+          items:
+            type: string
+            description: Provide the user group ids of time off requests.
+            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
+        users:
+          uniqueItems: true
+          type: array
+          description: Provide the user ids of time off requests. If empty, will return time off requests of all users (with a maximum of 5000 users).
+          example:
+          - 5b715612b079875110791432
+          - b715612b079875110791234
+          items:
+            type: string
+            description: Provide the user ids of time off requests. If empty, will return time off requests of all users (with a maximum of 5000 users).
+            example: '["5b715612b079875110791432","b715612b079875110791234"]'
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

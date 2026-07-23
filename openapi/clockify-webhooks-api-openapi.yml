@@ -1,0 +1,3799 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Webhooks API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Webhooks
+  x-displayName: Webhooks
+paths:
+  /v1/workspaces/{workspaceId}/addons/{addonId}/webhooks:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getAddonWebhooks
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents an addon identifier across the system.
+        example: 64c777ddd3fcab07cfbb210c
+        in: path
+        name: addonId
+        required: true
+        schema:
+          type: string
+          description: Represents an addon identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksDtoV1'
+          description: OK
+      summary: Get all webhooks for addon on a workspace
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/webhooks:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: getWebhooks
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a webhook type.
+        example: USER_CREATED
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+          enum:
+          - USER_CREATED
+          - SYSTEM
+          - ADDON
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksDtoV1'
+          description: OK
+      summary: Get all webhooks on a workspace
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      description: Creating a webhook generates a new token which can be used to verify that the webhook being sent was sent by Clockify, as it will always be present in the header.
+      operationId: createWebhook
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookRequestV1'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookDtoV1'
+          description: Created
+      summary: Create a webhook
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/webhooks/{webhookId}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deleteWebhook
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a webhook identifier across the system.
+        example: 5b715448b0798751107918ab
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+          description: Represents a webhook identifier across the system.
+          example: 5b715448b0798751107918ab
+      responses:
+        '200':
+          description: OK
+      summary: Delete a webhook
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    get:
+      operationId: getWebhook
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a webhook identifier across the system.
+        example: 5b715448b0798751107918ab
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+          description: Represents a webhook identifier across the system.
+          example: 5b715448b0798751107918ab
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookDtoV1'
+          description: OK
+      summary: Get a specific webhook by id
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updateWebhook
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a webhook identifier across the system.
+        example: 5b715448b0798751107918ab
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+          description: Represents a webhook identifier across the system.
+          example: 5b715448b0798751107918ab
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookDtoV1'
+          description: OK
+      summary: Update a webhook
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/webhooks/{webhookId}/logs:
+    servers:
+    - url: https://api.clockify.me/api
+    post:
+      operationId: getLogsForWebhook
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a webhook identifier across the system.
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+          description: Represents a webhook identifier across the system.
+      - description: Page number.
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 0
+      - description: Page size.
+        example: 50
+        in: query
+        name: size
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookLogSearchRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookLogDtoV1'
+          description: OK
+      summary: Get logs for a webhook
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/webhooks/{webhookId}/token:
+    servers:
+    - url: https://api.clockify.me/api
+    patch:
+      description: Generates a new webhook token and invalidates previous one
+      operationId: generateNewToken
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      - description: Represents a webhook identifier across the system.
+        example: 5b715448b0798751107918ab
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          type: string
+          description: Represents a webhook identifier across the system.
+          example: 5b715448b0798751107918ab
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookDtoV1'
+          description: OK
+      summary: Generate a new token
+      tags:
+      - Webhooks
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    WebhookEventTriggerSourceType:
+      type: object
+      description: Represents a webhook event trigger source type.
+      example: PROJECT_ID
+      oneOf:
+      - type: string
+        enum:
+        - PROJECT_ID
+        - USER_ID
+        - TAG_ID
+        - TASK_ID
+        - WORKSPACE_ID
+        - ASSIGNMENT_ID
+        - EXPENSE_ID
+      properties:
+        ASSIGNMENT_ID:
+          type: string
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        EXPENSE_ID:
+          type: string
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        PROJECT_ID:
+          type: string
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        TAG_ID:
+          type: string
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        TASK_ID:
+          type: string
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        USER_ID:
+          type: string
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        WORKSPACE_ID:
+          type: string
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        entityType:
+          type: string
+          enum:
+          - AUTH
+          - ALERT
+          - APPROVAL_REQUEST
+          - ASSIGNMENT
+          - CLIENT
+          - DOMAIN
+          - EXPENSE
+          - EXPENSE_CATEGORY
+          - EXPORT_SETTINGS
+          - INVOICE
+          - INVOICE_RECURRING_SETTINGS
+          - INVOICE_REMINDERS
+          - INVOICE_REMINDERS_INTERVALS
+          - INVOICE_ITEM_TYPE
+          - PASSWORD_RESET_TOKEN
+          - PROJECT
+          - PROJECT_FAVORITE
+          - REMINDER
+          - REPORT
+          - ORGANIZATION
+          - TEMPLATE
+          - TIMEENTRY
+          - TIMEENTRY_RATE
+          - TAG
+          - TASK
+          - TASK_FAVORITES
+          - USER
+          - WORKSPACE_USER
+          - USER_GROUP
+          - WEBHOOK
+          - WORKSPACE
+          - CUSTOM_FIELD
+          - WEBHOOK_LOG
+          - SCHEDULE_ASSIGNMENT
+          - SCHEDULE_MILESTONE
+          - COMPANY
+          - CURRENCY
+          - KIOSK_PIN_CODE
+          - KIOSK
+          - KIOSK_SESSION
+          - MARKETPLACE_ADDON
+          - INVOICE_PAYMENT
+          - DELETION_DOCUMENT
+          - FAVORITE_TIMEENTRY
+          - HOLIDAY
+          - POLICY
+          - POLICY_ASSIGNMENT
+          - EMAIL_KEY_REQUEST
+          - EMAIL_SESSION_REQUEST
+          - FEATURE_SUBSCRIPTION
+          - TIME_OFF_REQUEST
+          - LOG_BIN
+          - BALANCE_ASSIGNMENT
+          - CUSTOM_COLOR
+          - CUSTOM_COLORS_INDEX
+          - SAMPLE_DATA
+          - WEBHOOK_EVENT_STATUS
+    WebhookDtoV1:
+      type: object
+      properties:
+        authToken:
+          type: string
+          description: Represents an authentication token.
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI2NGI3YmU3YmUwODM1Yjc2ZDYzOTY5YTciLCJtdWx0aUZhY3RvciI6dHJ1ZSwiaXNzIjoiY2xvY2tpZnkiLCJuYW1lIjoiTWFydGluIExsb3lkIiwiZXhwIjoxNjkzMzY5MzEwLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNjkzMzI2MTEwLCJqdGkiOiJZVGcxT0Raak9XTXRPRGRsWVMwME5qZ3hMVGxpTlRndE5UQmlOVEprTmpOaE
+        deliveryEnabled:
+          type: boolean
+          description: Indicates whether webhook delivery is enabled or not. It can be disabled if delivery failed for too many times.
+          default: false
+        enabled:
+          type: boolean
+          description: Indicates whether webhook is enabled or not.
+          default: false
+        id:
+          type: string
+          description: Represents webhook identifier across the system.
+          example: 76a687e29ae1f428e7ebe101
+        name:
+          type: string
+          description: Represents webhook name.
+          example: stripe
+        planEnabled:
+          type: boolean
+          description: Indicates whether webhook is supported by current plan. It can be disabled if number of webhooks exceeds plan limit or if the feature is not supported on current plan.
+          default: false
+        triggerSource:
+          type: array
+          description: Represents a list of trigger sources.
+          example:
+          - 54a687e29ae1f428e7ebe909
+          - 87p187e29ae1f428e7ebej56
+          items:
+            type: string
+            description: Represents a list of trigger sources.
+            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
+        triggerSourceType:
+          $ref: '#/components/schemas/WebhookEventTriggerSourceType'
+        url:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: https://example-clockify.com/stripeEndpoint
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        webhookEvent:
+          $ref: '#/components/schemas/WebhookEventType'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    CreateWebhookRequestV1:
+      required:
+      - triggerSource
+      - triggerSourceType
+      - url
+      - webhookEvent
+      type: object
+      properties:
+        name:
+          maxLength: 30
+          minLength: 2
+          type: string
+          description: Represents a webhook name.
+          example: stripe
+        triggerSource:
+          type: array
+          description: Represents a list of trigger sources.
+          example:
+          - 54a687e29ae1f428e7ebe909
+          - 87p187e29ae1f428e7ebej56
+          items:
+            type: string
+            description: Represents a list of trigger sources.
+            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
+        triggerSourceType:
+          type: string
+          description: Represents a webhook event trigger source type.
+          example: PROJECT_ID
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        url:
+          minLength: 1
+          type: string
+          description: Represents a webhook target url.
+          example: https://example-clockify.com/stripeEndpoint
+        webhookEvent:
+          type: string
+          description: Represents a webhook event type.
+          example: NEW_PROJECT
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+    WebhookLogSearchRequestV1:
+      type: object
+      properties:
+        from:
+          type: string
+          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred after this value.
+          format: date-time
+          example: '2023-02-01T13:00:46Z'
+        sortByNewest:
+          type: boolean
+          description: If set to true, logs will be sorted with most recent first.
+          default: false
+        status:
+          type: string
+          description: Filters logs by status.
+          enum:
+          - ALL
+          - SUCCEEDED
+          - FAILED
+        to:
+          type: string
+          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred before this value.
+          format: date-time
+          example: '2023-02-05T13:00:46Z'
+    WebhookEventType:
+      type: object
+      description: Represents webhook event type.
+      example: NEW_PROJECT
+      oneOf:
+      - type: string
+        enum:
+        - NEW_PROJECT
+        - NEW_TASK
+        - NEW_CLIENT
+        - NEW_TIMER_STARTED
+        - TIMER_STOPPED
+        - TIME_ENTRY_UPDATED
+        - TIME_ENTRY_DELETED
+        - TIME_ENTRY_SPLIT
+        - NEW_TIME_ENTRY
+        - TIME_ENTRY_RESTORED
+        - NEW_TAG
+        - USER_DELETED_FROM_WORKSPACE
+        - USER_JOINED_WORKSPACE
+        - USER_DEACTIVATED_ON_WORKSPACE
+        - USER_ACTIVATED_ON_WORKSPACE
+        - USER_EMAIL_CHANGED
+        - USER_UPDATED
+        - NEW_INVOICE
+        - INVOICE_UPDATED
+        - NEW_APPROVAL_REQUEST
+        - APPROVAL_REQUEST_STATUS_UPDATED
+        - TIME_OFF_REQUESTED
+        - TIME_OFF_REQUEST_UPDATED
+        - TIME_OFF_REQUEST_APPROVED
+        - TIME_OFF_REQUEST_REJECTED
+        - TIME_OFF_REQUEST_STARTED
+        - TIME_OFF_REQUEST_WITHDRAWN
+        - BALANCE_UPDATED
+        - TAG_UPDATED
+        - TAG_DELETED
+        - TASK_UPDATED
+        - CLIENT_UPDATED
+        - TASK_DELETED
+        - CLIENT_DELETED
+        - EXPENSE_RESTORED
+        - ASSIGNMENT_CREATED
+        - ASSIGNMENT_DELETED
+        - ASSIGNMENT_PUBLISHED
+        - ASSIGNMENT_UPDATED
+        - EXPENSE_CREATED
+        - EXPENSE_DELETED
+        - EXPENSE_UPDATED
+        - PROJECT_UPDATED
+        - PROJECT_DELETED
+        - USER_GROUP_CREATED
+        - USER_GROUP_UPDATED
+        - USER_GROUP_DELETED
+        - USERS_INVITED_TO_WORKSPACE
+        - LIMITED_USERS_ADDED_TO_WORKSPACE
+        - COST_RATE_UPDATED
+        - BILLABLE_RATE_UPDATED
+      properties:
+        APPROVAL_REQUEST_STATUS_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        ASSIGNMENT_CREATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        ASSIGNMENT_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        ASSIGNMENT_PUBLISHED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        ASSIGNMENT_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        BALANCE_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        BILLABLE_RATE_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        CLIENT_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        CLIENT_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        COST_RATE_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        EXPENSE_CREATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        EXPENSE_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        EXPENSE_RESTORED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        EXPENSE_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        INVOICE_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        LIMITED_USERS_ADDED_TO_WORKSPACE:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_APPROVAL_REQUEST:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_CLIENT:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_INVOICE:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_PROJECT:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_TAG:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_TASK:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_TIMER_STARTED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        NEW_TIME_ENTRY:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        PROJECT_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        PROJECT_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TAG_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TAG_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TASK_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TASK_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIMER_STOPPED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_ENTRY_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_ENTRY_RESTORED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_ENTRY_SPLIT:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_ENTRY_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_OFF_REQUESTED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_OFF_REQUEST_APPROVED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_OFF_REQUEST_REJECTED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_OFF_REQUEST_STARTED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_OFF_REQUEST_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        TIME_OFF_REQUEST_WITHDRAWN:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USERS_INVITED_TO_WORKSPACE:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_ACTIVATED_ON_WORKSPACE:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_DEACTIVATED_ON_WORKSPACE:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_DELETED_FROM_WORKSPACE:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_EMAIL_CHANGED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_GROUP_CREATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_GROUP_DELETED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_GROUP_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_JOINED_WORKSPACE:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        USER_UPDATED:
+          type: string
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+        feature:
+          type: string
+          enum:
+          - ADD_TIME_FOR_OTHERS
+          - ADMIN_PANEL
+          - ALERTS
+          - APPROVAL
+          - AUDIT_LOG
+          - AUTOMATIC_LOCK
+          - BRANDED_REPORTS
+          - BULK_EDIT
+          - CUSTOM_FIELDS
+          - CUSTOM_REPORTING
+          - CUSTOM_SUBDOMAIN
+          - CREATION_PERMISSIONS
+          - DECIMAL_FORMAT
+          - DISABLE_MANUAL_MODE
+          - EDIT_MEMBER_PROFILE
+          - EXCLUDE_NON_BILLABLE_FROM_ESTIMATE
+          - EXPENSES
+          - FILE_IMPORT
+          - TIMESHEET_IMPORT
+          - USER_IMPORT
+          - HIDE_PAGES
+          - HISTORIC_RATES
+          - INVOICING
+          - INVOICE_EMAILS
+          - INVOICE_REMINDERS
+          - LABOR_COST
+          - LOCATIONS
+          - MANAGER_ROLE
+          - MULTI_FACTOR_AUTHENTICATION
+          - PROJECT_BUDGET
+          - PROJECT_TEMPLATES
+          - GRANT_PROJECT_MANAGER_ROLE
+          - PRIVATE_PROJECT_ACCESS
+          - QUICKBOOKS_INTEGRATION
+          - RECURRING_ESTIMATES
+          - RECURRING_INVOICES
+          - REQUIRED_FIELDS
+          - SCHEDULED_REPORTS
+          - SCHEDULING
+          - SCREENSHOTS
+          - SSO
+          - SUMMARY_ESTIMATE
+          - TARGETS_AND_REMINDERS
+          - TASK_RATES
+          - TIME_OFF
+          - UNLIMITED_REPORTS
+          - USER_CUSTOM_FIELDS
+          - WHO_CAN_CHANGE_TIMEENTRY_BILLABILITY
+          - BREAKS
+          - KIOSK_SESSION_DURATION
+          - KIOSK_PIN_REQUIRED
+          - WHO_CAN_SEE_ALL_TIME_ENTRIES
+          - WHO_CAN_SEE_PROJECT_STATUS
+          - WHO_CAN_SEE_PUBLIC_PROJECTS_ENTRIES
+          - WHO_CAN_SEE_TEAMS_DASHBOARD
+          - WORKSPACE_LOCK_TIMEENTRIES
+          - WORKSPACE_TIME_AUDIT
+          - WORKSPACE_TIME_ROUNDING
+          - KIOSK
+          - KIOSK_SIX_DIGIT_PIN
+          - KIOSK_QR_CODE
+          - LIMITED_USERS
+          - FORECASTING
+          - TIME_TRACKING
+          - ATTENDANCE_REPORT
+          - WORKSPACE_TRANSFER
+          - FAVORITE_ENTRIES
+          - SPLIT_TIME_ENTRY
+          - CLIENT_CURRENCY
+          - SCHEDULING_FORECASTING
+          - SCIM
+          - UNLIMITED_USER_SEATS
+          - BILLABLE_HOURS
+          - PROJECT_ESTIMATE
+          - CSV_EXPORT
+          - XLSX_EXPORT
+          - ONE_MONTH_RANGE_REPORTS
+          - ONE_YEAR_RANGE_REPORTS
+          - SHARED_REPORTS
+        payloadType:
+          type: string
+          enum:
+          - PROJECT
+          - TIME_ENTRY
+          - TIME_ENTRY_PLAKY_INTEGRATION
+          - CLIENT
+          - TAG
+          - TASK
+          - WEBHOOK
+          - WEBHOOK_LOG
+          - NO_PAYLOAD
+          - DOMAIN_DETAILS
+          - WORKSPACE_DELETED_DETAILS
+          - USER
+          - USER_GROUP
+          - FILE_IMPORT_RESULTS
+          - APPROVAL_REQUEST
+          - INVOICE
+          - TIME_OFF_REQUEST
+          - BALANCE_UPDATED
+          - ASSIGNMENT_WEBHOOK
+          - ASSIGNMENT
+          - TIME_ENTRY_WITH_CUSTOM_FIELD
+          - TIME_ENTRY_BATCH_DELETED_IDS
+          - ADDITIONAL_WORKSPACE
+          - EXPENSE
+          - WORKSPACE_TRANSFER_DETAILS
+          - PROJECT_STATUS_FAILED
+          - INVITED_USERS
+          - ADDED_LIMITED_USERS
+          - RATE_UPDATED
+          - JIRA_INSTALLED_PAYLOAD_WITH_JWT
+          - JIRA_UNINSTALLED_PAYLOAD_WITH_JWT
+          - JIRA_WORKLOG_PAYLOAD_WITH_JWT
+          - JIRA_DATA_CENTER_INSTALLED_PAYLOAD_WITH_JWT
+          - JIRA_DATA_CENTER_UNINSTALLED_PAYLOAD_WITH_JWT
+          - JIRA_PLUGIN_CONFIG_SAVE_PAYLOAD_WITH_JWT
+          - REMINDER_TO_START_TIMER
+          - REMINDER_TO_STOP_TIMER
+        validSourceTypes:
+          type: array
+          items:
+            type: string
+            enum:
+            - PROJECT_ID
+            - USER_ID
+            - TAG_ID
+            - TASK_ID
+            - WORKSPACE_ID
+            - ASSIGNMENT_ID
+            - EXPENSE_ID
+    WebhookLogDtoV1:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Represents log identifier across the system.
+          example: 65e5b854fe0dfa24f1528ef0
+        requestBody:
+          type: string
+          description: Represents request body.
+          example: '{"id":"65df50f5d2dd8f23a685374e","name":"Webhook"}'
+        respondedAt:
+          type: string
+          description: Represents date and time of response.
+          example: '2024-03-04T12:02:28.125+00:00'
+        responseBody:
+          type: string
+          description: Represents response body.
+          example: '{"id":"h73210f5d2dd8f23685374e","response":"Webhook response"}'
+        statusCode:
+          type: integer
+          description: Represents response status code.
+          format: int32
+          example: 200
+        webhookEventStatusId:
+          type: string
+          description: Represents webhook event status identifier across the system.
+          example: 6818c52b391aca499bf8dafc
+        webhookId:
+          type: string
+          description: Represents webhook identifier across the system.
+          example: 65df5508d2dd8f23a68537af
+    UpdateWebhookRequestV1:
+      required:
+      - triggerSource
+      - triggerSourceType
+      - url
+      - webhookEvent
+      type: object
+      properties:
+        name:
+          maxLength: 30
+          minLength: 2
+          type: string
+          description: Represents a webhook name.
+          example: Stripe
+        triggerSource:
+          type: array
+          description: Represents a list of trigger sources.
+          example:
+          - 54a687e29ae1f428e7ebe909
+          - 87p187e29ae1f428e7ebej56
+          items:
+            type: string
+            description: Represents a list of trigger sources.
+            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
+        triggerSourceType:
+          type: string
+          description: Represents a webhook event trigger source type.
+          example: PROJECT_ID
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        url:
+          minLength: 1
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: https://example-clockify.com/stripeEndpoint
+        webhookEvent:
+          type: string
+          description: Represents a webhook event type.
+          example: NEW_PROJECT
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+    WebhooksDtoV1:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          description: Represents a list of webhook objects for the workspace.
+          items:
+            $ref: '#/components/schemas/WebhookDtoV1'
+        workspaceWebhookCount:
+          type: integer
+          description: Represents number of webhooks for the workspace.
+          format: int32
+          example: 5
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

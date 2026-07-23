@@ -1,0 +1,555 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Expense Report API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Expense Report
+  x-displayName: Expense Report
+paths:
+  /v1/workspaces/{workspaceId}/reports/expenses/detailed:
+    servers:
+    - url: https://reports.api.clockify.me
+    post:
+      description: Expense report data on FREE subscription plan is limited to a maximum interval length of one month (31 days).
+      operationId: generateDetailedReportV1
+      parameters:
+      - in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec6bbb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseReportFilterV1'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDetailedReportDtoV1'
+          description: OK
+      summary: Generate an expense report
+      tags:
+      - Expense Report
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    ExpenseReportFilterV1:
+      type: object
+      properties:
+        approvalState:
+          type: string
+          description: Represents an approval state
+          enum:
+          - APPROVED
+          - UNAPPROVED
+          - ALL
+          example: APPROVED
+        billable:
+          type: boolean
+          description: Indicates whether report is billable
+          example: true
+        categories:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        clients:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        currency:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        dateRangeEnd:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2021-10-27T23:59:59.999'
+          minLength: 1
+        dateRangeStart:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2021-10-27T00:00:00'
+          minLength: 1
+        dateRangeType:
+          type: string
+          description: Represents date range type of expense report
+          enum:
+          - ABSOLUTE
+          - TODAY
+          - YESTERDAY
+          - THIS_WEEK
+          - LAST_WEEK
+          - PAST_TWO_WEEKS
+          - THIS_MONTH
+          - LAST_MONTH
+          - THIS_YEAR
+          - LAST_YEAR
+          example: TODAY
+        exportType:
+          type: string
+          description: Represents an export type
+          enum:
+          - JSON
+          - JSON_V1
+          - PDF
+          - CSV
+          - XLSX
+          - ZIP
+          example: JSON
+        invoicingState:
+          type: string
+          description: Represents an invoicing state
+          enum:
+          - INVOICED
+          - UNINVOICED
+          - ALL
+          example: INVOICED
+        note:
+          type: string
+          description: Represents a search term for filtering report entries by note
+          example: some note keyword
+        page:
+          type: integer
+          format: int32
+          description: Page number.
+          example: 1
+          minimum: 1
+        pageSize:
+          type: integer
+          format: int32
+          description: Page size.
+          example: 50
+          minimum: 1
+        projects:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        sortColumn:
+          type: string
+          description: Represents expenses sort column
+          enum:
+          - ID
+          - PROJECT
+          - USER
+          - CATEGORY
+          - DATE
+          - AMOUNT
+          example: ID
+        sortOrder:
+          type: string
+          description: Represents a sort order
+          enum:
+          - ASCENDING
+          - DESCENDING
+          example: ASCENDING
+        tasks:
+          $ref: '#/components/schemas/ContainsTaskFilterV1'
+        timeZone:
+          type: string
+          description: Represents a time zone
+          example: Europe/Budapest
+        userGroups:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        userLocale:
+          type: string
+          description: Represents a user locale
+          example: en
+        users:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        weekStart:
+          type: string
+          description: Represents week start
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+          example: MONDAY
+        withoutNote:
+          type: boolean
+          description: If set to 'true', report will only include entries with empty note
+          example: false
+        zoomLevel:
+          type: string
+          description: Represents a zoom level
+          enum:
+          - WEEK
+          - MONTH
+          - YEAR
+          example: WEEK
+      required:
+      - dateRangeEnd
+      - dateRangeStart
+    ContainsTaskFilterV1:
+      type: object
+      description: Represents filter criteria for expenses associated with tasks.
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    invoicingInfo:
+      type: object
+      description: Expense's invoicing info.
+      properties:
+        invoiceId:
+          type: string
+        manuallyInvoiced:
+          type: boolean
+    ExpenseTotalsDtoV1:
+      type: object
+      description: Represents expense totals
+      properties:
+        expensesCount:
+          type: integer
+          format: int32
+          description: Represents expenses count
+          example: 2
+        totalAmount:
+          type: number
+          format: double
+          description: Represents total amount of expenses
+          example: 20
+        totalAmountBillable:
+          type: number
+          format: double
+          description: Represents total billable amount of expenses
+          example: 20
+    ExpenseDetailedReportDtoV1:
+      type: object
+      description: report
+      properties:
+        expenses:
+          type: array
+          description: Represents list of expenses
+          items:
+            $ref: '#/components/schemas/ExpenseReportDtoV1'
+        totals:
+          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
+    ExpenseReportDtoV1:
+      type: object
+      description: Represents list of expenses
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Represents expenses amount.
+        approvalRequestId:
+          type: string
+          description: Represents approval request identifier across the system.
+          example: 5b715612b079875110791336
+        billable:
+          type: boolean
+          description: Indicates whether the expenses is billable.
+        categoryHasUnitPrice:
+          type: boolean
+          description: Indicates whether category has unit price.
+        categoryId:
+          type: string
+          description: Represents category identifier across the system.
+          example: 5b715612b079875110791334
+        categoryName:
+          type: string
+          description: Represents category's name.
+        categoryUnit:
+          type: string
+          description: Represents category's unit.
+        date:
+          type: string
+          description: Represents expenses date in YYYY-MM-DDTHH:MM:SS.ssssssZ format.
+          example: '2021-10-27T00:00:00Z'
+        exportFields:
+          type: array
+          description: Represents export fields.
+          items:
+            type: string
+            description: Represents export fields.
+            enum:
+            - PROJECT
+            - CLIENT
+            - TASK
+            - DESCRIPTION
+            - USER
+            - TAGS
+            - START_DATE
+            - START_TIME
+            - END_TIME
+            - DURATION
+            - BILLABLE_AMOUNT
+            - COST_AMOUNT
+            - PROFIT
+            - EMAIL
+            - BILLABLE
+            - BILLABLE_H
+            - NON_BILLABLE_H
+            - END_DATE
+            - DECIMAL_DURATION
+            - BILLABLE_RATE
+            - COST_RATE
+            - APPROVAL
+            - BAR_CHART
+            - PIE_CHART_1
+            - PIE_CHART_2
+            - PIE_CHART_3
+            - RTL
+            - TOTAL
+            - SUBGROUP
+            - GROUP
+            - DATE
+            - TIME
+            - CATEGORY
+            - NOTE
+            - AMOUNT
+            - INVOICED
+            - INVOICE_ID
+            - CATEGORY_NO_OF_UNITS
+            - CATEGORY_UNIT
+            - KIOSK
+            - KIOSK_QR_CODE
+            - TYPE
+            - BREAK
+            - NOTES
+            - BILLABLE_TOTAL
+            - RECEIPTS
+            - EXPENSE_TOTAL
+            - DATE_OF_CREATION
+            - DATE_OF_APPROVAL
+            - NAME
+            - ROLE
+            - PROJECTS
+            - STATUS
+            - WEEK_START
+            - WORKING_DAYS
+            - TEAM_MANAGERS
+            - TEAM_MEMBERS
+            - DAILY_WORK_CAPACITY
+            - VISIBILITY
+            - BILLABILITY
+            - TASKS
+            - TRACKED_H
+            - ESTIMATED_H
+            - REMAINING_H
+            - OVERAGE_H
+            - TRACKED_BUDGET
+            - ESTIMATED_BUDGET
+            - REMAINING_BUDGET
+            - OVERAGE_BUDGET
+            - PROGRESS
+            - RECURRING_ESTIMATE
+            - EXPENSES
+            - BILLABLE_EXPENSES
+            - NON_BILLABLE_EXPENSES
+            - ADDITIONAL_FIELDS
+            - PROJECT_MEMBERS
+            - PROJECT_MANAGER
+            - APPROVED_BY
+            - ISSUE_DATE
+            - DUE_ON
+            - BALANCE
+        fileId:
+          type: string
+          description: Represents file identifier across the system.
+          example: 5b715612b079875110791335
+        fileName:
+          type: string
+          description: Represents expenses file name.
+        id:
+          type: string
+          description: Represents expenses identifier across the system.
+          example: 5b715612b079875110791122
+        invoicingInfo:
+          $ref: '#/components/schemas/invoicingInfo'
+        locked:
+          type: boolean
+          description: Indicates whether the expenses is locked.
+        notes:
+          type: string
+          description: Represents expenses note.
+          example: Expenses Note
+        projectColor:
+          type: string
+          description: Represents project's color
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b715612b079875110791333
+        projectName:
+          type: string
+          description: Represents project's name.
+        quantity:
+          type: number
+          format: double
+          description: Represents expenses quantity
+          example: 10
+        reportName:
+          type: string
+          description: Represents expense name.
+        time:
+          type: string
+          description: Represents expense time.
+        userEmail:
+          type: string
+          description: Represents user's email.
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5b715612b079875110791121
+        userName:
+          type: string
+          description: Represents user's name.
+        userStatus:
+          type: string
+          description: Represents user's status.
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 5b715612b079875110791121
+    ContainsUsersFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ALL
+          - ACTIVE_WITH_PENDING
+          - ACTIVE
+          - PENDING
+          - INACTIVE
+          example: ACTIVE
+    ContainsArchivedFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

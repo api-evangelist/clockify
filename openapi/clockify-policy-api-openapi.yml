@@ -1,0 +1,793 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Policy API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Policy
+  x-displayName: Policy
+paths:
+  /v1/workspaces/{workspaceId}/time-off/policies:
+    servers:
+    - url: https://api.clockify.me/api
+    get:
+      operationId: findPoliciesForWorkspace
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Page number.
+        in: query
+        name: page
+        required: false
+        schema:
+          maximum: 1000
+          type: string
+      - description: Page size.
+        example: 50
+        in: query
+        name: page-size
+        required: false
+        schema:
+          maximum: 200
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+      - description: If provided, you'll get a filtered list of policies that contain the provided string in their name.
+        example: Holidays
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+          description: If provided, you'll get a filtered list of policies that contain the provided string in their name.
+          example: Holidays
+      - description: If provided, you'll get a filtered list of policies with the corresponding status.
+        example: ACTIVE
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+      - in: query
+        name: sort-column
+        required: false
+        schema:
+          type: string
+          default: DEFAULT_SORT
+      - in: query
+        name: sort-order
+        required: false
+        schema:
+          type: string
+          default: ASCENDING
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicyDtoV1'
+          description: OK
+      summary: Get policies on a workspace
+      tags:
+      - Policy
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    post:
+      operationId: createPolicy
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePolicyRequestV1'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDtoV1'
+          description: Created
+      summary: Create a time off policy
+      tags:
+      - Policy
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/time-off/policies/{id}:
+    servers:
+    - url: https://api.clockify.me/api
+    delete:
+      operationId: deletePolicy
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      responses:
+        '200':
+          description: OK
+      summary: Delete a policy
+      tags:
+      - Policy
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    get:
+      operationId: getPolicy
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDtoV1'
+          description: OK
+      summary: Get a time off policy
+      tags:
+      - Policy
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    patch:
+      operationId: updatePolicyStatus
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePolicyStatusRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDtoV1'
+          description: OK
+      summary: Change a policy status
+      tags:
+      - Policy
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+    put:
+      operationId: updatePolicy
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 60f91b3ffdaf031696ec61a8
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+      - description: Represents a policy identifier across the system.
+        example: 63034cd0cb0fb876a57e93ad
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: Represents a policy identifier across the system.
+          example: 63034cd0cb0fb876a57e93ad
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDtoV1'
+          description: OK
+      summary: Update a policy
+      tags:
+      - Policy
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    UserGroupIdsSchema:
+      type: object
+      properties:
+        contains:
+          type: string
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents ids upon which filtering is performed.
+          example:
+          - 5b715612b079875110791111
+          - 5b715612b079875110791222
+          items:
+            type: string
+            description: Represents ids upon which filtering is performed.
+            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
+        status:
+          type: string
+          description: Represents user status.
+          example: ALL
+          enum:
+          - ALL
+          - ACTIVE
+          - INACTIVE
+      description: Provide list with user group ids and corresponding status.
+    DefaultEntitiesDto:
+      type: object
+      properties:
+        projectId:
+          type: string
+        taskId:
+          type: string
+    NegativeBalanceDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        period:
+          type: string
+        shouldReset:
+          type: boolean
+        timeUnit:
+          type: string
+      description: Represents the data about negative balance including amount, time unit and period.
+    UpdatePolicyRequestV1:
+      required:
+      - allowHalfDay
+      - allowNegativeBalance
+      - approve
+      - archived
+      - everyoneIncludingNew
+      - hasExpiration
+      - name
+      - userGroups
+      - users
+      type: object
+      properties:
+        allowHalfDay:
+          type: boolean
+          description: Indicates whether policy allows half day.
+          example: true
+          default: false
+        allowNegativeBalance:
+          type: boolean
+          description: Indicates whether policy allows negative balance.
+          example: false
+          default: false
+        approve:
+          $ref: '#/components/schemas/PolicyApprovalDto'
+        archived:
+          type: boolean
+          description: Indicates whether policy is archived.
+          example: false
+          default: false
+        automaticAccrual:
+          $ref: '#/components/schemas/AutomaticAccrualRequest'
+        automaticTimeEntryCreation:
+          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#8BC34A'
+        everyoneIncludingNew:
+          type: boolean
+          description: Indicates whether the policy is shown to new users.
+          example: false
+          default: false
+        hasExpiration:
+          type: boolean
+          description: Indicates whether the policy has expiration.
+          example: false
+          default: false
+        icon:
+          type: string
+          description: Provide icon.
+          example: UMBRELLA
+          enum:
+          - UMBRELLA
+          - SNOWFLAKE
+          - FAMILY
+          - PLANE
+          - STETHOSCOPE
+          - HEALTH_METRICS
+          - CHILDCARE
+          - LUGGAGE
+          - MONETIZATION
+          - CALENDAR
+        name:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Provide the name you would like to use for updating the policy.
+          example: Days
+        negativeBalance:
+          $ref: '#/components/schemas/NegativeBalanceRequest'
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+        users:
+          $ref: '#/components/schemas/UserIdsSchema'
+    AutomaticTimeEntryCreationRequest:
+      required:
+      - defaultEntities
+      type: object
+      properties:
+        defaultEntities:
+          $ref: '#/components/schemas/DefaultEntitiesRequest'
+        enabled:
+          type: boolean
+          description: Indicates that automatic time entry creation is enabled.
+          default: false
+      description: Provides automatic time entry creation settings.
+    AutomaticAccrualDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Represents automatic accrual's amount
+          format: double
+          example: 20
+        period:
+          type: string
+          description: Represents automatic accrual's period
+          example: YEAR
+          enum:
+          - MONTH
+          - YEAR
+        timeUnit:
+          type: string
+          description: Represents automatic accrual's time unit
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Represents automatic approval settings.
+    AutomaticAccrualRequest:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: number
+          description: Represents amount of automatic accrual.
+          format: double
+          example: 2
+        period:
+          type: string
+          description: Represents automatic accrual period.
+          example: MONTH
+          enum:
+          - MONTH
+          - YEAR
+        timeUnit:
+          type: string
+          description: Represents automatic accrual time unit.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Provide automatic accrual settings.
+    PolicyDtoV1:
+      type: object
+      properties:
+        allowHalfDay:
+          type: boolean
+          description: Indicates whether the half day is allowed.
+          example: false
+          default: false
+        allowNegativeBalance:
+          type: boolean
+          description: Indicates whether the negative balance is allowed.
+          example: true
+          default: false
+        approve:
+          $ref: '#/components/schemas/PolicyApprovalDto'
+        archived:
+          type: boolean
+          description: Indicates whether the policy is archived.
+          example: true
+          default: false
+        automaticAccrual:
+          $ref: '#/components/schemas/AutomaticAccrualDto'
+        automaticTimeEntryCreation:
+          $ref: '#/components/schemas/AutomaticTimeEntryCreationDto'
+        everyoneIncludingNew:
+          type: boolean
+          description: Indicates whether the policy is applied to future new users.
+          example: false
+          default: false
+        id:
+          type: string
+          description: Represents policy identifier across the system.
+          example: 5b715612b079875110791111
+        name:
+          type: string
+          description: Represents the name of the policy.
+          example: Days
+        negativeBalance:
+          $ref: '#/components/schemas/NegativeBalanceDto'
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+        timeUnit:
+          type: string
+          description: Represents the time unit of the policy.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents user groups' identifiers across the system. Indicates which user groups are included in the policy.
+          example:
+          - 5b715612b079875110791342
+          - 5b715612b079875110791324
+          - 5b715612b079875110793142
+          items:
+            type: string
+            description: Represents user groups' identifiers across the system. Indicates which user groups are included in the policy.
+            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
+        userIds:
+          uniqueItems: true
+          type: array
+          description: Represents users' identifiers across the system. Indicates which users are included in the policy.
+          example:
+          - 5b715612b079875110791432
+          - 5b715612b079875110791234
+          items:
+            type: string
+            description: Represents users' identifiers across the system. Indicates which users are included in the policy.
+            example: '["5b715612b079875110791432","5b715612b079875110791234"]'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 5b715612b079875110792222
+    ChangePolicyStatusRequestV1:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+          description: Provide the status you would like to use for changing the policy.
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+    PolicyApprovalDto:
+      type: object
+      properties:
+        requiresApproval:
+          type: boolean
+          description: Indicates whether it requires approval
+          example: true
+          default: false
+        specificMembers:
+          type: boolean
+          description: Indicates whether it requires specific members
+          example: false
+          default: false
+        teamManagers:
+          type: boolean
+          description: Indicates whether it requires team manager's approval
+          example: false
+          default: false
+        userIds:
+          uniqueItems: true
+          type: array
+          description: Represents set of user's identifier across the system
+          example:
+          - 6579d126c2fe3b25f20ea001
+          - 6579d126c2fe3b25f20ea002
+          items:
+            type: string
+            description: Represents set of user's identifier across the system
+            example: '["6579d126c2fe3b25f20ea001","6579d126c2fe3b25f20ea002"]'
+      description: Represents approval settings.
+    CreatePolicyRequestV1:
+      required:
+      - approve
+      - name
+      type: object
+      properties:
+        allowHalfDay:
+          type: boolean
+          description: Indicates whether policy allows half days.
+          example: false
+          default: false
+        allowNegativeBalance:
+          type: boolean
+          description: Indicates whether policy allows negative balances.
+          example: true
+          default: false
+        approve:
+          $ref: '#/components/schemas/PolicyApprovalDto'
+        archived:
+          type: boolean
+          description: Indicates whether policy is archived.
+          example: true
+          default: false
+        automaticAccrual:
+          $ref: '#/components/schemas/AutomaticAccrualRequest'
+        automaticTimeEntryCreation:
+          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#8BC34A'
+        everyoneIncludingNew:
+          type: boolean
+          description: Indicates whether the policy is to be applied to future new users.
+          example: false
+          default: false
+        hasExpiration:
+          type: boolean
+          description: Indicates whether the policy balance should have expiration
+          example: false
+          default: false
+        icon:
+          type: string
+          description: Provide icon.
+          example: UMBRELLA
+          enum:
+          - UMBRELLA
+          - SNOWFLAKE
+          - FAMILY
+          - PLANE
+          - STETHOSCOPE
+          - HEALTH_METRICS
+          - CHILDCARE
+          - LUGGAGE
+          - MONETIZATION
+          - CALENDAR
+        name:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Represents a name of new policy.
+          example: Mental health days
+        negativeBalance:
+          $ref: '#/components/schemas/NegativeBalanceRequest'
+        timeUnit:
+          type: string
+          description: 'Indicates time unit of the policy. '
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+        users:
+          $ref: '#/components/schemas/UserIdsSchema'
+    UserIdsSchema:
+      type: object
+      properties:
+        contains:
+          type: string
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents ids upon which filtering is performed.
+          example:
+          - 5b715612b079875110791111
+          - 5b715612b079875110791222
+          items:
+            type: string
+            description: Represents ids upon which filtering is performed.
+            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
+        status:
+          type: string
+          description: Represents user status.
+          example: ALL
+          enum:
+          - ALL
+          - ACTIVE
+          - INACTIVE
+      description: Provide list with user ids and corresponding status.
+    DefaultEntitiesRequest:
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Default project for automatically created time entries
+        taskId:
+          type: string
+          description: Default task for automatically created time entries
+      description: Provides information about default project and task for automatically created time entries.
+    NegativeBalanceRequest:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: number
+          description: Represents negative balance amount.
+          format: double
+          example: 2
+        amountValidForTimeUnit:
+          type: boolean
+        period:
+          type: string
+          description: Represents negative balance period.
+          example: MONTH
+          enum:
+          - MONTH
+          - YEAR
+        shouldReset:
+          type: boolean
+          description: Indicates whether negative balance should be reset at the end of the negative balance period.
+          example: true
+          default: false
+        timeUnit:
+          type: string
+          description: Represents negative balance time unit.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Provide the negative balance data you would like to use for updating the policy.
+    AutomaticTimeEntryCreationDto:
+      type: object
+      properties:
+        defaultEntities:
+          $ref: '#/components/schemas/DefaultEntitiesDto'
+        enabled:
+          type: boolean
+      description: Represents automatic time entry creation settings.
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

@@ -1,0 +1,295 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Audit Log Report API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Audit Log Report
+  x-displayName: Audit Log Report
+paths:
+  /v1/workspaces/{workspaceId}/audit-log:
+    servers:
+    - url: https://auditlog-api.api.clockify.me
+    post:
+      operationId: getAuditLogs
+      parameters:
+      - description: Represents a workspace identifier across the system.
+        example: 64a687e29ae1f428e7ebe303
+        in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuditLogGetRequestV1'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageableV1ListAuditLogDtoV1'
+          description: OK
+      summary: Generate an audit log report
+      tags:
+      - Audit Log Report
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    PageableV1ListAuditLogDtoV1:
+      type: object
+      properties:
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditLogDtoV1'
+    AuditLogDtoV1:
+      type: object
+      properties:
+        action:
+          type: string
+          description: Represents an audit log action type.
+          example: CREATE_PROJECT
+          enum:
+          - CREATE_TIME_PERSONAL_TIMER
+          - CREATE_TIME_PERSONAL_MANUAL
+          - CREATE_TIME_IMPORT
+          - CREATE_TIME_KIOSK
+          - CREATE_TIME_FOR_OTHER
+          - RESTORE_TIME
+          - RESTORE_TIME_FOR_OTHER
+          - UPDATE_TIME_PERSONAL
+          - UPDATE_TIME_FOR_OTHER
+          - DELETE_TIME_PERSONAL
+          - DELETE_TIME_FOR_OTHER
+          - CREATE_PROJECT
+          - CREATE_PROJECT_IMPORT
+          - CREATE_PROJECT_QUICKBOOKS
+          - UPDATE_PROJECT
+          - DELETE_PROJECT
+          - CREATE_TASK
+          - CREATE_TASK_IMPORT
+          - UPDATE_TASK
+          - DELETE_TASK
+          - CREATE_CLIENT
+          - CREATE_CLIENT_IMPORT
+          - CREATE_CLIENT_QUICKBOOKS
+          - UPDATE_CLIENT
+          - DELETE_CLIENT
+          - CREATE_TAG
+          - CREATE_TAG_IMPORT
+          - UPDATE_TAG
+          - DELETE_TAG
+          - CREATE_EXPENSE
+          - CREATE_EXPENSE_FOR_OTHER
+          - RESTORE_EXPENSE
+          - RESTORE_EXPENSE_FOR_OTHER
+          - UPDATE_EXPENSE
+          - UPDATE_EXPENSE_FOR_OTHER
+          - DELETE_EXPENSE
+          - DELETE_EXPENSE_FOR_OTHER
+        content:
+          type: string
+          description: Represents the current value of the modified entity
+          example: '{"projectName":"New Project","client":"","archived":false,"visibility":true,"members":["John Doe"],"billableByDefault":true,"note":"","billableRate":0,"costRate":null,"currency":"USD","activeEstimate":"NONE","estimateType":null,"estimate":null,"recurringEstimate":false,"interval":null,"month":null,"dayOfWeek":null,"dayOfMonth":null,"hour":null}'
+        previousContent:
+          type: string
+          description: Represents the previous value of the modified entity.
+          example: 'null'
+        timestamp:
+          type: string
+          description: Represents a timestamp of when the audit log entry was created.
+          example: '2025-05-01T11:15:00Z'
+        userEmail:
+          type: string
+          description: Represents the email address of the user.
+          example: johndoe@example.com
+        userId:
+          type: string
+          description: Represents a user identifier across the system.
+          example: 45b687e29ae1f428e7ebe123
+        userName:
+          type: string
+          description: Represents the name of the user.
+          example: John Doe
+        workspaceId:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    authors:
+      required:
+      - authorIds
+      - contains
+      type: object
+      properties:
+        authorIds:
+          uniqueItems: true
+          type: array
+          description: Represents a set of author user ids. Include "SYSTEM" in this set to retrieve system related audit logs.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          - SYSTEM
+          items:
+            type: string
+            description: Represents a set of author user ids. Include "SYSTEM" in this set to retrieve system related audit logs.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678","SYSTEM"]'
+        contains:
+          minLength: 1
+          type: string
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+      description: Represents the audit log author filter.
+    AuditLogGetRequestV1:
+      required:
+      - actions
+      - authors
+      - end
+      - start
+      type: object
+      properties:
+        actions:
+          minItems: 1
+          uniqueItems: true
+          type: array
+          description: Represents a set of audit log actions.
+          example:
+          - CREATE_TIME_PERSONAL_MANUAL
+          - CREATE_TIME_PERSONAL_TIMER
+          - CREATE_PROJECT
+          items:
+            type: string
+            description: Represents a set of audit log actions.
+            example: '["CREATE_TIME_PERSONAL_MANUAL","CREATE_TIME_PERSONAL_TIMER","CREATE_PROJECT"]'
+            enum:
+            - CREATE_TIME_PERSONAL_TIMER
+            - CREATE_TIME_PERSONAL_MANUAL
+            - CREATE_TIME_IMPORT
+            - CREATE_TIME_KIOSK
+            - CREATE_TIME_FOR_OTHER
+            - RESTORE_TIME
+            - RESTORE_TIME_FOR_OTHER
+            - UPDATE_TIME_PERSONAL
+            - UPDATE_TIME_FOR_OTHER
+            - DELETE_TIME_PERSONAL
+            - DELETE_TIME_FOR_OTHER
+            - CREATE_PROJECT
+            - CREATE_PROJECT_IMPORT
+            - CREATE_PROJECT_QUICKBOOKS
+            - UPDATE_PROJECT
+            - DELETE_PROJECT
+            - CREATE_TASK
+            - CREATE_TASK_IMPORT
+            - UPDATE_TASK
+            - DELETE_TASK
+            - CREATE_CLIENT
+            - CREATE_CLIENT_IMPORT
+            - CREATE_CLIENT_QUICKBOOKS
+            - UPDATE_CLIENT
+            - DELETE_CLIENT
+            - CREATE_TAG
+            - CREATE_TAG_IMPORT
+            - UPDATE_TAG
+            - DELETE_TAG
+            - CREATE_EXPENSE
+            - CREATE_EXPENSE_FOR_OTHER
+            - RESTORE_EXPENSE
+            - RESTORE_EXPENSE_FOR_OTHER
+            - UPDATE_EXPENSE
+            - UPDATE_EXPENSE_FOR_OTHER
+            - DELETE_EXPENSE
+            - DELETE_EXPENSE_FOR_OTHER
+        authors:
+          $ref: '#/components/schemas/authors'
+        end:
+          type: string
+          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-05-01T23:59:59Z'
+        page:
+          minimum: 0
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+        page-size:
+          maximum: 50
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 20
+          default: 20
+        start:
+          type: string
+          description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-05-01T00:00:00Z'
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'

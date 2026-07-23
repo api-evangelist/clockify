@@ -1,0 +1,1384 @@
+openapi: 3.0.1
+info:
+  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
+  title: Clockify Approval Time Entry Report API
+  version: v1
+  x-logo:
+    altText: Clockify logo
+    url: https://clockify.me/downloads/clockify_logo_primary_black_margin.png
+tags:
+- name: Time Entry Report
+  x-displayName: Time Entry Report
+paths:
+  /v1/workspaces/{workspaceId}/reports/detailed:
+    servers:
+    - url: https://reports.api.clockify.me
+    post:
+      description: Detailed report data on FREE subscription plan is limited to a maximum interval length of one month (31 days).
+      operationId: generateDetailedReport
+      parameters:
+      - in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ecxxxx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetailedReportFilterV1'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TimeEntryDetailedReportDto'
+          description: OK
+      summary: Generate a detailed report
+      tags:
+      - Time Entry Report
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/reports/summary:
+    servers:
+    - url: https://reports.api.clockify.me
+    post:
+      description: Summary report data on FREE subscription plan is limited to a maximum interval length of one month (31 days).
+      operationId: generateSummaryReport
+      parameters:
+      - in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ecxxxx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SummaryReportFilterV1'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TimeEntrySummaryReportDto'
+          description: OK
+      summary: Generate a summary report
+      tags:
+      - Time Entry Report
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+  /v1/workspaces/{workspaceId}/reports/weekly:
+    servers:
+    - url: https://reports.api.clockify.me
+    post:
+      description: Weekly report data on FREE subscription plan is limited to a maximum interval length of one month (31 days).
+      operationId: generateWeeklyReport
+      parameters:
+      - in: path
+        name: workspaceId
+        required: true
+        schema:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 60f91b3ffdaf031696ecxxxx
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeeklyReportFilterV1'
+      responses:
+        '200':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TimeEntryWeeklyReportDto'
+          description: OK
+      summary: Generate a weekly report
+      tags:
+      - Time Entry Report
+      security:
+      - ApiKeyAuth: []
+      - AddonKeyAuth: []
+components:
+  schemas:
+    ReportTimeIntervalDto:
+      type: object
+      description: Represents time interval
+      properties:
+        duration:
+          type: integer
+          format: int32
+          description: Represents the duration of interval.
+        end:
+          type: string
+          description: Represents the end datetime. Date is in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          example: '2022-08-27T08:32:01.640708Z'
+        start:
+          type: string
+          description: Represents the start datetime. Date is in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          example: '2022-08-26T08:32:01.640708Z'
+    CompareBreakFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of breaks in the day in hours, multiplied by 100. For example, if desired value is 0.5h, input should be 50
+          example: '50'
+    UserDto:
+      type: object
+      properties:
+        dateFormat:
+          type: string
+        email:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        timeFormat:
+          type: string
+        timeZone:
+          type: string
+        weekStart:
+          type: string
+    CustomFieldFilterV1:
+      type: object
+      description: Represents list of time entry custom field filter objects.
+      properties:
+        id:
+          type: string
+          description: Represents a custom field identifier across the system.
+          example: 5b71544ab0798751107918b3
+        isEmpty:
+          type: boolean
+          description: Indicates whether the custom field is empty.
+          example: false
+        numberCondition:
+          type: string
+          description: Represents a custom field number condition.
+          enum:
+          - EQUAL
+          - GREATER_THAN
+          - LESS_THAN
+          example: EQUAL
+        type:
+          type: string
+          description: Represents a type of custom field.
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+          example: NUMBER
+        value:
+          type: object
+          description: Represents a custom field value.
+          example: 2000
+    TimeEntryDto:
+      type: object
+      description: time entry
+      properties:
+        approvalRequestId:
+          type: string
+          description: Represents approval request identifier across the system.
+          example: 5b715612b079875110791222
+        billable:
+          type: boolean
+          description: Indicates whether the time entry is billable
+          example: true
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 5b715612b079875110791112
+        clientName:
+          type: string
+          description: Represents client name
+          example: Cake.com
+        description:
+          type: string
+          description: Represents time entry description
+          example: Time Entry Description
+        get_id:
+          type: string
+          description: Represents time entry identifier across the system.
+          example: 5b715612b079875110791111
+        locked:
+          type: boolean
+        projectColor:
+          type: string
+          description: Represents project color
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b715612b079875110791133
+        projectName:
+          type: string
+          description: Represents project name.
+          example: Clockify
+        tags:
+          type: array
+          description: List of tags
+          items:
+            $ref: '#/components/schemas/ReportTagDto'
+        taskId:
+          type: string
+          description: Represents task identifier across the system.
+          example: 5b715612b079875110791134
+        taskName:
+          type: string
+          description: Represents task name.
+          example: Task name
+        timeInterval:
+          $ref: '#/components/schemas/ReportTimeIntervalDto'
+        userEmail:
+          type: string
+          description: Represents user email.
+          example: user@cake.com
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5b715612b079875110791135
+        userName:
+          type: string
+          description: Represents user's name
+          example: john
+    GroupOneDto:
+      type: object
+      description: List of groups
+      properties:
+        amount:
+          type: number
+          description: Represents group one amount
+          example: 100
+        children:
+          type: array
+          description: Represents list of children groups
+          items:
+            $ref: '#/components/schemas/GroupOneDto'
+        clientName:
+          type: string
+          description: Represents client name
+          example: Cake.com
+        days:
+          type: array
+          description: Represents list of days
+          items:
+            $ref: '#/components/schemas/DailyTotalDto'
+        duration:
+          type: number
+          description: Represents duration
+          example: 10
+        id:
+          type: string
+          description: Represents group one identifier across the system.
+          example: 5b715612b079875110791111
+        name:
+          type: string
+          description: Represents name
+          example: Name
+        nameLowerCase:
+          type: string
+          description: Represents lower case name
+          example: name
+    WeeklyReportFilterV1:
+      type: object
+      properties:
+        amountShown:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided amount shown.
+          enum:
+          - EARNED
+          - COST
+          - PROFIT
+          - HIDE_AMOUNT
+          - EXPORT
+          example: COST
+        amounts:
+          type: array
+          items:
+            type: string
+            enum:
+            - EARNED
+            - COST
+            - PROFIT
+            - HIDE_AMOUNT
+            - EXPORT
+            example: '[EARNED, COST]'
+        approvalState:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided approval state.
+          enum:
+          - APPROVED
+          - UNAPPROVED
+          - ALL
+          example: APPROVED
+        archived:
+          type: boolean
+          description: Indicates whether the report is archived
+          example: false
+        attendanceFilter:
+          $ref: '#/components/schemas/AttendanceFilterV1'
+        billable:
+          type: boolean
+          description: Indicates whether the report is billable
+          example: true
+        clients:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        currency:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldFilterV1'
+        dateFormat:
+          type: string
+          description: Provide date in format YYYY-MM-DD
+          example: '2018-11-01'
+        dateRangeEnd:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2018-11-30T23:59:59.999'
+          minLength: 1
+        dateRangeStart:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2018-11-01T00:00:00'
+          minLength: 1
+        dateRangeType:
+          type: string
+          description: Provide the date range type
+          enum:
+          - ABSOLUTE
+          - TODAY
+          - YESTERDAY
+          - THIS_WEEK
+          - LAST_WEEK
+          - PAST_TWO_WEEKS
+          - THIS_MONTH
+          - LAST_MONTH
+          - THIS_YEAR
+          - LAST_YEAR
+          example: LAST_MONTH
+        description:
+          type: string
+          description: Represents search term for filtering report entries by description
+          example: some description keyword
+        detailedFilter:
+          $ref: '#/components/schemas/DetailedFilterV1'
+        exportType:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided export type.
+          enum:
+          - JSON
+          - JSON_V1
+          - PDF
+          - CSV
+          - XLSX
+          - ZIP
+          example: JSON
+        invoicingState:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided invoicing state.
+          enum:
+          - INVOICED
+          - UNINVOICED
+          - ALL
+          example: INVOICED
+        projects:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        rounding:
+          type: boolean
+          description: Indicates whether the report filter is rounding
+          example: false
+        sortOrder:
+          type: string
+          description: If provided, you'll get sorted result by provided sort order.
+          enum:
+          - ASCENDING
+          - DESCENDING
+          example: ASCENDING
+        summaryFilter:
+          $ref: '#/components/schemas/SummaryFilterV1'
+        tags:
+          $ref: '#/components/schemas/ContainsTagFilterV1'
+        tasks:
+          $ref: '#/components/schemas/ContainsTaskFilterV1'
+        timeFormat:
+          type: string
+          description: Provide time in format THH:MM:SS.ssssss
+          example: T00:00:00
+        timeZone:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided time zone.
+          example: Europe/Belgrade
+        userCustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldFilterV1'
+          writeOnly: true
+        userGroups:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        userLocale:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided user locale.
+          example: en
+        users:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        weekStart:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided week start.
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+          example: MONDAY
+        weeklyFilter:
+          $ref: '#/components/schemas/WeeklyFilterV1'
+        withoutDescription:
+          type: boolean
+          description: If set to 'true', report will only include entries with empty description
+          example: false
+        zoomLevel:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided zoom level.
+          enum:
+          - WEEK
+          - MONTH
+          - YEAR
+          example: WEEK
+      required:
+      - dateRangeEnd
+      - dateRangeStart
+      - weeklyFilter
+    ContainsUsersFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ALL
+          - ACTIVE_WITH_PENDING
+          - ACTIVE
+          - PENDING
+          - INACTIVE
+          example: ACTIVE
+    SummaryFilterV1:
+      type: object
+      description: Represents a summary report filter.
+      properties:
+        groups:
+          type: array
+          description: Represents group ids
+          example: '"[5b715448b07987511071111", "5b715448b079875110792222"]'
+          items:
+            type: string
+            description: Represents group ids
+            example: '"[5b715448b07987511071111", "5b715448b079875110792222"]'
+        sortColumn:
+          type: string
+          description: If provided, you'll get sorted result by provided sort column.
+          enum:
+          - GROUP
+          - DURATION
+          - AMOUNT
+          - EARNED
+          - COST
+          - PROFIT
+          example: GROUP
+        summaryChartType:
+          type: string
+          description: If provided, you'll get sorted result by provided summary chart type.
+          enum:
+          - BILLABILITY
+          - PROJECT
+          example: PROJECT
+    ContainsTaskFilterV1:
+      type: object
+      description: Represents filter criteria for expenses associated with tasks.
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    ReportTagDto:
+      type: object
+      description: List of tags
+      properties:
+        id:
+          type: string
+          description: Represents tag identifier across the system.
+          example: 5b715612b079875110791136
+        name:
+          type: string
+          description: Represents tag name.
+          example: tagname
+    CompareWorkFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of completed work for day in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
+          example: '750'
+    DetailedReportFilterV1:
+      type: object
+      properties:
+        amountShown:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided amount shown.
+          enum:
+          - EARNED
+          - COST
+          - PROFIT
+          - HIDE_AMOUNT
+          - EXPORT
+          example: COST
+        amounts:
+          type: array
+          items:
+            type: string
+            enum:
+            - EARNED
+            - COST
+            - PROFIT
+            - HIDE_AMOUNT
+            - EXPORT
+            example: '[EARNED, COST]'
+        approvalState:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided approval state.
+          enum:
+          - APPROVED
+          - UNAPPROVED
+          - ALL
+          example: APPROVED
+        archived:
+          type: boolean
+          description: Indicates whether the report is archived
+          example: false
+        attendanceFilter:
+          $ref: '#/components/schemas/AttendanceFilterV1'
+        billable:
+          type: boolean
+          description: Indicates whether the report is billable
+          example: true
+        clients:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        currency:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldFilterV1'
+        dateFormat:
+          type: string
+          description: Provide date in format YYYY-MM-DD
+          example: '2018-11-01'
+        dateRangeEnd:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2018-11-30T23:59:59.999'
+          minLength: 1
+        dateRangeStart:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2018-11-01T00:00:00'
+          minLength: 1
+        dateRangeType:
+          type: string
+          description: Provide the date range type
+          enum:
+          - ABSOLUTE
+          - TODAY
+          - YESTERDAY
+          - THIS_WEEK
+          - LAST_WEEK
+          - PAST_TWO_WEEKS
+          - THIS_MONTH
+          - LAST_MONTH
+          - THIS_YEAR
+          - LAST_YEAR
+          example: LAST_MONTH
+        description:
+          type: string
+          description: Represents search term for filtering report entries by description
+          example: some description keyword
+        detailedFilter:
+          $ref: '#/components/schemas/DetailedFilterV1'
+        exportType:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided export type.
+          enum:
+          - JSON
+          - JSON_V1
+          - PDF
+          - CSV
+          - XLSX
+          - ZIP
+          example: JSON
+        invoicingState:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided invoicing state.
+          enum:
+          - INVOICED
+          - UNINVOICED
+          - ALL
+          example: INVOICED
+        projects:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        rounding:
+          type: boolean
+          description: Indicates whether the report filter is rounding
+          example: false
+        sortOrder:
+          type: string
+          description: If provided, you'll get sorted result by provided sort order.
+          enum:
+          - ASCENDING
+          - DESCENDING
+          example: ASCENDING
+        summaryFilter:
+          $ref: '#/components/schemas/SummaryFilterV1'
+        tags:
+          $ref: '#/components/schemas/ContainsTagFilterV1'
+        tasks:
+          $ref: '#/components/schemas/ContainsTaskFilterV1'
+        timeFormat:
+          type: string
+          description: Provide time in format THH:MM:SS.ssssss
+          example: T00:00:00
+        timeZone:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided time zone.
+          example: Europe/Belgrade
+        userCustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldFilterV1'
+          writeOnly: true
+        userGroups:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        userLocale:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided user locale.
+          example: en
+        users:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        weekStart:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided week start.
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+          example: MONDAY
+        weeklyFilter:
+          $ref: '#/components/schemas/WeeklyFilterV1'
+        withoutDescription:
+          type: boolean
+          description: If set to 'true', report will only include entries with empty description
+          example: false
+        zoomLevel:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided zoom level.
+          enum:
+          - WEEK
+          - MONTH
+          - YEAR
+          example: WEEK
+      required:
+      - dateRangeEnd
+      - dateRangeStart
+      - detailedFilter
+    DetailedFilterV1:
+      type: object
+      description: Represents a detailed report filter.
+      properties:
+        auditFilter:
+          $ref: '#/components/schemas/AuditFilterV1'
+        options:
+          $ref: '#/components/schemas/DetailedOptionsV1'
+        page:
+          type: integer
+          format: int32
+          example: 1
+        pageSize:
+          type: integer
+          format: int32
+          example: 20
+        sortColumn:
+          type: string
+          description: If provided, you'll get sorted result by sort column.
+          enum:
+          - ID
+          - DESCRIPTION
+          - USER
+          - DURATION
+          - DATE
+          - ZONED_DATE
+          - NATURAL
+          - USER_DATE
+          example: ID
+    DetailedOptionsV1:
+      type: object
+      properties:
+        totals:
+          type: string
+          enum:
+          - CALCULATE
+          - EXCLUDE
+          example: CALCULATE
+    ContainsTagFilterV1:
+      type: object
+      description: Represents an object for filtering entries by tags.
+      properties:
+        containedInTimeentry:
+          type: string
+          description: If provided, you'll get result filtered by value of contained in time entry.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS_ONLY
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    CompareOvertimeFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of overtime work (difference between work and capacity) in hours, multiplied by 100. For example, if desired value is 1.5h, input should be 150.
+          example: '150'
+    DailyTotalDto:
+      type: object
+      description: Represents list of days
+      properties:
+        amount:
+          type: number
+        date:
+          type: string
+        duration:
+          type: number
+    ContainsArchivedFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    AttendanceFilterV1:
+      type: object
+      description: Represents an attendance report filter.
+      properties:
+        breakFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompareBreakFilter'
+        capacityFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompareCapacityFilter'
+        endFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompareEndFilter'
+        hasTimeOff:
+          type: boolean
+          description: If set to true, report will include time off hours.
+          example: true
+        overtimeFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompareOvertimeFilter'
+        page:
+          type: integer
+          format: int32
+          default: 1
+          description: Specifies page number.
+          minimum: 1
+        pageSize:
+          type: integer
+          format: int32
+          description: Specifies page size.
+          minimum: 1
+        sortColumn:
+          type: string
+          enum:
+          - USER
+          - DATE
+          - START
+          - END
+          - BREAK
+          - WORK
+          - CAPACITY
+          - OVERTIME
+          - TIME_OFF
+        startFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompareStartFilter'
+        workFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompareWorkFilter'
+    TimeEntryDetailedReportDto:
+      type: object
+      description: report
+      properties:
+        timeEntries:
+          type: array
+          description: List of entries
+          items:
+            $ref: '#/components/schemas/TimeEntryDto'
+        totals:
+          type: array
+          description: List of totals
+          items:
+            $ref: '#/components/schemas/TimeEntryReportTotals'
+    TimeEntrySummaryReportDto:
+      type: object
+      description: report
+      properties:
+        chart:
+          type: array
+          description: List of summary report charts
+          items:
+            $ref: '#/components/schemas/SummaryReportChartDto'
+        groupOne:
+          type: array
+          description: List of groups
+          items:
+            $ref: '#/components/schemas/GroupOneDto'
+        totals:
+          type: array
+          description: List of totals
+          items:
+            $ref: '#/components/schemas/TimeEntryReportTotals'
+    AmountDto:
+      type: object
+      description: List of amounts
+      properties:
+        type:
+          type: string
+          description: Represents amount type
+          enum:
+          - EARNED
+          - COST
+          - PROFIT
+          - HIDE_AMOUNT
+          - EXPORT
+          example: PROFIT
+        value:
+          type: number
+          description: Represents amount value
+          example: 1000
+    AuditFilterV1:
+      type: object
+      properties:
+        duration:
+          type: integer
+          format: int32
+          description: Represent audit duration.
+          example: 2
+        durationShorter:
+          type: boolean
+          description: Represent audit duration shorter.
+          example: false
+        withoutProject:
+          type: boolean
+          description: Indicates whether to filter without a project.
+          example: false
+        withoutTask:
+          type: boolean
+          description: Indicates whether to filter without a task.
+          example: true
+    TimeEntryReportTotals:
+      type: object
+      description: List of totals
+      properties:
+        amounts:
+          type: array
+          description: List of amounts
+          items:
+            $ref: '#/components/schemas/AmountDto'
+        entriesCount:
+          type: integer
+          format: int32
+          description: Represents entries count
+          example: 1
+        id:
+          type: string
+          description: Represents time entry report identifier across the system.
+          example: 5b715612b079875110791122
+        totalBillableTime:
+          type: number
+          description: Represents total billable time
+          example: 1000
+        totalTime:
+          type: number
+          description: Represents total time
+          example: 1200
+    CompareEndFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents end time in 24-hour notation.
+          example: '17:00'
+    CompareStartFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents start time in 24-hour notation.
+          example: '15:00'
+    SummaryReportChartDto:
+      type: object
+      description: List of summary report charts
+      properties:
+        earned:
+          type: number
+          description: Represents how much is earned
+          example: 1000
+        id:
+          type: string
+          description: Represents summary report identifier across the system.
+          example: 5b715612b079875110791111
+        totalAmount:
+          type: number
+          description: Represents total amount
+          example: 11000
+        totalBillableTime:
+          type: number
+          description: Represents total billable time
+          example: 19000
+        totalTime:
+          type: number
+          description: Represents total time
+          example: 20000
+    SummaryReportFilterV1:
+      type: object
+      properties:
+        amountShown:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided amount shown.
+          enum:
+          - EARNED
+          - COST
+          - PROFIT
+          - HIDE_AMOUNT
+          - EXPORT
+          example: COST
+        amounts:
+          type: array
+          items:
+            type: string
+            enum:
+            - EARNED
+            - COST
+            - PROFIT
+            - HIDE_AMOUNT
+            - EXPORT
+            example: '[EARNED, COST]'
+        approvalState:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided approval state.
+          enum:
+          - APPROVED
+          - UNAPPROVED
+          - ALL
+          example: APPROVED
+        archived:
+          type: boolean
+          description: Indicates whether the report is archived
+          example: false
+        attendanceFilter:
+          $ref: '#/components/schemas/AttendanceFilterV1'
+        billable:
+          type: boolean
+          description: Indicates whether the report is billable
+          example: true
+        clients:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        currency:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldFilterV1'
+        dateFormat:
+          type: string
+          description: Provide date in format YYYY-MM-DD
+          example: '2018-11-01'
+        dateRangeEnd:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2018-11-30T23:59:59.999'
+          minLength: 1
+        dateRangeStart:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2018-11-01T00:00:00'
+          minLength: 1
+        dateRangeType:
+          type: string
+          description: Provide the date range type
+          enum:
+          - ABSOLUTE
+          - TODAY
+          - YESTERDAY
+          - THIS_WEEK
+          - LAST_WEEK
+          - PAST_TWO_WEEKS
+          - THIS_MONTH
+          - LAST_MONTH
+          - THIS_YEAR
+          - LAST_YEAR
+          example: LAST_MONTH
+        description:
+          type: string
+          description: Represents search term for filtering report entries by description
+          example: some description keyword
+        detailedFilter:
+          $ref: '#/components/schemas/DetailedFilterV1'
+        exportType:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided export type.
+          enum:
+          - JSON
+          - JSON_V1
+          - PDF
+          - CSV
+          - XLSX
+          - ZIP
+          example: JSON
+        invoicingState:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided invoicing state.
+          enum:
+          - INVOICED
+          - UNINVOICED
+          - ALL
+          example: INVOICED
+        projects:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        rounding:
+          type: boolean
+          description: Indicates whether the report filter is rounding
+          example: false
+        sortOrder:
+          type: string
+          description: If provided, you'll get sorted result by provided sort order.
+          enum:
+          - ASCENDING
+          - DESCENDING
+          example: ASCENDING
+        summaryFilter:
+          $ref: '#/components/schemas/SummaryFilterV1'
+        tags:
+          $ref: '#/components/schemas/ContainsTagFilterV1'
+        tasks:
+          $ref: '#/components/schemas/ContainsTaskFilterV1'
+        timeFormat:
+          type: string
+          description: Provide time in format THH:MM:SS.ssssss
+          example: T00:00:00
+        timeZone:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided time zone.
+          example: Europe/Belgrade
+        userCustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomFieldFilterV1'
+          writeOnly: true
+        userGroups:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        userLocale:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided user locale.
+          example: en
+        users:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        weekStart:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided week start.
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+          example: MONDAY
+        weeklyFilter:
+          $ref: '#/components/schemas/WeeklyFilterV1'
+        withoutDescription:
+          type: boolean
+          description: If set to 'true', report will only include entries with empty description
+          example: false
+        zoomLevel:
+          type: string
+          description: If provided, you'll get filtered result including reports with provided zoom level.
+          enum:
+          - WEEK
+          - MONTH
+          - YEAR
+          example: WEEK
+      required:
+      - dateRangeEnd
+      - dateRangeStart
+      - summaryFilter
+    TimeEntryWeeklyReportDto:
+      type: object
+      description: report
+      properties:
+        decimalFormat:
+          type: boolean
+          description: Indicates whether time entry report is in decimal format.
+          example: false
+        groupOne:
+          type: array
+          description: List of groups
+          items:
+            $ref: '#/components/schemas/GroupOneDto'
+        includeUsersWithoutTime:
+          type: boolean
+          description: Indicates whether time entry report includes users without time.
+          example: false
+        totals:
+          type: array
+          description: List of totals
+          items:
+            $ref: '#/components/schemas/TimeEntryReportTotals'
+        totalsByDay:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyTotalDto'
+        trackTimeDownToSeconds:
+          type: boolean
+        usersWithoutTime:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDto'
+    WeeklyFilterV1:
+      type: object
+      description: Represents a weekly report filter.
+      properties:
+        group:
+          type: string
+          description: Weekly filter will include group identifier.
+          example: 5b715448b079875110791111
+        subgroup:
+          type: string
+          description: Weekly filter will include subgroup identifier.
+          example: 5b715448b079875110792222
+    CompareCapacityFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents daily work capacity of user in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
+          example: '750'
+  securitySchemes:
+    AddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+    ApiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    MarketplaceKeyAuth:
+      in: header
+      name: x-marketplace-token
+      type: apiKey
+    ReportAddonKeyAuth:
+      in: header
+      name: x-addon-token
+      type: apiKey
+x-tagGroups:
+- name: Clockify API
+  tags:
+  - User
+  - Workspace
+  - Webhooks
+  - Approval
+  - Client
+  - Custom fields
+  - Expense
+  - Holiday
+  - Invoice
+  - Project
+  - Task
+  - Scheduling
+  - Tag
+  - Time entry
+  - Balance
+  - Policy
+  - Time Off
+  - Group
+- name: Clockify Reports API
+  tags:
+  - Shared Report
+  - Team Report
+  - Time Entry Report
+  - Expense Report
+- name: Clockify Audit Log API
+  tags:
+  - Audit Log Report
+- name: Deprecated API
+  tags:
+  - Template (Deprecated)
+  - Scheduling (Deprecated)
+  - Workspace (Deprecated)
+- name: Experimental API
+  tags:
+  - Entity changes (Experimental)
+- name: Guide
+  tags:
+  - 'Entity Changes: Use cases'
