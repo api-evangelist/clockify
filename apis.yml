@@ -8,7 +8,19 @@ description: >-
   clients, time entries, reports, and webhooks, and authenticates with an
   X-Api-Key header.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/clockify.png
 tags:
   - Time Tracking
   - Timesheets
@@ -23,34 +35,305 @@ created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-  - aid: clockify:rest-api
-    name: Clockify REST API
-    description: >-
-      REST API for Clockify providing access to workspaces, users, groups,
-      projects, tasks, clients, tags, time entries, reports, webhooks, and
-      approvals. Authentication uses the X-Api-Key request header with a key
-      generated from a user's Profile Settings; the API enforces a 10
-      requests per second per key rate limit and regional URL prefixes for
-      EU and other workspaces.
-    humanURL: https://docs.clockify.me/
-    baseURL: https://api.clockify.me/api/v1
-    tags:
-      - Time Entries
-      - Workspaces
-      - Projects
-      - Tasks
-      - Users
-      - Reports
-      - Webhooks
-      - API Key
-    properties:
-      - type: Documentation
-        url: https://docs.clockify.me/
-      - type: API Overview
-        url: https://clockify.me/help/getting-started/clockify-api-overview
-      - type: Authentication
-        url: https://clockify.me/help/troubleshooting/general-api-troubleshooting/where-to-generate-api-key-for-account
-
+- aid: clockify:rest-api
+  name: Clockify REST API
+  description: >-
+    REST API for Clockify providing access to workspaces, users, groups, projects, tasks, clients, tags,
+    time entries, reports, webhooks, and approvals. Authentication uses the X-Api-Key request header with
+    a key generated from a user's Profile Settings; the API enforces a 10 requests per second per key
+    rate limit and regional URL prefixes for EU and other workspaces.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Time Entries
+  - Workspaces
+  - Projects
+  - Tasks
+  - Users
+  - Reports
+  - Webhooks
+  - API Key
+  properties:
+  - type: Documentation
+    url: https://docs.clockify.me/
+  - type: API Overview
+    url: https://clockify.me/help/getting-started/clockify-api-overview
+  - type: Authentication
+    url: >-
+      https://clockify.me/help/troubleshooting/general-api-troubleshooting/where-to-generate-api-key-for-account
+- aid: clockify:clockify-approval-api
+  name: Clockify Approval API
+  description: The Approval API from Clockify — 5 operation(s) for approval.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Approval
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-approval-api-openapi.yml
+- aid: clockify:clockify-audit-log-report-api
+  name: Clockify Audit Log Report API
+  description: The Audit Log Report API from Clockify — 1 operation(s) for audit log report.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Audit Log Report
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-audit-log-report-api-openapi.yml
+- aid: clockify:clockify-balance-api
+  name: Clockify Balance API
+  description: The Balance API from Clockify — 2 operation(s) for balance.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Balance
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-balance-api-openapi.yml
+- aid: clockify:clockify-client-api
+  name: Clockify Client API
+  description: The Client API from Clockify — 2 operation(s) for client.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Client
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-client-api-openapi.yml
+- aid: clockify:clockify-custom-fields-api
+  name: Clockify Custom fields API
+  description: The Custom fields API from Clockify — 4 operation(s) for custom fields.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Custom fields
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-custom-fields-api-openapi.yml
+- aid: clockify:clockify-entity-changes-experimental-api
+  name: Clockify Entity changes (Experimental) API
+  description: For use case see [Entity Changes Use Cases](#tag/Entity-Changes:-Use-cases)
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Entity changes (Experimental)
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-entity-changes-experimental-api-openapi.yml
+- aid: clockify:clockify-expense-api
+  name: Clockify Expense API
+  description: The Expense API from Clockify — 6 operation(s) for expense.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Expense
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-expense-api-openapi.yml
+- aid: clockify:clockify-expense-report-api
+  name: Clockify Expense Report API
+  description: The Expense Report API from Clockify — 1 operation(s) for expense report.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Expense Report
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-expense-report-api-openapi.yml
+- aid: clockify:clockify-group-api
+  name: Clockify Group API
+  description: The Group API from Clockify — 4 operation(s) for group.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Group
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-group-api-openapi.yml
+- aid: clockify:clockify-holiday-api
+  name: Clockify Holiday API
+  description: The Holiday API from Clockify — 3 operation(s) for holiday.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Holiday
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-holiday-api-openapi.yml
+- aid: clockify:clockify-invoice-api
+  name: Clockify Invoice API
+  description: The Invoice API from Clockify — 12 operation(s) for invoice.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-invoice-api-openapi.yml
+- aid: clockify:clockify-policy-api
+  name: Clockify Policy API
+  description: The Policy API from Clockify — 2 operation(s) for policy.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-policy-api-openapi.yml
+- aid: clockify:clockify-project-api
+  name: Clockify Project API
+  description: The Project API from Clockify — 8 operation(s) for project.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-project-api-openapi.yml
+- aid: clockify:clockify-scheduling-api
+  name: Clockify Scheduling API
+  description: The Scheduling API from Clockify — 10 operation(s) for scheduling.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Scheduling
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-scheduling-api-openapi.yml
+- aid: clockify:clockify-scheduling-deprecated-api
+  name: Clockify Scheduling (Deprecated) API
+  description: >-
+    This endpoint group contains deprecated endpoints from the [Scheduling](#tag/Scheduling) endpoint
+    group.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Scheduling (Deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-scheduling-deprecated-api-openapi.yml
+- aid: clockify:clockify-shared-report-api
+  name: Clockify Shared Report API
+  description: The Shared Report API from Clockify — 3 operation(s) for shared report.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Shared Report
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-shared-report-api-openapi.yml
+- aid: clockify:clockify-tag-api
+  name: Clockify Tag API
+  description: The Tag API from Clockify — 2 operation(s) for tag.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Tag
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-tag-api-openapi.yml
+- aid: clockify:clockify-task-api
+  name: Clockify Task API
+  description: The Task API from Clockify — 4 operation(s) for task.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Task
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-task-api-openapi.yml
+- aid: clockify:clockify-team-report-api
+  name: Clockify Team Report API
+  description: The Team Report API from Clockify — 1 operation(s) for team report.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Team Report
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-team-report-api-openapi.yml
+- aid: clockify:clockify-template-deprecated-api
+  name: Clockify Template (Deprecated) API
+  description: This endpoint group is deprecated and should not be used.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Template (Deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-template-deprecated-api-openapi.yml
+- aid: clockify:clockify-time-entry-api
+  name: Clockify Time entry API
+  description: The Time entry API from Clockify — 6 operation(s) for time entry.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Time entry
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-time-entry-api-openapi.yml
+- aid: clockify:clockify-time-entry-report-api
+  name: Clockify Time Entry Report API
+  description: The Time Entry Report API from Clockify — 3 operation(s) for time entry report.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Time Entry Report
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-time-entry-report-api-openapi.yml
+- aid: clockify:clockify-time-off-api
+  name: Clockify Time Off API
+  description: The Time Off API from Clockify — 4 operation(s) for time off.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Time Off
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-time-off-api-openapi.yml
+- aid: clockify:clockify-user-api
+  name: Clockify User API
+  description: The User API from Clockify — 8 operation(s) for user.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-user-api-openapi.yml
+- aid: clockify:clockify-webhooks-api
+  name: Clockify Webhooks API
+  description: The Webhooks API from Clockify — 5 operation(s) for webhooks.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-webhooks-api-openapi.yml
+- aid: clockify:clockify-workspace-api
+  name: Clockify Workspace API
+  description: The Workspace API from Clockify — 8 operation(s) for workspace.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Workspace
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-workspace-api-openapi.yml
+- aid: clockify:clockify-workspace-deprecated-api
+  name: Clockify Workspace (Deprecated) API
+  description: >-
+    This endpoint group contains deprecated endpoints from the [Workspace](#tag/Workspace) endpoint group.
+  humanURL: https://docs.clockify.me/
+  baseURL: https://api.clockify.me/api/v1
+  tags:
+  - Workspace (Deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/clockify-workspace-deprecated-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/clockify-agentic-access.yml
