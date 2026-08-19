@@ -1,0 +1,209 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Template (Deprecated) API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Template (Deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all templates on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/templates",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of templates that contain the provided string in their name."
+              },
+              {
+                "name": "cleansed",
+                "value": "",
+                "type": "query",
+                "description": "If set to true will filter out inactive template projects and tasks."
+              },
+              {
+                "name": "hydrated",
+                "value": "",
+                "type": "query",
+                "description": "If set to true will return hydrated template projects and tasks."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all templates on a workspace"
+        },
+        {
+          "info": {
+            "name": "Create templates on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/templates",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create templates on a workspace"
+        },
+        {
+          "info": {
+            "name": "Get template by ID on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/templates/:templateId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "templateId",
+                "value": "5b6d45c4b0798751107762b8",
+                "type": "path",
+                "description": "Represents a template identifier across the system."
+              },
+              {
+                "name": "cleansed",
+                "value": "",
+                "type": "query",
+                "description": "If set to true will filter out inactive template projects and tasks."
+              },
+              {
+                "name": "hydrated",
+                "value": "",
+                "type": "query",
+                "description": "If set to true will return hydrated template projects and tasks."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get template by ID on a workspace"
+        },
+        {
+          "info": {
+            "name": "Update a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/templates/:templateId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "templateId",
+                "value": "5b6d45c4b0798751107762b8",
+                "type": "path",
+                "description": "Represents a template identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a template"
+        },
+        {
+          "info": {
+            "name": "Delete a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/templates/:templateId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "templateId",
+                "value": "5b6d45c4b0798751107762b8",
+                "type": "path",
+                "description": "Represents a template identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a template"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

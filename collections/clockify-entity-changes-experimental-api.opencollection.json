@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Entity changes (Experimental) API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity changes (Experimental)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Created entities (Experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/entities/created",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents workspace identifier across the system."
+              },
+              {
+                "name": "type",
+                "value": "TIME_ENTRY",
+                "type": "query",
+                "description": "Specifies the type of document to be retrieved. Expected values are CLIENTS, PROJECTS, TAGS, TASKS, SCHEDULED_ASSIGNMENT, TIME_ENTRY, TIME_ENTRY_RATE, TIME_ENTRY_CUSTOM_FIELD_VALUE.This parameter can accept multiple values, and at least one option must be provided. Based on the input, the application will return results corresponding to the selected document types."
+              },
+              {
+                "name": "start",
+                "value": "2024-10-29T10:00:00Z",
+                "type": "query",
+                "description": "Represents the start date in yyyy-MM-ddThh:mm:ssZ format. This parameter is optional; if no start date is provided, the application will set a default start date that matches the end date to create a date range of 30 days. If the end date is not specified either, the default behavior will apply from the current date."
+              },
+              {
+                "name": "end",
+                "value": "2024-11-28T10:00:00Z",
+                "type": "query",
+                "description": "Represents the end date in yyyy-MM-ddThh:mm:ssZ format. This parameter is optional; if no end date is provided, the application will set a default end date that matches the start date to create a date range of 30 days."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves records from the database collection that were created within a specified date range.  \nThe date range is determined by two parameters: start and end.  "
+        },
+        {
+          "info": {
+            "name": "Deleted entities (Experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/entities/deleted",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents workspace identifier across the system (Experimental) "
+              },
+              {
+                "name": "type",
+                "value": "TIME_ENTRY",
+                "type": "query",
+                "description": "Specifies the type of document to be retrieved. Expected values are CLIENTS, PROJECTS, TAGS, TASKS, SCHEDULED_ASSIGNMENT, TIME_ENTRY, TIME_ENTRY_RATE, TIME_ENTRY_CUSTOM_FIELD_VALUE.This parameter can accept multiple values, and at least one option must be provided. Based on the input, the application will return results corresponding to the selected document types."
+              },
+              {
+                "name": "start",
+                "value": "2024-10-29T10:00:00Z",
+                "type": "query",
+                "description": "Represents the start date in yyyy-MM-ddThh:mm:ssZ format. This parameter is optional; if no start date is provided, the application will set a default start date that matches the end date to create a date range of 30 days. If the end date is not specified either, the default behavior will apply from the current date."
+              },
+              {
+                "name": "end",
+                "value": "2024-11-28T10:00:00Z",
+                "type": "query",
+                "description": "Represents the end date in yyyy-MM-ddThh:mm:ssZ format. This parameter is optional; if no end date is provided, the application will set a default end date that matches the start date to create a date range of 30 days."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves a list of record(s) that were deleted within a specified date range.   \nThe date range is determined by the two parameters start and end.  \n\n> ### 💡 Note\n> Deleted entities will be updated and reflected in this endpoint approximately one minute after the deletion occurs. Also, entities that are created and deleted within the request date range will not appear in the /deleted endpoint. "
+        },
+        {
+          "info": {
+            "name": "Updated entities (Experimental)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/entities/updated",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents workspace identifier across the system."
+              },
+              {
+                "name": "type",
+                "value": "TIME_ENTRY",
+                "type": "query",
+                "description": "Specifies the type of document to be retrieved. Expected values are CLIENTS, PROJECTS, TAGS, TASKS, SCHEDULED_ASSIGNMENT, TIME_ENTRY, TIME_ENTRY_RATE, TIME_ENTRY_CUSTOM_FIELD_VALUE.This parameter can accept multiple values, and at least one option must be provided. Based on the input, the application will return results corresponding to the selected document types."
+              },
+              {
+                "name": "start",
+                "value": "2024-10-29T10:00:00Z",
+                "type": "query",
+                "description": "Represents the start date in yyyy-MM-ddThh:mm:ssZ format. This parameter is optional; if no start date is provided, the application will set a default start date that matches the end date to create a date range of 30 days. If the end date is not specified either, the default behavior will apply from the current date."
+              },
+              {
+                "name": "end",
+                "value": "2024-11-28T10:00:00Z",
+                "type": "query",
+                "description": "Represents the end date in yyyy-MM-ddThh:mm:ssZ format. This parameter is optional; if no end date is provided, the application will set a default end date that matches the start date to create a date range of 30 days."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves records that were updated within the specified date range.   \nThe date range is determined by the two parameters: start and end.   \n\n> ### 💡 Note\n> If an entity is both created and updated within the requested date range, it will be excluded from the /updated endpoint results.  "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

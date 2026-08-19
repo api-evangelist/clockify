@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Holiday API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Holiday",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get holidays on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/holidays",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "assigned-to",
+                "value": "60f924bafdaf031696ec6218",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of holidays assigned to user."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get holidays on a workspace"
+        },
+        {
+          "info": {
+            "name": "Create a holiday",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/holidays",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a holiday"
+        },
+        {
+          "info": {
+            "name": "Get holidays in a specific period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/holidays/in-period",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "assigned-to",
+                "value": "60f924bafdaf031696ec6218",
+                "type": "query",
+                "description": "Filter list of holidays assigned to user."
+              },
+              {
+                "name": "start",
+                "value": "2022-12-03T10:59:59.999Z",
+                "type": "query",
+                "description": "Filter list of holidays starting from start date. Expected date format yyyy-MM-ddThh:mm:ssZ"
+              },
+              {
+                "name": "end",
+                "value": "2022-12-05T23:59:59.999Z",
+                "type": "query",
+                "description": "Filter list of holidays ending by end date. Expected date format yyyy-MM-ddThh:mm:ssZ"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get holidays in a specific period"
+        },
+        {
+          "info": {
+            "name": "Update a holiday",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/holidays/:holidayId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "holidayId",
+                "value": "60f927920658241e3cf35e02",
+                "type": "path",
+                "description": "Represents a holiday identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a holiday"
+        },
+        {
+          "info": {
+            "name": "Delete a holiday",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/holidays/:holidayId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "holidayId",
+                "value": "60f927920658241e3cf35e02",
+                "type": "path",
+                "description": "Represents a holiday identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a holiday"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

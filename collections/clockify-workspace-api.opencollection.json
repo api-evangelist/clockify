@@ -1,0 +1,287 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Workspace API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all my workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces",
+            "params": [
+              {
+                "name": "roles",
+                "value": "WORKSPACE_ADMIN,OWNER",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of workspaces where you have any of the specified roles. Owners are not counted as admins when filtering."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-marketplace-token",
+              "value": "{{x-marketplace-token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all my workspaces"
+        },
+        {
+          "info": {
+            "name": "Add a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a workspace"
+        },
+        {
+          "info": {
+            "name": "Get workspace info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get workspace info"
+        },
+        {
+          "info": {
+            "name": "Update workspace cost rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/cost-rate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update workspace cost rate"
+        },
+        {
+          "info": {
+            "name": "Update workspace billable rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/hourly-rate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update workspace billable rate"
+        },
+        {
+          "info": {
+            "name": "Add user to a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "send-email",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to send an email when user is added to the workspace."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "You can add users to a workspace via API only if that workspace has a paid subscription. If the workspace has a paid subscription, you can add as many users as you want but you are limited by the number of paid user seats on that workspace."
+        },
+        {
+          "info": {
+            "name": "Update a user's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "89b687e29ae1f428e7ebe912",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a user's status"
+        },
+        {
+          "info": {
+            "name": "Update a user's cost rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId/cost-rate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "89b687e29ae1f428e7ebe912",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a user's cost rate"
+        },
+        {
+          "info": {
+            "name": "Update a user's hourly rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId/hourly-rate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "89b687e29ae1f428e7ebe912",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a user's hourly rate"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

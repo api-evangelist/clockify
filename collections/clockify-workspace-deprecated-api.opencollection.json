@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Workspace (Deprecated) API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspace (Deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Remove user from a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "89b687e29ae1f428e7ebe912",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint is not functional and has been deprecated. A user can be removed/deleted on the CAKE.com Account Members page after deactivating all their existing memberships on all workspaces within an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

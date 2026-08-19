@@ -1,0 +1,1273 @@
+{
+  "item": [
+    {
+      "id": "f3b4c486-e91b-4af5-be5c-ff04a58557e3",
+      "name": "Workspace",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e0fbc44b-77e7-4fb1-b069-d966eb570179",
+          "name": "Get all my workspaces",
+          "request": {
+            "name": "Get all my workspaces",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces"
+              ],
+              "host": [
+                "{{v1-workspaces-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "roles",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of workspaces where you have any of the specified roles. Owners are not counted as admins when filtering."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-marketplace-token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a89ae97c-254a-4c74-ba5f-5d36cf35119a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "roles",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-marketplace-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"currencies\": [\n      {\n        \"code\": \"USD\",\n        \"id\": \"5b641568b07987035750505e\",\n        \"isDefault\": true\n      },\n      {\n        \"code\": \"USD\",\n        \"id\": \"5b641568b07987035750505e\",\n        \"isDefault\": true\n      }\n    ],\n    \"featureSubscriptionType\": {\n      \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n    },\n    \"features\": \"LOCATIONS\",\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"64a687e29ae1f428e7ebe303\",\n    \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"Cool Company\",\n    \"subdomain\": {\n      \"enabled\": false,\n      \"name\": \"coolcompany\"\n    },\n    \"workspaceSettings\": {\n      \"activeBillableHours\": false,\n      \"adminOnlyPages\": \"REPORTS\",\n      \"automaticLock\": {\n        \"changeDay\": \"FRIDAY\",\n        \"dayOfMonth\": 15,\n        \"firstDay\": \"MONDAY\",\n        \"olderThanPeriod\": \"DAYS\",\n        \"olderThanValue\": 5,\n        \"type\": \"WEEKLY\"\n      },\n      \"canSeeTimeSheet\": false,\n      \"canSeeTracker\": false,\n      \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n      \"defaultBillableProjects\": false,\n      \"durationFormat\": \"FULL\",\n      \"entityCreationPermissions\": {\n        \"whoCanCreateProjectsAndClients\": \"ADMINS_AND_PROJECT_MANAGERS\",\n        \"whoCanCreateTags\": \"ADMINS\",\n        \"whoCanCreateTasks\": \"EVERYONE\"\n      },\n      \"forceDescription\": false,\n      \"forceProjects\": false,\n      \"forceTags\": false,\n      \"forceTasks\": false,\n      \"isProjectPublicByDefault\": false,\n      \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n      \"lockTimeZone\": \"Europe/Belgrade\",\n      \"multiFactorEnabled\": false,\n      \"numberFormat\": \"COMMA_PERIOD\",\n      \"onlyAdminsCanChangeBillableStatus\": false,\n      \"onlyAdminsCreateProject\": false,\n      \"onlyAdminsCreateTag\": false,\n      \"onlyAdminsCreateTask\": false,\n      \"onlyAdminsSeeAllTimeEntries\": false,\n      \"onlyAdminsSeeBillableRates\": false,\n      \"onlyAdminsSeeDashboard\": false,\n      \"onlyAdminsSeePublicProjectsEntries\": false,\n      \"projectFavorites\": false,\n      \"projectGroupingLabel\": \"Project Label\",\n      \"projectLabel\": \"string\",\n      \"projectPickerSpecialFilter\": false,\n      \"round\": {\n        \"minutes\": \"15\",\n        \"round\": \"Round to nearest\"\n      },\n      \"taskLabel\": \"string\",\n      \"timeRoundingInReports\": false,\n      \"timeTrackingMode\": \"DEFAULT\",\n      \"trackTimeDownToSecond\": false,\n      \"workingDays\": [\n        \"MONDAY\",\n        \"TUESDAY\"\n      ]\n    }\n  },\n  {\n    \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"currencies\": [\n      {\n        \"code\": \"USD\",\n        \"id\": \"5b641568b07987035750505e\",\n        \"isDefault\": true\n      },\n      {\n        \"code\": \"USD\",\n        \"id\": \"5b641568b07987035750505e\",\n        \"isDefault\": true\n      }\n    ],\n    \"featureSubscriptionType\": {\n      \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n    },\n    \"features\": \"ATTENDANCE_REPORT\",\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"64a687e29ae1f428e7ebe303\",\n    \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"Cool Company\",\n    \"subdomain\": {\n      \"enabled\": false,\n      \"name\": \"coolcompany\"\n    },\n    \"workspaceSettings\": {\n      \"activeBillableHours\": false,\n      \"adminOnlyPages\": \"PROJECT\",\n      \"automaticLock\": {\n        \"changeDay\": \"FRIDAY\",\n        \"dayOfMonth\": 15,\n        \"firstDay\": \"MONDAY\",\n        \"olderThanPeriod\": \"DAYS\",\n        \"olderThanValue\": 5,\n        \"type\": \"WEEKLY\"\n      },\n      \"canSeeTimeSheet\": false,\n      \"canSeeTracker\": false,\n      \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n      \"defaultBillableProjects\": false,\n      \"durationFormat\": \"FULL\",\n      \"entityCreationPermissions\": {\n        \"whoCanCreateProjectsAndClients\": \"ADMINS_AND_PROJECT_MANAGERS\",\n        \"whoCanCreateTags\": \"ADMINS\",\n        \"whoCanCreateTasks\": \"ADMINS_AND_PROJECT_MANAGERS\"\n      },\n      \"forceDescription\": false,\n      \"forceProjects\": false,\n      \"forceTags\": false,\n      \"forceTasks\": false,\n      \"isProjectPublicByDefault\": false,\n      \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n      \"lockTimeZone\": \"Europe/Belgrade\",\n      \"multiFactorEnabled\": false,\n      \"numberFormat\": \"COMMA_PERIOD\",\n      \"onlyAdminsCanChangeBillableStatus\": false,\n      \"onlyAdminsCreateProject\": false,\n      \"onlyAdminsCreateTag\": false,\n      \"onlyAdminsCreateTask\": false,\n      \"onlyAdminsSeeAllTimeEntries\": false,\n      \"onlyAdminsSeeBillableRates\": false,\n      \"onlyAdminsSeeDashboard\": false,\n      \"onlyAdminsSeePublicProjectsEntries\": false,\n      \"projectFavorites\": false,\n      \"projectGroupingLabel\": \"Project Label\",\n      \"projectLabel\": \"string\",\n      \"projectPickerSpecialFilter\": false,\n      \"round\": {\n        \"minutes\": \"15\",\n        \"round\": \"Round to nearest\"\n      },\n      \"taskLabel\": \"string\",\n      \"timeRoundingInReports\": false,\n      \"timeTrackingMode\": \"DEFAULT\",\n      \"trackTimeDownToSecond\": false,\n      \"workingDays\": [\n        \"MONDAY\",\n        \"SUNDAY\"\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75da0bdf-b1de-4799-b215-6a627b3db2f0",
+          "name": "Add a workspace",
+          "request": {
+            "name": "Add a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces"
+              ],
+              "host": [
+                "{{v1-workspaces-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"organizationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8db63eda-717c-4976-8be5-ca5c84cfea97",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Cool Company\",\n  \"organizationId\": \"67d471fb56aa9668b7bfa295\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4c32650-1480-4d76-89ee-6f0ef7c55765",
+          "name": "Get workspace info",
+          "request": {
+            "name": "Get workspace info",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b135dcd-dd9b-4729-8658-69d8f9c7f303",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de36604c-0bdc-4f3b-9139-77571425efce",
+          "name": "Update workspace cost rate",
+          "request": {
+            "name": "Update workspace cost rate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "cost-rate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-cost-rate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"since\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82559776-17b6-42b3-9672-8452922daadf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "cost-rate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-cost-rate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 20000,\n  \"since\": \"2020-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37637ead-e139-4e09-826a-6d1e30a02f18",
+          "name": "Update workspace billable rate",
+          "request": {
+            "name": "Update workspace billable rate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "hourly-rate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-hourly-rate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"currency\": \"USD\",\n  \"since\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ca629377-cf76-4f12-9c57-9e488e6b46c6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "hourly-rate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-hourly-rate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 2000,\n  \"currency\": \"USD\",\n  \"since\": \"2020-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7dc89d4-591e-4ab4-b9c7-ca859208314d",
+          "name": "Add user to a workspace",
+          "request": {
+            "name": "Add user to a workspace",
+            "description": {
+              "content": "You can add users to a workspace via API only if that workspace has a paid subscription. If the workspace has a paid subscription, you can add as many users as you want but you are limited by the number of paid user seats on that workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "send-email",
+                  "value": "true",
+                  "description": "(Required) Indicates whether to send an email when user is added to the workspace."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "335369f1-fcc7-48da-b04d-d32841b7f268",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "send-email",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"johndoe@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "886bae7b-126f-4a1e-9927-dc6f0bd6333f",
+          "name": "Update a user's status",
+          "request": {
+            "name": "Update a user's status",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85a1efd0-a38d-45ee-b7e7-d33537178434",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f6c29c2-b926-4b5f-b407-6b0e39e97d0f",
+          "name": "Update a user's cost rate",
+          "request": {
+            "name": "Update a user's cost rate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId",
+                "cost-rate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-cost-rate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"since\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14cac0d1-8b37-4de9-a409-1a13bfd1c06d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId",
+                    "cost-rate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-cost-rate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 20000,\n  \"since\": \"2020-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb020e78-ae42-463c-aec4-48fd605af80d",
+          "name": "Update a user's hourly rate",
+          "request": {
+            "name": "Update a user's hourly rate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId",
+                "hourly-rate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-hourly-rate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"since\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69436c29-c4ad-431a-a514-2491c7ae437d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId",
+                    "hourly-rate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-hourly-rate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 20000,\n  \"since\": \"2020-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SCHEDULED_REPORTS\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"PROJECT\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"EVERYONE\",\n      \"whoCanCreateTasks\": \"EVERYONE\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"FRIDAY\",\n      \"WEDNESDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-cost-rate-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-hourly-rate-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-userId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-userId-cost-rate-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-userId-hourly-rate-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "521a7dc4-e58a-4c80-8ace-76c8d69c06f4",
+    "name": "Clockify Approval Workspace API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

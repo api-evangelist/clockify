@@ -1,0 +1,464 @@
+{
+  "item": [
+    {
+      "id": "d5de04fd-9d6a-47cd-8f2f-d7fe030f980f",
+      "name": "Time Entry Report",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc2df059-e6f9-4492-aa5a-e2d55b29a5f1",
+          "name": "Generate a detailed report",
+          "request": {
+            "name": "Generate a detailed report",
+            "description": {
+              "content": "Detailed report data on FREE subscription plan is limited to a maximum interval length of one month (31 days).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "reports",
+                "detailed"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-reports-detailed-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateRangeEnd\": \"<string>\",\n  \"dateRangeStart\": \"<string>\",\n  \"detailedFilter\": {\n    \"auditFilter\": {\n      \"duration\": \"<integer>\",\n      \"durationShorter\": \"<boolean>\",\n      \"withoutProject\": \"<boolean>\",\n      \"withoutTask\": \"<boolean>\"\n    },\n    \"options\": {\n      \"totals\": \"<string>\"\n    },\n    \"page\": \"<integer>\",\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\"\n  },\n  \"amountShown\": \"<string>\",\n  \"amounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"approvalState\": \"<string>\",\n  \"archived\": \"<boolean>\",\n  \"attendanceFilter\": {\n    \"breakFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"capacityFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"endFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"hasTimeOff\": \"<boolean>\",\n    \"overtimeFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"page\": 1,\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\",\n    \"startFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"workFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"billable\": \"<boolean>\",\n  \"clients\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"currency\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"customFields\": [\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"dateFormat\": \"<string>\",\n  \"dateRangeType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"exportType\": \"<string>\",\n  \"invoicingState\": \"<string>\",\n  \"projects\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"rounding\": \"<boolean>\",\n  \"sortOrder\": \"<string>\",\n  \"summaryFilter\": {\n    \"groups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sortColumn\": \"<string>\",\n    \"summaryChartType\": \"<string>\"\n  },\n  \"tags\": {\n    \"containedInTimeentry\": \"<string>\",\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"tasks\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"timeFormat\": \"<string>\",\n  \"timeZone\": \"<string>\",\n  \"userCustomFields\": [\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"userLocale\": \"<string>\",\n  \"users\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"weekStart\": \"<string>\",\n  \"weeklyFilter\": {\n    \"group\": \"<string>\",\n    \"subgroup\": \"<string>\"\n  },\n  \"withoutDescription\": \"<boolean>\",\n  \"zoomLevel\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19a3fc9f-bac8-464b-aaf2-1d1fdb62bedf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "reports",
+                    "detailed"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-reports-detailed-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dateRangeEnd\": \"2018-11-30T23:59:59.999\",\n  \"dateRangeStart\": \"2018-11-01T00:00:00\",\n  \"detailedFilter\": {\n    \"auditFilter\": {\n      \"duration\": 2,\n      \"durationShorter\": false,\n      \"withoutProject\": false,\n      \"withoutTask\": true\n    },\n    \"options\": {\n      \"totals\": \"CALCULATE\"\n    },\n    \"page\": 1,\n    \"pageSize\": 20,\n    \"sortColumn\": \"ID\"\n  },\n  \"amountShown\": \"COST\",\n  \"amounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"approvalState\": \"APPROVED\",\n  \"archived\": false,\n  \"attendanceFilter\": {\n    \"breakFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"50\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"50\"\n      }\n    ],\n    \"capacityFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      }\n    ],\n    \"endFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"17:00\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"17:00\"\n      }\n    ],\n    \"hasTimeOff\": true,\n    \"overtimeFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"150\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"150\"\n      }\n    ],\n    \"page\": 1,\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\",\n    \"startFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"15:00\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"15:00\"\n      }\n    ],\n    \"workFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      }\n    ]\n  },\n  \"billable\": true,\n  \"clients\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"currency\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"customFields\": [\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"dateFormat\": \"2018-11-01\",\n  \"dateRangeType\": \"LAST_MONTH\",\n  \"description\": \"some description keyword\",\n  \"exportType\": \"JSON\",\n  \"invoicingState\": \"INVOICED\",\n  \"projects\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"rounding\": false,\n  \"sortOrder\": \"ASCENDING\",\n  \"summaryFilter\": {\n    \"groups\": [\n      \"\\\"[5b715448b07987511071111\\\", \\\"5b715448b079875110792222\\\"]\",\n      \"\\\"[5b715448b07987511071111\\\", \\\"5b715448b079875110792222\\\"]\"\n    ],\n    \"sortColumn\": \"GROUP\",\n    \"summaryChartType\": \"PROJECT\"\n  },\n  \"tags\": {\n    \"containedInTimeentry\": \"CONTAINS_ONLY\",\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"tasks\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"timeFormat\": \"T00:00:00\",\n  \"timeZone\": \"Europe/Belgrade\",\n  \"userCustomFields\": [\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"userLocale\": \"en\",\n  \"users\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"weekStart\": \"MONDAY\",\n  \"weeklyFilter\": {\n    \"group\": \"5b715448b079875110791111\",\n    \"subgroup\": \"5b715448b079875110792222\"\n  },\n  \"withoutDescription\": false,\n  \"zoomLevel\": \"WEEK\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"timeEntries\": [\n    {\n      \"approvalRequestId\": \"5b715612b079875110791222\",\n      \"billable\": true,\n      \"clientId\": \"5b715612b079875110791112\",\n      \"clientName\": \"Cake.com\",\n      \"description\": \"Time Entry Description\",\n      \"get_id\": \"5b715612b079875110791111\",\n      \"locked\": true,\n      \"projectColor\": \"string\",\n      \"projectId\": \"5b715612b079875110791133\",\n      \"projectName\": \"Clockify\",\n      \"tags\": [\n        {\n          \"id\": \"5b715612b079875110791136\",\n          \"name\": \"tagname\"\n        },\n        {\n          \"id\": \"5b715612b079875110791136\",\n          \"name\": \"tagname\"\n        }\n      ],\n      \"taskId\": \"5b715612b079875110791134\",\n      \"taskName\": \"Task name\",\n      \"timeInterval\": {\n        \"duration\": 4003,\n        \"end\": \"2022-08-27T08:32:01.640708Z\",\n        \"start\": \"2022-08-26T08:32:01.640708Z\"\n      },\n      \"userEmail\": \"user@cake.com\",\n      \"userId\": \"5b715612b079875110791135\",\n      \"userName\": \"john\"\n    },\n    {\n      \"approvalRequestId\": \"5b715612b079875110791222\",\n      \"billable\": true,\n      \"clientId\": \"5b715612b079875110791112\",\n      \"clientName\": \"Cake.com\",\n      \"description\": \"Time Entry Description\",\n      \"get_id\": \"5b715612b079875110791111\",\n      \"locked\": false,\n      \"projectColor\": \"string\",\n      \"projectId\": \"5b715612b079875110791133\",\n      \"projectName\": \"Clockify\",\n      \"tags\": [\n        {\n          \"id\": \"5b715612b079875110791136\",\n          \"name\": \"tagname\"\n        },\n        {\n          \"id\": \"5b715612b079875110791136\",\n          \"name\": \"tagname\"\n        }\n      ],\n      \"taskId\": \"5b715612b079875110791134\",\n      \"taskName\": \"Task name\",\n      \"timeInterval\": {\n        \"duration\": 5371,\n        \"end\": \"2022-08-27T08:32:01.640708Z\",\n        \"start\": \"2022-08-26T08:32:01.640708Z\"\n      },\n      \"userEmail\": \"user@cake.com\",\n      \"userId\": \"5b715612b079875110791135\",\n      \"userName\": \"john\"\n    }\n  ],\n  \"totals\": [\n    {\n      \"amounts\": [\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        },\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        }\n      ],\n      \"entriesCount\": 1,\n      \"id\": \"5b715612b079875110791122\",\n      \"totalBillableTime\": 1000,\n      \"totalTime\": 1200\n    },\n    {\n      \"amounts\": [\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        },\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        }\n      ],\n      \"entriesCount\": 1,\n      \"id\": \"5b715612b079875110791122\",\n      \"totalBillableTime\": 1000,\n      \"totalTime\": 1200\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49aebb3f-6c72-479d-ab47-ac4fee5b4e60",
+          "name": "Generate a summary report",
+          "request": {
+            "name": "Generate a summary report",
+            "description": {
+              "content": "Summary report data on FREE subscription plan is limited to a maximum interval length of one month (31 days).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "reports",
+                "summary"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-reports-summary-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateRangeEnd\": \"<string>\",\n  \"dateRangeStart\": \"<string>\",\n  \"summaryFilter\": {\n    \"groups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sortColumn\": \"<string>\",\n    \"summaryChartType\": \"<string>\"\n  },\n  \"amountShown\": \"<string>\",\n  \"amounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"approvalState\": \"<string>\",\n  \"archived\": \"<boolean>\",\n  \"attendanceFilter\": {\n    \"breakFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"capacityFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"endFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"hasTimeOff\": \"<boolean>\",\n    \"overtimeFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"page\": 1,\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\",\n    \"startFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"workFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"billable\": \"<boolean>\",\n  \"clients\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"currency\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"customFields\": [\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"dateFormat\": \"<string>\",\n  \"dateRangeType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedFilter\": {\n    \"auditFilter\": {\n      \"duration\": \"<integer>\",\n      \"durationShorter\": \"<boolean>\",\n      \"withoutProject\": \"<boolean>\",\n      \"withoutTask\": \"<boolean>\"\n    },\n    \"options\": {\n      \"totals\": \"<string>\"\n    },\n    \"page\": \"<integer>\",\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\"\n  },\n  \"exportType\": \"<string>\",\n  \"invoicingState\": \"<string>\",\n  \"projects\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"rounding\": \"<boolean>\",\n  \"sortOrder\": \"<string>\",\n  \"tags\": {\n    \"containedInTimeentry\": \"<string>\",\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"tasks\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"timeFormat\": \"<string>\",\n  \"timeZone\": \"<string>\",\n  \"userCustomFields\": [\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"userLocale\": \"<string>\",\n  \"users\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"weekStart\": \"<string>\",\n  \"weeklyFilter\": {\n    \"group\": \"<string>\",\n    \"subgroup\": \"<string>\"\n  },\n  \"withoutDescription\": \"<boolean>\",\n  \"zoomLevel\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09f22de7-7a89-4572-b33a-e8c06891be5f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "reports",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-reports-summary-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dateRangeEnd\": \"2018-11-30T23:59:59.999\",\n  \"dateRangeStart\": \"2018-11-01T00:00:00\",\n  \"summaryFilter\": {\n    \"groups\": [\n      \"\\\"[5b715448b07987511071111\\\", \\\"5b715448b079875110792222\\\"]\",\n      \"\\\"[5b715448b07987511071111\\\", \\\"5b715448b079875110792222\\\"]\"\n    ],\n    \"sortColumn\": \"GROUP\",\n    \"summaryChartType\": \"PROJECT\"\n  },\n  \"amountShown\": \"COST\",\n  \"amounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"approvalState\": \"APPROVED\",\n  \"archived\": false,\n  \"attendanceFilter\": {\n    \"breakFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"50\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"50\"\n      }\n    ],\n    \"capacityFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      }\n    ],\n    \"endFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"17:00\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"17:00\"\n      }\n    ],\n    \"hasTimeOff\": true,\n    \"overtimeFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"150\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"150\"\n      }\n    ],\n    \"page\": 1,\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\",\n    \"startFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"15:00\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"15:00\"\n      }\n    ],\n    \"workFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      }\n    ]\n  },\n  \"billable\": true,\n  \"clients\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"currency\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"customFields\": [\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"dateFormat\": \"2018-11-01\",\n  \"dateRangeType\": \"LAST_MONTH\",\n  \"description\": \"some description keyword\",\n  \"detailedFilter\": {\n    \"auditFilter\": {\n      \"duration\": 2,\n      \"durationShorter\": false,\n      \"withoutProject\": false,\n      \"withoutTask\": true\n    },\n    \"options\": {\n      \"totals\": \"CALCULATE\"\n    },\n    \"page\": 1,\n    \"pageSize\": 20,\n    \"sortColumn\": \"ID\"\n  },\n  \"exportType\": \"JSON\",\n  \"invoicingState\": \"INVOICED\",\n  \"projects\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"rounding\": false,\n  \"sortOrder\": \"ASCENDING\",\n  \"tags\": {\n    \"containedInTimeentry\": \"CONTAINS_ONLY\",\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"tasks\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"timeFormat\": \"T00:00:00\",\n  \"timeZone\": \"Europe/Belgrade\",\n  \"userCustomFields\": [\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"userLocale\": \"en\",\n  \"users\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"weekStart\": \"MONDAY\",\n  \"weeklyFilter\": {\n    \"group\": \"5b715448b079875110791111\",\n    \"subgroup\": \"5b715448b079875110792222\"\n  },\n  \"withoutDescription\": false,\n  \"zoomLevel\": \"WEEK\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"chart\": [\n    {\n      \"earned\": 1000,\n      \"id\": \"5b715612b079875110791111\",\n      \"totalAmount\": 11000,\n      \"totalBillableTime\": 19000,\n      \"totalTime\": 20000\n    },\n    {\n      \"earned\": 1000,\n      \"id\": \"5b715612b079875110791111\",\n      \"totalAmount\": 11000,\n      \"totalBillableTime\": 19000,\n      \"totalTime\": 20000\n    }\n  ],\n  \"groupOne\": [\n    {\n      \"amount\": 100,\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        }\n      ],\n      \"clientName\": \"Cake.com\",\n      \"days\": [\n        {\n          \"amount\": 1289.0063560175113,\n          \"date\": \"string\",\n          \"duration\": 8530.441918231683\n        },\n        {\n          \"amount\": 614.0435770639152,\n          \"date\": \"string\",\n          \"duration\": 3132.308329603042\n        }\n      ],\n      \"duration\": 10,\n      \"id\": \"5b715612b079875110791111\",\n      \"name\": \"Name\",\n      \"nameLowerCase\": \"name\"\n    },\n    {\n      \"amount\": 100,\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        }\n      ],\n      \"clientName\": \"Cake.com\",\n      \"days\": [\n        {\n          \"amount\": 8620.27705765412,\n          \"date\": \"string\",\n          \"duration\": 9356.123232135387\n        },\n        {\n          \"amount\": 3682.5061021905626,\n          \"date\": \"string\",\n          \"duration\": 1983.8228167103066\n        }\n      ],\n      \"duration\": 10,\n      \"id\": \"5b715612b079875110791111\",\n      \"name\": \"Name\",\n      \"nameLowerCase\": \"name\"\n    }\n  ],\n  \"totals\": [\n    {\n      \"amounts\": [\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        },\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        }\n      ],\n      \"entriesCount\": 1,\n      \"id\": \"5b715612b079875110791122\",\n      \"totalBillableTime\": 1000,\n      \"totalTime\": 1200\n    },\n    {\n      \"amounts\": [\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        },\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        }\n      ],\n      \"entriesCount\": 1,\n      \"id\": \"5b715612b079875110791122\",\n      \"totalBillableTime\": 1000,\n      \"totalTime\": 1200\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff3609f2-e06b-46d8-a616-b1c25c9845f0",
+          "name": "Generate a weekly report",
+          "request": {
+            "name": "Generate a weekly report",
+            "description": {
+              "content": "Weekly report data on FREE subscription plan is limited to a maximum interval length of one month (31 days).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "reports",
+                "weekly"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-reports-weekly-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dateRangeEnd\": \"<string>\",\n  \"dateRangeStart\": \"<string>\",\n  \"weeklyFilter\": {\n    \"group\": \"<string>\",\n    \"subgroup\": \"<string>\"\n  },\n  \"amountShown\": \"<string>\",\n  \"amounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"approvalState\": \"<string>\",\n  \"archived\": \"<boolean>\",\n  \"attendanceFilter\": {\n    \"breakFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"capacityFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"endFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"hasTimeOff\": \"<boolean>\",\n    \"overtimeFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"page\": 1,\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\",\n    \"startFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"workFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"billable\": \"<boolean>\",\n  \"clients\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"currency\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"customFields\": [\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"dateFormat\": \"<string>\",\n  \"dateRangeType\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedFilter\": {\n    \"auditFilter\": {\n      \"duration\": \"<integer>\",\n      \"durationShorter\": \"<boolean>\",\n      \"withoutProject\": \"<boolean>\",\n      \"withoutTask\": \"<boolean>\"\n    },\n    \"options\": {\n      \"totals\": \"<string>\"\n    },\n    \"page\": \"<integer>\",\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\"\n  },\n  \"exportType\": \"<string>\",\n  \"invoicingState\": \"<string>\",\n  \"projects\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"rounding\": \"<boolean>\",\n  \"sortOrder\": \"<string>\",\n  \"summaryFilter\": {\n    \"groups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sortColumn\": \"<string>\",\n    \"summaryChartType\": \"<string>\"\n  },\n  \"tags\": {\n    \"containedInTimeentry\": \"<string>\",\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"tasks\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"timeFormat\": \"<string>\",\n  \"timeZone\": \"<string>\",\n  \"userCustomFields\": [\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"isEmpty\": \"<boolean>\",\n      \"numberCondition\": \"<string>\",\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"userLocale\": \"<string>\",\n  \"users\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"weekStart\": \"<string>\",\n  \"withoutDescription\": \"<boolean>\",\n  \"zoomLevel\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3872d14-98b5-4b3e-8c32-bdae89c531b2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "reports",
+                    "weekly"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-reports-weekly-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dateRangeEnd\": \"2018-11-30T23:59:59.999\",\n  \"dateRangeStart\": \"2018-11-01T00:00:00\",\n  \"weeklyFilter\": {\n    \"group\": \"5b715448b079875110791111\",\n    \"subgroup\": \"5b715448b079875110792222\"\n  },\n  \"amountShown\": \"COST\",\n  \"amounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"approvalState\": \"APPROVED\",\n  \"archived\": false,\n  \"attendanceFilter\": {\n    \"breakFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"50\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"50\"\n      }\n    ],\n    \"capacityFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      }\n    ],\n    \"endFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"17:00\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"17:00\"\n      }\n    ],\n    \"hasTimeOff\": true,\n    \"overtimeFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"150\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"150\"\n      }\n    ],\n    \"page\": 1,\n    \"pageSize\": \"<integer>\",\n    \"sortColumn\": \"<string>\",\n    \"startFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"15:00\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"15:00\"\n      }\n    ],\n    \"workFilters\": [\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      },\n      {\n        \"filtrationType\": \"<string>\",\n        \"value\": \"750\"\n      }\n    ]\n  },\n  \"billable\": true,\n  \"clients\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"currency\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"customFields\": [\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"dateFormat\": \"2018-11-01\",\n  \"dateRangeType\": \"LAST_MONTH\",\n  \"description\": \"some description keyword\",\n  \"detailedFilter\": {\n    \"auditFilter\": {\n      \"duration\": 2,\n      \"durationShorter\": false,\n      \"withoutProject\": false,\n      \"withoutTask\": true\n    },\n    \"options\": {\n      \"totals\": \"CALCULATE\"\n    },\n    \"page\": 1,\n    \"pageSize\": 20,\n    \"sortColumn\": \"ID\"\n  },\n  \"exportType\": \"JSON\",\n  \"invoicingState\": \"INVOICED\",\n  \"projects\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"rounding\": false,\n  \"sortOrder\": \"ASCENDING\",\n  \"summaryFilter\": {\n    \"groups\": [\n      \"\\\"[5b715448b07987511071111\\\", \\\"5b715448b079875110792222\\\"]\",\n      \"\\\"[5b715448b07987511071111\\\", \\\"5b715448b079875110792222\\\"]\"\n    ],\n    \"sortColumn\": \"GROUP\",\n    \"summaryChartType\": \"PROJECT\"\n  },\n  \"tags\": {\n    \"containedInTimeentry\": \"CONTAINS_ONLY\",\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"tasks\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"timeFormat\": \"T00:00:00\",\n  \"timeZone\": \"Europe/Belgrade\",\n  \"userCustomFields\": [\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"id\": \"5b71544ab0798751107918b3\",\n      \"isEmpty\": false,\n      \"numberCondition\": \"EQUAL\",\n      \"type\": \"NUMBER\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"userLocale\": \"en\",\n  \"users\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715448b079875110792222\",\n      \"5b715448b079875110791111\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"weekStart\": \"MONDAY\",\n  \"withoutDescription\": false,\n  \"zoomLevel\": \"WEEK\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"decimalFormat\": false,\n  \"groupOne\": [\n    {\n      \"amount\": 100,\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        }\n      ],\n      \"clientName\": \"Cake.com\",\n      \"days\": [\n        {\n          \"amount\": 5061.936717308258,\n          \"date\": \"string\",\n          \"duration\": 274.46477101679244\n        },\n        {\n          \"amount\": 2654.4184737798005,\n          \"date\": \"string\",\n          \"duration\": 7247.597770937897\n        }\n      ],\n      \"duration\": 10,\n      \"id\": \"5b715612b079875110791111\",\n      \"name\": \"Name\",\n      \"nameLowerCase\": \"name\"\n    },\n    {\n      \"amount\": 100,\n      \"children\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/GroupOneDto detected>\"\n        }\n      ],\n      \"clientName\": \"Cake.com\",\n      \"days\": [\n        {\n          \"amount\": 9933.706052085312,\n          \"date\": \"string\",\n          \"duration\": 1073.174905259726\n        },\n        {\n          \"amount\": 8162.978618695974,\n          \"date\": \"string\",\n          \"duration\": 6727.556718981665\n        }\n      ],\n      \"duration\": 10,\n      \"id\": \"5b715612b079875110791111\",\n      \"name\": \"Name\",\n      \"nameLowerCase\": \"name\"\n    }\n  ],\n  \"includeUsersWithoutTime\": false,\n  \"totals\": [\n    {\n      \"amounts\": [\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        },\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        }\n      ],\n      \"entriesCount\": 1,\n      \"id\": \"5b715612b079875110791122\",\n      \"totalBillableTime\": 1000,\n      \"totalTime\": 1200\n    },\n    {\n      \"amounts\": [\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        },\n        {\n          \"type\": \"PROFIT\",\n          \"value\": 1000\n        }\n      ],\n      \"entriesCount\": 1,\n      \"id\": \"5b715612b079875110791122\",\n      \"totalBillableTime\": 1000,\n      \"totalTime\": 1200\n    }\n  ],\n  \"totalsByDay\": [\n    {\n      \"amount\": 1371.2499764160646,\n      \"date\": \"string\",\n      \"duration\": 7557.937165224481\n    },\n    {\n      \"amount\": 9541.022133583747,\n      \"date\": \"string\",\n      \"duration\": 2862.7830458479066\n    }\n  ],\n  \"trackTimeDownToSeconds\": false,\n  \"usersWithoutTime\": [\n    {\n      \"dateFormat\": \"string\",\n      \"email\": \"string\",\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"timeFormat\": \"string\",\n      \"timeZone\": \"string\",\n      \"weekStart\": \"string\"\n    },\n    {\n      \"dateFormat\": \"string\",\n      \"email\": \"string\",\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"timeFormat\": \"string\",\n      \"timeZone\": \"string\",\n      \"weekStart\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://reports.api.clockify.me",
+      "key": "v1-workspaces-workspaceId-reports-detailed-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://reports.api.clockify.me",
+      "key": "v1-workspaces-workspaceId-reports-summary-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://reports.api.clockify.me",
+      "key": "v1-workspaces-workspaceId-reports-weekly-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab65d0d4-cc4c-427f-b39f-271fda068d9e",
+    "name": "Clockify Approval Time Entry Report API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

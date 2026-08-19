@@ -1,0 +1,732 @@
+{
+  "item": [
+    {
+      "id": "e727f47f-df45-4e4a-b014-43a26677c78b",
+      "name": "Holiday",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c522b3a-e35c-48b0-a593-eef70764b86b",
+          "name": "Get holidays on a workspace",
+          "request": {
+            "name": "Get holidays on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "holidays"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-holidays-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assigned-to",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of holidays assigned to user."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2dc490e9-db3a-4df1-83ad-0a988d6f83a5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "holidays"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-holidays-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assigned-to",
+                      "value": "60f924bafdaf031696ec6218"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"automaticTimeEntryCreation\": false,\n    \"datePeriod\": {\n      \"endDate\": \"1958-05-27\",\n      \"startDate\": \"1987-07-25\"\n    },\n    \"everyoneIncludingNew\": false,\n    \"id\": \"5b715612b079875110791111\",\n    \"name\": \"New Year's Day\",\n    \"occursAnnually\": true,\n    \"projectId\": \"65b36d3c525e243c48f9150f\",\n    \"taskId\": \"65b36d46fa3df8607e42d21a\",\n    \"userGroupIds\": [\n      \"5b715612b079875110791342\",\n      \"5b715612b079875110791324\",\n      \"5b715612b079875110793142\"\n    ],\n    \"userIds\": [\n      \"5b715612b079875110791432\",\n      \"5b715612b079875110791234\"\n    ],\n    \"workspaceId\": \"5b715612b079875110792222\"\n  },\n  {\n    \"automaticTimeEntryCreation\": false,\n    \"datePeriod\": {\n      \"endDate\": \"2016-09-24\",\n      \"startDate\": \"1966-11-28\"\n    },\n    \"everyoneIncludingNew\": false,\n    \"id\": \"5b715612b079875110791111\",\n    \"name\": \"New Year's Day\",\n    \"occursAnnually\": true,\n    \"projectId\": \"65b36d3c525e243c48f9150f\",\n    \"taskId\": \"65b36d46fa3df8607e42d21a\",\n    \"userGroupIds\": [\n      \"5b715612b079875110791342\",\n      \"5b715612b079875110791324\",\n      \"5b715612b079875110793142\"\n    ],\n    \"userIds\": [\n      \"5b715612b079875110791432\",\n      \"5b715612b079875110791234\"\n    ],\n    \"workspaceId\": \"5b715612b079875110792222\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dcc93f4-ee65-4bcb-9251-38a3385774e0",
+          "name": "Create a holiday",
+          "request": {
+            "name": "Create a holiday",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "holidays"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-holidays-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"datePeriod\": {\n    \"endDate\": \"<string>\",\n    \"startDate\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"<string>\",\n  \"everyoneIncludingNew\": false,\n  \"occursAnnually\": false,\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"users\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bac9116a-65ab-4903-a2e4-ec734b5d3616",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "holidays"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-holidays-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"datePeriod\": {\n    \"endDate\": \"2023-02-16\",\n    \"startDate\": \"2023-02-14\"\n  },\n  \"name\": \"Labour Day\",\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"#8BC34A\",\n  \"everyoneIncludingNew\": true,\n  \"occursAnnually\": true,\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  },\n  \"users\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"automaticTimeEntryCreation\": false,\n  \"datePeriod\": {\n    \"endDate\": \"1986-10-19\",\n    \"startDate\": \"1962-08-31\"\n  },\n  \"everyoneIncludingNew\": false,\n  \"id\": \"5b715612b079875110791111\",\n  \"name\": \"New Year's Day\",\n  \"occursAnnually\": true,\n  \"projectId\": \"65b36d3c525e243c48f9150f\",\n  \"taskId\": \"65b36d46fa3df8607e42d21a\",\n  \"userGroupIds\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"userIds\": [\n    \"5b715612b079875110791432\",\n    \"5b715612b079875110791234\"\n  ],\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "891710bc-6725-4a6a-91c5-dda33cb33903",
+          "name": "Get holidays in a specific period",
+          "request": {
+            "name": "Get holidays in a specific period",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "holidays",
+                "in-period"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-holidays-in-period-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assigned-to",
+                  "value": "<string>",
+                  "description": "(Required) Filter list of holidays assigned to user."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Filter list of holidays starting from start date. Expected date format yyyy-MM-ddThh:mm:ssZ"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) Filter list of holidays ending by end date. Expected date format yyyy-MM-ddThh:mm:ssZ"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "36cdc18d-a2d0-45ef-aab3-10ce2cfc2847",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "holidays",
+                    "in-period"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-holidays-in-period-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assigned-to",
+                      "value": "60f924bafdaf031696ec6218"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2022-12-03T10:59:59.999Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2022-12-05T23:59:59.999Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"automaticTimeEntryCreation\": false,\n    \"datePeriod\": {\n      \"endDate\": \"1998-11-08\",\n      \"startDate\": \"2026-04-12\"\n    },\n    \"everyoneIncludingNew\": false,\n    \"id\": \"5b715612b079875110791111\",\n    \"name\": \"New Year's Day\",\n    \"occursAnnually\": true,\n    \"projectId\": \"65b36d3c525e243c48f9150f\",\n    \"taskId\": \"65b36d46fa3df8607e42d21a\",\n    \"userGroupIds\": [\n      \"5b715612b079875110791342\",\n      \"5b715612b079875110791324\",\n      \"5b715612b079875110793142\"\n    ],\n    \"userIds\": [\n      \"5b715612b079875110791432\",\n      \"5b715612b079875110791234\"\n    ],\n    \"workspaceId\": \"5b715612b079875110792222\"\n  },\n  {\n    \"automaticTimeEntryCreation\": false,\n    \"datePeriod\": {\n      \"endDate\": \"1950-12-23\",\n      \"startDate\": \"2024-05-11\"\n    },\n    \"everyoneIncludingNew\": false,\n    \"id\": \"5b715612b079875110791111\",\n    \"name\": \"New Year's Day\",\n    \"occursAnnually\": true,\n    \"projectId\": \"65b36d3c525e243c48f9150f\",\n    \"taskId\": \"65b36d46fa3df8607e42d21a\",\n    \"userGroupIds\": [\n      \"5b715612b079875110791342\",\n      \"5b715612b079875110791324\",\n      \"5b715612b079875110793142\"\n    ],\n    \"userIds\": [\n      \"5b715612b079875110791432\",\n      \"5b715612b079875110791234\"\n    ],\n    \"workspaceId\": \"5b715612b079875110792222\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3129e6a-8073-48d8-9426-c68aa1e839df",
+          "name": "Delete a holiday",
+          "request": {
+            "name": "Delete a holiday",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "holidays",
+                ":holidayId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-holidays-holidayId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "holidayId",
+                  "description": "(Required) Represents a holiday identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "836987cc-b398-489e-95ed-7fb2c52f2194",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "holidays",
+                    ":holidayId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-holidays-holidayId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "holidayId",
+                      "description": "(Required) Represents a holiday identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"string\",\n      \"taskId\": \"string\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"#8BC34A\",\n  \"datePeriod\": {\n    \"endDate\": \"1986-09-28\",\n    \"startDate\": \"1982-12-14\"\n  },\n  \"everyoneIncludingNew\": false,\n  \"id\": \"5b715612b079875110791111\",\n  \"name\": \"New Year's Day\",\n  \"occursAnnually\": true,\n  \"userGroupIds\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"userGroups\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"userIds\": [\n    \"5b715612b079875110791432\",\n    \"5b715612b079875110791234\"\n  ],\n  \"users\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  ],\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84e5b991-0cb3-4d1c-9307-5f49b66c17c2",
+          "name": "Update a holiday",
+          "request": {
+            "name": "Update a holiday",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "holidays",
+                ":holidayId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-holidays-holidayId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "holidayId",
+                  "description": "(Required) Represents a holiday identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"datePeriod\": {\n    \"endDate\": \"<string>\",\n    \"startDate\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"occursAnnually\": false,\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"<string>\",\n  \"everyoneIncludingNew\": false,\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"users\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\",\n    \"statuses\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b974bad5-3b99-464a-b92b-828770e6ff97",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "holidays",
+                    ":holidayId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-holidays-holidayId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "holidayId",
+                      "description": "(Required) Represents a holiday identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"datePeriod\": {\n    \"endDate\": \"2023-02-16\",\n    \"startDate\": \"2023-02-14\"\n  },\n  \"name\": \"New Year's Day\",\n  \"occursAnnually\": true,\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"#8BC34A\",\n  \"everyoneIncludingNew\": false,\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"users\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"status\": \"ACTIVE\",\n    \"statuses\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"automaticTimeEntryCreation\": false,\n  \"datePeriod\": {\n    \"endDate\": \"1986-10-19\",\n    \"startDate\": \"1962-08-31\"\n  },\n  \"everyoneIncludingNew\": false,\n  \"id\": \"5b715612b079875110791111\",\n  \"name\": \"New Year's Day\",\n  \"occursAnnually\": true,\n  \"projectId\": \"65b36d3c525e243c48f9150f\",\n  \"taskId\": \"65b36d46fa3df8607e42d21a\",\n  \"userGroupIds\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"userIds\": [\n    \"5b715612b079875110791432\",\n    \"5b715612b079875110791234\"\n  ],\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-holidays-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-holidays-in-period-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-holidays-holidayId-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "ad67041b-9073-4d3d-8081-4e99c19e8cd3",
+    "name": "Clockify Approval Holiday API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

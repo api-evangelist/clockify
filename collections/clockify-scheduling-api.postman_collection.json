@@ -1,0 +1,1760 @@
+{
+  "item": [
+    {
+      "id": "56e2c3fd-5ccb-4fbf-88cc-9d1653904f4e",
+      "name": "Scheduling",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94a4d2b1-ed7f-4431-97af-3c824bb1b2fc",
+          "name": "Get all assignments",
+          "request": {
+            "name": "Get all assignments",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "all"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-all-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "",
+                  "description": "If provided, assignments will be filtered by name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "<string>",
+                  "description": "Represents the column as the sorting criteria."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Represents the sorting mode."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "122a663a-8cdb-4503-b0aa-59454881de73",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "all"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-all-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Bugfixing"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2020-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "sort-column",
+                      "value": "USER"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"clientId\": \"36b687e29ae1f428e7ebe109\",\n    \"clientName\": \"Software Development\",\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1963-07-19T21:49:11.214Z\",\n      \"start\": \"2011-03-26T02:34:06.302Z\"\n    },\n    \"projectArchived\": true,\n    \"projectBillable\": true,\n    \"projectColor\": \"#000000\",\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"projectName\": \"Software Development\",\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"taskName\": \"Bugfixing\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"userName\": \"John Doe\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"clientId\": \"36b687e29ae1f428e7ebe109\",\n    \"clientName\": \"Software Development\",\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1951-10-06T18:46:28.925Z\",\n      \"start\": \"1995-09-21T11:42:30.941Z\"\n    },\n    \"projectArchived\": true,\n    \"projectBillable\": true,\n    \"projectColor\": \"#000000\",\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"projectName\": \"Software Development\",\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"taskName\": \"Bugfixing\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"userName\": \"John Doe\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8b1d1ec-7557-488b-b6a1-2b0455b1ea60",
+          "name": "Get all scheduled assignments per project",
+          "request": {
+            "name": "Get all scheduled assignments per project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "projects",
+                "totals"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-projects-totals-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end\": \"<dateTime>\",\n  \"start\": \"<dateTime>\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"search\": \"<string>\",\n  \"statusFilter\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57720002-609a-43e7-9692-f2660120cfbc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "projects",
+                    "totals"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-projects-totals-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"search\": \"Project name\",\n  \"statusFilter\": \"PUBLISHED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"assignments\": [\n      {\n        \"date\": \"2015-07-01T13:00:45.194Z\",\n        \"hasAssignment\": false\n      },\n      {\n        \"date\": \"1969-02-26T11:24:32.781Z\",\n        \"hasAssignment\": false\n      }\n    ],\n    \"clientName\": \"Software Development\",\n    \"milestones\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"id\": \"34a687e29ae1f428e7ebe303\",\n        \"name\": \"Q3\",\n        \"projectId\": \"5b641568b07987035750505e\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"id\": \"34a687e29ae1f428e7ebe303\",\n        \"name\": \"Q3\",\n        \"projectId\": \"5b641568b07987035750505e\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      }\n    ],\n    \"projectArchived\": false,\n    \"projectBillable\": false,\n    \"projectColor\": \"#000000\",\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"projectName\": \"Software Development\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"taskName\": \"Bugfixing\",\n    \"totalHours\": 490.5,\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"assignments\": [\n      {\n        \"date\": \"1997-07-06T03:44:20.085Z\",\n        \"hasAssignment\": true\n      },\n      {\n        \"date\": \"1970-07-17T13:38:03.518Z\",\n        \"hasAssignment\": false\n      }\n    ],\n    \"clientName\": \"Software Development\",\n    \"milestones\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"id\": \"34a687e29ae1f428e7ebe303\",\n        \"name\": \"Q3\",\n        \"projectId\": \"5b641568b07987035750505e\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"id\": \"34a687e29ae1f428e7ebe303\",\n        \"name\": \"Q3\",\n        \"projectId\": \"5b641568b07987035750505e\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      }\n    ],\n    \"projectArchived\": false,\n    \"projectBillable\": false,\n    \"projectColor\": \"#000000\",\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"projectName\": \"Software Development\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"taskName\": \"Bugfixing\",\n    \"totalHours\": 490.5,\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0343aa84-6de4-40a4-b5b9-e97afeffb56a",
+          "name": "Get all scheduled assignments on project",
+          "request": {
+            "name": "Get all scheduled assignments on project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "projects",
+                "totals",
+                ":projectId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-projects-totals-projectId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) Represents an end date in the yyyy-MM-ddThh:mm:ssZ format."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1b6aa74d-8e0a-4f5b-a174-9b35044b88fc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "projects",
+                    "totals",
+                    ":projectId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-projects-totals-projectId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2020-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assignments\": [\n    {\n      \"date\": \"1999-03-05T22:58:43.963Z\",\n      \"hasAssignment\": true\n    },\n    {\n      \"date\": \"2007-12-23T21:31:23.580Z\",\n      \"hasAssignment\": true\n    }\n  ],\n  \"clientName\": \"Software Development\",\n  \"milestones\": [\n    {\n      \"date\": \"2020-01-01T08:00:00Z\",\n      \"id\": \"34a687e29ae1f428e7ebe303\",\n      \"name\": \"Q3\",\n      \"projectId\": \"5b641568b07987035750505e\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    },\n    {\n      \"date\": \"2020-01-01T08:00:00Z\",\n      \"id\": \"34a687e29ae1f428e7ebe303\",\n      \"name\": \"Q3\",\n      \"projectId\": \"5b641568b07987035750505e\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    }\n  ],\n  \"projectArchived\": false,\n  \"projectBillable\": false,\n  \"projectColor\": \"#000000\",\n  \"projectId\": \"56b687e29ae1f428e7ebe504\",\n  \"projectName\": \"Software Development\",\n  \"taskId\": \"36b687e29ae1f428e7ebe109\",\n  \"taskName\": \"Bugfixing\",\n  \"totalHours\": 490.5,\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9958b67f-bab1-42fd-b278-7c9fb4d1cc57",
+          "name": "Publish assignments",
+          "request": {
+            "name": "Publish assignments",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "publish"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-publish-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end\": \"<string>\",\n  \"start\": \"<string>\",\n  \"notifyUsers\": false,\n  \"search\": \"<string>\",\n  \"userFilter\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sourceType\": \"<string>\",\n    \"status\": \"<string>\",\n    \"statuses\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"userGroupFilter\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"viewType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0352cf3f-59ca-4786-87da-7eb896574698",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-publish-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"notifyUsers\": false,\n  \"search\": \"search keyword\",\n  \"userFilter\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"sourceType\": \"USER_GROUP\",\n    \"status\": \"ACTIVE\",\n    \"statuses\": [\n      \"PENDING\",\n      \"INACTIVE\"\n    ]\n  },\n  \"userGroupFilter\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"viewType\": \"PROJECTS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f854b68e-2109-4001-8645-3172f916691b",
+          "name": "Create a recurring assignment",
+          "request": {
+            "name": "Create a recurring assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "recurring"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-recurring-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end\": \"<string>\",\n  \"hoursPerDay\": \"<double>\",\n  \"projectId\": \"<string>\",\n  \"start\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"billable\": false,\n  \"includeNonWorkingDays\": false,\n  \"note\": \"<string>\",\n  \"recurringAssignment\": {\n    \"weeks\": \"<integer>\",\n    \"repeat\": false\n  },\n  \"startTime\": \"<string>\",\n  \"taskId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf115829-cc93-46df-8f23-04be8c2b8078",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "recurring"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-recurring-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"hoursPerDay\": 7.5,\n  \"projectId\": \"56b687e29ae1f428e7ebe504\",\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"userId\": \"72k687e29ae1f428e7ebe109\",\n  \"billable\": false,\n  \"includeNonWorkingDays\": false,\n  \"note\": \"This is a sample note for an assignment.\",\n  \"recurringAssignment\": {\n    \"weeks\": 5,\n    \"repeat\": false\n  },\n  \"startTime\": \"10:00:00\",\n  \"taskId\": \"56b687e29ae1f428e7ebe505\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"2003-02-15T03:05:42.510Z\",\n      \"start\": \"1951-12-14T18:46:59.865Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1987-11-07T10:13:23.017Z\",\n      \"start\": \"1955-08-28T16:38:39.357Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "296c97b9-34ae-48de-99dd-a87a89c31e6b",
+          "name": "Delete a recurring assignment",
+          "request": {
+            "name": "Delete a recurring assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "recurring",
+                ":assignmentId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-recurring-assignmentId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "seriesUpdateOption",
+                  "value": "<string>",
+                  "description": "Represents a series option."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assignmentId",
+                  "description": "(Required) Represents an assignment identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3ff3538b-71d0-4edd-a1f3-cb8023a0a6aa",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "recurring",
+                    ":assignmentId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-recurring-assignmentId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seriesUpdateOption",
+                      "value": "ALL"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assignmentId",
+                      "description": "(Required) Represents an assignment identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1995-07-22T01:35:21.578Z\",\n      \"start\": \"2021-05-29T00:23:39.354Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1994-02-16T18:49:27.199Z\",\n      \"start\": \"1967-11-09T09:31:22.813Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7063af2f-d5e1-4075-9203-7d53c106b7f4",
+          "name": "Update a recurring assignment",
+          "request": {
+            "name": "Update a recurring assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "recurring",
+                ":assignmentId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-recurring-assignmentId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assignmentId",
+                  "description": "(Required) Represents an assignment identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end\": \"<string>\",\n  \"start\": \"<string>\",\n  \"billable\": false,\n  \"hoursPerDay\": \"<double>\",\n  \"includeNonWorkingDays\": false,\n  \"note\": \"<string>\",\n  \"seriesUpdateOption\": \"<string>\",\n  \"startTime\": \"<string>\",\n  \"taskId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a9ee177-ea73-468e-87eb-87cf20f6669c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "recurring",
+                    ":assignmentId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-recurring-assignmentId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assignmentId",
+                      "description": "(Required) Represents an assignment identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"billable\": false,\n  \"hoursPerDay\": 7.5,\n  \"includeNonWorkingDays\": false,\n  \"note\": \"This is a sample note for an assignment.\",\n  \"seriesUpdateOption\": \"THIS_ONE\",\n  \"startTime\": \"10:00:00\",\n  \"taskId\": \"56b687e29ae1f428e7ebe505\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1995-07-22T01:35:21.578Z\",\n      \"start\": \"2021-05-29T00:23:39.354Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1994-02-16T18:49:27.199Z\",\n      \"start\": \"1967-11-09T09:31:22.813Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eea22ecc-27f8-45a5-8391-f429225ad6c7",
+          "name": "Change the recurring period",
+          "request": {
+            "name": "Change the recurring period",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "series",
+                ":assignmentId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-series-assignmentId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assignmentId",
+                  "description": "(Required) Represents an assignment identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"weeks\": \"<integer>\",\n  \"repeat\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9cf5e090-ae0e-413d-81d3-b30dcf476651",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "series",
+                    ":assignmentId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-series-assignmentId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assignmentId",
+                      "description": "(Required) Represents an assignment identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"weeks\": 5,\n  \"repeat\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1995-07-22T01:35:21.578Z\",\n      \"start\": \"2021-05-29T00:23:39.354Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1994-02-16T18:49:27.199Z\",\n      \"start\": \"1967-11-09T09:31:22.813Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fec0c94-4d32-4ca3-aaeb-0dab63ad002f",
+          "name": "Get total of users' capacity on workspace",
+          "request": {
+            "name": "Get total of users' capacity on workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "user-filter",
+                "totals"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-user-filter-totals-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end\": \"<dateTime>\",\n  \"start\": \"<dateTime>\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"search\": \"<string>\",\n  \"statusFilter\": \"<string>\",\n  \"userFilter\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sourceType\": \"<string>\",\n    \"status\": \"<string>\",\n    \"statuses\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"userGroupFilter\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "326f6c80-a920-4e62-b57d-8cdaa425351f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "user-filter",
+                    "totals"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-user-filter-totals-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"search\": \"keyword\",\n  \"statusFilter\": \"PUBLISHED\",\n  \"userFilter\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"sourceType\": \"USER_GROUP\",\n    \"status\": \"ACTIVE\",\n    \"statuses\": [\n      \"PENDING\",\n      \"INACTIVE\"\n    ]\n  },\n  \"userGroupFilter\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"status\": \"ACTIVE\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"capacityPerDay\": 25200,\n    \"totalHoursPerDay\": [\n      {\n        \"date\": \"1980-11-08T13:03:44.111Z\",\n        \"totalHours\": 9441.355041271563\n      },\n      {\n        \"date\": \"1975-01-25T22:59:43.384Z\",\n        \"totalHours\": 4595.430096957322\n      }\n    ],\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"userImage\": \"string\",\n    \"userName\": \"John Doe\",\n    \"userStatus\": \"ACTIVE\",\n    \"workingDays\": \"SUNDAY\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"capacityPerDay\": 25200,\n    \"totalHoursPerDay\": [\n      {\n        \"date\": \"2017-07-16T07:37:30.232Z\",\n        \"totalHours\": 6096.8597722296045\n      },\n      {\n        \"date\": \"1976-01-15T09:02:00.846Z\",\n        \"totalHours\": 9293.360162101884\n      }\n    ],\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"userImage\": \"string\",\n    \"userName\": \"John Doe\",\n    \"userStatus\": \"ACTIVE\",\n    \"workingDays\": \"WEDNESDAY\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "602a8ac0-3da4-4e23-b68e-e8911c65af2d",
+          "name": "Get total capacity of a user",
+          "request": {
+            "name": "Get total capacity of a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                "users",
+                ":userId",
+                "totals"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-users-userId-totals-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) Represents an end date in the yyyy-MM-ddThh:mm:ssZ format."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8a5da573-6c75-47c2-af6f-3ea5db0ae41e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    "users",
+                    ":userId",
+                    "totals"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-users-userId-totals-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2020-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"capacityPerDay\": 25200,\n  \"totalHoursPerDay\": [\n    {\n      \"date\": \"1980-02-07T13:02:04.610Z\",\n      \"totalHours\": 9173.817177255307\n    },\n    {\n      \"date\": \"2013-06-04T19:13:22.935Z\",\n      \"totalHours\": 7149.48092173707\n    }\n  ],\n  \"userId\": \"72k687e29ae1f428e7ebe109\",\n  \"userImage\": \"string\",\n  \"userName\": \"John Doe\",\n  \"userStatus\": \"ACTIVE\",\n  \"workingDays\": \"TUESDAY\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cc788bd-9bbf-4cf6-a6c2-68bd4a0a8d85",
+          "name": "Copy a scheduled assignment",
+          "request": {
+            "name": "Copy a scheduled assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "scheduling",
+                "assignments",
+                ":assignmentId",
+                "copy"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-scheduling-assignments-assignmentId-copy-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assignmentId",
+                  "description": "(Required) Represents an assignment identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"seriesUpdateOption\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0489dd9b-5f06-4e84-8209-c77e5edef359",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "scheduling",
+                    "assignments",
+                    ":assignmentId",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-scheduling-assignments-assignmentId-copy-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assignmentId",
+                      "description": "(Required) Represents an assignment identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"72k687e29ae1f428e7ebe109\",\n  \"seriesUpdateOption\": \"THIS_ONE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1995-07-22T01:35:21.578Z\",\n      \"start\": \"2021-05-29T00:23:39.354Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"excludeDays\": [\n      {\n        \"date\": \"2020-01-01T08:00:00Z\",\n        \"type\": \"WEEKEND\"\n      }\n    ],\n    \"hoursPerDay\": 7.5,\n    \"id\": \"74a687e29ae1f428e7ebe505\",\n    \"includeNonWorkingDays\": false,\n    \"note\": \"This is a sample note for an assignment.\",\n    \"period\": {\n      \"end\": \"1994-02-16T18:49:27.199Z\",\n      \"start\": \"1967-11-09T09:31:22.813Z\"\n    },\n    \"projectId\": \"56b687e29ae1f428e7ebe504\",\n    \"published\": false,\n    \"recurring\": {\n      \"repeat\": false,\n      \"seriesId\": \"64c777ddd3fcab07cfbb210c\",\n      \"weeks\": 5\n    },\n    \"startTime\": \"10:00:00\",\n    \"taskId\": \"36b687e29ae1f428e7ebe109\",\n    \"userId\": \"72k687e29ae1f428e7ebe109\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-all-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-projects-totals-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-projects-totals-projectId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-publish-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-recurring-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-recurring-assignmentId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-series-assignmentId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-user-filter-totals-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-users-userId-totals-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-scheduling-assignments-assignmentId-copy-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "53974103-1b50-4a97-85f4-3da4fdfc28f4",
+    "name": "Clockify Approval Scheduling API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

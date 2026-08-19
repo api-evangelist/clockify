@@ -1,0 +1,252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Group API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find all groups on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user-groups",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "project-id",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of groups that matches the string provided in their project id."
+              },
+              {
+                "name": "name",
+                "value": "development_team",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of groups that matches the string provided in their name."
+              },
+              {
+                "name": "sort-column",
+                "value": "NAME",
+                "type": "query",
+                "description": "Column to be used as the sorting criteria."
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sorting mode."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "includeTeamManagers",
+                "value": "true",
+                "type": "query",
+                "description": "If provided, you'll get a list of team managers assigned to this user group."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Find all groups on a workspace"
+        },
+        {
+          "info": {
+            "name": "Add a new group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user-groups",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new group"
+        },
+        {
+          "info": {
+            "name": "Update a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user-groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "76a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents a user group identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a group"
+        },
+        {
+          "info": {
+            "name": "Delete a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user-groups/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "76a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents a user group identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a group"
+        },
+        {
+          "info": {
+            "name": "Add users to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user-groups/:userGroupId/users",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userGroupId",
+                "value": "76a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents a user group identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add users to a group"
+        },
+        {
+          "info": {
+            "name": "Remove a user from a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user-groups/:userGroupId/users/:userId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userGroupId",
+                "value": "76a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents a user group identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Remove a user from a group"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

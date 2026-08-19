@@ -1,0 +1,277 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Custom fields API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get custom fields on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/custom-fields",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "name",
+                "value": "location",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of custom fields that contain the provided string in their name."
+              },
+              {
+                "name": "status",
+                "value": "VISIBLE",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of custom fields that matches the provided string with the custom field status."
+              },
+              {
+                "name": "entity-type",
+                "value": "TIMEENTRY,USER",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of custom fields that matches the provided string with the custom field entity type."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get custom fields on a workspace"
+        },
+        {
+          "info": {
+            "name": "Create custom fields on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/custom-fields",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create custom fields on a workspace"
+        },
+        {
+          "info": {
+            "name": "Update custom field on workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/custom-fields/:customFieldId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "customFieldId",
+                "value": "26a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents a custom field identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update custom field on workspace"
+        },
+        {
+          "info": {
+            "name": "Delete a custom field",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/custom-fields/:customFieldId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents workspace identifier across the system."
+              },
+              {
+                "name": "customFieldId",
+                "value": "26a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents custom field identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a custom field"
+        },
+        {
+          "info": {
+            "name": "Get custom fields on a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/custom-fields",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "status",
+                "value": "INACTIVE",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of custom fields that matches the provided string with the custom field status."
+              },
+              {
+                "name": "entity-type",
+                "value": "TIMEENTRY",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of custom fields that matches the provided string with the custom field entity type."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get custom fields on a project"
+        },
+        {
+          "info": {
+            "name": "Update custom field on a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/custom-fields/:customFieldId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "customFieldId",
+                "value": "26a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents a custom field identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update custom field on a project"
+        },
+        {
+          "info": {
+            "name": "Remove custom field from a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/custom-fields/:customFieldId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "customFieldId",
+                "value": "26a687e29ae1f428e7ebe101",
+                "type": "path",
+                "description": "Represents a custom field identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Remove custom field from a project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

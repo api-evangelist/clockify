@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Time Off API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Off",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a time off request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:policyId/requests",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "policyId",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a time off request"
+        },
+        {
+          "info": {
+            "name": "Change a time off request status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:policyId/requests/:requestId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "policyId",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              },
+              {
+                "name": "requestId",
+                "value": "6308850156b7d75ea8fd3fbd",
+                "type": "path",
+                "description": "Represents a time off request identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Change a time off request status"
+        },
+        {
+          "info": {
+            "name": "Delete a time off request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:policyId/requests/:requestId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "policyId",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              },
+              {
+                "name": "requestId",
+                "value": "6308850156b7d75ea8fd3fbd",
+                "type": "path",
+                "description": "Represents a time off request identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a time off request"
+        },
+        {
+          "info": {
+            "name": "Create a time off request for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:policyId/users/:userId/requests",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "policyId",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "60f924bafdaf031696ec6218",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a time off request for a user"
+        },
+        {
+          "info": {
+            "name": "Get all time off requests on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/requests",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all time off requests on a workspace"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

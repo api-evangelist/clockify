@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Expense Report API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Expense Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate an expense report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/reports/expenses/detailed",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Expense report data on FREE subscription plan is limited to a maximum interval length of one month (31 days)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

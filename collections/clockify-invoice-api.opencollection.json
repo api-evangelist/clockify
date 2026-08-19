@@ -1,0 +1,607 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Invoice API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoice",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all invoices on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "statuses",
+                "value": "UNSENT,PAID",
+                "type": "query",
+                "description": "If provided, you'll get a filtered result of invoices that matches the provided string in the user ID linked to the expense."
+              },
+              {
+                "name": "sort-column",
+                "value": "CLIENT",
+                "type": "query",
+                "description": "Valid column name as sorting criteria. Default: ID"
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sort order. Default: ASCENDING"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all invoices on a workspace"
+        },
+        {
+          "info": {
+            "name": "Add an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add an invoice"
+        },
+        {
+          "info": {
+            "name": "Filter out invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/info",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Filter out invoices"
+        },
+        {
+          "info": {
+            "name": "Get an invoice in another language",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/settings",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get an invoice in another language"
+        },
+        {
+          "info": {
+            "name": "Change an invoice language",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/settings",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Change an invoice language"
+        },
+        {
+          "info": {
+            "name": "Get an invoice by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "83q687e29ae1f428e7ebe195",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get an invoice by ID"
+        },
+        {
+          "info": {
+            "name": "Update an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an invoice"
+        },
+        {
+          "info": {
+            "name": "Delete an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an invoice"
+        },
+        {
+          "info": {
+            "name": "Duplicate an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/duplicate",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Duplicate an invoice"
+        },
+        {
+          "info": {
+            "name": "Export an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/export",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userLocale",
+                "value": "en",
+                "type": "query",
+                "description": "Represents a locale."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Export an invoice"
+        },
+        {
+          "info": {
+            "name": "Add item to an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/items",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "83q687e29ae1f428e7ebe195",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add item to an invoice"
+        },
+        {
+          "info": {
+            "name": "Import time entries and expenses to an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/items/import",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "83q687e29ae1f428e7ebe195",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Import time entries and expenses to an invoice"
+        },
+        {
+          "info": {
+            "name": "Delete item from an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/items/:order",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "83q687e29ae1f428e7ebe195",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              },
+              {
+                "name": "order",
+                "value": "3",
+                "type": "path",
+                "description": "Represents an invoice item order."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete item from an invoice"
+        },
+        {
+          "info": {
+            "name": "Get payments for an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/payments",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get payments for an invoice"
+        },
+        {
+          "info": {
+            "name": "Add payment to an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/payments",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add payment to an invoice"
+        },
+        {
+          "info": {
+            "name": "Delete payment from an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/payments/:paymentId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "paymentId",
+                "value": "56p687e29ae1f428e7ebe456",
+                "type": "path",
+                "description": "Represents a payment identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete payment from an invoice"
+        },
+        {
+          "info": {
+            "name": "Change an invoice status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/invoices/:invoiceId/status",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "invoiceId",
+                "value": "78a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents an invoice identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Change an invoice status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

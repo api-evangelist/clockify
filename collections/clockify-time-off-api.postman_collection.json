@@ -1,0 +1,833 @@
+{
+  "item": [
+    {
+      "id": "6889d592-727b-4704-97b2-acfdea1778ca",
+      "name": "Time Off",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd5c0932-97bc-4e53-ab1a-eb33ac7bc447",
+          "name": "Create a time off request",
+          "request": {
+            "name": "Create a time off request",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":policyId",
+                "requests"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-policyId-requests-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) Represents a policy identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timeOffPeriod\": {\n    \"period\": {\n      \"days\": \"<integer>\",\n      \"end\": \"<string>\",\n      \"start\": \"<string>\"\n    },\n    \"halfDayPeriod\": \"<string>\",\n    \"isHalfDay\": false,\n    \"timeOffHalfDayPeriod\": \"<string>\"\n  },\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95707baa-2417-41f9-9e41-061898c1a945",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":policyId",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-policyId-requests-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeOffPeriod\": {\n    \"period\": {\n      \"days\": 3,\n      \"end\": \"2021-12-25\",\n      \"start\": \"2021-12-23\"\n    },\n    \"halfDayPeriod\": \"NOT_DEFINED\",\n    \"isHalfDay\": false,\n    \"timeOffHalfDayPeriod\": \"<string>\"\n  },\n  \"note\": \"Create Time Off Note\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": 10,\n  \"balanceDiff\": 1,\n  \"createdAt\": \"2022-08-26T08:32:01.640708Z\",\n  \"id\": \"5b715612b079875110791111\",\n  \"note\": \"Time Off Request Note\",\n  \"policyId\": \"5b715612b079875110792333\",\n  \"policyName\": \"Days\",\n  \"requesterUserId\": \"5b715612b0798751107925555\",\n  \"requesterUserName\": \"John\",\n  \"status\": {\n    \"changedAt\": \"1963-01-27T20:57:42.289Z\",\n    \"changedByUserId\": \"string\",\n    \"changedByUserName\": \"string\",\n    \"changedForUserName\": \"string\",\n    \"note\": \"string\",\n    \"statusType\": \"ALL\"\n  },\n  \"timeOffPeriod\": {\n    \"halfDay\": true,\n    \"halfDayHours\": {\n      \"end\": \"1956-12-08T08:41:53.386Z\",\n      \"start\": \"1978-09-08T05:36:09.740Z\"\n    },\n    \"halfDayPeriod\": \"string\",\n    \"period\": {\n      \"end\": \"1972-07-11T08:41:58.382Z\",\n      \"start\": \"1956-07-19T18:12:33.317Z\"\n    }\n  },\n  \"timeUnit\": \"DAYS\",\n  \"userEmail\": \"nicholas@clockify.com\",\n  \"userId\": \"5b715612b079875110794444\",\n  \"userName\": \"Nicholas\",\n  \"userTimeZone\": \"Europe/Budapest\",\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c96e058-8582-4ed7-b878-91a6a59104a8",
+          "name": "Delete a time off request",
+          "request": {
+            "name": "Delete a time off request",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":policyId",
+                "requests",
+                ":requestId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-policyId-requests-requestId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) Represents a policy identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestId",
+                  "description": "(Required) Represents a time off request identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2b421c4e-07da-4b8d-8423-52d97a7dc4d8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":policyId",
+                    "requests",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-policyId-requests-requestId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) Represents a time off request identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balanceDiff\": 1,\n  \"createdAt\": \"2022-08-26T08:32:01.640708Z\",\n  \"id\": \"5b715612b079875110791111\",\n  \"note\": \"Time Off Request Note\",\n  \"policyId\": \"5b715612b079875110792333\",\n  \"status\": {\n    \"changedAt\": \"2006-08-16T15:47:05.858Z\",\n    \"changedByUserId\": \"string\",\n    \"changedByUserName\": \"string\",\n    \"changedForUserName\": \"string\",\n    \"note\": \"string\",\n    \"statusType\": \"REJECTED\"\n  },\n  \"timeOffPeriod\": {\n    \"halfDay\": true,\n    \"halfDayHours\": {\n      \"end\": \"2005-05-20T04:03:15.977Z\",\n      \"start\": \"1966-08-05T15:56:18.742Z\"\n    },\n    \"halfDayPeriod\": \"string\",\n    \"period\": {\n      \"end\": \"2003-10-09T11:07:40.090Z\",\n      \"start\": \"1962-01-05T10:00:17.374Z\"\n    }\n  },\n  \"userId\": \"5b715612b079875110794444\",\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79d84135-11d9-42ee-9f9f-29cc76517e6f",
+          "name": "Change a time off request status",
+          "request": {
+            "name": "Change a time off request status",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":policyId",
+                "requests",
+                ":requestId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-policyId-requests-requestId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) Represents a policy identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "requestId",
+                  "description": "(Required) Represents a time off request identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"note\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c756ba43-a77c-4807-b430-5a81d81722d2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":policyId",
+                    "requests",
+                    ":requestId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-policyId-requests-requestId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "requestId",
+                      "description": "(Required) Represents a time off request identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"note\": \"Time Off Request Note\",\n  \"status\": \"APPROVED\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balanceDiff\": 1,\n  \"createdAt\": \"2022-08-26T08:32:01.640708Z\",\n  \"id\": \"5b715612b079875110791111\",\n  \"note\": \"Time Off Request Note\",\n  \"policyId\": \"5b715612b079875110792333\",\n  \"status\": {\n    \"changedAt\": \"2006-08-16T15:47:05.858Z\",\n    \"changedByUserId\": \"string\",\n    \"changedByUserName\": \"string\",\n    \"changedForUserName\": \"string\",\n    \"note\": \"string\",\n    \"statusType\": \"REJECTED\"\n  },\n  \"timeOffPeriod\": {\n    \"halfDay\": true,\n    \"halfDayHours\": {\n      \"end\": \"2005-05-20T04:03:15.977Z\",\n      \"start\": \"1966-08-05T15:56:18.742Z\"\n    },\n    \"halfDayPeriod\": \"string\",\n    \"period\": {\n      \"end\": \"2003-10-09T11:07:40.090Z\",\n      \"start\": \"1962-01-05T10:00:17.374Z\"\n    }\n  },\n  \"userId\": \"5b715612b079875110794444\",\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69fa49d5-3226-468b-8dce-99a9b1c41c35",
+          "name": "Create a time off request for a user",
+          "request": {
+            "name": "Create a time off request for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":policyId",
+                "users",
+                ":userId",
+                "requests"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-policyId-users-userId-requests-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) Represents a policy identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timeOffPeriod\": {\n    \"period\": {\n      \"days\": \"<integer>\",\n      \"end\": \"<string>\",\n      \"start\": \"<string>\"\n    },\n    \"halfDayPeriod\": \"<string>\",\n    \"isHalfDay\": false,\n    \"timeOffHalfDayPeriod\": \"<string>\"\n  },\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64de903a-7bc7-4b98-bea3-99296a4ced72",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":policyId",
+                    "users",
+                    ":userId",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-policyId-users-userId-requests-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeOffPeriod\": {\n    \"period\": {\n      \"days\": 3,\n      \"end\": \"2021-12-25\",\n      \"start\": \"2021-12-23\"\n    },\n    \"halfDayPeriod\": \"NOT_DEFINED\",\n    \"isHalfDay\": false,\n    \"timeOffHalfDayPeriod\": \"<string>\"\n  },\n  \"note\": \"Create Time Off Note\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": 10,\n  \"balanceDiff\": 1,\n  \"createdAt\": \"2022-08-26T08:32:01.640708Z\",\n  \"id\": \"5b715612b079875110791111\",\n  \"note\": \"Time Off Request Note\",\n  \"policyId\": \"5b715612b079875110792333\",\n  \"policyName\": \"Days\",\n  \"requesterUserId\": \"5b715612b0798751107925555\",\n  \"requesterUserName\": \"John\",\n  \"status\": {\n    \"changedAt\": \"1963-01-27T20:57:42.289Z\",\n    \"changedByUserId\": \"string\",\n    \"changedByUserName\": \"string\",\n    \"changedForUserName\": \"string\",\n    \"note\": \"string\",\n    \"statusType\": \"ALL\"\n  },\n  \"timeOffPeriod\": {\n    \"halfDay\": true,\n    \"halfDayHours\": {\n      \"end\": \"1956-12-08T08:41:53.386Z\",\n      \"start\": \"1978-09-08T05:36:09.740Z\"\n    },\n    \"halfDayPeriod\": \"string\",\n    \"period\": {\n      \"end\": \"1972-07-11T08:41:58.382Z\",\n      \"start\": \"1956-07-19T18:12:33.317Z\"\n    }\n  },\n  \"timeUnit\": \"DAYS\",\n  \"userEmail\": \"nicholas@clockify.com\",\n  \"userId\": \"5b715612b079875110794444\",\n  \"userName\": \"Nicholas\",\n  \"userTimeZone\": \"Europe/Budapest\",\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b0d911b-fc2c-4d2b-bb81-8194c2678522",
+          "name": "Get all time off requests on a workspace",
+          "request": {
+            "name": "Get all time off requests on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "requests"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-requests-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end\": \"<dateTime>\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"start\": \"<dateTime>\",\n  \"statuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"users\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "26dd88e8-b51a-4976-b56d-21514bf777d2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-requests-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end\": \"2022-08-26T23:55:06.281873Z\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"start\": \"2022-08-26T08:00:06.281873Z\",\n  \"statuses\": [\n    \"APPROVED\",\n    \"PENDING\"\n  ],\n  \"userGroups\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"users\": [\n    \"5b715612b079875110791432\",\n    \"b715612b079875110791234\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"requests\": [\n    {\n      \"balance\": 10,\n      \"balanceDiff\": 1,\n      \"createdAt\": \"2022-08-26T08:32:01.640708Z\",\n      \"id\": \"5b715612b079875110791111\",\n      \"note\": \"Time Off Request Note\",\n      \"policyId\": \"5b715612b079875110792333\",\n      \"policyName\": \"Days\",\n      \"requesterUserId\": \"5b715612b0798751107925555\",\n      \"requesterUserName\": \"John\",\n      \"status\": {\n        \"changedAt\": \"1986-04-05T08:56:35.283Z\",\n        \"changedByUserId\": \"string\",\n        \"changedByUserName\": \"string\",\n        \"changedForUserName\": \"string\",\n        \"note\": \"string\",\n        \"statusType\": \"PENDING\"\n      },\n      \"timeOffPeriod\": {\n        \"halfDay\": true,\n        \"halfDayHours\": {\n          \"end\": \"1949-12-28T23:17:38.025Z\",\n          \"start\": \"2023-04-18T13:09:59.355Z\"\n        },\n        \"halfDayPeriod\": \"string\",\n        \"period\": {\n          \"end\": \"2025-03-08T05:37:37.993Z\",\n          \"start\": \"1984-09-08T04:24:50.260Z\"\n        }\n      },\n      \"timeUnit\": \"DAYS\",\n      \"userEmail\": \"nicholas@clockify.com\",\n      \"userId\": \"5b715612b079875110794444\",\n      \"userName\": \"Nicholas\",\n      \"userTimeZone\": \"Europe/Budapest\",\n      \"workspaceId\": \"5b715612b079875110792222\"\n    },\n    {\n      \"balance\": 10,\n      \"balanceDiff\": 1,\n      \"createdAt\": \"2022-08-26T08:32:01.640708Z\",\n      \"id\": \"5b715612b079875110791111\",\n      \"note\": \"Time Off Request Note\",\n      \"policyId\": \"5b715612b079875110792333\",\n      \"policyName\": \"Days\",\n      \"requesterUserId\": \"5b715612b0798751107925555\",\n      \"requesterUserName\": \"John\",\n      \"status\": {\n        \"changedAt\": \"1960-03-31T20:43:18.092Z\",\n        \"changedByUserId\": \"string\",\n        \"changedByUserName\": \"string\",\n        \"changedForUserName\": \"string\",\n        \"note\": \"string\",\n        \"statusType\": \"APPROVED\"\n      },\n      \"timeOffPeriod\": {\n        \"halfDay\": true,\n        \"halfDayHours\": {\n          \"end\": \"2000-07-01T23:04:05.060Z\",\n          \"start\": \"1957-07-06T05:03:45.827Z\"\n        },\n        \"halfDayPeriod\": \"string\",\n        \"period\": {\n          \"end\": \"2013-03-26T03:19:11.665Z\",\n          \"start\": \"1957-12-21T19:13:48.685Z\"\n        }\n      },\n      \"timeUnit\": \"DAYS\",\n      \"userEmail\": \"nicholas@clockify.com\",\n      \"userId\": \"5b715612b079875110794444\",\n      \"userName\": \"Nicholas\",\n      \"userTimeZone\": \"Europe/Budapest\",\n      \"workspaceId\": \"5b715612b079875110792222\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-policies-policyId-requests-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-policies-policyId-requests-requestId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-policies-policyId-users-userId-requests-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-requests-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "7c03e9fc-180b-4dbe-8974-24e9c9774452",
+    "name": "Clockify Approval Time Off API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

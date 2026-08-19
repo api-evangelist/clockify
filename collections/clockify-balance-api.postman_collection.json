@@ -1,0 +1,536 @@
+{
+  "item": [
+    {
+      "id": "48d7c4e4-17e8-47ef-9ffb-6217416adf2d",
+      "name": "Balance",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "322cf7da-4179-4172-b7fa-f61dabdffb11",
+          "name": "Get balances for a policy",
+          "request": {
+            "name": "Get balances for a policy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "balance",
+                "policy",
+                ":policyId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-balance-policy-policyId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "If provided, you'll get result sorted by sort column."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Sort results in ascending or descending order."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) Represents a policy identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "49999170-070d-4ab6-8de1-fb6dfe7c0f8e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "balance",
+                    "policy",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-balance-policy-policyId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "USER"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"balances\": [\n    {\n      \"balance\": 20,\n      \"id\": \"5b715448b079875110792222\",\n      \"negativeBalanceAmount\": 2,\n      \"negativeBalanceLimit\": true,\n      \"policyArchived\": false,\n      \"policyId\": \"5b715448b079875110793333\",\n      \"policyName\": \"Days\",\n      \"policyTimeUnit\": \"DAYS\",\n      \"total\": 18,\n      \"used\": 2,\n      \"userId\": \"5b715448b079875110791234\",\n      \"userName\": \"nicholas\",\n      \"workspaceId\": \"5b715448b079875110791111\"\n    },\n    {\n      \"balance\": 20,\n      \"id\": \"5b715448b079875110792222\",\n      \"negativeBalanceAmount\": 2,\n      \"negativeBalanceLimit\": true,\n      \"policyArchived\": false,\n      \"policyId\": \"5b715448b079875110793333\",\n      \"policyName\": \"Days\",\n      \"policyTimeUnit\": \"DAYS\",\n      \"total\": 18,\n      \"used\": 2,\n      \"userId\": \"5b715448b079875110791234\",\n      \"userName\": \"nicholas\",\n      \"workspaceId\": \"5b715448b079875110791111\"\n    }\n  ],\n  \"count\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "632344e6-a054-494a-9280-09c35e6d0ad6",
+          "name": "Update a balance",
+          "request": {
+            "name": "Update a balance",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "balance",
+                "policy",
+                ":policyId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-balance-policy-policyId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) Represents a policy identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userIds\": [\n    \"<string>\"\n  ],\n  \"value\": \"<double>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5ad7a41-89ba-462c-a82c-c5222698629c",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "balance",
+                    "policy",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-balance-policy-policyId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userIds\": [\n    \"5b715448b079875110792222\",\n    \"5b715448b079875110791111\"\n  ],\n  \"value\": 22,\n  \"note\": \"Bonus days added.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0971fe70-6fd2-4324-b359-2dddc1afea6b",
+          "name": "Get balance for a user",
+          "request": {
+            "name": "Get balance for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "balance",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-balance-user-userId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "<string>",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort result based on given criteria"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Sort result by providing sort order."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7515615-e9bd-41ff-ac38-e4224ff11d39",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "balance",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-balance-user-userId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "POLICY"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"balances\": [\n    {\n      \"balance\": 20,\n      \"id\": \"5b715448b079875110792222\",\n      \"negativeBalanceAmount\": 2,\n      \"negativeBalanceLimit\": true,\n      \"policyArchived\": false,\n      \"policyId\": \"5b715448b079875110793333\",\n      \"policyName\": \"Days\",\n      \"policyTimeUnit\": \"DAYS\",\n      \"total\": 18,\n      \"used\": 2,\n      \"userId\": \"5b715448b079875110791234\",\n      \"userName\": \"nicholas\",\n      \"workspaceId\": \"5b715448b079875110791111\"\n    },\n    {\n      \"balance\": 20,\n      \"id\": \"5b715448b079875110792222\",\n      \"negativeBalanceAmount\": 2,\n      \"negativeBalanceLimit\": true,\n      \"policyArchived\": false,\n      \"policyId\": \"5b715448b079875110793333\",\n      \"policyName\": \"Days\",\n      \"policyTimeUnit\": \"DAYS\",\n      \"total\": 18,\n      \"used\": 2,\n      \"userId\": \"5b715448b079875110791234\",\n      \"userName\": \"nicholas\",\n      \"workspaceId\": \"5b715448b079875110791111\"\n    }\n  ],\n  \"count\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-balance-policy-policyId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-balance-user-userId-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "3acb3782-2508-4d09-9b71-832cf81572ac",
+    "name": "Clockify Approval Balance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

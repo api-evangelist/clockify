@@ -1,0 +1,215 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Client API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Client",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find clients on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/clients",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "name",
+                "value": "Client X",
+                "type": "query",
+                "description": "Filters client results that matches with the string provided in their client name."
+              },
+              {
+                "name": "sort-column",
+                "value": "NAME",
+                "type": "query",
+                "description": "Column name that will be used as criteria for sorting results."
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sorting mode"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "archived",
+                "value": "false",
+                "type": "query",
+                "description": "Filter whether to include archived clients or not."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Find clients on a workspace"
+        },
+        {
+          "info": {
+            "name": "Add a new client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/clients",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new client"
+        },
+        {
+          "info": {
+            "name": "Get a client by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/clients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "44a687e29ae1f428e7ebe305",
+                "type": "path",
+                "description": "Represents a client identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a client by ID"
+        },
+        {
+          "info": {
+            "name": "Update a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/clients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "44a687e29ae1f428e7ebe305",
+                "type": "path",
+                "description": "Represents a client identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "archive-projects",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mark-tasks-as-done",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a client"
+        },
+        {
+          "info": {
+            "name": "Delete a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/clients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "44a687e29ae1f428e7ebe305",
+                "type": "path",
+                "description": "Represents a client identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a client"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,415 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Expense API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Expense",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all expenses on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "user-id",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of expenses which match the provided string in the user ID linked to the expense."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all expenses on a workspace"
+        },
+        {
+          "info": {
+            "name": "Create an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an expense"
+        },
+        {
+          "info": {
+            "name": "Get all expense categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/categories",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "sort-column",
+                "value": "NAME",
+                "type": "query",
+                "description": "Represents the column name to be used as sorting criteria."
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Represents the sorting order."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "archived",
+                "value": "true",
+                "type": "query",
+                "description": "Flag to filter results based on whether category is archived or not."
+              },
+              {
+                "name": "name",
+                "value": "procurement",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of expense categories that matches the provided string in their name."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all expense categories"
+        },
+        {
+          "info": {
+            "name": "Add an expense category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/categories",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add an expense category"
+        },
+        {
+          "info": {
+            "name": "Update an expense category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/categories/:categoryId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "categoryId",
+                "value": "89a687e29ae1f428e7ebe567",
+                "type": "path",
+                "description": "Represents a category identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an expense category"
+        },
+        {
+          "info": {
+            "name": "Delete an expense category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/categories/:categoryId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "categoryId",
+                "value": "89a687e29ae1f428e7ebe567",
+                "type": "path",
+                "description": "Represents a category identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an expense category"
+        },
+        {
+          "info": {
+            "name": "Archive an expense category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/categories/:categoryId/status",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "categoryId",
+                "value": "89a687e29ae1f428e7ebe567",
+                "type": "path",
+                "description": "Represents a category identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Archive an expense category"
+        },
+        {
+          "info": {
+            "name": "Get an expense by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/:expenseId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "expenseId",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "path",
+                "description": "Represents an expense identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get an expense by ID"
+        },
+        {
+          "info": {
+            "name": "Update an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/:expenseId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "expenseId",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "path",
+                "description": "Represents an expense identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an expense"
+        },
+        {
+          "info": {
+            "name": "Delete an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/:expenseId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "expenseId",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "path",
+                "description": "Represents an expense identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an expense"
+        },
+        {
+          "info": {
+            "name": "Download a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/expenses/:expenseId/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "745687e29ae1f428e7ebe890",
+                "type": "path",
+                "description": "Represents a file identifier across the system."
+              },
+              {
+                "name": "expenseId",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "path",
+                "description": "Represents an expense identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Download a receipt"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

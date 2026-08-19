@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Balance API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get balances for a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/balance/policy/:policyId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "policyId",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query"
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "USER",
+                "type": "query",
+                "description": "If provided, you'll get result sorted by sort column."
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sort results in ascending or descending order."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get balances for a policy"
+        },
+        {
+          "info": {
+            "name": "Update a balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/balance/policy/:policyId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "policyId",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a balance"
+        },
+        {
+          "info": {
+            "name": "Get balance for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/balance/user/:userId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "60f924bafdaf031696ec6218",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "sort",
+                "value": "POLICY",
+                "type": "query",
+                "description": "Sort result based on given criteria"
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sort result by providing sort order."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get balance for a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

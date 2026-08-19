@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Audit Log Report API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Log Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate an audit log report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/audit-log",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Generate an audit log report"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

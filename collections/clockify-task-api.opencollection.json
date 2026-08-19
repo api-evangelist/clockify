@@ -1,0 +1,341 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Task API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Task",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find tasks on a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/tasks",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "25b687e29ae1f428e7ebe123",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "name",
+                "value": "Bugfixing",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of tasks that matches the provided string in their name."
+              },
+              {
+                "name": "strict-name-search",
+                "value": "",
+                "type": "query",
+                "description": "Flag to toggle on/off strict search mode. When set to true, search by name only will return tasks whose name exactly matches the string value given for the 'name' parameter. When set to false, results will also include tasks whose name contain the string value, but could be longer than the string value itself. For example, if there is a task with the name 'applications', and the search value is 'app', setting strict-name-search to true will not return that task in the results, whereas setting it to false will."
+              },
+              {
+                "name": "is-active",
+                "value": "",
+                "type": "query",
+                "description": "Filters search results whether task is active or not."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "sort-column",
+                "value": "ID",
+                "type": "query",
+                "description": "Represents the column as criteria for sorting tasks."
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sorting mode."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Find tasks on a project"
+        },
+        {
+          "info": {
+            "name": "Add a new task on a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/tasks",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "25b687e29ae1f428e7ebe123",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "contains-assignee",
+                "value": "",
+                "type": "query",
+                "description": "Flag to set whether task will have assignee or none."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new task on a project"
+        },
+        {
+          "info": {
+            "name": "Update a task's cost rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/tasks/:id/cost-rate",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "25b687e29ae1f428e7ebe123",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "57a687e29ae1f428e7ebe107",
+                "type": "path",
+                "description": "Represents a task identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a task's cost rate"
+        },
+        {
+          "info": {
+            "name": "Update a task's billable rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/tasks/:id/hourly-rate",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "25b687e29ae1f428e7ebe123",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "57a687e29ae1f428e7ebe107",
+                "type": "path",
+                "description": "Represents a task identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a task's billable rate"
+        },
+        {
+          "info": {
+            "name": "Get a task by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/tasks/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "57a687e29ae1f428e7ebe107",
+                "type": "path",
+                "description": "Represents a task identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "25b687e29ae1f428e7ebe123",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a task by id"
+        },
+        {
+          "info": {
+            "name": "Update a task on a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/tasks/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "57a687e29ae1f428e7ebe107",
+                "type": "path",
+                "description": "Represents a task identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "25b687e29ae1f428e7ebe123",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "contains-assignee",
+                "value": "",
+                "type": "query",
+                "description": "Flag to set whether task will have assignee or none."
+              },
+              {
+                "name": "membership-status",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "Represents a membership status."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a task on a project"
+        },
+        {
+          "info": {
+            "name": "Delete a task from a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/tasks/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "57a687e29ae1f428e7ebe107",
+                "type": "path",
+                "description": "Represents a task identifier across the system."
+              },
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "25b687e29ae1f428e7ebe123",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a task from a project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

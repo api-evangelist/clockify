@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Scheduling (Deprecated) API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scheduling (Deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all scheduled assignments per project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/projects/totals",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "search",
+                "value": "Project name",
+                "type": "query",
+                "description": "Represents a term for searching projects and clients by name."
+              },
+              {
+                "name": "start",
+                "value": "2020-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "end",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents an end date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all scheduled assignments per project"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

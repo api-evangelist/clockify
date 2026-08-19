@@ -1,0 +1,513 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Time entry API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time entry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a new time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-entries",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new time entry"
+        },
+        {
+          "info": {
+            "name": "Mark time entries as invoiced",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-entries/invoiced",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Mark time entries as invoiced"
+        },
+        {
+          "info": {
+            "name": "Get all in progress time entries on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-entries/status/in-progress",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all in progress time entries on a workspace"
+        },
+        {
+          "info": {
+            "name": "Get a specific time entry on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-entries/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "path",
+                "description": "Represents a time entry identifier across the system."
+              },
+              {
+                "name": "hydrated",
+                "value": "",
+                "type": "query",
+                "description": "Flag to set whether to include additional information of a time entry or not."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a specific time entry on a workspace"
+        },
+        {
+          "info": {
+            "name": "Update time entry on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-entries/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "path",
+                "description": "Represents a time entry identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update time entry on a workspace"
+        },
+        {
+          "info": {
+            "name": "Delete a time entry from a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-entries/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "path",
+                "description": "Represents a time entry identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a time entry from a workspace"
+        },
+        {
+          "info": {
+            "name": "Get time entries for a user on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user/:userId/time-entries",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "description",
+                "value": "Description keywords",
+                "type": "query",
+                "description": "Represents a term for searching time entries by description."
+              },
+              {
+                "name": "start",
+                "value": "2020-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "end",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents an end date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "project",
+                "value": "5b641568b07987035750505e",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of time entries that matches the provided string in their project id."
+              },
+              {
+                "name": "task",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of time entries that matches the provided string in their task id."
+              },
+              {
+                "name": "tags",
+                "value": "5e4117fe8c625f38930d57b7,7e4117fe8c625f38930d57b8",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of time entries that matches the provided string(s) in their tag id(s)."
+              },
+              {
+                "name": "project-required",
+                "value": "",
+                "type": "query",
+                "description": "Flag to set whether to only get time entries which have a project."
+              },
+              {
+                "name": "task-required",
+                "value": "",
+                "type": "query",
+                "description": "Flag to set whether to only get time entries which have tasks."
+              },
+              {
+                "name": "hydrated",
+                "value": "",
+                "type": "query",
+                "description": "Flag to set whether to include additional information on time entries or not."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "in-progress",
+                "value": "",
+                "type": "query",
+                "description": "Flag to set whether to filter only in progress time entries."
+              },
+              {
+                "name": "get-week-before",
+                "value": "2020-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Valid yyyy-MM-ddThh:mm:ssZ format date. If provided, filters results within the week before the datetime provided and only those entries with assigned project or task."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get time entries for a user on a workspace"
+        },
+        {
+          "info": {
+            "name": "Add a new time entry for another user on workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user/:userId/time-entries",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "from-entry",
+                "value": "64c777ddd3fcab07cfbb210c",
+                "type": "query",
+                "description": "Represents a time entry identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new time entry for another user on workspace"
+        },
+        {
+          "info": {
+            "name": "Bulk edit time entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user/:userId/time-entries",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "hydrated",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, results will contain additional information about the time entry."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Bulk edit time entries"
+        },
+        {
+          "info": {
+            "name": "Stop a currently running timer on a workspace for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user/:userId/time-entries",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Stop a currently running timer on a workspace for a user"
+        },
+        {
+          "info": {
+            "name": "Delete all time entries for a user on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user/:userId/time-entries",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "time-entry-ids",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "query",
+                "description": "Represents a list of time entry ids to delete."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete all time entries for a user on a workspace"
+        },
+        {
+          "info": {
+            "name": "Duplicate a time entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/user/:userId/time-entries/:id/duplicate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "8j39fn9307hh5125439g2ast",
+                "type": "path",
+                "description": "Represents a time entry identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Duplicate a time entry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,441 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Scheduling API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scheduling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/all",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "name",
+                "value": "Bugfixing",
+                "type": "query",
+                "description": "If provided, assignments will be filtered by name"
+              },
+              {
+                "name": "start",
+                "value": "2020-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "end",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "sort-column",
+                "value": "USER",
+                "type": "query",
+                "description": "Represents the column as the sorting criteria."
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Represents the sorting mode."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all assignments"
+        },
+        {
+          "info": {
+            "name": "Get all scheduled assignments per project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/projects/totals",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all scheduled assignments per project"
+        },
+        {
+          "info": {
+            "name": "Get all scheduled assignments on project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/projects/totals/:projectId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "56b687e29ae1f428e7ebe504",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "start",
+                "value": "2020-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "end",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents an end date in the yyyy-MM-ddThh:mm:ssZ format."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all scheduled assignments on project"
+        },
+        {
+          "info": {
+            "name": "Publish assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/publish",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Publish assignments"
+        },
+        {
+          "info": {
+            "name": "Create a recurring assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/recurring",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a recurring assignment"
+        },
+        {
+          "info": {
+            "name": "Update a recurring assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/recurring/:assignmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "assignmentId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents an assignment identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a recurring assignment"
+        },
+        {
+          "info": {
+            "name": "Delete a recurring assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/recurring/:assignmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "assignmentId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents an assignment identifier across the system."
+              },
+              {
+                "name": "seriesUpdateOption",
+                "value": "ALL",
+                "type": "query",
+                "description": "Represents a series option."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a recurring assignment"
+        },
+        {
+          "info": {
+            "name": "Change the recurring period",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/series/:assignmentId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "assignmentId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents an assignment identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Change the recurring period"
+        },
+        {
+          "info": {
+            "name": "Get total of users' capacity on workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/user-filter/totals",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get total of users' capacity on workspace"
+        },
+        {
+          "info": {
+            "name": "Get total capacity of a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/users/:userId/totals",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "start",
+                "value": "2020-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+              },
+              {
+                "name": "end",
+                "value": "2021-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Represents an end date in the yyyy-MM-ddThh:mm:ssZ format."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get total capacity of a user"
+        },
+        {
+          "info": {
+            "name": "Copy a scheduled assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/scheduling/assignments/:assignmentId/copy",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "assignmentId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents an assignment identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Copy a scheduled assignment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

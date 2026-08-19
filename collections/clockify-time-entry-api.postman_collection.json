@@ -1,0 +1,1926 @@
+{
+  "item": [
+    {
+      "id": "bab0dd76-5370-405d-b6fe-7fa36d827047",
+      "name": "Time entry",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "701ac808-63bf-4e37-bf7c-290dff1b230d",
+          "name": "Add a new time entry",
+          "request": {
+            "name": "Add a new time entry",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-entries"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-entries-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billable\": false,\n  \"customAttributes\": [\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"customFields\": [\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"end\": \"<dateTime>\",\n  \"projectId\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"tagIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"taskId\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "090edd47-6097-48fd-a42f-a596a235a09e",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-entries-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billable\": false,\n  \"customAttributes\": [\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    }\n  ],\n  \"customFields\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"customFieldValues\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"isLocked\": false,\n  \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"timeInterval\": {\n    \"duration\": \"8000\",\n    \"end\": \"2021-01-01T00:00:00Z\",\n    \"start\": \"2020-01-01T00:00:00Z\"\n  },\n  \"type\": \"BREAK\",\n  \"userId\": \"5a0ab5acb07987125438b60f\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c26b184-f5c2-48b0-ad01-6d7085b4504f",
+          "name": "Mark time entries as invoiced",
+          "request": {
+            "name": "Mark time entries as invoiced",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-entries",
+                "invoiced"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-entries-invoiced-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoiced\": false,\n  \"timeEntryIds\": [\n    {\n      \"dateOfCreationFromObjectId\": \"<dateTime>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0859c5c0-4bcd-44c9-9e4e-c4c95bf8db95",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-entries",
+                    "invoiced"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-entries-invoiced-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoiced\": false,\n  \"timeEntryIds\": [\n    {\n      \"dateOfCreationFromObjectId\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "373bfa86-2c63-46a0-8e35-b34797186023",
+          "name": "Get all in progress time entries on a workspace",
+          "request": {
+            "name": "Get all in progress time entries on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-entries",
+                "status",
+                "in-progress"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-entries-status-in-progress-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "83ee9a1f-bdaf-4123-a4b0-b969dfec527b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-entries",
+                    "status",
+                    "in-progress"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-entries-status-in-progress-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06a57ebd-7600-4fe3-a4ef-f33c2f8f7516",
+          "name": "Delete a time entry from a workspace",
+          "request": {
+            "name": "Delete a time entry from a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-entries",
+                ":id"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-entries-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a time entry identifier across the system."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3d8ce550-76bd-4ddc-9ba0-a3c4366a69a9",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-entries-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a time entry identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bb27d11-0f7f-4230-a873-9114e02ee037",
+          "name": "Get a specific time entry on a workspace",
+          "request": {
+            "name": "Get a specific time entry on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-entries",
+                ":id"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-entries-id-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hydrated",
+                  "value": "false",
+                  "description": "Flag to set whether to include additional information of a time entry or not."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a time entry identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "73db9c37-a8a2-4845-96e5-427a5ab3bd18",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-entries-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hydrated",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a time entry identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"customFieldValues\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"isLocked\": false,\n  \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"timeInterval\": {\n    \"duration\": \"8000\",\n    \"end\": \"2021-01-01T00:00:00Z\",\n    \"start\": \"2020-01-01T00:00:00Z\"\n  },\n  \"type\": \"BREAK\",\n  \"userId\": \"5a0ab5acb07987125438b60f\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbcdfe59-71b3-414f-9c31-fac8abeb7789",
+          "name": "Update time entry on a workspace",
+          "request": {
+            "name": "Update time entry on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-entries",
+                ":id"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-entries-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a time entry identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start\": \"<dateTime>\",\n  \"billable\": false,\n  \"customFields\": [\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"end\": \"<dateTime>\",\n  \"projectId\": \"<string>\",\n  \"tagIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"taskId\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67c1af87-dd38-4860-b01f-ff83d7fc3c9e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-entries-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a time entry identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"billable\": false,\n  \"customFields\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"customFieldValues\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"isLocked\": false,\n  \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"timeInterval\": {\n    \"duration\": \"8000\",\n    \"end\": \"2021-01-01T00:00:00Z\",\n    \"start\": \"2020-01-01T00:00:00Z\"\n  },\n  \"type\": \"BREAK\",\n  \"userId\": \"5a0ab5acb07987125438b60f\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3add876-527b-4393-a087-1d825052577e",
+          "name": "Delete all time entries for a user on a workspace",
+          "request": {
+            "name": "Delete all time entries for a user on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "user",
+                ":userId",
+                "time-entries"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time-entry-ids",
+                  "value": "<string>",
+                  "description": "(Required) Represents a list of time entry ids to delete."
+                },
+                {
+                  "disabled": false,
+                  "key": "time-entry-ids",
+                  "value": "<string>",
+                  "description": "(Required) Represents a list of time entry ids to delete."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6aab55fc-4ef1-4321-8cd6-815c42421e0f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "user",
+                    ":userId",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time-entry-ids",
+                      "value": "5a0ab5acb07987125438b60f"
+                    },
+                    {
+                      "key": "time-entry-ids",
+                      "value": "5a0ab5acb07987125438b60f"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f92d2ba-d617-4aca-a336-4f2b353ff6b1",
+          "name": "Get time entries for a user on a workspace",
+          "request": {
+            "name": "Get time entries for a user on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "user",
+                ":userId",
+                "time-entries"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Represents a term for searching time entries by description."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Represents a start date in the yyyy-MM-ddThh:mm:ssZ format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "Represents an end date in the yyyy-MM-ddThh:mm:ssZ format."
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of time entries that matches the provided string in their project id."
+                },
+                {
+                  "disabled": false,
+                  "key": "task",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of time entries that matches the provided string in their task id."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of time entries that matches the provided string(s) in their tag id(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of time entries that matches the provided string(s) in their tag id(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "project-required",
+                  "value": "false",
+                  "description": "Flag to set whether to only get time entries which have a project."
+                },
+                {
+                  "disabled": false,
+                  "key": "task-required",
+                  "value": "false",
+                  "description": "Flag to set whether to only get time entries which have tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "hydrated",
+                  "value": "false",
+                  "description": "Flag to set whether to include additional information on time entries or not."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "in-progress",
+                  "value": "<string>",
+                  "description": "Flag to set whether to filter only in progress time entries."
+                },
+                {
+                  "disabled": false,
+                  "key": "get-week-before",
+                  "value": "<string>",
+                  "description": "Valid yyyy-MM-ddThh:mm:ssZ format date. If provided, filters results within the week before the datetime provided and only those entries with assigned project or task."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0bd02507-1b8f-4e8c-987f-5607c9e4d196",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "user",
+                    ":userId",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "description",
+                      "value": "Description keywords"
+                    },
+                    {
+                      "key": "start",
+                      "value": "2020-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2021-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "project",
+                      "value": "5b641568b07987035750505e"
+                    },
+                    {
+                      "key": "task",
+                      "value": "64c777ddd3fcab07cfbb210c"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "5e4117fe8c625f38930d57b7"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "7e4117fe8c625f38930d57b8"
+                    },
+                    {
+                      "key": "project-required",
+                      "value": "false"
+                    },
+                    {
+                      "key": "task-required",
+                      "value": "false"
+                    },
+                    {
+                      "key": "hydrated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "in-progress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "get-week-before",
+                      "value": "2020-01-01T00:00:00Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc423650-c4d9-4d60-b21c-4693bae2a3aa",
+          "name": "Stop a currently running timer on a workspace for a user",
+          "request": {
+            "name": "Stop a currently running timer on a workspace for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "user",
+                ":userId",
+                "time-entries"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"end\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6b26d7bc-9b89-49e5-8a17-2d1336cccf02",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "user",
+                    ":userId",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"end\": \"2021-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"customFieldValues\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"isLocked\": false,\n  \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"timeInterval\": {\n    \"duration\": \"8000\",\n    \"end\": \"2021-01-01T00:00:00Z\",\n    \"start\": \"2020-01-01T00:00:00Z\"\n  },\n  \"type\": \"BREAK\",\n  \"userId\": \"5a0ab5acb07987125438b60f\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e26ae258-9f95-4f0d-b3f5-28b66cc2140c",
+          "name": "Add a new time entry for another user on workspace",
+          "request": {
+            "name": "Add a new time entry for another user on workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "user",
+                ":userId",
+                "time-entries"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from-entry",
+                  "value": "<string>",
+                  "description": "Represents a time entry identifier across the system."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billable\": false,\n  \"customAttributes\": [\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"customFields\": [\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"sourceType\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"end\": \"<dateTime>\",\n  \"projectId\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"tagIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"taskId\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45f8c286-534d-405f-899d-b5344c85a298",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "user",
+                    ":userId",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from-entry",
+                      "value": "64c777ddd3fcab07cfbb210c"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billable\": false,\n  \"customAttributes\": [\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    },\n    {\n      \"name\": \"race\",\n      \"namespace\": \"user_info\",\n      \"value\": \"Asian\"\n    }\n  ],\n  \"customFields\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"sourceType\": \"WORKSPACE\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"end\": \"2021-01-01T00:00:00Z\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"start\": \"2020-01-01T00:00:00Z\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"customFieldValues\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"isLocked\": false,\n  \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"timeInterval\": {\n    \"duration\": \"8000\",\n    \"end\": \"2021-01-01T00:00:00Z\",\n    \"start\": \"2020-01-01T00:00:00Z\"\n  },\n  \"type\": \"BREAK\",\n  \"userId\": \"5a0ab5acb07987125438b60f\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dcc8783-26f0-49b4-8aaf-b28bb79055fb",
+          "name": "Bulk edit time entries",
+          "request": {
+            "name": "Bulk edit time entries",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "user",
+                ":userId",
+                "time-entries"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hydrated",
+                  "value": "false",
+                  "description": "If set to true, results will contain additional information about the time entry."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"billable\": false,\n    \"customFields\": [\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"<string>\",\n        \"sourceType\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    ],\n    \"description\": \"<string>\",\n    \"end\": \"<dateTime>\",\n    \"projectId\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"tagIds\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"taskId\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "737422aa-665c-49ca-b646-43380a81b5b2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "user",
+                    ":userId",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-user-userId-time-entries-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hydrated",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"billable\": false,\n    \"customFields\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"sourceType\": \"WORKSPACE\",\n        \"value\": \"<object>\"\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"end\": \"2021-01-01T00:00:00Z\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"start\": \"2020-01-01T00:00:00Z\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"type\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billable\": false,\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"billable\": false,\n    \"customFieldValues\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"name\": \"TIN\",\n        \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n        \"type\": \"WORKSPACE\",\n        \"value\": {}\n      }\n    ],\n    \"description\": \"This is a sample time entry description.\",\n    \"id\": \"64c777ddd3fcab07cfbb210c\",\n    \"isLocked\": false,\n    \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n    \"projectId\": \"25b687e29ae1f428e7ebe123\",\n    \"tagIds\": [\n      \"321r77ddd3fcab07cfbb567y\",\n      \"44x777ddd3fcab07cfbb88f\"\n    ],\n    \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n    \"timeInterval\": {\n      \"duration\": \"8000\",\n      \"end\": \"2021-01-01T00:00:00Z\",\n      \"start\": \"2020-01-01T00:00:00Z\"\n    },\n    \"type\": \"BREAK\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c77918de-1201-467a-9093-078df08dcbdc",
+          "name": "Duplicate a time entry",
+          "request": {
+            "name": "Duplicate a time entry",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "user",
+                ":userId",
+                "time-entries",
+                ":id",
+                "duplicate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-user-userId-time-entries-id-duplicate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a time entry identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a254cf2-063e-4fc6-99b3-b47bf1eba1a7",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "user",
+                    ":userId",
+                    "time-entries",
+                    ":id",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-user-userId-time-entries-id-duplicate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a time entry identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"customFieldValues\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"TIN\",\n      \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n      \"type\": \"WORKSPACE\",\n      \"value\": {}\n    }\n  ],\n  \"description\": \"This is a sample time entry description.\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"isLocked\": false,\n  \"kioskId\": \"94c777ddd3fcab07cfbb210d\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"tagIds\": [\n    \"321r77ddd3fcab07cfbb567y\",\n    \"44x777ddd3fcab07cfbb88f\"\n  ],\n  \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n  \"timeInterval\": {\n    \"duration\": \"8000\",\n    \"end\": \"2021-01-01T00:00:00Z\",\n    \"start\": \"2020-01-01T00:00:00Z\"\n  },\n  \"type\": \"BREAK\",\n  \"userId\": \"5a0ab5acb07987125438b60f\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-entries-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-entries-invoiced-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-entries-status-in-progress-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-entries-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-user-userId-time-entries-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-user-userId-time-entries-id-duplicate-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "f21784c1-8b5b-4970-9289-947369f53aca",
+    "name": "Clockify Approval Time entry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

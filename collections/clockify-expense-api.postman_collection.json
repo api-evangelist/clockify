@@ -1,0 +1,1893 @@
+{
+  "item": [
+    {
+      "id": "2f823b31-35c6-405e-9e5c-ebbe9210195d",
+      "name": "Expense",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ffec2fd6-6a14-41da-93d8-3aae3c1f5564",
+          "name": "Get all expenses on a workspace",
+          "request": {
+            "name": "Get all expenses on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "user-id",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of expenses which match the provided string in the user ID linked to the expense."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "316f6e1d-f0c6-42d3-a1c9-f828a726ded8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "user-id",
+                      "value": "5a0ab5acb07987125438b60f"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dailyTotals\": [\n    {\n      \"date\": \"2020-01-01\",\n      \"dateAsInstant\": \"2020-03-05T05:49:55.113Z\",\n      \"total\": 1500.75\n    },\n    {\n      \"date\": \"2020-01-01\",\n      \"dateAsInstant\": \"1970-04-22T13:04:22.017Z\",\n      \"total\": 1500.75\n    }\n  ],\n  \"expenses\": {\n    \"count\": 25,\n    \"expenses\": [\n      {\n        \"billable\": false,\n        \"category\": {\n          \"archived\": false,\n          \"hasUnitPrice\": false,\n          \"id\": \"89a687e29ae1f428e7ebe303\",\n          \"name\": \"Procurement\",\n          \"priceInCents\": 1000,\n          \"unit\": \"piece\",\n          \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n        },\n        \"date\": \"89b687e29ae1f428e7ebe912\",\n        \"fileId\": \"745687e29ae1f428e7ebe890\",\n        \"fileName\": \"expense_20200101\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"locked\": true,\n        \"notes\": \"This is a sample note for this expense.\",\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"quantity\": 2901.1927932898598,\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"total\": 10500.5,\n        \"userId\": \"89b687e29ae1f428e7ebe912\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      {\n        \"billable\": false,\n        \"category\": {\n          \"archived\": false,\n          \"hasUnitPrice\": false,\n          \"id\": \"89a687e29ae1f428e7ebe303\",\n          \"name\": \"Procurement\",\n          \"priceInCents\": 1000,\n          \"unit\": \"piece\",\n          \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n        },\n        \"date\": \"89b687e29ae1f428e7ebe912\",\n        \"fileId\": \"745687e29ae1f428e7ebe890\",\n        \"fileName\": \"expense_20200101\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"locked\": true,\n        \"notes\": \"This is a sample note for this expense.\",\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"quantity\": 8624.919703285397,\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"total\": 10500.5,\n        \"userId\": \"89b687e29ae1f428e7ebe912\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      }\n    ]\n  },\n  \"weeklyTotals\": [\n    {\n      \"date\": \"2020-01-01\",\n      \"total\": 20000.75\n    },\n    {\n      \"date\": \"2020-01-01\",\n      \"total\": 20000.75\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b6a6633-6740-43d2-9359-28a5335b8ec4",
+          "name": "Create an expense",
+          "request": {
+            "name": "Create an expense",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "amount",
+                  "value": "<double>",
+                  "type": "text",
+                  "description": "(Required) Represents an expense amount as the double data type."
+                },
+                {
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Represents a category identifier across the system."
+                },
+                {
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "type": "text",
+                  "description": "(Required) Provides a valid yyyy-MM-ddThh:mm:ssZ format date."
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "projectId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Represents a project identifier across the system."
+                },
+                {
+                  "key": "userId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Represents a user identifier across the system."
+                },
+                {
+                  "key": "billable",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Indicates whether expense is billable or not."
+                },
+                {
+                  "key": "notes",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Represents notes for an expense."
+                },
+                {
+                  "key": "taskId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Represents a task identifier across the system."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "62f62afb-0475-4198-99c2-861e6a371947",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Represents an expense amount as the double data type.",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "99.5",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Represents a category identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "categoryId",
+                      "value": "45y687e29ae1f428e7ebe890",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Provides a valid yyyy-MM-ddThh:mm:ssZ format date.",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "2020-01-01T00:00:00Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Represents a project identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "projectId",
+                      "value": "25b687e29ae1f428e7ebe123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Represents a user identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "userId",
+                      "value": "89b687e29ae1f428e7ebe912",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates whether expense is billable or not.",
+                        "type": "text/plain"
+                      },
+                      "key": "billable",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Represents notes for an expense.",
+                        "type": "text/plain"
+                      },
+                      "key": "notes",
+                      "value": "This is a sample note for this expense.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Represents a task identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskId",
+                      "value": "54m377ddd3fcab07cfbb432w",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"categoryId\": \"45y687e29ae1f428e7ebe890\",\n  \"date\": \"2020-01-01\",\n  \"fileId\": \"745687e29ae1f428e7ebe890\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"locked\": false,\n  \"notes\": \"This is a sample note for this expense.\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"quantity\": 15.689714635273022,\n  \"taskId\": \"25b687e29ae1f428e7ebe123\",\n  \"total\": 10500.5,\n  \"userId\": \"89b687e29ae1f428e7ebe912\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6b4a638-6520-4e6c-9331-4d83abb2c3d9",
+          "name": "Get all expense categories",
+          "request": {
+            "name": "Get all expense categories",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                "categories"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-categories-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "<string>",
+                  "description": "Represents the column name to be used as sorting criteria."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Represents the sorting order."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "false",
+                  "description": "Flag to filter results based on whether category is archived or not."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of expense categories that matches the provided string in their name."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "537d56f7-e9bf-4baa-a168-ea23c2a2e2ba",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-categories-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort-column",
+                      "value": "NAME"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "true"
+                    },
+                    {
+                      "key": "name",
+                      "value": "procurement"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    {\n      \"archived\": false,\n      \"hasUnitPrice\": false,\n      \"id\": \"89a687e29ae1f428e7ebe303\",\n      \"name\": \"Procurement\",\n      \"priceInCents\": 1000,\n      \"unit\": \"piece\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    },\n    {\n      \"archived\": false,\n      \"hasUnitPrice\": false,\n      \"id\": \"89a687e29ae1f428e7ebe303\",\n      \"name\": \"Procurement\",\n      \"priceInCents\": 1000,\n      \"unit\": \"piece\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    }\n  ],\n  \"count\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a331c78-897b-4207-bf17-2cc603e9774d",
+          "name": "Add an expense category",
+          "request": {
+            "name": "Add an expense category",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                "categories"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-categories-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"hasUnitPrice\": false,\n  \"priceInCents\": \"<integer>\",\n  \"unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96700723-5ae1-465e-b959-e1edaf929f5f",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-categories-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Procurement\",\n  \"hasUnitPrice\": false,\n  \"priceInCents\": 1000,\n  \"unit\": \"piece\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"hasUnitPrice\": false,\n  \"id\": \"89a687e29ae1f428e7ebe303\",\n  \"name\": \"Procurement\",\n  \"priceInCents\": 1000,\n  \"unit\": \"piece\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5c07bb5-6d99-4d76-af3f-fa1bcb1d2ec0",
+          "name": "Delete an expense category",
+          "request": {
+            "name": "Delete an expense category",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                "categories",
+                ":categoryId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-categories-categoryId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "categoryId",
+                  "description": "(Required) Represents a category identifier across the system."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "590f9607-04f7-4bca-b5b8-01b32192aa71",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    "categories",
+                    ":categoryId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-categories-categoryId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "categoryId",
+                      "description": "(Required) Represents a category identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93ea2e36-6a13-47af-8fe3-b80dff0c6a30",
+          "name": "Update an expense category",
+          "request": {
+            "name": "Update an expense category",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                "categories",
+                ":categoryId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-categories-categoryId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "categoryId",
+                  "description": "(Required) Represents a category identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"hasUnitPrice\": false,\n  \"priceInCents\": \"<integer>\",\n  \"unit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dd910546-aa38-4b70-832f-da99ed447272",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    "categories",
+                    ":categoryId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-categories-categoryId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "categoryId",
+                      "description": "(Required) Represents a category identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Procurement\",\n  \"hasUnitPrice\": false,\n  \"priceInCents\": 1000,\n  \"unit\": \"piece\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"hasUnitPrice\": false,\n  \"id\": \"89a687e29ae1f428e7ebe303\",\n  \"name\": \"Procurement\",\n  \"priceInCents\": 1000,\n  \"unit\": \"piece\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd92f27f-6658-4542-a0d0-f878299c66bc",
+          "name": "Archive an expense category",
+          "request": {
+            "name": "Archive an expense category",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                "categories",
+                ":categoryId",
+                "status"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-categories-categoryId-status-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "categoryId",
+                  "description": "(Required) Represents a category identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"archived\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53362465-1a16-450e-ba23-a0f6fb2a23bf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    "categories",
+                    ":categoryId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-categories-categoryId-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "categoryId",
+                      "description": "(Required) Represents a category identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"archived\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"hasUnitPrice\": false,\n  \"id\": \"89a687e29ae1f428e7ebe303\",\n  \"name\": \"Procurement\",\n  \"priceInCents\": 1000,\n  \"unit\": \"piece\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39919f01-86a9-48dd-a39f-ac30f179d4ec",
+          "name": "Delete an expense",
+          "request": {
+            "name": "Delete an expense",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                ":expenseId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-expenseId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "expenseId",
+                  "description": "(Required) Represents an expense identifier across the system."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7b33aa2c-5b35-4e13-826a-feda7d214b0e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    ":expenseId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-expenseId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "expenseId",
+                      "description": "(Required) Represents an expense identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "020a51a8-a6e4-4db6-9582-c0e6f586d723",
+          "name": "Get an expense by ID",
+          "request": {
+            "name": "Get an expense by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                ":expenseId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-expenseId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "expenseId",
+                  "description": "(Required) Represents an expense identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da66f97d-619b-444e-ac35-428323baa3b5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    ":expenseId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-expenseId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "expenseId",
+                      "description": "(Required) Represents an expense identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"categoryId\": \"45y687e29ae1f428e7ebe890\",\n  \"date\": \"2020-01-01\",\n  \"fileId\": \"745687e29ae1f428e7ebe890\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"locked\": false,\n  \"notes\": \"This is a sample note for this expense.\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"quantity\": 15.689714635273022,\n  \"taskId\": \"25b687e29ae1f428e7ebe123\",\n  \"total\": 10500.5,\n  \"userId\": \"89b687e29ae1f428e7ebe912\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea6c53e6-ac9b-4422-b0c5-a5ab3fc64503",
+          "name": "Update an expense",
+          "request": {
+            "name": "Update an expense",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                ":expenseId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-expenseId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "expenseId",
+                  "description": "(Required) Represents an expense identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "amount",
+                  "value": "<double>",
+                  "type": "text",
+                  "description": "(Required) Represents an expense amount as the double data type."
+                },
+                {
+                  "key": "categoryId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Represents a category identifier across the system."
+                },
+                {
+                  "key": "changeFields",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "(Required) Represents a list of expense change fields."
+                },
+                {
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "type": "text",
+                  "description": "(Required) Provides a valid yyyy-MM-ddThh:mm:ssZ format date."
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "userId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Represents a user identifier across the system."
+                },
+                {
+                  "key": "billable",
+                  "value": "false",
+                  "type": "text",
+                  "description": "Indicates whether expense is billable or not."
+                },
+                {
+                  "key": "notes",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Represents notes for an expense."
+                },
+                {
+                  "key": "projectId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Represents a project identifier across the system."
+                },
+                {
+                  "key": "taskId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Represents a task identifier across the system."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "11f651a8-202b-4e3e-bbdb-55b22118ad72",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    ":expenseId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-expenseId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "expenseId",
+                      "description": "(Required) Represents an expense identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Represents an expense amount as the double data type.",
+                        "type": "text/plain"
+                      },
+                      "key": "amount",
+                      "value": "99.5",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Represents a category identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "categoryId",
+                      "value": "45y687e29ae1f428e7ebe890",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Represents a list of expense change fields.",
+                        "type": "text/plain"
+                      },
+                      "key": "changeFields",
+                      "value": "[\"USER\",\"DATE\",\"PROJECT\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Provides a valid yyyy-MM-ddThh:mm:ssZ format date.",
+                        "type": "text/plain"
+                      },
+                      "key": "date",
+                      "value": "2020-01-01T00:00:00Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Represents a user identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "userId",
+                      "value": "89b687e29ae1f428e7ebe912",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates whether expense is billable or not.",
+                        "type": "text/plain"
+                      },
+                      "key": "billable",
+                      "value": "false",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Represents notes for an expense.",
+                        "type": "text/plain"
+                      },
+                      "key": "notes",
+                      "value": "This is a sample note for this expense.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Represents a project identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "projectId",
+                      "value": "25b687e29ae1f428e7ebe123",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Represents a task identifier across the system.",
+                        "type": "text/plain"
+                      },
+                      "key": "taskId",
+                      "value": "25b687e29ae1f428e7ebe123",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billable\": false,\n  \"categoryId\": \"45y687e29ae1f428e7ebe890\",\n  \"date\": \"2020-01-01\",\n  \"fileId\": \"745687e29ae1f428e7ebe890\",\n  \"id\": \"64c777ddd3fcab07cfbb210c\",\n  \"locked\": false,\n  \"notes\": \"This is a sample note for this expense.\",\n  \"projectId\": \"25b687e29ae1f428e7ebe123\",\n  \"quantity\": 15.689714635273022,\n  \"taskId\": \"25b687e29ae1f428e7ebe123\",\n  \"total\": 10500.5,\n  \"userId\": \"89b687e29ae1f428e7ebe912\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6275a103-f649-45a4-ab89-76e2388b2f0b",
+          "name": "Download a receipt",
+          "request": {
+            "name": "Download a receipt",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "expenses",
+                ":expenseId",
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-expenses-expenseId-files-fileId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fileId",
+                  "description": "(Required) Represents a file identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "expenseId",
+                  "description": "(Required) Represents an expense identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "34567b64-a184-4a7f-ad1d-ec489edba2e4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "expenses",
+                    ":expenseId",
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-expenses-expenseId-files-fileId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fileId",
+                      "description": "(Required) Represents a file identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "expenseId",
+                      "description": "(Required) Represents an expense identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-expenses-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-expenses-categories-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-expenses-categories-categoryId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-expenses-categories-categoryId-status-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-expenses-expenseId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-expenses-expenseId-files-fileId-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "2737bba0-2500-49f6-9ab7-57377d83bbe1",
+    "name": "Clockify Approval Expense API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

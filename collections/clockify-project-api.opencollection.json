@@ -1,0 +1,570 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Project API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all projects on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "name",
+                "value": "Software Development",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of projects that contains the provided string in the project name."
+              },
+              {
+                "name": "strict-name-search",
+                "value": "",
+                "type": "query",
+                "description": "Flag to toggle on/off strict search mode. When set to true, search by name will only return projects whose name exactly matches the string value given for the 'name' parameter. When set to false, results will also include projects whose name contain the string value, but could be longer than the string value itself. For example, if there is a project with the name 'applications', and the search value is 'app', setting strict-name-search to true will not return that project in the results, whereas setting it to false will."
+              },
+              {
+                "name": "archived",
+                "value": "",
+                "type": "query",
+                "description": "If provided and set to true, you'll only get archived projects. If omitted, you'll get both archived and non-archived projects."
+              },
+              {
+                "name": "billable",
+                "value": "",
+                "type": "query",
+                "description": "If provided and set to true, you'll only get billable projects. If omitted, you'll get both billable and non-billable projects."
+              },
+              {
+                "name": "clients",
+                "value": "5a0ab5acb07987125438b60f,64c777ddd3fcab07cfbb210c",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of projects that contain clients which match any of the provided ids."
+              },
+              {
+                "name": "contains-client",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, you'll get a filtered list of projects that contain clients which match the provided id(s) in 'clients' field. If set to false, you'll get a filtered list of projects which do NOT contain clients that match the provided id(s) in 'clients' field."
+              },
+              {
+                "name": "client-status",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "Filters projects based on client status provided."
+              },
+              {
+                "name": "users",
+                "value": "5a0ab5acb07987125438b60f,64c777ddd3fcab07cfbb210c",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of projects that contain users which match any of the provided ids."
+              },
+              {
+                "name": "contains-user",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, you'll get a filtered list of projects that contain users which match the provided id(s) in 'users' field. If set to false, you'll get a filtered list of projects which do NOT contain users which match the provided id(s) in 'users' field."
+              },
+              {
+                "name": "user-status",
+                "value": "ALL",
+                "type": "query",
+                "description": "Filters projects based on user status provided."
+              },
+              {
+                "name": "is-template",
+                "value": "",
+                "type": "query",
+                "description": "Filters projects based on whether they are used as a template or not."
+              },
+              {
+                "name": "sort-column",
+                "value": "NAME",
+                "type": "query",
+                "description": "Sorts the results by the given column/field."
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sorting mode."
+              },
+              {
+                "name": "hydrated",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, results will contain additional information about the project."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "access",
+                "value": "PUBLIC",
+                "type": "query",
+                "description": "Valid set of string(s). If provided, you'll get a filtered list of projects that matches the provided access."
+              },
+              {
+                "name": "expense-limit",
+                "value": "10",
+                "type": "query",
+                "description": "Represents the maximum number of expenses to fetch."
+              },
+              {
+                "name": "expense-date",
+                "value": "2024-12-31",
+                "type": "query",
+                "description": "If provided, you will get expenses dated before the provided value in yyyy-MM-dd format."
+              },
+              {
+                "name": "userGroups",
+                "value": "5a0ab5acb07987125438b60f,64c777ddd3fcab07cfbb210c",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of projects that contain groups which match any of the provided ids."
+              },
+              {
+                "name": "contains-group",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, you'll get a filtered list of projects that contain groups which match the provided id(s) in 'userGroups' field. If set to false, you'll get a filtered list of projects which do NOT contain groups which match the provided id(s) in 'userGroups' field."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all projects on a workspace"
+        },
+        {
+          "info": {
+            "name": "Add a new project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a new project"
+        },
+        {
+          "info": {
+            "name": "Create project from a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/from-template",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create project from a template"
+        },
+        {
+          "info": {
+            "name": "Find a project by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "hydrated",
+                "value": "",
+                "type": "query",
+                "description": "If set to true, results will contain additional information about the project"
+              },
+              {
+                "name": "custom-field-entity-type",
+                "value": "TIMEENTRY",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of custom fields that matches the provided string with the custom field entity type."
+              },
+              {
+                "name": "expense-limit",
+                "value": "10",
+                "type": "query",
+                "description": "Represents the maximum number of expenses to fetch."
+              },
+              {
+                "name": "expense-date",
+                "value": "2024-12-31",
+                "type": "query",
+                "description": "If provided, you will get expenses dated before the provided value in yyyy-MM-dd format."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Find a project by ID"
+        },
+        {
+          "info": {
+            "name": "Update a project on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a project on a workspace"
+        },
+        {
+          "info": {
+            "name": "Delete a project from a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a project from a workspace"
+        },
+        {
+          "info": {
+            "name": "Update project estimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/estimate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update project estimate"
+        },
+        {
+          "info": {
+            "name": "Assign/remove users to/from the project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/memberships",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Assign/remove users to/from the project"
+        },
+        {
+          "info": {
+            "name": "Update project memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/memberships",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update project memberships"
+        },
+        {
+          "info": {
+            "name": "Update a project template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/template",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a project template"
+        },
+        {
+          "info": {
+            "name": "Update project user's cost rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/users/:userId/cost-rate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "4a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update project user's cost rate"
+        },
+        {
+          "info": {
+            "name": "Update a project user's billable rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/projects/:projectId/users/:userId/hourly-rate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "projectId",
+                "value": "5b641568b07987035750505e",
+                "type": "path",
+                "description": "Represents a project identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "4a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a project user's billable rate"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

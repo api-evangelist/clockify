@@ -1,0 +1,238 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval Policy API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get policies on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "name",
+                "value": "Holidays",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of policies that contain the provided string in their name."
+              },
+              {
+                "name": "status",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of policies with the corresponding status."
+              },
+              {
+                "name": "sort-column",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort-order",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get policies on a workspace"
+        },
+        {
+          "info": {
+            "name": "Create a time off policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a time off policy"
+        },
+        {
+          "info": {
+            "name": "Get a time off policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a time off policy"
+        },
+        {
+          "info": {
+            "name": "Update a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a policy"
+        },
+        {
+          "info": {
+            "name": "Change a policy status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Change a policy status"
+        },
+        {
+          "info": {
+            "name": "Delete a policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/time-off/policies/:id",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "60f91b3ffdaf031696ec61a8",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "id",
+                "value": "63034cd0cb0fb876a57e93ad",
+                "type": "path",
+                "description": "Represents a policy identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a policy"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

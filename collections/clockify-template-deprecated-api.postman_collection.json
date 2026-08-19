@@ -1,0 +1,769 @@
+{
+  "item": [
+    {
+      "id": "160efe11-6172-438a-9910-b875d3fd86a0",
+      "name": "Template (Deprecated)",
+      "description": {
+        "content": "This endpoint group is deprecated and should not be used.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12a1b7dd-0770-4d4e-a79a-d6657699b8b8",
+          "name": "Get all templates on a workspace",
+          "request": {
+            "name": "Get all templates on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "templates"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-templates-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of templates that contain the provided string in their name."
+                },
+                {
+                  "disabled": false,
+                  "key": "cleansed",
+                  "value": "false",
+                  "description": "If set to true will filter out inactive template projects and tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "hydrated",
+                  "value": "false",
+                  "description": "If set to true will return hydrated template projects and tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d47af092-5984-4be1-87f1-019b5fbb6bd4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-templates-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cleansed",
+                      "value": "false"
+                    },
+                    {
+                      "key": "hydrated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"5b6d45c4b0798751107762b8\",\n    \"name\": \"exampleTemplate\",\n    \"userId\": \"89b687e29ae1f428e7ebe912\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"id\": \"5b6d45c4b0798751107762b8\",\n    \"name\": \"exampleTemplate\",\n    \"userId\": \"89b687e29ae1f428e7ebe912\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5314223-7f34-4a14-8169-1ae6c1b4542a",
+          "name": "Create templates on a workspace",
+          "request": {
+            "name": "Create templates on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "templates"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-templates-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"projectsAndTasks\": [\n      {\n        \"projectId\": \"<string>\",\n        \"taskId\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"projectId\": \"<string>\",\n        \"taskId\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"timeEntryIds\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"weekStart\": \"<date>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"projectsAndTasks\": [\n      {\n        \"projectId\": \"<string>\",\n        \"taskId\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"projectId\": \"<string>\",\n        \"taskId\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"timeEntryIds\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"weekStart\": \"<date>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "823cb1af-9784-41d4-82d3-9db34f33c86c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-templates-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"exampleTemplate\",\n    \"projectsAndTasks\": [\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"type\": \"REGULAR\"\n      },\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"type\": \"REGULAR\"\n      }\n    ],\n    \"timeEntryIds\": [\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"weekStart\": \"2019-08-24\"\n  },\n  {\n    \"name\": \"exampleTemplate\",\n    \"projectsAndTasks\": [\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"type\": \"REGULAR\"\n      },\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"type\": \"REGULAR\"\n      }\n    ],\n    \"timeEntryIds\": [\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"weekStart\": \"2019-08-24\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"entries\": [\n      {\n        \"billable\": false,\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"tagIds\": [\n          \"321r77ddd3fcab07cfbb567y\",\n          \"44x777ddd3fcab07cfbb88f\"\n        ],\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"1962-06-13T12:01:36.169Z\",\n          \"offsetEnd\": 2937,\n          \"offsetStart\": 4655,\n          \"start\": \"1970-10-02T11:49:39.372Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"1958-08-12T18:15:20.521Z\",\n          \"zonedStart\": \"1979-11-09T21:40:52.536Z\"\n        },\n        \"type\": \"REGULAR\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      {\n        \"billable\": false,\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"tagIds\": [\n          \"321r77ddd3fcab07cfbb567y\",\n          \"44x777ddd3fcab07cfbb88f\"\n        ],\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"2024-10-26T12:23:40.312Z\",\n          \"offsetEnd\": 2015,\n          \"offsetStart\": 3579,\n          \"start\": \"1954-04-14T23:21:44.813Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"2021-08-26T13:35:32.621Z\",\n          \"zonedStart\": \"2016-05-12T07:17:24.960Z\"\n        },\n        \"type\": \"REGULAR\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      }\n    ],\n    \"id\": \"5b6d45c4b0798751107762b8\",\n    \"name\": \"exampleTemplate\",\n    \"projectsAndTasks\": [\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n      },\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n      }\n    ],\n    \"userId\": \"89b687e29ae1f428e7ebe912\",\n    \"weekStart\": \"2024-04-15\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"entries\": [\n      {\n        \"billable\": false,\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"tagIds\": [\n          \"321r77ddd3fcab07cfbb567y\",\n          \"44x777ddd3fcab07cfbb88f\"\n        ],\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"1986-05-20T02:19:45.395Z\",\n          \"offsetEnd\": 6906,\n          \"offsetStart\": 567,\n          \"start\": \"1982-02-10T11:49:23.862Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"1985-04-10T08:17:37.093Z\",\n          \"zonedStart\": \"2001-01-17T21:45:57.780Z\"\n        },\n        \"type\": \"REGULAR\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      {\n        \"billable\": false,\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"tagIds\": [\n          \"321r77ddd3fcab07cfbb567y\",\n          \"44x777ddd3fcab07cfbb88f\"\n        ],\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"2018-07-01T00:46:38.210Z\",\n          \"offsetEnd\": 3667,\n          \"offsetStart\": 6137,\n          \"start\": \"1950-06-26T02:05:28.330Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"2023-11-07T19:23:30.652Z\",\n          \"zonedStart\": \"1957-03-19T09:54:32.674Z\"\n        },\n        \"type\": \"REGULAR\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      }\n    ],\n    \"id\": \"5b6d45c4b0798751107762b8\",\n    \"name\": \"exampleTemplate\",\n    \"projectsAndTasks\": [\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n      },\n      {\n        \"projectId\": \"25b687e29ae1f428e7ebe123\",\n        \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n      }\n    ],\n    \"userId\": \"89b687e29ae1f428e7ebe912\",\n    \"weekStart\": \"2000-08-10\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dd863e2-82dd-4729-bd25-6f38f96eff99",
+          "name": "Delete a template",
+          "request": {
+            "name": "Delete a template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "templates",
+                ":templateId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-templates-templateId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "templateId",
+                  "description": "(Required) Represents a template identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "37e45671-3f74-417a-89e8-bdb79b86cc0b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "templates",
+                    ":templateId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-templates-templateId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "templateId",
+                      "description": "(Required) Represents a template identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"billable\": false,\n      \"customFieldValues\": [\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        },\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        }\n      ],\n      \"description\": \"This is a sample time entry description.\",\n      \"id\": \"64c777ddd3fcab07cfbb210c\",\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"tagIds\": [\n        \"321r77ddd3fcab07cfbb567y\",\n        \"44x777ddd3fcab07cfbb88f\"\n      ],\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n      \"timeInterval\": {\n        \"duration\": \"PT1H30M\",\n        \"end\": \"1996-06-01T05:01:24.744Z\",\n        \"offsetEnd\": 2697,\n        \"offsetStart\": 5325,\n        \"start\": \"1957-04-26T04:03:32.632Z\",\n        \"timeZone\": \"string\",\n        \"zonedEnd\": \"1958-06-15T04:31:37.060Z\",\n        \"zonedStart\": \"1951-11-02T13:17:55.461Z\"\n      },\n      \"type\": \"REGULAR\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    },\n    {\n      \"billable\": false,\n      \"customFieldValues\": [\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        },\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        }\n      ],\n      \"description\": \"This is a sample time entry description.\",\n      \"id\": \"64c777ddd3fcab07cfbb210c\",\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"tagIds\": [\n        \"321r77ddd3fcab07cfbb567y\",\n        \"44x777ddd3fcab07cfbb88f\"\n      ],\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n      \"timeInterval\": {\n        \"duration\": \"PT1H30M\",\n        \"end\": \"1968-03-28T11:18:44.159Z\",\n        \"offsetEnd\": 2181,\n        \"offsetStart\": 8949,\n        \"start\": \"1977-07-12T00:46:28.809Z\",\n        \"timeZone\": \"string\",\n        \"zonedEnd\": \"1994-09-28T06:40:31.503Z\",\n        \"zonedStart\": \"2003-09-21T14:57:30.638Z\"\n      },\n      \"type\": \"REGULAR\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    }\n  ],\n  \"id\": \"5b6d45c4b0798751107762b8\",\n  \"name\": \"exampleTemplate\",\n  \"projectsAndTasks\": [\n    {\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n    },\n    {\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n    }\n  ],\n  \"userId\": \"89b687e29ae1f428e7ebe912\",\n  \"weekStart\": \"1971-04-09\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d526b1f6-6d6f-4e8a-90f4-fb76aa65df90",
+          "name": "Get template by ID on a workspace",
+          "request": {
+            "name": "Get template by ID on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "templates",
+                ":templateId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-templates-templateId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cleansed",
+                  "value": "false",
+                  "description": "If set to true will filter out inactive template projects and tasks."
+                },
+                {
+                  "disabled": false,
+                  "key": "hydrated",
+                  "value": "false",
+                  "description": "If set to true will return hydrated template projects and tasks."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "templateId",
+                  "description": "(Required) Represents a template identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8096de25-c691-43d7-99d9-81536bd0140c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "templates",
+                    ":templateId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-templates-templateId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cleansed",
+                      "value": "false"
+                    },
+                    {
+                      "key": "hydrated",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "templateId",
+                      "description": "(Required) Represents a template identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5b6d45c4b0798751107762b8\",\n  \"name\": \"exampleTemplate\",\n  \"userId\": \"89b687e29ae1f428e7ebe912\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "344cf528-1f28-4295-9e07-2b0bd3224b41",
+          "name": "Update a template",
+          "request": {
+            "name": "Update a template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "templates",
+                ":templateId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-templates-templateId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "templateId",
+                  "description": "(Required) Represents a template identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0d012dd-da71-4aad-b0b7-c78ba07db532",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "templates",
+                    ":templateId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-templates-templateId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "templateId",
+                      "description": "(Required) Represents a template identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"exampleTemplate\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"billable\": false,\n      \"customFieldValues\": [\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        },\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        }\n      ],\n      \"description\": \"This is a sample time entry description.\",\n      \"id\": \"64c777ddd3fcab07cfbb210c\",\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"tagIds\": [\n        \"321r77ddd3fcab07cfbb567y\",\n        \"44x777ddd3fcab07cfbb88f\"\n      ],\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n      \"timeInterval\": {\n        \"duration\": \"PT1H30M\",\n        \"end\": \"1996-06-01T05:01:24.744Z\",\n        \"offsetEnd\": 2697,\n        \"offsetStart\": 5325,\n        \"start\": \"1957-04-26T04:03:32.632Z\",\n        \"timeZone\": \"string\",\n        \"zonedEnd\": \"1958-06-15T04:31:37.060Z\",\n        \"zonedStart\": \"1951-11-02T13:17:55.461Z\"\n      },\n      \"type\": \"REGULAR\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    },\n    {\n      \"billable\": false,\n      \"customFieldValues\": [\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        },\n        {\n          \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n          \"sourceType\": \"WORKSPACE\",\n          \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n          \"value\": {}\n        }\n      ],\n      \"description\": \"This is a sample time entry description.\",\n      \"id\": \"64c777ddd3fcab07cfbb210c\",\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"tagIds\": [\n        \"321r77ddd3fcab07cfbb567y\",\n        \"44x777ddd3fcab07cfbb88f\"\n      ],\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\",\n      \"timeInterval\": {\n        \"duration\": \"PT1H30M\",\n        \"end\": \"1968-03-28T11:18:44.159Z\",\n        \"offsetEnd\": 2181,\n        \"offsetStart\": 8949,\n        \"start\": \"1977-07-12T00:46:28.809Z\",\n        \"timeZone\": \"string\",\n        \"zonedEnd\": \"1994-09-28T06:40:31.503Z\",\n        \"zonedStart\": \"2003-09-21T14:57:30.638Z\"\n      },\n      \"type\": \"REGULAR\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    }\n  ],\n  \"id\": \"5b6d45c4b0798751107762b8\",\n  \"name\": \"exampleTemplate\",\n  \"projectsAndTasks\": [\n    {\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n    },\n    {\n      \"projectId\": \"25b687e29ae1f428e7ebe123\",\n      \"taskId\": \"54m377ddd3fcab07cfbb432w\"\n    }\n  ],\n  \"userId\": \"89b687e29ae1f428e7ebe912\",\n  \"weekStart\": \"1971-04-09\",\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-templates-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-templates-templateId-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "ca2ea95d-3df5-45bc-89c0-4cc22586c9ef",
+    "name": "Clockify Approval Template (Deprecated) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

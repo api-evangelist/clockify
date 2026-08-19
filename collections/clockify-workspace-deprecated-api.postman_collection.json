@@ -1,0 +1,169 @@
+{
+  "item": [
+    {
+      "id": "4866daf3-bf77-4594-a6bd-c0eefdc17cf5",
+      "name": "Workspace (Deprecated)",
+      "description": {
+        "content": "This endpoint group contains deprecated endpoints from the [Workspace](#tag/Workspace) endpoint group.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "052e2a66-10d0-4802-9d24-301cf32aa3a9",
+          "name": "Remove user from a workspace",
+          "request": {
+            "name": "Remove user from a workspace",
+            "description": {
+              "content": "This endpoint is not functional and has been deprecated. A user can be removed/deleted on the CAKE.com Account Members page after deactivating all their existing memberships on all workspaces within an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fc2adaa8-fc80-41ef-87a7-5c655c1fcf10",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cakeOrganizationId\": \"67d471fb56aa9668b7bfa295\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"currencies\": [\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    },\n    {\n      \"code\": \"USD\",\n      \"id\": \"5b641568b07987035750505e\",\n      \"isDefault\": true\n    }\n  ],\n  \"featureSubscriptionType\": {\n    \"value\": \"<Circular reference to #/components/schemas/FeaturePlan detected>\"\n  },\n  \"features\": \"SSO\",\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"64a687e29ae1f428e7ebe303\",\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Cool Company\",\n  \"subdomain\": {\n    \"enabled\": false,\n    \"name\": \"coolcompany\"\n  },\n  \"workspaceSettings\": {\n    \"activeBillableHours\": false,\n    \"adminOnlyPages\": \"TEAM\",\n    \"automaticLock\": {\n      \"changeDay\": \"FRIDAY\",\n      \"dayOfMonth\": 15,\n      \"firstDay\": \"MONDAY\",\n      \"olderThanPeriod\": \"DAYS\",\n      \"olderThanValue\": 5,\n      \"type\": \"WEEKLY\"\n    },\n    \"canSeeTimeSheet\": false,\n    \"canSeeTracker\": false,\n    \"currencyFormat\": \"CURRENCY_SPACE_VALUE\",\n    \"defaultBillableProjects\": false,\n    \"durationFormat\": \"FULL\",\n    \"entityCreationPermissions\": {\n      \"whoCanCreateProjectsAndClients\": \"EVERYONE\",\n      \"whoCanCreateTags\": \"ADMINS_AND_PROJECT_MANAGERS\",\n      \"whoCanCreateTasks\": \"ADMINS\"\n    },\n    \"forceDescription\": false,\n    \"forceProjects\": false,\n    \"forceTags\": false,\n    \"forceTasks\": false,\n    \"isProjectPublicByDefault\": true,\n    \"lockTimeEntries\": \"2024-02-25T23:00:00Z\",\n    \"lockTimeZone\": \"Europe/Belgrade\",\n    \"multiFactorEnabled\": false,\n    \"numberFormat\": \"COMMA_PERIOD\",\n    \"onlyAdminsCanChangeBillableStatus\": false,\n    \"onlyAdminsCreateProject\": false,\n    \"onlyAdminsCreateTag\": false,\n    \"onlyAdminsCreateTask\": false,\n    \"onlyAdminsSeeAllTimeEntries\": false,\n    \"onlyAdminsSeeBillableRates\": false,\n    \"onlyAdminsSeeDashboard\": false,\n    \"onlyAdminsSeePublicProjectsEntries\": false,\n    \"projectFavorites\": false,\n    \"projectGroupingLabel\": \"Project Label\",\n    \"projectLabel\": \"string\",\n    \"projectPickerSpecialFilter\": false,\n    \"round\": {\n      \"minutes\": \"15\",\n      \"round\": \"Round to nearest\"\n    },\n    \"taskLabel\": \"string\",\n    \"timeRoundingInReports\": false,\n    \"timeTrackingMode\": \"DEFAULT\",\n    \"trackTimeDownToSecond\": false,\n    \"workingDays\": [\n      \"THURSDAY\",\n      \"SUNDAY\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-userId-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "195b9520-4525-429e-b591-713233f2f6c8",
+    "name": "Clockify Approval Workspace (Deprecated) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

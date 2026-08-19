@@ -1,0 +1,422 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Clockify Approval User API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a photo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/file/image",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a photo"
+        },
+        {
+          "info": {
+            "name": "Get currently logged-in user's info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/user",
+            "params": [
+              {
+                "name": "include-memberships",
+                "value": "true",
+                "type": "query",
+                "description": "If set to true, memberships will be included."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-marketplace-token",
+              "value": "{{x-marketplace-token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get currently logged-in user's info"
+        },
+        {
+          "info": {
+            "name": "Get a member's profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/member-profile/:userId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a member's profile"
+        },
+        {
+          "info": {
+            "name": "Update a member's profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/member-profile/:userId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a member's profile"
+        },
+        {
+          "info": {
+            "name": "Find all users on a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "email",
+                "value": "mail@example.com",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of users that contain the provided string in their email address."
+              },
+              {
+                "name": "project-id",
+                "value": "21a687e29ae1f428e7ebe606",
+                "type": "query",
+                "description": "If provided, you'll get a list of users that have access to the project."
+              },
+              {
+                "name": "status",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of users with the corresponding status."
+              },
+              {
+                "name": "account-statuses",
+                "value": "LIMITED",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of users with the corresponding account status filter. If not, this will only filter ACTIVE, PENDING_EMAIL_VERIFICATION, and NOT_REGISTERED Users."
+              },
+              {
+                "name": "name",
+                "value": "John",
+                "type": "query",
+                "description": "If provided, you'll get a filtered list of users that contain the provided string in their name"
+              },
+              {
+                "name": "sort-column",
+                "value": "ID",
+                "type": "query",
+                "description": "Sorting column criteria. Default value: EMAIL"
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sorting mode. Default value: ASCENDING"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              },
+              {
+                "name": "memberships",
+                "value": "WORKSPACE",
+                "type": "query",
+                "description": "If provided, you'll get all users along with workspaces, groups, or projects they have access to. Default value is NONE."
+              },
+              {
+                "name": "include-roles",
+                "value": "",
+                "type": "query",
+                "description": "If you pass along includeRoles=true, you'll get each user's detailed manager role (including projects and members which they manage)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Find all users on a workspace"
+        },
+        {
+          "info": {
+            "name": "Filter workspace users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/info",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-marketplace-token",
+              "value": "{{x-marketplace-token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Filter workspace users"
+        },
+        {
+          "info": {
+            "name": "Update a user's custom field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId/custom-field/:customFieldId/value",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "customFieldId",
+                "value": "5e4117fe8c625f38930d57b7",
+                "type": "path",
+                "description": "Represents custom field identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a user's custom field"
+        },
+        {
+          "info": {
+            "name": "Find user's team manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId/managers",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              },
+              {
+                "name": "sort-column",
+                "value": "ID",
+                "type": "query",
+                "description": "Sorting column criteria"
+              },
+              {
+                "name": "sort-order",
+                "value": "ASCENDING",
+                "type": "query",
+                "description": "Sorting mode"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number."
+              },
+              {
+                "name": "page-size",
+                "value": "50",
+                "type": "query",
+                "description": "Page size."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Find user's team manager"
+        },
+        {
+          "info": {
+            "name": "Give manager role to a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId/roles",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Give manager role to a user"
+        },
+        {
+          "info": {
+            "name": "Remove user's manager role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/workspaces/:workspaceId/users/:userId/roles",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "64a687e29ae1f428e7ebe303",
+                "type": "path",
+                "description": "Represents a workspace identifier across the system."
+              },
+              {
+                "name": "userId",
+                "value": "5a0ab5acb07987125438b60f",
+                "type": "path",
+                "description": "Represents a user identifier across the system."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Remove user's manager role"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

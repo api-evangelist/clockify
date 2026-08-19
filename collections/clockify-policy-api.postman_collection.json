@@ -1,0 +1,909 @@
+{
+  "item": [
+    {
+      "id": "e0c245f7-aeda-4eb6-bdca-b38b591bfeb2",
+      "name": "Policy",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae7dd66f-2f65-4623-8612-2f7233ee686e",
+          "name": "Get policies on a workspace",
+          "request": {
+            "name": "Get policies on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of policies that contain the provided string in their name."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of policies with the corresponding status."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "DEFAULT_SORT"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "ASCENDING"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5801c0b6-732e-4bab-b57e-99773338f480",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Holidays"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "sort-column",
+                      "value": "DEFAULT_SORT"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"allowHalfDay\": false,\n    \"allowNegativeBalance\": true,\n    \"approve\": {\n      \"requiresApproval\": true,\n      \"specificMembers\": false,\n      \"teamManagers\": false,\n      \"userIds\": [\n        \"6579d126c2fe3b25f20ea001\",\n        \"6579d126c2fe3b25f20ea002\"\n      ]\n    },\n    \"archived\": true,\n    \"automaticAccrual\": {\n      \"amount\": 20,\n      \"period\": \"YEAR\",\n      \"timeUnit\": \"DAYS\"\n    },\n    \"automaticTimeEntryCreation\": {\n      \"defaultEntities\": {\n        \"projectId\": \"string\",\n        \"taskId\": \"string\"\n      },\n      \"enabled\": false\n    },\n    \"everyoneIncludingNew\": false,\n    \"id\": \"5b715612b079875110791111\",\n    \"name\": \"Days\",\n    \"negativeBalance\": {\n      \"amount\": 7084.015106944576,\n      \"period\": \"string\",\n      \"shouldReset\": false,\n      \"timeUnit\": \"string\"\n    },\n    \"projectId\": \"string\",\n    \"timeUnit\": \"DAYS\",\n    \"userGroupIds\": [\n      \"5b715612b079875110791342\",\n      \"5b715612b079875110791324\",\n      \"5b715612b079875110793142\"\n    ],\n    \"userIds\": [\n      \"5b715612b079875110791432\",\n      \"5b715612b079875110791234\"\n    ],\n    \"workspaceId\": \"5b715612b079875110792222\"\n  },\n  {\n    \"allowHalfDay\": false,\n    \"allowNegativeBalance\": true,\n    \"approve\": {\n      \"requiresApproval\": true,\n      \"specificMembers\": false,\n      \"teamManagers\": false,\n      \"userIds\": [\n        \"6579d126c2fe3b25f20ea001\",\n        \"6579d126c2fe3b25f20ea002\"\n      ]\n    },\n    \"archived\": true,\n    \"automaticAccrual\": {\n      \"amount\": 20,\n      \"period\": \"YEAR\",\n      \"timeUnit\": \"DAYS\"\n    },\n    \"automaticTimeEntryCreation\": {\n      \"defaultEntities\": {\n        \"projectId\": \"string\",\n        \"taskId\": \"string\"\n      },\n      \"enabled\": false\n    },\n    \"everyoneIncludingNew\": false,\n    \"id\": \"5b715612b079875110791111\",\n    \"name\": \"Days\",\n    \"negativeBalance\": {\n      \"amount\": 7910.500037452045,\n      \"period\": \"string\",\n      \"shouldReset\": false,\n      \"timeUnit\": \"string\"\n    },\n    \"projectId\": \"string\",\n    \"timeUnit\": \"DAYS\",\n    \"userGroupIds\": [\n      \"5b715612b079875110791342\",\n      \"5b715612b079875110791324\",\n      \"5b715612b079875110793142\"\n    ],\n    \"userIds\": [\n      \"5b715612b079875110791432\",\n      \"5b715612b079875110791234\"\n    ],\n    \"workspaceId\": \"5b715612b079875110792222\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea3e7050-8799-4a77-9173-4098618d7398",
+          "name": "Create a time off policy",
+          "request": {
+            "name": "Create a time off policy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"approve\": {\n    \"requiresApproval\": false,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"allowHalfDay\": false,\n  \"allowNegativeBalance\": false,\n  \"archived\": false,\n  \"automaticAccrual\": {\n    \"amount\": \"<double>\",\n    \"period\": \"<string>\",\n    \"timeUnit\": \"<string>\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"<string>\",\n  \"everyoneIncludingNew\": false,\n  \"hasExpiration\": false,\n  \"icon\": \"<string>\",\n  \"negativeBalance\": {\n    \"amount\": \"<double>\",\n    \"amountValidForTimeUnit\": \"<boolean>\",\n    \"period\": \"<string>\",\n    \"shouldReset\": false,\n    \"timeUnit\": \"<string>\"\n  },\n  \"timeUnit\": \"<string>\",\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"users\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "89d03aa6-69eb-4749-b664-a62086ca4bf8",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"approve\": {\n    \"requiresApproval\": true,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"6579d126c2fe3b25f20ea001\",\n      \"6579d126c2fe3b25f20ea002\"\n    ]\n  },\n  \"name\": \"Mental health days\",\n  \"allowHalfDay\": false,\n  \"allowNegativeBalance\": true,\n  \"archived\": true,\n  \"automaticAccrual\": {\n    \"amount\": 2,\n    \"period\": \"MONTH\",\n    \"timeUnit\": \"DAYS\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"#8BC34A\",\n  \"everyoneIncludingNew\": false,\n  \"hasExpiration\": false,\n  \"icon\": \"UMBRELLA\",\n  \"negativeBalance\": {\n    \"amount\": 2,\n    \"amountValidForTimeUnit\": \"<boolean>\",\n    \"period\": \"MONTH\",\n    \"shouldReset\": true,\n    \"timeUnit\": \"DAYS\"\n  },\n  \"timeUnit\": \"DAYS\",\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  },\n  \"users\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowHalfDay\": false,\n  \"allowNegativeBalance\": true,\n  \"approve\": {\n    \"requiresApproval\": true,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"6579d126c2fe3b25f20ea001\",\n      \"6579d126c2fe3b25f20ea002\"\n    ]\n  },\n  \"archived\": true,\n  \"automaticAccrual\": {\n    \"amount\": 20,\n    \"period\": \"YEAR\",\n    \"timeUnit\": \"DAYS\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"string\",\n      \"taskId\": \"string\"\n    },\n    \"enabled\": true\n  },\n  \"everyoneIncludingNew\": false,\n  \"id\": \"5b715612b079875110791111\",\n  \"name\": \"Days\",\n  \"negativeBalance\": {\n    \"amount\": 7420.437703890774,\n    \"period\": \"string\",\n    \"shouldReset\": true,\n    \"timeUnit\": \"string\"\n  },\n  \"projectId\": \"string\",\n  \"timeUnit\": \"DAYS\",\n  \"userGroupIds\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"userIds\": [\n    \"5b715612b079875110791432\",\n    \"5b715612b079875110791234\"\n  ],\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "134ad43f-8c14-419a-8a0b-53a5540f85a2",
+          "name": "Delete a policy",
+          "request": {
+            "name": "Delete a policy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a policy identifier across the system."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ab592283-3e2d-41b6-be91-1bb5d67b853a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d496180-dcf9-4929-9f19-f640149f6023",
+          "name": "Get a time off policy",
+          "request": {
+            "name": "Get a time off policy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a policy identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1a46ac29-46bc-47fc-831c-197b38423cb7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowHalfDay\": false,\n  \"allowNegativeBalance\": true,\n  \"approve\": {\n    \"requiresApproval\": true,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"6579d126c2fe3b25f20ea001\",\n      \"6579d126c2fe3b25f20ea002\"\n    ]\n  },\n  \"archived\": true,\n  \"automaticAccrual\": {\n    \"amount\": 20,\n    \"period\": \"YEAR\",\n    \"timeUnit\": \"DAYS\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"string\",\n      \"taskId\": \"string\"\n    },\n    \"enabled\": true\n  },\n  \"everyoneIncludingNew\": false,\n  \"id\": \"5b715612b079875110791111\",\n  \"name\": \"Days\",\n  \"negativeBalance\": {\n    \"amount\": 7420.437703890774,\n    \"period\": \"string\",\n    \"shouldReset\": true,\n    \"timeUnit\": \"string\"\n  },\n  \"projectId\": \"string\",\n  \"timeUnit\": \"DAYS\",\n  \"userGroupIds\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"userIds\": [\n    \"5b715612b079875110791432\",\n    \"5b715612b079875110791234\"\n  ],\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c24a8a66-b19f-4f1b-9d6a-d17dd0b2dd8b",
+          "name": "Change a policy status",
+          "request": {
+            "name": "Change a policy status",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a policy identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8cbabef-f2c5-481e-bfdd-ce613c1d7efb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"ACTIVE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowHalfDay\": false,\n  \"allowNegativeBalance\": true,\n  \"approve\": {\n    \"requiresApproval\": true,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"6579d126c2fe3b25f20ea001\",\n      \"6579d126c2fe3b25f20ea002\"\n    ]\n  },\n  \"archived\": true,\n  \"automaticAccrual\": {\n    \"amount\": 20,\n    \"period\": \"YEAR\",\n    \"timeUnit\": \"DAYS\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"string\",\n      \"taskId\": \"string\"\n    },\n    \"enabled\": true\n  },\n  \"everyoneIncludingNew\": false,\n  \"id\": \"5b715612b079875110791111\",\n  \"name\": \"Days\",\n  \"negativeBalance\": {\n    \"amount\": 7420.437703890774,\n    \"period\": \"string\",\n    \"shouldReset\": true,\n    \"timeUnit\": \"string\"\n  },\n  \"projectId\": \"string\",\n  \"timeUnit\": \"DAYS\",\n  \"userGroupIds\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"userIds\": [\n    \"5b715612b079875110791432\",\n    \"5b715612b079875110791234\"\n  ],\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "192dcc6d-d08a-4d4f-92a0-64cf780dd6c5",
+          "name": "Update a policy",
+          "request": {
+            "name": "Update a policy",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "time-off",
+                "policies",
+                ":id"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Represents a policy identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"allowHalfDay\": false,\n  \"allowNegativeBalance\": false,\n  \"approve\": {\n    \"requiresApproval\": false,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"archived\": false,\n  \"everyoneIncludingNew\": false,\n  \"hasExpiration\": false,\n  \"name\": \"<string>\",\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"users\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"automaticAccrual\": {\n    \"amount\": \"<double>\",\n    \"period\": \"<string>\",\n    \"timeUnit\": \"<string>\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"negativeBalance\": {\n    \"amount\": \"<double>\",\n    \"amountValidForTimeUnit\": \"<boolean>\",\n    \"period\": \"<string>\",\n    \"shouldReset\": false,\n    \"timeUnit\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd821ec0-58f1-4c37-a761-1dd6d1dcf09f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "time-off",
+                    "policies",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-time-off-policies-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Represents a policy identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowHalfDay\": true,\n  \"allowNegativeBalance\": false,\n  \"approve\": {\n    \"requiresApproval\": true,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"6579d126c2fe3b25f20ea001\",\n      \"6579d126c2fe3b25f20ea002\"\n    ]\n  },\n  \"archived\": false,\n  \"everyoneIncludingNew\": false,\n  \"hasExpiration\": false,\n  \"name\": \"Days\",\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  },\n  \"users\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  },\n  \"automaticAccrual\": {\n    \"amount\": 2,\n    \"period\": \"MONTH\",\n    \"timeUnit\": \"DAYS\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"<string>\",\n      \"taskId\": \"<string>\"\n    },\n    \"enabled\": false\n  },\n  \"color\": \"#8BC34A\",\n  \"icon\": \"UMBRELLA\",\n  \"negativeBalance\": {\n    \"amount\": 2,\n    \"amountValidForTimeUnit\": \"<boolean>\",\n    \"period\": \"MONTH\",\n    \"shouldReset\": true,\n    \"timeUnit\": \"DAYS\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"allowHalfDay\": false,\n  \"allowNegativeBalance\": true,\n  \"approve\": {\n    \"requiresApproval\": true,\n    \"specificMembers\": false,\n    \"teamManagers\": false,\n    \"userIds\": [\n      \"6579d126c2fe3b25f20ea001\",\n      \"6579d126c2fe3b25f20ea002\"\n    ]\n  },\n  \"archived\": true,\n  \"automaticAccrual\": {\n    \"amount\": 20,\n    \"period\": \"YEAR\",\n    \"timeUnit\": \"DAYS\"\n  },\n  \"automaticTimeEntryCreation\": {\n    \"defaultEntities\": {\n      \"projectId\": \"string\",\n      \"taskId\": \"string\"\n    },\n    \"enabled\": true\n  },\n  \"everyoneIncludingNew\": false,\n  \"id\": \"5b715612b079875110791111\",\n  \"name\": \"Days\",\n  \"negativeBalance\": {\n    \"amount\": 7420.437703890774,\n    \"period\": \"string\",\n    \"shouldReset\": true,\n    \"timeUnit\": \"string\"\n  },\n  \"projectId\": \"string\",\n  \"timeUnit\": \"DAYS\",\n  \"userGroupIds\": [\n    \"5b715612b079875110791342\",\n    \"5b715612b079875110791324\",\n    \"5b715612b079875110793142\"\n  ],\n  \"userIds\": [\n    \"5b715612b079875110791432\",\n    \"5b715612b079875110791234\"\n  ],\n  \"workspaceId\": \"5b715612b079875110792222\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-policies-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-time-off-policies-id-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "7b798d84-8f82-4f68-af59-fde2fe0cecb7",
+    "name": "Clockify Approval Policy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

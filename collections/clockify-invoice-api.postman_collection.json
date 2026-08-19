@@ -1,0 +1,2491 @@
+{
+  "item": [
+    {
+      "id": "c761fb35-cc91-4be8-be2c-a79fa1a07896",
+      "name": "Invoice",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cfcaeb7a-543e-4251-a35a-7b4dae97de54",
+          "name": "Get all invoices on a workspace",
+          "request": {
+            "name": "Get all invoices on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered result of invoices that matches the provided string in the user ID linked to the expense."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "<string>",
+                  "description": "Valid column name as sorting criteria. Default: ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Sort order. Default: ASCENDING"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7909ca32-b60e-44db-aff0-15e5a851f174",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort-column",
+                      "value": "CLIENT"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoices\": [\n    {\n      \"amount\": 100,\n      \"balance\": 50,\n      \"clientId\": \"98h687e29ae1f428e7ebe707\",\n      \"clientName\": \"Client X\",\n      \"currency\": \"USD\",\n      \"dueDate\": \"2020-06-01T08:00:00Z\",\n      \"id\": \"78a687e29ae1f428e7ebe303\",\n      \"issuedDate\": \"2020-01-01T08:00:00Z\",\n      \"number\": \"202306121129\",\n      \"paid\": 50,\n      \"status\": \"PAID\"\n    },\n    {\n      \"amount\": 100,\n      \"balance\": 50,\n      \"clientId\": \"98h687e29ae1f428e7ebe707\",\n      \"clientName\": \"Client X\",\n      \"currency\": \"USD\",\n      \"dueDate\": \"2020-06-01T08:00:00Z\",\n      \"id\": \"78a687e29ae1f428e7ebe303\",\n      \"issuedDate\": \"2020-01-01T08:00:00Z\",\n      \"number\": \"202306121129\",\n      \"paid\": 50,\n      \"status\": \"PAID\"\n    }\n  ],\n  \"total\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44333813-31d8-4a93-8efb-ca2dc8b54d87",
+          "name": "Add an invoice",
+          "request": {
+            "name": "Add an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"dueDate\": \"<dateTime>\",\n  \"issuedDate\": \"<dateTime>\",\n  \"number\": \"<string>\",\n  \"timeViewMode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d02451f8-97e5-44eb-ba28-868d4eff6e81",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"currency\": \"USD\",\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"number\": \"202306121129\",\n  \"timeViewMode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billFrom\": \"Business X\",\n  \"clientId\": \"34p687e29ae1f428e7ebe562\",\n  \"currency\": \"USD\",\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"number\": \"202306121129\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04e7bba0-e54c-48f0-92cd-c868b61a8ce7",
+          "name": "Filter out invoices",
+          "request": {
+            "name": "Filter out invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                "info"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-info-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clients\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"companies\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"exactAmount\": \"<long>\",\n  \"exactBalance\": \"<long>\",\n  \"greaterThanAmount\": \"<long>\",\n  \"greaterThanBalance\": \"<long>\",\n  \"invoiceNumber\": \"<string>\",\n  \"issueDate\": {\n    \"issue-date-end\": \"<string>\",\n    \"issue-date-start\": \"<string>\"\n  },\n  \"lessThanAmount\": \"<long>\",\n  \"lessThanBalance\": \"<long>\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"sortColumn\": \"<string>\",\n  \"sortOrder\": \"<string>\",\n  \"statuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"strictSearch\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4bee186-7e8a-4ef5-a11c-ff29c3923645",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    "info"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-info-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clients\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"companies\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ]\n  },\n  \"exactAmount\": 1000,\n  \"exactBalance\": 1000,\n  \"greaterThanAmount\": 500,\n  \"greaterThanBalance\": 500,\n  \"invoiceNumber\": \"Invoice-01\",\n  \"issueDate\": {\n    \"issue-date-end\": \"2020-01-01\",\n    \"issue-date-start\": \"2020-01-01\"\n  },\n  \"lessThanAmount\": 500,\n  \"lessThanBalance\": 500,\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"sortColumn\": \"ID\",\n  \"sortOrder\": \"ASCENDING\",\n  \"statuses\": [\n    \"SENT\",\n    \"PAID\",\n    \"PARTIALLY_PAID\"\n  ],\n  \"strictSearch\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoices\": [\n    {\n      \"amount\": 100,\n      \"balance\": 50,\n      \"billFrom\": \"Company XYZ\",\n      \"clientId\": \"98h687e29ae1f428e7ebe707\",\n      \"clientName\": \"Client X\",\n      \"currency\": \"USD\",\n      \"daysOverdue\": 10,\n      \"dueDate\": \"2020-06-01T08:00:00Z\",\n      \"id\": \"78a687e29ae1f428e7ebe303\",\n      \"issuedDate\": \"2020-01-01T08:00:00Z\",\n      \"number\": \"202306121129\",\n      \"paid\": 50,\n      \"status\": \"PAID\",\n      \"visibleZeroFields\": \"DISCOUNT\"\n    },\n    {\n      \"amount\": 100,\n      \"balance\": 50,\n      \"billFrom\": \"Company XYZ\",\n      \"clientId\": \"98h687e29ae1f428e7ebe707\",\n      \"clientName\": \"Client X\",\n      \"currency\": \"USD\",\n      \"daysOverdue\": 10,\n      \"dueDate\": \"2020-06-01T08:00:00Z\",\n      \"id\": \"78a687e29ae1f428e7ebe303\",\n      \"issuedDate\": \"2020-01-01T08:00:00Z\",\n      \"number\": \"202306121129\",\n      \"paid\": 50,\n      \"status\": \"PAID\",\n      \"visibleZeroFields\": \"DISCOUNT\"\n    }\n  ],\n  \"total\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e0a017f-86c2-4e48-bf56-471c34505d33",
+          "name": "Get an invoice in another language",
+          "request": {
+            "name": "Get an invoice in another language",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                "settings"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-settings-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7175d261-6ddc-4d19-8f1a-f8d63c0d5c48",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-settings-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"defaults\": {\n    \"companyId\": \"34a687e29ae1f428e7ebe101\",\n    \"defaultImportExpenseItemTypeId\": \"88a687e29ae1f428e7ebe303\",\n    \"defaultImportTimeItemTypeId\": \"18a687e29ae1f428e7ebe303\",\n    \"dueDays\": 2,\n    \"itemTypeId\": \"78a687e29ae1f428e7ebe303\",\n    \"notes\": \"This is a sample note for this invoice.\",\n    \"subject\": \"January salary\",\n    \"tax\": 1843,\n    \"tax2\": 61,\n    \"tax2Percent\": 1,\n    \"taxPercent\": 5,\n    \"taxType\": \"COMPOUND\"\n  },\n  \"exportFields\": {\n    \"itemType\": true,\n    \"quantity\": false,\n    \"rtl\": false,\n    \"tax\": false,\n    \"tax2\": false,\n    \"unitPrice\": false\n  },\n  \"labels\": {\n    \"amount\": \"1000\",\n    \"billFrom\": \"Entity A\",\n    \"billTo\": \"Entity B\",\n    \"description\": \"This is a sample description for this invoice.\",\n    \"discount\": \"0\",\n    \"dueDate\": \"2020-01-01\",\n    \"issueDate\": \"2020-01-01\",\n    \"itemType\": \"Service\",\n    \"notes\": \"This is a sample note for this invoice.\",\n    \"paid\": \"1000\",\n    \"quantity\": \"10\",\n    \"subtotal\": \"1000\",\n    \"tax\": \"10\",\n    \"tax2\": \"0\",\n    \"total\": \"1010\",\n    \"totalAmount\": \"1010\",\n    \"unitPrice\": \"100\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74a25ea1-67cc-44ed-bd1d-5b6eaa64c85b",
+          "name": "Change an invoice language",
+          "request": {
+            "name": "Change an invoice language",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                "settings"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-settings-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"labels\": {\n    \"amount\": \"<string>\",\n    \"billFrom\": \"<string>\",\n    \"billTo\": \"<string>\",\n    \"description\": \"<string>\",\n    \"discount\": \"<string>\",\n    \"dueDate\": \"<string>\",\n    \"issueDate\": \"<string>\",\n    \"itemType\": \"<string>\",\n    \"notes\": \"<string>\",\n    \"paid\": \"<string>\",\n    \"quantity\": \"<string>\",\n    \"subtotal\": \"<string>\",\n    \"tax\": \"<string>\",\n    \"tax2\": \"<string>\",\n    \"total\": \"<string>\",\n    \"totalAmountDue\": \"<string>\",\n    \"unitPrice\": \"<string>\"\n  },\n  \"defaults\": {\n    \"notes\": \"<string>\",\n    \"subject\": \"<string>\",\n    \"companyId\": \"<string>\",\n    \"dueDays\": \"<integer>\",\n    \"itemTypeId\": \"<string>\",\n    \"tax2Percent\": \"<double>\",\n    \"taxPercent\": \"<double>\",\n    \"taxType\": \"<string>\"\n  },\n  \"exportFields\": {\n    \"itemType\": false,\n    \"quantity\": false,\n    \"rtl\": false,\n    \"tax\": false,\n    \"tax2\": false,\n    \"unitPrice\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6ea3a79-f4f8-4615-8e67-b396086f4c95",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-settings-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"labels\": {\n    \"amount\": \"AMOUNT\",\n    \"billFrom\": \"BILL FROM\",\n    \"billTo\": \"BILL TO\",\n    \"description\": \"DESCRIPTION\",\n    \"discount\": \"DISCOUNT\",\n    \"dueDate\": \"DUE DATE\",\n    \"issueDate\": \"ISSUE DATE\",\n    \"itemType\": \"ITEM TYPE\",\n    \"notes\": \"NOTES\",\n    \"paid\": \"PAID\",\n    \"quantity\": \"QUANTITY\",\n    \"subtotal\": \"SUBTOTAL\",\n    \"tax\": \"TAX\",\n    \"tax2\": \"TAX2\",\n    \"total\": \"AMOUNT\",\n    \"totalAmountDue\": \"TOTAL AMOUNT DUE\",\n    \"unitPrice\": \"UNIT PRICE\"\n  },\n  \"defaults\": {\n    \"notes\": \"This is a sample note for this invoice.\",\n    \"subject\": \"January salary\",\n    \"companyId\": \"34a687e29ae1f428e7ebe101\",\n    \"dueDays\": 2,\n    \"itemTypeId\": \"78a687e29ae1f428e7ebe303\",\n    \"tax2Percent\": 5,\n    \"taxPercent\": 5,\n    \"taxType\": \"COMPOUND\"\n  },\n  \"exportFields\": {\n    \"itemType\": false,\n    \"quantity\": false,\n    \"rtl\": false,\n    \"tax\": false,\n    \"tax2\": false,\n    \"unitPrice\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07c4f520-65b0-4a88-b05f-aa8ac9dd5ae3",
+          "name": "Delete an invoice",
+          "request": {
+            "name": "Delete an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3d9b0e6b-8b45-47fe-9862-8f3537a1fb87",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf7cc26e-91d4-41d4-b764-47698d7800e3",
+          "name": "Get an invoice by ID",
+          "request": {
+            "name": "Get an invoice by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c12695de-267f-4ebf-83e7-a04e1d168e20",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"ITEM_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"NONE\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"NONE\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "100fbaa2-961a-4d16-992f-72776d2aaef4",
+          "name": "Update an invoice",
+          "request": {
+            "name": "Update an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency\": \"<string>\",\n  \"discountPercent\": \"<double>\",\n  \"dueDate\": \"<dateTime>\",\n  \"issuedDate\": \"<dateTime>\",\n  \"number\": \"<string>\",\n  \"tax2Percent\": \"<double>\",\n  \"taxPercent\": \"<double>\",\n  \"clientId\": \"<string>\",\n  \"companyId\": \"<string>\",\n  \"note\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"visibleZeroFields\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c94cfdad-6d05-474a-8445-bd15c88de2d4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currency\": \"USD\",\n  \"discountPercent\": 1.5,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"number\": \"202306121129\",\n  \"tax2Percent\": 0,\n  \"taxPercent\": 0.5,\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"note\": \"This is a sample note for this invoice.\",\n  \"subject\": \"January salary\",\n  \"taxType\": \"<string>\",\n  \"visibleZeroFields\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"INVOICE_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX1\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"<string>\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46e79863-62c5-4264-aef9-15e442747b8d",
+          "name": "Duplicate an invoice",
+          "request": {
+            "name": "Duplicate an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "duplicate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-duplicate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "38d3cc60-9d50-40cf-9f15-9e605e8aa017",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-duplicate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"INVOICE_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX1\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"<string>\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bc90178-2990-4cb3-9ca1-94350dcb69de",
+          "name": "Export an invoice",
+          "request": {
+            "name": "Export an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "export"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-export-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "userLocale",
+                  "value": "<string>",
+                  "description": "(Required) Represents a locale."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4409fcf5-c8f4-4ff4-8953-02a026dbd03e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "export"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-export-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "userLocale",
+                      "value": "en"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67fb4dc5-5613-4b85-a9de-891ae4d04c4b",
+          "name": "Add item to an invoice",
+          "request": {
+            "name": "Add item to an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "items"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-items-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applyTaxes\": \"<string>\",\n  \"description\": \"<string>\",\n  \"itemType\": \"<string>\",\n  \"quantity\": \"<long>\",\n  \"unitPrice\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58a14a2c-4660-4e09-b59e-098bf6d9cf86",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-items-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"applyTaxes\": \"TAX1TAX2\",\n  \"description\": \"This is a description of an invoice item.\",\n  \"itemType\": \"Service\",\n  \"quantity\": 10000,\n  \"unitPrice\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"INVOICE_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX1\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"<string>\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f96fee6a-3d2f-4504-9056-b87dba8c0415",
+          "name": "Import time entries and expenses to an invoice",
+          "request": {
+            "name": "Import time entries and expenses to an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "items",
+                "import"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-items-import-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<string>\",\n  \"importExpenses\": false,\n  \"projectFilter\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"timeEntryGroupType\": \"<string>\",\n  \"to\": \"<string>\",\n  \"expenseFieldsForDetailedGroup\": \"NOTE\",\n  \"expensesGroupBy\": \"PROJECT\",\n  \"expensesGroupType\": \"DETAILED\",\n  \"roundTimeEntryDuration\": false,\n  \"timeEntryFieldsForDetailedGroup\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"timeEntryPrimaryGroupBy\": \"<string>\",\n  \"timeEntrySecondaryGroupBy\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b98d2373-d7cc-43e6-ba39-fc333f329903",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "items",
+                    "import"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-items-import-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"2025-06-01T00:00:00Z\",\n  \"importExpenses\": false,\n  \"projectFilter\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5a0ab5acb07987125438b60f\",\n      \"64c777ddd3fcab07cfbb210c\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  \"timeEntryGroupType\": \"GROUPED\",\n  \"to\": \"2025-06-07T00:00:00Z\",\n  \"expenseFieldsForDetailedGroup\": [\n    \"NOTE\"\n  ],\n  \"expensesGroupBy\": \"CATEGORY\",\n  \"expensesGroupType\": \"DETAILED\",\n  \"roundTimeEntryDuration\": false,\n  \"timeEntryFieldsForDetailedGroup\": [\n    \"PROJECT\",\n    \"DESCRIPTION\"\n  ],\n  \"timeEntryPrimaryGroupBy\": \"PROJECT\",\n  \"timeEntrySecondaryGroupBy\": \"TASK\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"INVOICE_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX1\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"<string>\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "563dcdd7-6c4b-458b-859f-522181914696",
+          "name": "Delete item from an invoice",
+          "request": {
+            "name": "Delete item from an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "items",
+                ":order"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-items-order-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "order",
+                  "description": "(Required) Represents an invoice item order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7c553ab-93e6-45ce-9ff0-72ef7e598dfd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "items",
+                    ":order"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-items-order-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "order",
+                      "description": "(Required) Represents an invoice item order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"INVOICE_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX1\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"<string>\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66ad9f75-7f03-4e0c-950e-43cfaab11418",
+          "name": "Get payments for an invoice",
+          "request": {
+            "name": "Get payments for an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "payments"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-payments-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0326b555-769a-41ec-9e3d-26a36d1ba375",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-payments-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"amount\": 100,\n    \"author\": \"John Doe\",\n    \"date\": \"2021-01-01T12:00:00Z\",\n    \"id\": \"78a687e29ae1f428e7ebe303\",\n    \"note\": \"This is a sample note for this invoice payment.\"\n  },\n  {\n    \"amount\": 100,\n    \"author\": \"John Doe\",\n    \"date\": \"2021-01-01T12:00:00Z\",\n    \"id\": \"78a687e29ae1f428e7ebe303\",\n    \"note\": \"This is a sample note for this invoice payment.\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aea754d5-edfb-4069-ae90-49a60c83911c",
+          "name": "Add payment to an invoice",
+          "request": {
+            "name": "Add payment to an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "payments"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-payments-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<long>\",\n  \"note\": \"<string>\",\n  \"paymentDate\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce34315a-3686-4d5d-9a73-1bc39f32184c",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-payments-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 100,\n  \"note\": \"This is a sample note for this invoice payment.\",\n  \"paymentDate\": \"2021-01-01T12:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"INVOICE_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX1\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"<string>\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "baa7574a-bf63-4483-a33c-5afa43278f1e",
+          "name": "Delete payment from an invoice",
+          "request": {
+            "name": "Delete payment from an invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "payments",
+                ":paymentId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-payments-paymentId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) Represents a payment identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "383997f3-717b-4561-9d2d-ade2ad9b9749",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-payments-paymentId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Represents a payment identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 100,\n  \"balance\": 50,\n  \"billFrom\": \"Business X\",\n  \"calculationType\": \"INVOICE_BASED\",\n  \"clientAddress\": \"Ground Floor, ABC Bldg., Palo Alto, California, USA 94020\",\n  \"clientId\": \"98h687e29ae1f428e7ebe707\",\n  \"clientName\": \"Client X\",\n  \"companyId\": \"04g687e29ae1f428e7ebe123\",\n  \"containsImportedExpenses\": false,\n  \"containsImportedTimes\": false,\n  \"currency\": \"USD\",\n  \"discount\": 10.5,\n  \"discountAmount\": 11,\n  \"dueDate\": \"2020-06-01T08:00:00Z\",\n  \"id\": \"78a687e29ae1f428e7ebe303\",\n  \"issuedDate\": \"2020-01-01T08:00:00Z\",\n  \"items\": [\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX1\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    },\n    {\n      \"amount\": 5000,\n      \"applyTaxes\": \"TAX2\",\n      \"description\": \"This is a description of an invoice item.\",\n      \"importType\": \"NOT_IMPORTED\",\n      \"itemType\": \"Goods\",\n      \"order\": 100,\n      \"quantity\": 10,\n      \"unitPrice\": 500\n    }\n  ],\n  \"note\": \"This is a sample note for this invoice.\",\n  \"number\": \"202306121129\",\n  \"paid\": 50,\n  \"status\": \"PAID\",\n  \"subject\": \"January salary\",\n  \"subtotal\": 5000,\n  \"tax\": 1.5,\n  \"tax2\": 0,\n  \"tax2Amount\": 0,\n  \"taxAmount\": 1,\n  \"taxType\": \"<string>\",\n  \"userId\": \"12t687e29ae1f428e7ebe202\",\n  \"visibleZeroFields\": \"TAX_2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69530435-97c3-4581-b8a7-f8fcad2fb8cc",
+          "name": "Change an invoice status",
+          "request": {
+            "name": "Change an invoice status",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "invoices",
+                ":invoiceId",
+                "status"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-invoices-invoiceId-status-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceId",
+                  "description": "(Required) Represents an invoice identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoiceStatus\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c49d812-3ffc-4e6e-a8ce-3e178a3dbc8d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "invoices",
+                    ":invoiceId",
+                    "status"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-invoices-invoiceId-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceId",
+                      "description": "(Required) Represents an invoice identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"invoiceStatus\": \"PAID\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-info-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-settings-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-duplicate-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-export-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-items-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-items-import-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-items-order-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-payments-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-payments-paymentId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-invoices-invoiceId-status-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "09ac8e58-f9b8-4e11-9a2a-b09d0c2a793c",
+    "name": "Clockify Approval Invoice API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

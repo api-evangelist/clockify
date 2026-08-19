@@ -1,0 +1,1578 @@
+{
+  "item": [
+    {
+      "id": "97079cce-d9a1-4367-8be3-703edc0a86ec",
+      "name": "User",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e811b79c-dabd-479a-b7fb-6778429be875",
+          "name": "Add a photo",
+          "request": {
+            "name": "Add a photo",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "file",
+                "image"
+              ],
+              "host": [
+                "{{v1-file-image-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Image to be uploaded"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23f875e9-5fbe-47c9-ba68-72a4d2b15422",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "file",
+                    "image"
+                  ],
+                  "host": [
+                    "{{v1-file-image-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Image to be uploaded",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"image-01234567.jpg\",\n  \"url\": \"https://clockify.com/image-01234567.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d6931fa-20f5-4123-99dd-59ecf9400363",
+          "name": "Get currently logged-in user's info",
+          "request": {
+            "name": "Get currently logged-in user's info",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "user"
+              ],
+              "host": [
+                "{{v1-user-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include-memberships",
+                  "value": "false",
+                  "description": "If set to true, memberships will be included."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-marketplace-token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "552ba371-f9f7-4c43-a3f3-da6bd355822f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{v1-user-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include-memberships",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-marketplace-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activeWorkspace\": \"64a687e29ae1f428e7ebe303\",\n  \"customFields\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"customFieldName\": \"TIN\",\n      \"customFieldType\": \"NUMBER\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"value\": {}\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"customFieldName\": \"TIN\",\n      \"customFieldType\": \"DROPDOWN_SINGLE\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"value\": {}\n    }\n  ],\n  \"defaultWorkspace\": \"64a687e29ae1f428e7ebe303\",\n  \"email\": \"johndoe@example.com\",\n  \"id\": \"5a0ab5acb07987125438b60f\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"John Doe\",\n  \"profilePicture\": \"https://www.url.com/profile-picture1234567890.png\",\n  \"settings\": {\n    \"dateFormat\": \"MM/DD/YYYY\",\n    \"timeFormat\": \"HOUR24\",\n    \"timeZone\": \"Asia/Aden\",\n    \"alerts\": true,\n    \"approval\": false,\n    \"collapseAllProjectLists\": true,\n    \"dashboardPinToTop\": true,\n    \"dashboardSelection\": \"ME\",\n    \"dashboardViewType\": \"BILLABILITY\",\n    \"groupSimilarEntriesDisabled\": true,\n    \"invoiceReminders\": false,\n    \"isCompactViewOn\": false,\n    \"lang\": \"en\",\n    \"longRunning\": true,\n    \"multiFactorEnabled\": true,\n    \"myStartOfDay\": \"09:00\",\n    \"onboarding\": false,\n    \"projectListCollapse\": 15,\n    \"projectPickerTaskFilter\": false,\n    \"pto\": true,\n    \"reminders\": false,\n    \"scheduledReports\": true,\n    \"scheduling\": false,\n    \"sendNewsletter\": false,\n    \"showOnlyWorkingDays\": false,\n    \"summaryReportSettings\": {\n      \"group\": \"PROJECT\",\n      \"subgroup\": \"CLIENT\"\n    },\n    \"theme\": \"DARK\",\n    \"timeTrackingManual\": true,\n    \"weekStart\": \"MONDAY\",\n    \"weeklyUpdates\": false\n  },\n  \"status\": \"PENDING_EMAIL_VERIFICATION\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64aac46a-2d0c-40ef-99bc-e28b8548a12e",
+          "name": "Get a member's profile",
+          "request": {
+            "name": "Get a member's profile",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "member-profile",
+                ":userId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-member-profile-userId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "003edb32-c9be-4b35-adae-ba97cab84a75",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "member-profile",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-member-profile-userId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"johndoe@example.com\",\n  \"hasPassword\": false,\n  \"hasPendingApprovalRequest\": false,\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"name\": \"John Doe\",\n  \"userCustomFieldValues\": [\n    {\n      \"customField\": {\n        \"allowedValues\": [\n          \"New York\",\n          \"London\",\n          \"Manila\",\n          \"Sydney\",\n          \"Belgrade\"\n        ],\n        \"description\": \"This field contains a location.\",\n        \"entityType\": \"USER\",\n        \"id\": \"44a687e29ae1f428e7ebe305\",\n        \"name\": \"location\",\n        \"onlyAdminCanEdit\": false,\n        \"placeholder\": \"Location\",\n        \"projectDefaultValues\": [\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          },\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          }\n        ],\n        \"required\": false,\n        \"status\": \"VISIBLE\",\n        \"type\": \"DROPDOWN_MULTIPLE\",\n        \"workspaceDefaultValue\": {},\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"race\",\n      \"sourceType\": \"WORKSPACE\",\n      \"type\": \"DROPDOWN_MULTIPLE\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"value\": {}\n    },\n    {\n      \"customField\": {\n        \"allowedValues\": [\n          \"New York\",\n          \"London\",\n          \"Manila\",\n          \"Sydney\",\n          \"Belgrade\"\n        ],\n        \"description\": \"This field contains a location.\",\n        \"entityType\": \"USER\",\n        \"id\": \"44a687e29ae1f428e7ebe305\",\n        \"name\": \"location\",\n        \"onlyAdminCanEdit\": false,\n        \"placeholder\": \"Location\",\n        \"projectDefaultValues\": [\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          },\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          }\n        ],\n        \"required\": false,\n        \"status\": \"VISIBLE\",\n        \"type\": \"DROPDOWN_MULTIPLE\",\n        \"workspaceDefaultValue\": {},\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"race\",\n      \"sourceType\": \"WORKSPACE\",\n      \"type\": \"DROPDOWN_MULTIPLE\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"value\": {}\n    }\n  ],\n  \"weekStart\": \"MONDAY\",\n  \"workCapacity\": \"PT7H\",\n  \"workingDays\": \"FRIDAY\",\n  \"workspaceNumber\": 3\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7295ed04-ed15-4bd1-90ad-009cb431534f",
+          "name": "Update a member's profile",
+          "request": {
+            "name": "Update a member's profile",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "member-profile",
+                ":userId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-member-profile-userId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"imageUrl\": \"<string>\",\n  \"name\": \"<string>\",\n  \"removeProfileImage\": false,\n  \"userCustomFields\": [\n    {\n      \"customFieldId\": \"<string>\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"weekStart\": \"<string>\",\n  \"workCapacity\": \"<string>\",\n  \"workingDays\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d73d3377-cd06-4c0f-8e28-cc3ba2694105",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "member-profile",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-member-profile-userId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"name\": \"John Doe\",\n  \"removeProfileImage\": false,\n  \"userCustomFields\": [\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"value\": \"<object>\"\n    },\n    {\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"value\": \"<object>\"\n    }\n  ],\n  \"weekStart\": \"MONDAY\",\n  \"workCapacity\": \"PT7H\",\n  \"workingDays\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email\": \"johndoe@example.com\",\n  \"hasPassword\": false,\n  \"hasPendingApprovalRequest\": false,\n  \"imageUrl\": \"https://www.url.com/imageurl-1234567890.jpg\",\n  \"name\": \"John Doe\",\n  \"userCustomFieldValues\": [\n    {\n      \"customField\": {\n        \"allowedValues\": [\n          \"New York\",\n          \"London\",\n          \"Manila\",\n          \"Sydney\",\n          \"Belgrade\"\n        ],\n        \"description\": \"This field contains a location.\",\n        \"entityType\": \"USER\",\n        \"id\": \"44a687e29ae1f428e7ebe305\",\n        \"name\": \"location\",\n        \"onlyAdminCanEdit\": false,\n        \"placeholder\": \"Location\",\n        \"projectDefaultValues\": [\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          },\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          }\n        ],\n        \"required\": false,\n        \"status\": \"VISIBLE\",\n        \"type\": \"DROPDOWN_MULTIPLE\",\n        \"workspaceDefaultValue\": {},\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"race\",\n      \"sourceType\": \"WORKSPACE\",\n      \"type\": \"DROPDOWN_MULTIPLE\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"value\": {}\n    },\n    {\n      \"customField\": {\n        \"allowedValues\": [\n          \"New York\",\n          \"London\",\n          \"Manila\",\n          \"Sydney\",\n          \"Belgrade\"\n        ],\n        \"description\": \"This field contains a location.\",\n        \"entityType\": \"USER\",\n        \"id\": \"44a687e29ae1f428e7ebe305\",\n        \"name\": \"location\",\n        \"onlyAdminCanEdit\": false,\n        \"placeholder\": \"Location\",\n        \"projectDefaultValues\": [\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          },\n          {\n            \"projectId\": \"5b641568b07987035750505e\",\n            \"status\": \"VISIBLE\",\n            \"value\": {}\n          }\n        ],\n        \"required\": false,\n        \"status\": \"VISIBLE\",\n        \"type\": \"DROPDOWN_MULTIPLE\",\n        \"workspaceDefaultValue\": {},\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n      \"name\": \"race\",\n      \"sourceType\": \"WORKSPACE\",\n      \"type\": \"DROPDOWN_MULTIPLE\",\n      \"userId\": \"5a0ab5acb07987125438b60f\",\n      \"value\": {}\n    }\n  ],\n  \"weekStart\": \"MONDAY\",\n  \"workCapacity\": \"PT7H\",\n  \"workingDays\": \"THURSDAY\",\n  \"workspaceNumber\": 3\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "671d982a-b844-4b33-bb74-f0294c6dea95",
+          "name": "Find all users on a workspace",
+          "request": {
+            "name": "Find all users on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of users that contain the provided string in their email address."
+                },
+                {
+                  "disabled": false,
+                  "key": "project-id",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a list of users that have access to the project."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of users with the corresponding status."
+                },
+                {
+                  "disabled": false,
+                  "key": "account-statuses",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of users with the corresponding account status filter. If not, this will only filter ACTIVE, PENDING_EMAIL_VERIFICATION, and NOT_REGISTERED Users."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of users that contain the provided string in their name"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "<string>",
+                  "description": "Sorting column criteria. Default value: EMAIL"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Sorting mode. Default value: ASCENDING"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "memberships",
+                  "value": "<string>",
+                  "description": "If provided, you'll get all users along with workspaces, groups, or projects they have access to. Default value is NONE."
+                },
+                {
+                  "disabled": false,
+                  "key": "include-roles",
+                  "value": "false",
+                  "description": "(Required) If you pass along includeRoles=true, you'll get each user's detailed manager role (including projects and members which they manage)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eeed9327-4bca-4b0c-b4bf-ae8849f027a7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "mail@example.com"
+                    },
+                    {
+                      "key": "project-id",
+                      "value": "21a687e29ae1f428e7ebe606"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "account-statuses",
+                      "value": "LIMITED"
+                    },
+                    {
+                      "key": "name",
+                      "value": "John"
+                    },
+                    {
+                      "key": "sort-column",
+                      "value": "ID"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "memberships",
+                      "value": "WORKSPACE"
+                    },
+                    {
+                      "key": "include-roles",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"activeWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"customFields\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_SINGLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"LINK\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      }\n    ],\n    \"defaultWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"email\": \"johndoe@example.com\",\n    \"id\": \"5a0ab5acb07987125438b60f\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"John Doe\",\n    \"profilePicture\": \"https://www.url.com/profile-picture1234567890.png\",\n    \"settings\": {\n      \"dateFormat\": \"MM/DD/YYYY\",\n      \"timeFormat\": \"HOUR24\",\n      \"timeZone\": \"Asia/Aden\",\n      \"alerts\": true,\n      \"approval\": false,\n      \"collapseAllProjectLists\": true,\n      \"dashboardPinToTop\": true,\n      \"dashboardSelection\": \"ME\",\n      \"dashboardViewType\": \"BILLABILITY\",\n      \"groupSimilarEntriesDisabled\": true,\n      \"invoiceReminders\": false,\n      \"isCompactViewOn\": false,\n      \"lang\": \"en\",\n      \"longRunning\": true,\n      \"multiFactorEnabled\": true,\n      \"myStartOfDay\": \"09:00\",\n      \"onboarding\": false,\n      \"projectListCollapse\": 15,\n      \"projectPickerTaskFilter\": false,\n      \"pto\": true,\n      \"reminders\": false,\n      \"scheduledReports\": true,\n      \"scheduling\": false,\n      \"sendNewsletter\": false,\n      \"showOnlyWorkingDays\": false,\n      \"summaryReportSettings\": {\n        \"group\": \"PROJECT\",\n        \"subgroup\": \"CLIENT\"\n      },\n      \"theme\": \"DARK\",\n      \"timeTrackingManual\": true,\n      \"weekStart\": \"MONDAY\",\n      \"weeklyUpdates\": false\n    },\n    \"status\": \"ACTIVE\"\n  },\n  {\n    \"activeWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"customFields\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_MULTIPLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_SINGLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      }\n    ],\n    \"defaultWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"email\": \"johndoe@example.com\",\n    \"id\": \"5a0ab5acb07987125438b60f\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"John Doe\",\n    \"profilePicture\": \"https://www.url.com/profile-picture1234567890.png\",\n    \"settings\": {\n      \"dateFormat\": \"MM/DD/YYYY\",\n      \"timeFormat\": \"HOUR24\",\n      \"timeZone\": \"Asia/Aden\",\n      \"alerts\": true,\n      \"approval\": false,\n      \"collapseAllProjectLists\": true,\n      \"dashboardPinToTop\": true,\n      \"dashboardSelection\": \"ME\",\n      \"dashboardViewType\": \"BILLABILITY\",\n      \"groupSimilarEntriesDisabled\": true,\n      \"invoiceReminders\": false,\n      \"isCompactViewOn\": false,\n      \"lang\": \"en\",\n      \"longRunning\": true,\n      \"multiFactorEnabled\": true,\n      \"myStartOfDay\": \"09:00\",\n      \"onboarding\": false,\n      \"projectListCollapse\": 15,\n      \"projectPickerTaskFilter\": false,\n      \"pto\": true,\n      \"reminders\": false,\n      \"scheduledReports\": true,\n      \"scheduling\": false,\n      \"sendNewsletter\": false,\n      \"showOnlyWorkingDays\": false,\n      \"summaryReportSettings\": {\n        \"group\": \"PROJECT\",\n        \"subgroup\": \"CLIENT\"\n      },\n      \"theme\": \"DARK\",\n      \"timeTrackingManual\": true,\n      \"weekStart\": \"MONDAY\",\n      \"weeklyUpdates\": false\n    },\n    \"status\": \"NOT_REGISTERED\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a13f71e-b98a-4798-b7d3-45cce6c40821",
+          "name": "Filter workspace users",
+          "request": {
+            "name": "Filter workspace users",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                "info"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-info-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-marketplace-token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountStatuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"email\": \"<string>\",\n  \"includeRoles\": false,\n  \"memberships\": \"NONE\",\n  \"name\": \"<string>\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"projectId\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sortColumn\": \"<string>\",\n  \"sortOrder\": \"<string>\",\n  \"status\": \"<string>\",\n  \"userGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c93281b-200a-4fc5-9d72-d140e06bdb35",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    "info"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-info-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-marketplace-token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountStatuses\": [\n    \"LIMITED\",\n    \"ACTIVE\"\n  ],\n  \"email\": \"mail@example.com\",\n  \"includeRoles\": false,\n  \"memberships\": \"NONE\",\n  \"name\": \"John\",\n  \"page\": 1,\n  \"pageSize\": 50,\n  \"projectId\": \"21a687e29ae1f428e7ebe606\",\n  \"roles\": [\n    \"WORKSPACE_ADMIN\",\n    \"OWNER\"\n  ],\n  \"sortColumn\": \"ID\",\n  \"sortOrder\": \"ASCENDING\",\n  \"status\": \"ACTIVE\",\n  \"userGroups\": [\n    \"5a0ab5acb07987125438b60f\",\n    \"72wab5acb07987125438b564\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"activeWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"customFields\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_SINGLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"LINK\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      }\n    ],\n    \"defaultWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"email\": \"johndoe@example.com\",\n    \"id\": \"5a0ab5acb07987125438b60f\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"John Doe\",\n    \"profilePicture\": \"https://www.url.com/profile-picture1234567890.png\",\n    \"settings\": {\n      \"dateFormat\": \"MM/DD/YYYY\",\n      \"timeFormat\": \"HOUR24\",\n      \"timeZone\": \"Asia/Aden\",\n      \"alerts\": true,\n      \"approval\": false,\n      \"collapseAllProjectLists\": true,\n      \"dashboardPinToTop\": true,\n      \"dashboardSelection\": \"ME\",\n      \"dashboardViewType\": \"BILLABILITY\",\n      \"groupSimilarEntriesDisabled\": true,\n      \"invoiceReminders\": false,\n      \"isCompactViewOn\": false,\n      \"lang\": \"en\",\n      \"longRunning\": true,\n      \"multiFactorEnabled\": true,\n      \"myStartOfDay\": \"09:00\",\n      \"onboarding\": false,\n      \"projectListCollapse\": 15,\n      \"projectPickerTaskFilter\": false,\n      \"pto\": true,\n      \"reminders\": false,\n      \"scheduledReports\": true,\n      \"scheduling\": false,\n      \"sendNewsletter\": false,\n      \"showOnlyWorkingDays\": false,\n      \"summaryReportSettings\": {\n        \"group\": \"PROJECT\",\n        \"subgroup\": \"CLIENT\"\n      },\n      \"theme\": \"DARK\",\n      \"timeTrackingManual\": true,\n      \"weekStart\": \"MONDAY\",\n      \"weeklyUpdates\": false\n    },\n    \"status\": \"ACTIVE\"\n  },\n  {\n    \"activeWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"customFields\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_MULTIPLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_SINGLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      }\n    ],\n    \"defaultWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"email\": \"johndoe@example.com\",\n    \"id\": \"5a0ab5acb07987125438b60f\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"John Doe\",\n    \"profilePicture\": \"https://www.url.com/profile-picture1234567890.png\",\n    \"settings\": {\n      \"dateFormat\": \"MM/DD/YYYY\",\n      \"timeFormat\": \"HOUR24\",\n      \"timeZone\": \"Asia/Aden\",\n      \"alerts\": true,\n      \"approval\": false,\n      \"collapseAllProjectLists\": true,\n      \"dashboardPinToTop\": true,\n      \"dashboardSelection\": \"ME\",\n      \"dashboardViewType\": \"BILLABILITY\",\n      \"groupSimilarEntriesDisabled\": true,\n      \"invoiceReminders\": false,\n      \"isCompactViewOn\": false,\n      \"lang\": \"en\",\n      \"longRunning\": true,\n      \"multiFactorEnabled\": true,\n      \"myStartOfDay\": \"09:00\",\n      \"onboarding\": false,\n      \"projectListCollapse\": 15,\n      \"projectPickerTaskFilter\": false,\n      \"pto\": true,\n      \"reminders\": false,\n      \"scheduledReports\": true,\n      \"scheduling\": false,\n      \"sendNewsletter\": false,\n      \"showOnlyWorkingDays\": false,\n      \"summaryReportSettings\": {\n        \"group\": \"PROJECT\",\n        \"subgroup\": \"CLIENT\"\n      },\n      \"theme\": \"DARK\",\n      \"timeTrackingManual\": true,\n      \"weekStart\": \"MONDAY\",\n      \"weeklyUpdates\": false\n    },\n    \"status\": \"NOT_REGISTERED\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e272c2cd-d2ec-40d8-86ec-dbcafb8ebc9c",
+          "name": "Update a user's custom field",
+          "request": {
+            "name": "Update a user's custom field",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId",
+                "custom-field",
+                ":customFieldId",
+                "value"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-custom-field-customFieldId-value-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customFieldId",
+                  "description": "(Required) Represents custom field identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e4d6f47-d7f0-4a45-9e35-54190d8b6060",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId",
+                    "custom-field",
+                    ":customFieldId",
+                    "value"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-custom-field-customFieldId-value-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customFieldId",
+                      "description": "(Required) Represents custom field identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n  \"customFieldName\": \"TIN\",\n  \"customFieldType\": \"DROPDOWN_SINGLE\",\n  \"userId\": \"5a0ab5acb07987125438b60f\",\n  \"value\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "600f4f4c-f8f7-4483-82ef-6763bad40bfb",
+          "name": "Find user's team manager",
+          "request": {
+            "name": "Find user's team manager",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId",
+                "managers"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-managers-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "<string>",
+                  "description": "Sorting column criteria"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Sorting mode"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6afc961a-ea16-4a2b-8c9f-7dc76dd88ed8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId",
+                    "managers"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-managers-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort-column",
+                      "value": "ID"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"activeWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"customFields\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_SINGLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"LINK\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      }\n    ],\n    \"defaultWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"email\": \"johndoe@example.com\",\n    \"id\": \"5a0ab5acb07987125438b60f\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"John Doe\",\n    \"profilePicture\": \"https://www.url.com/profile-picture1234567890.png\",\n    \"settings\": {\n      \"dateFormat\": \"MM/DD/YYYY\",\n      \"timeFormat\": \"HOUR24\",\n      \"timeZone\": \"Asia/Aden\",\n      \"alerts\": true,\n      \"approval\": false,\n      \"collapseAllProjectLists\": true,\n      \"dashboardPinToTop\": true,\n      \"dashboardSelection\": \"ME\",\n      \"dashboardViewType\": \"BILLABILITY\",\n      \"groupSimilarEntriesDisabled\": true,\n      \"invoiceReminders\": false,\n      \"isCompactViewOn\": false,\n      \"lang\": \"en\",\n      \"longRunning\": true,\n      \"multiFactorEnabled\": true,\n      \"myStartOfDay\": \"09:00\",\n      \"onboarding\": false,\n      \"projectListCollapse\": 15,\n      \"projectPickerTaskFilter\": false,\n      \"pto\": true,\n      \"reminders\": false,\n      \"scheduledReports\": true,\n      \"scheduling\": false,\n      \"sendNewsletter\": false,\n      \"showOnlyWorkingDays\": false,\n      \"summaryReportSettings\": {\n        \"group\": \"PROJECT\",\n        \"subgroup\": \"CLIENT\"\n      },\n      \"theme\": \"DARK\",\n      \"timeTrackingManual\": true,\n      \"weekStart\": \"MONDAY\",\n      \"weeklyUpdates\": false\n    },\n    \"status\": \"ACTIVE\"\n  },\n  {\n    \"activeWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"customFields\": [\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_MULTIPLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      },\n      {\n        \"customFieldId\": \"5e4117fe8c625f38930d57b7\",\n        \"customFieldName\": \"TIN\",\n        \"customFieldType\": \"DROPDOWN_SINGLE\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"value\": {}\n      }\n    ],\n    \"defaultWorkspace\": \"64a687e29ae1f428e7ebe303\",\n    \"email\": \"johndoe@example.com\",\n    \"id\": \"5a0ab5acb07987125438b60f\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"John Doe\",\n    \"profilePicture\": \"https://www.url.com/profile-picture1234567890.png\",\n    \"settings\": {\n      \"dateFormat\": \"MM/DD/YYYY\",\n      \"timeFormat\": \"HOUR24\",\n      \"timeZone\": \"Asia/Aden\",\n      \"alerts\": true,\n      \"approval\": false,\n      \"collapseAllProjectLists\": true,\n      \"dashboardPinToTop\": true,\n      \"dashboardSelection\": \"ME\",\n      \"dashboardViewType\": \"BILLABILITY\",\n      \"groupSimilarEntriesDisabled\": true,\n      \"invoiceReminders\": false,\n      \"isCompactViewOn\": false,\n      \"lang\": \"en\",\n      \"longRunning\": true,\n      \"multiFactorEnabled\": true,\n      \"myStartOfDay\": \"09:00\",\n      \"onboarding\": false,\n      \"projectListCollapse\": 15,\n      \"projectPickerTaskFilter\": false,\n      \"pto\": true,\n      \"reminders\": false,\n      \"scheduledReports\": true,\n      \"scheduling\": false,\n      \"sendNewsletter\": false,\n      \"showOnlyWorkingDays\": false,\n      \"summaryReportSettings\": {\n        \"group\": \"PROJECT\",\n        \"subgroup\": \"CLIENT\"\n      },\n      \"theme\": \"DARK\",\n      \"timeTrackingManual\": true,\n      \"weekStart\": \"MONDAY\",\n      \"weeklyUpdates\": false\n    },\n    \"status\": \"NOT_REGISTERED\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04e29419-5e49-483b-bd55-a062048e9178",
+          "name": "Remove user's manager role",
+          "request": {
+            "name": "Remove user's manager role",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId",
+                "roles"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-roles-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityId\": \"<string>\",\n  \"role\": \"<string>\",\n  \"sourceType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e41e9f2-6a1c-4942-a9e2-254e901e5f22",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-roles-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityId\": \"60f924bafdaf031696ec6218\",\n  \"role\": \"TEAM_MANAGER\",\n  \"sourceType\": \"USER_GROUP\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f2ed93e-6adf-4e9a-aa5c-404543354821",
+          "name": "Give manager role to a user",
+          "request": {
+            "name": "Give manager role to a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "users",
+                ":userId",
+                "roles"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-users-userId-roles-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityId\": \"<string>\",\n  \"role\": \"<string>\",\n  \"sourceType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56a5639e-99ba-4645-ba71-8015357de779",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "users",
+                    ":userId",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-users-userId-roles-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityId\": \"60f924bafdaf031696ec6218\",\n  \"role\": \"TEAM_MANAGER\",\n  \"sourceType\": \"USER_GROUP\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"role\": {\n      \"id\": \"60f91b3ffdaf031696ec61a8\",\n      \"name\": \"Administrator\",\n      \"source\": {\n        \"id\": \"5b715612b079875110791234\",\n        \"type\": \"USER_GROUP\"\n      }\n    },\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"role\": {\n      \"id\": \"60f91b3ffdaf031696ec61a8\",\n      \"name\": \"Administrator\",\n      \"source\": {\n        \"id\": \"5b715612b079875110791234\",\n        \"type\": \"USER_GROUP\"\n      }\n    },\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-file-image-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-user-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-member-profile-userId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-info-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-userId-custom-field-customFieldId-value-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-userId-managers-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-users-userId-roles-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "1cfdcb2b-dfbc-4009-9fc4-92b92ea5bc69",
+    "name": "Clockify Approval User API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

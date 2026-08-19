@@ -1,0 +1,2095 @@
+{
+  "item": [
+    {
+      "id": "1b56cdd8-2547-46e1-b23c-bb570687ffe9",
+      "name": "Project",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed8caaea-2031-4b01-a3d9-31c5b880f46d",
+          "name": "Get all projects on a workspace",
+          "request": {
+            "name": "Get all projects on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of projects that contains the provided string in the project name."
+                },
+                {
+                  "disabled": false,
+                  "key": "strict-name-search",
+                  "value": "false",
+                  "description": "Flag to toggle on/off strict search mode. When set to true, search by name will only return projects whose name exactly matches the string value given for the 'name' parameter. When set to false, results will also include projects whose name contain the string value, but could be longer than the string value itself. For example, if there is a project with the name 'applications', and the search value is 'app', setting strict-name-search to true will not return that project in the results, whereas setting it to false will."
+                },
+                {
+                  "disabled": false,
+                  "key": "archived",
+                  "value": "false",
+                  "description": "If provided and set to true, you'll only get archived projects. If omitted, you'll get both archived and non-archived projects."
+                },
+                {
+                  "disabled": false,
+                  "key": "billable",
+                  "value": "false",
+                  "description": "If provided and set to true, you'll only get billable projects. If omitted, you'll get both billable and non-billable projects."
+                },
+                {
+                  "disabled": false,
+                  "key": "clients",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of projects that contain clients which match any of the provided ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "clients",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of projects that contain clients which match any of the provided ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "contains-client",
+                  "value": "true",
+                  "description": "If set to true, you'll get a filtered list of projects that contain clients which match the provided id(s) in 'clients' field. If set to false, you'll get a filtered list of projects which do NOT contain clients that match the provided id(s) in 'clients' field."
+                },
+                {
+                  "disabled": false,
+                  "key": "client-status",
+                  "value": "<string>",
+                  "description": "Filters projects based on client status provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "users",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of projects that contain users which match any of the provided ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "users",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of projects that contain users which match any of the provided ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "contains-user",
+                  "value": "true",
+                  "description": "If set to true, you'll get a filtered list of projects that contain users which match the provided id(s) in 'users' field. If set to false, you'll get a filtered list of projects which do NOT contain users which match the provided id(s) in 'users' field."
+                },
+                {
+                  "disabled": false,
+                  "key": "user-status",
+                  "value": "<string>",
+                  "description": "Filters projects based on user status provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "is-template",
+                  "value": "false",
+                  "description": "Filters projects based on whether they are used as a template or not."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "<string>",
+                  "description": "Sorts the results by the given column/field."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Sorting mode."
+                },
+                {
+                  "disabled": false,
+                  "key": "hydrated",
+                  "value": "false",
+                  "description": "If set to true, results will contain additional information about the project."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                },
+                {
+                  "disabled": false,
+                  "key": "access",
+                  "value": "<string>",
+                  "description": "Valid set of string(s). If provided, you'll get a filtered list of projects that matches the provided access."
+                },
+                {
+                  "disabled": false,
+                  "key": "expense-limit",
+                  "value": "20",
+                  "description": "Represents the maximum number of expenses to fetch."
+                },
+                {
+                  "disabled": false,
+                  "key": "expense-date",
+                  "value": "<string>",
+                  "description": "If provided, you will get expenses dated before the provided value in yyyy-MM-dd format."
+                },
+                {
+                  "disabled": false,
+                  "key": "userGroups",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of projects that contain groups which match any of the provided ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "userGroups",
+                  "value": "<string>",
+                  "description": "If provided, you'll get a filtered list of projects that contain groups which match any of the provided ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "contains-group",
+                  "value": "true",
+                  "description": "If set to true, you'll get a filtered list of projects that contain groups which match the provided id(s) in 'userGroups' field. If set to false, you'll get a filtered list of projects which do NOT contain groups which match the provided id(s) in 'userGroups' field."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "78eff836-e8e8-4274-b45b-9d3ebec6f331",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "Software Development"
+                    },
+                    {
+                      "key": "strict-name-search",
+                      "value": "false"
+                    },
+                    {
+                      "key": "archived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "billable",
+                      "value": "false"
+                    },
+                    {
+                      "key": "clients",
+                      "value": "5a0ab5acb07987125438b60f"
+                    },
+                    {
+                      "key": "clients",
+                      "value": "64c777ddd3fcab07cfbb210c"
+                    },
+                    {
+                      "key": "contains-client",
+                      "value": "true"
+                    },
+                    {
+                      "key": "client-status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "users",
+                      "value": "5a0ab5acb07987125438b60f"
+                    },
+                    {
+                      "key": "users",
+                      "value": "64c777ddd3fcab07cfbb210c"
+                    },
+                    {
+                      "key": "contains-user",
+                      "value": "true"
+                    },
+                    {
+                      "key": "user-status",
+                      "value": "ALL"
+                    },
+                    {
+                      "key": "is-template",
+                      "value": "false"
+                    },
+                    {
+                      "key": "sort-column",
+                      "value": "NAME"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    },
+                    {
+                      "key": "hydrated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    },
+                    {
+                      "key": "access",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "expense-limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "expense-date",
+                      "value": "2024-12-31"
+                    },
+                    {
+                      "key": "userGroups",
+                      "value": "5a0ab5acb07987125438b60f"
+                    },
+                    {
+                      "key": "userGroups",
+                      "value": "64c777ddd3fcab07cfbb210c"
+                    },
+                    {
+                      "key": "contains-group",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"archived\": false,\n    \"billable\": false,\n    \"budgetEstimate\": {\n      \"active\": true,\n      \"estimate\": 600000,\n      \"includeExpenses\": false,\n      \"resetOption\": \"WEEKLY\",\n      \"type\": \"AUTO\"\n    },\n    \"color\": \"#000000\",\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"duration\": \"60000\",\n    \"estimate\": {\n      \"estimate\": \"PT1H30M\",\n      \"type\": \"AUTO\"\n    },\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"5b641568b07987035750505e\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"Software Development\",\n    \"note\": \"This is a sample note for the project.\",\n    \"public\": false,\n    \"template\": false,\n    \"timeEstimate\": {\n      \"active\": true,\n      \"estimate\": \"60000\",\n      \"includeNonBillable\": false,\n      \"resetOption\": \"WEEKLY\",\n      \"type\": \"AUTO\"\n    },\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  },\n  {\n    \"archived\": false,\n    \"billable\": false,\n    \"budgetEstimate\": {\n      \"active\": false,\n      \"estimate\": 600000,\n      \"includeExpenses\": false,\n      \"resetOption\": \"WEEKLY\",\n      \"type\": \"AUTO\"\n    },\n    \"color\": \"#000000\",\n    \"costRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"duration\": \"60000\",\n    \"estimate\": {\n      \"estimate\": \"PT1H30M\",\n      \"type\": \"AUTO\"\n    },\n    \"hourlyRate\": {\n      \"amount\": 10500,\n      \"currency\": \"USD\"\n    },\n    \"id\": \"5b641568b07987035750505e\",\n    \"memberships\": [\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      },\n      {\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"membershipStatus\": \"PENDING\",\n        \"membershipType\": \"PROJECT\",\n        \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n        \"userId\": \"5a0ab5acb07987125438b60f\"\n      }\n    ],\n    \"name\": \"Software Development\",\n    \"note\": \"This is a sample note for the project.\",\n    \"public\": false,\n    \"template\": false,\n    \"timeEstimate\": {\n      \"active\": true,\n      \"estimate\": \"60000\",\n      \"includeNonBillable\": false,\n      \"resetOption\": \"WEEKLY\",\n      \"type\": \"AUTO\"\n    },\n    \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b13ebfe9-93ca-4e8c-8595-7cdaeae2c21a",
+          "name": "Add a new project",
+          "request": {
+            "name": "Add a new project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"billable\": false,\n  \"clientId\": \"<string>\",\n  \"color\": \"<string>\",\n  \"costRate\": {\n    \"amount\": \"<integer>\",\n    \"since\": \"<string>\"\n  },\n  \"estimate\": {\n    \"estimate\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"hourlyRate\": {\n    \"amount\": \"<integer>\",\n    \"since\": \"<string>\"\n  },\n  \"isPublic\": false,\n  \"memberships\": [\n    {\n      \"hourlyRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      },\n      \"membershipStatus\": \"<string>\",\n      \"membershipType\": \"<string>\",\n      \"userId\": \"<string>\"\n    },\n    {\n      \"hourlyRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      },\n      \"membershipStatus\": \"<string>\",\n      \"membershipType\": \"<string>\",\n      \"userId\": \"<string>\"\n    }\n  ],\n  \"note\": \"<string>\",\n  \"tasks\": [\n    {\n      \"name\": \"<string>\",\n      \"assigneeId\": \"<string>\",\n      \"assigneeIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"billable\": false,\n      \"budgetEstimate\": \"<long>\",\n      \"costRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\",\n        \"sinceAsInstant\": \"<dateTime>\"\n      },\n      \"estimate\": \"<string>\",\n      \"hourlyRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"userGroupIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"assigneeId\": \"<string>\",\n      \"assigneeIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"billable\": false,\n      \"budgetEstimate\": \"<long>\",\n      \"costRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\",\n        \"sinceAsInstant\": \"<dateTime>\"\n      },\n      \"estimate\": \"<string>\",\n      \"hourlyRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"userGroupIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf93a7df-4c7b-4df1-aa86-ce967ec67397",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Software Development\",\n  \"billable\": false,\n  \"clientId\": \"9t641568b07987035750704\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 20000,\n    \"since\": \"2020-01-01T00:00:00Z\"\n  },\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 20000,\n    \"since\": \"2020-01-01T00:00:00Z\"\n  },\n  \"isPublic\": false,\n  \"memberships\": [\n    {\n      \"hourlyRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"userId\": \"12t687e29ae1f428e7ebe202\"\n    },\n    {\n      \"hourlyRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"userId\": \"12t687e29ae1f428e7ebe202\"\n    }\n  ],\n  \"note\": \"This is a sample note for the project.\",\n  \"tasks\": [\n    {\n      \"name\": \"Bugfixing\",\n      \"assigneeId\": \"<string>\",\n      \"assigneeIds\": [\n        \"45b687e29ae1f428e7ebe123\",\n        \"67s687e29ae1f428e7ebe678\"\n      ],\n      \"billable\": false,\n      \"budgetEstimate\": 10000,\n      \"costRate\": {\n        \"amount\": 2000,\n        \"since\": \"2020-01-01T00:00:00Z\",\n        \"sinceAsInstant\": \"<dateTime>\"\n      },\n      \"estimate\": \"PT1H30M\",\n      \"hourlyRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      },\n      \"id\": \"57a687e29ae1f428e7ebe107\",\n      \"projectId\": \"5b641568b07987035750505e\",\n      \"status\": \"DONE\",\n      \"userGroupIds\": [\n        \"67b687e29ae1f428e7ebe123\",\n        \"12s687e29ae1f428e7ebe678\"\n      ]\n    },\n    {\n      \"name\": \"Bugfixing\",\n      \"assigneeId\": \"<string>\",\n      \"assigneeIds\": [\n        \"45b687e29ae1f428e7ebe123\",\n        \"67s687e29ae1f428e7ebe678\"\n      ],\n      \"billable\": false,\n      \"budgetEstimate\": 10000,\n      \"costRate\": {\n        \"amount\": 2000,\n        \"since\": \"2020-01-01T00:00:00Z\",\n        \"sinceAsInstant\": \"<dateTime>\"\n      },\n      \"estimate\": \"PT1H30M\",\n      \"hourlyRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      },\n      \"id\": \"57a687e29ae1f428e7ebe107\",\n      \"projectId\": \"5b641568b07987035750505e\",\n      \"status\": \"DONE\",\n      \"userGroupIds\": [\n        \"67b687e29ae1f428e7ebe123\",\n        \"12s687e29ae1f428e7ebe678\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": false,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 6370,\n    \"dayOfWeek\": \"MONDAY\",\n    \"hour\": 4159,\n    \"interval\": \"MONTHLY\",\n    \"month\": \"JUNE\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": false,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fff549f8-89e8-4b59-8d5b-089e93f4f966",
+          "name": "Create project from a template",
+          "request": {
+            "name": "Create project from a template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                "from-template"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-from-template-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"templateProjectId\": \"<string>\",\n  \"clientId\": \"<string>\",\n  \"color\": \"<string>\",\n  \"isPublic\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "514d8031-bf75-4e2d-a414-378c208d3841",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    "from-template"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-from-template-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Software Development\",\n  \"templateProjectId\": \"5b641568b07987035750505e\",\n  \"clientId\": \"9t641568b07987035750704\",\n  \"color\": \"#000000\",\n  \"isPublic\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bffc424-3035-4e17-973a-805a48731df4",
+          "name": "Delete a project from a workspace",
+          "request": {
+            "name": "Delete a project from a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f1e726a4-f596-45b4-8251-bccec0d4e539",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ee160c9-ab8a-4a85-a69e-d80843e9281f",
+          "name": "Find a project by ID",
+          "request": {
+            "name": "Find a project by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hydrated",
+                  "value": "false",
+                  "description": "If set to true, results will contain additional information about the project"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom-field-entity-type",
+                  "value": "TIMEENTRY",
+                  "description": "If provided, you'll get a filtered list of custom fields that matches the provided string with the custom field entity type."
+                },
+                {
+                  "disabled": false,
+                  "key": "expense-limit",
+                  "value": "20",
+                  "description": "Represents the maximum number of expenses to fetch."
+                },
+                {
+                  "disabled": false,
+                  "key": "expense-date",
+                  "value": "<string>",
+                  "description": "If provided, you will get expenses dated before the provided value in yyyy-MM-dd format."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "84e7aec7-8df8-4f21-b02a-3ad246549bc7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hydrated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "custom-field-entity-type",
+                      "value": "TIMEENTRY"
+                    },
+                    {
+                      "key": "expense-limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "expense-date",
+                      "value": "2024-12-31"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20a68830-81f3-4696-9b6d-171447de352f",
+          "name": "Update a project on a workspace",
+          "request": {
+            "name": "Update a project on a workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"clientId\": \"<string>\",\n  \"color\": \"<string>\",\n  \"costRate\": {\n    \"amount\": \"<integer>\",\n    \"since\": \"<string>\"\n  },\n  \"hourlyRate\": {\n    \"amount\": \"<integer>\",\n    \"since\": \"<string>\"\n  },\n  \"isPublic\": false,\n  \"name\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc3465dc-010e-4a21-bf4b-98771bab5128",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"clientId\": \"9t641568b07987035750704\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 20000,\n    \"since\": \"2020-01-01T00:00:00Z\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 20000,\n    \"since\": \"2020-01-01T00:00:00Z\"\n  },\n  \"isPublic\": false,\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7acac8b-a8a4-4799-b7e4-b2aa7d3f8612",
+          "name": "Update project estimate",
+          "request": {
+            "name": "Update project estimate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId",
+                "estimate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-estimate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"budgetEstimate\": {\n    \"active\": false,\n    \"estimate\": \"<long>\",\n    \"includeExpenses\": false,\n    \"resetOption\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"estimateReset\": {\n    \"active\": \"<boolean>\",\n    \"dayOfMonth\": \"<integer>\",\n    \"dayOfWeek\": \"<string>\",\n    \"hour\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"month\": \"<string>\"\n  },\n  \"timeEstimate\": {\n    \"active\": false,\n    \"estimate\": \"<string>\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3cef938b-7093-428c-a836-3611e968a8b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId",
+                    "estimate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-estimate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"budgetEstimate\": {\n    \"active\": false,\n    \"estimate\": 10000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"MONTHLY\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"active\": \"<boolean>\",\n    \"dayOfMonth\": 20,\n    \"dayOfWeek\": \"MONDAY\",\n    \"hour\": 15,\n    \"interval\": \"MONTHLY\",\n    \"isActive\": \"<boolean>\",\n    \"month\": \"FEBRUARY\"\n  },\n  \"timeEstimate\": {\n    \"active\": false,\n    \"estimate\": \"PT1H30M\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"MONTHLY\",\n    \"type\": \"AUTO\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b132a7a-19ef-4108-b024-5192b228275c",
+          "name": "Update project memberships",
+          "request": {
+            "name": "Update project memberships",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId",
+                "memberships"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-memberships-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberships\": [\n    {\n      \"userId\": \"<string>\",\n      \"costRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      },\n      \"hourlyRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      }\n    },\n    {\n      \"userId\": \"<string>\",\n      \"costRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      },\n      \"hourlyRate\": {\n        \"amount\": \"<integer>\",\n        \"since\": \"<string>\"\n      }\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3c6e367a-b690-440a-8f17-a4d2a4afb2ac",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId",
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-memberships-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberships\": [\n    {\n      \"userId\": \"12t687e29ae1f428e7ebe202\",\n      \"costRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      }\n    },\n    {\n      \"userId\": \"12t687e29ae1f428e7ebe202\",\n      \"costRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 20000,\n        \"since\": \"2020-01-01T00:00:00Z\"\n      }\n    }\n  ],\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47bb2c8a-3535-43b8-8098-c51276d57f1d",
+          "name": "Assign/remove users to/from the project",
+          "request": {
+            "name": "Assign/remove users to/from the project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId",
+                "memberships"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-memberships-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"remove\": false,\n  \"userGroups\": {\n    \"contains\": \"<string>\",\n    \"ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"status\": \"<string>\"\n  },\n  \"userIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fb43efcd-bda5-4c7b-9037-f035ff870d54",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId",
+                    "memberships"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-memberships-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remove\": false,\n  \"userGroups\": {\n    \"contains\": \"CONTAINS\",\n    \"ids\": [\n      \"5b715612b079875110791111\",\n      \"5b715612b079875110791222\"\n    ],\n    \"status\": \"ALL\"\n  },\n  \"userIds\": [\n    \"45b687e29ae1f428e7ebe123\",\n    \"67s687e29ae1f428e7ebe678\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5416b44-ee57-472a-a0cf-e50c19227583",
+          "name": "Update a project template",
+          "request": {
+            "name": "Update a project template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId",
+                "template"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-template-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isTemplate\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "adef1899-34a6-40e3-b000-8fd4b39bdba3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId",
+                    "template"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-template-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isTemplate\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bdc7009-e568-4040-890e-5476979137a9",
+          "name": "Update project user's cost rate",
+          "request": {
+            "name": "Update project user's cost rate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId",
+                "users",
+                ":userId",
+                "cost-rate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-users-userId-cost-rate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"since\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be12fa8d-9aeb-48f5-94f4-90398ed2cbcf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId",
+                    "users",
+                    ":userId",
+                    "cost-rate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-users-userId-cost-rate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 20000,\n  \"since\": \"2020-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b964ce0-c29f-4b76-980f-eb4146fb13c9",
+          "name": "Update a project user's billable rate",
+          "request": {
+            "name": "Update a project user's billable rate",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "projects",
+                ":projectId",
+                "users",
+                ":userId",
+                "hourly-rate"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-projects-projectId-users-userId-hourly-rate-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) Represents a project identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"since\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "46da6302-6845-448b-93f4-de35e86c14f1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "projects",
+                    ":projectId",
+                    "users",
+                    ":userId",
+                    "hourly-rate"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-projects-projectId-users-userId-hourly-rate-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) Represents a project identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 20000,\n  \"since\": \"2020-01-01T00:00:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"archived\": false,\n  \"billable\": false,\n  \"budgetEstimate\": {\n    \"active\": true,\n    \"estimate\": 600000,\n    \"includeExpenses\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"clientId\": \"9t641568b07987035750704\",\n  \"clientName\": \"Client X\",\n  \"color\": \"#000000\",\n  \"costRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"duration\": \"60000\",\n  \"estimate\": {\n    \"estimate\": \"PT1H30M\",\n    \"type\": \"AUTO\"\n  },\n  \"estimateReset\": {\n    \"dayOfMonth\": 4444,\n    \"dayOfWeek\": \"SATURDAY\",\n    \"hour\": 3244,\n    \"interval\": \"YEARLY\",\n    \"month\": \"MAY\"\n  },\n  \"hourlyRate\": {\n    \"amount\": 10500,\n    \"currency\": \"USD\"\n  },\n  \"id\": \"5b641568b07987035750505e\",\n  \"memberships\": [\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    },\n    {\n      \"costRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"hourlyRate\": {\n        \"amount\": 10500,\n        \"currency\": \"USD\"\n      },\n      \"membershipStatus\": \"PENDING\",\n      \"membershipType\": \"PROJECT\",\n      \"targetId\": \"64c777ddd3fcab07cfbb210c\",\n      \"userId\": \"5a0ab5acb07987125438b60f\"\n    }\n  ],\n  \"name\": \"Software Development\",\n  \"note\": \"This is a sample note for the project.\",\n  \"public\": false,\n  \"template\": false,\n  \"timeEstimate\": {\n    \"active\": true,\n    \"estimate\": \"60000\",\n    \"includeNonBillable\": false,\n    \"resetOption\": \"WEEKLY\",\n    \"type\": \"AUTO\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-from-template-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-projectId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-projectId-estimate-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-projectId-memberships-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-projectId-template-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-projectId-users-userId-cost-rate-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-projects-projectId-users-userId-hourly-rate-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "489016f0-8556-48d4-9c3c-dcf7bc09d91f",
+    "name": "Clockify Approval Project API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}

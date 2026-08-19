@@ -1,0 +1,948 @@
+{
+  "item": [
+    {
+      "id": "0e4f489e-8c10-4bc5-91b2-ec18097a8cbe",
+      "name": "Approval",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42792b6a-aa20-4573-beff-898508db6f20",
+          "name": "Get approval requests",
+          "request": {
+            "name": "Get approval requests",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "approval-requests"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-approval-requests-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filters results based on the provided approval state."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-column",
+                  "value": "<string>",
+                  "description": "Represents the column name to be used as sorting criteria."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-order",
+                  "value": "<string>",
+                  "description": "Represents the sorting order."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page-size",
+                  "value": "50",
+                  "description": "Page size."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ccff2d83-7dce-4640-9455-c59a30d9f20a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "approval-requests"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-approval-requests-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "PENDING"
+                    },
+                    {
+                      "key": "sort-column",
+                      "value": "START"
+                    },
+                    {
+                      "key": "sort-order",
+                      "value": "ASCENDING"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page-size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"approvalRequest\": {\n      \"creator\": {\n        \"userEmail\": \"johhndoe@example.com\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"userName\": \"johhndoe\"\n      },\n      \"dateRange\": {\n        \"end\": \"2002-10-31T17:53:23.702Z\",\n        \"start\": \"1964-10-07T15:11:00.173Z\"\n      },\n      \"id\": \"567687e29ae1f428e7ebf564\",\n      \"owner\": {\n        \"startOfWeek\": \"MONDAY\",\n        \"timeZone\": \"Europe/Budapest\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"userName\": \"johndoe\"\n      },\n      \"status\": {\n        \"note\": \"This is a sample approval request note.\",\n        \"state\": \"APPROVED\",\n        \"updatedAt\": \"2020-01-01T08:00:00Z\",\n        \"updatedBy\": \"5a0ab5acb07987125438b60f\",\n        \"updatedByUserName\": \"juandelacruz\"\n      },\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    },\n    \"approvedTime\": \"PT1H30M\",\n    \"billableAmount\": 2500,\n    \"billableTime\": \"PT1H30M\",\n    \"breakTime\": \"PT1H30M\",\n    \"costAmount\": 5000,\n    \"entries\": [\n      {\n        \"approvalRequestId\": \"5e4117fe8c625f38930d57b7\",\n        \"billable\": false,\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"id\": \"5b715448b0798751107918ab\",\n        \"isLocked\": false,\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"tags\": [\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          },\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          }\n        ],\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"1960-02-24T10:07:20.055Z\",\n          \"offsetEnd\": 7724,\n          \"offsetStart\": 2112,\n          \"start\": \"2008-11-25T14:36:30.445Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"1974-07-10T00:50:04.245Z\",\n          \"zonedStart\": \"2008-03-14T14:04:27.311Z\"\n        },\n        \"type\": \"REGULAR\"\n      },\n      {\n        \"approvalRequestId\": \"5e4117fe8c625f38930d57b7\",\n        \"billable\": false,\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"id\": \"5b715448b0798751107918ab\",\n        \"isLocked\": false,\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"tags\": [\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          },\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          }\n        ],\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"2003-01-16T09:32:18.935Z\",\n          \"offsetEnd\": 4631,\n          \"offsetStart\": 1555,\n          \"start\": \"1979-06-13T09:39:51.167Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"1947-05-28T10:39:17.036Z\",\n          \"zonedStart\": \"1979-08-01T01:34:38.003Z\"\n        },\n        \"type\": \"REGULAR\"\n      }\n    ],\n    \"expenseTotal\": 7500,\n    \"expenses\": [\n      {\n        \"approvalRequestId\": \"445687e29ae1f428e7ebe893\",\n        \"approvalStatus\": \"PENDING\",\n        \"billable\": false,\n        \"category\": {\n          \"archived\": false,\n          \"hasUnitPrice\": false,\n          \"id\": \"89a687e29ae1f428e7ebe303\",\n          \"name\": \"Procurement\",\n          \"priceInCents\": 1000,\n          \"unit\": \"piece\",\n          \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n        },\n        \"currency\": \"USD\",\n        \"date\": \"2020-01-01\",\n        \"detailedApprovalStatus\": \"PENDING\",\n        \"fileId\": \"745687e29ae1f428e7ebe890\",\n        \"fileName\": \"file_12345.csv\",\n        \"fileUrl\": \"string\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"locked\": true,\n        \"notes\": \"This is a sample note for this expense.\",\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"quantity\": 537.5953288118851,\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"total\": 10500.5,\n        \"userId\": \"89b687e29ae1f428e7ebe912\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      {\n        \"approvalRequestId\": \"445687e29ae1f428e7ebe893\",\n        \"approvalStatus\": \"PENDING\",\n        \"billable\": false,\n        \"category\": {\n          \"archived\": false,\n          \"hasUnitPrice\": false,\n          \"id\": \"89a687e29ae1f428e7ebe303\",\n          \"name\": \"Procurement\",\n          \"priceInCents\": 1000,\n          \"unit\": \"piece\",\n          \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n        },\n        \"currency\": \"USD\",\n        \"date\": \"2020-01-01\",\n        \"detailedApprovalStatus\": \"PENDING\",\n        \"fileId\": \"745687e29ae1f428e7ebe890\",\n        \"fileName\": \"file_12345.csv\",\n        \"fileUrl\": \"string\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"locked\": false,\n        \"notes\": \"This is a sample note for this expense.\",\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"quantity\": 4899.779092218337,\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"total\": 10500.5,\n        \"userId\": \"89b687e29ae1f428e7ebe912\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      }\n    ],\n    \"pendingTime\": \"PT1H30M\",\n    \"trackedTime\": \"PT1H30M\"\n  },\n  {\n    \"approvalRequest\": {\n      \"creator\": {\n        \"userEmail\": \"johhndoe@example.com\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"userName\": \"johhndoe\"\n      },\n      \"dateRange\": {\n        \"end\": \"1975-12-31T18:53:25.337Z\",\n        \"start\": \"2002-01-23T22:06:57.709Z\"\n      },\n      \"id\": \"567687e29ae1f428e7ebf564\",\n      \"owner\": {\n        \"startOfWeek\": \"MONDAY\",\n        \"timeZone\": \"Europe/Budapest\",\n        \"userId\": \"5a0ab5acb07987125438b60f\",\n        \"userName\": \"johndoe\"\n      },\n      \"status\": {\n        \"note\": \"This is a sample approval request note.\",\n        \"state\": \"APPROVED\",\n        \"updatedAt\": \"2020-01-01T08:00:00Z\",\n        \"updatedBy\": \"5a0ab5acb07987125438b60f\",\n        \"updatedByUserName\": \"juandelacruz\"\n      },\n      \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n    },\n    \"approvedTime\": \"PT1H30M\",\n    \"billableAmount\": 2500,\n    \"billableTime\": \"PT1H30M\",\n    \"breakTime\": \"PT1H30M\",\n    \"costAmount\": 5000,\n    \"entries\": [\n      {\n        \"approvalRequestId\": \"5e4117fe8c625f38930d57b7\",\n        \"billable\": false,\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"id\": \"5b715448b0798751107918ab\",\n        \"isLocked\": false,\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"tags\": [\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          },\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          }\n        ],\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"1986-08-17T12:39:18.915Z\",\n          \"offsetEnd\": 3390,\n          \"offsetStart\": 3981,\n          \"start\": \"2019-08-02T00:30:28.469Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"2026-03-26T17:35:50.740Z\",\n          \"zonedStart\": \"1960-01-30T01:53:42.641Z\"\n        },\n        \"type\": \"REGULAR\"\n      },\n      {\n        \"approvalRequestId\": \"5e4117fe8c625f38930d57b7\",\n        \"billable\": false,\n        \"costRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"customFieldValues\": [\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          },\n          {\n            \"customFieldId\": \"44a687e29ae1f428e7ebe305\",\n            \"sourceType\": \"WORKSPACE\",\n            \"timeEntryId\": \"64c777ddd3fcab07cfbb210c\",\n            \"value\": {}\n          }\n        ],\n        \"description\": \"This is a sample time entry description.\",\n        \"hourlyRate\": {\n          \"amount\": 10500,\n          \"currency\": \"USD\"\n        },\n        \"id\": \"5b715448b0798751107918ab\",\n        \"isLocked\": false,\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"tags\": [\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          },\n          {\n            \"archived\": false,\n            \"id\": \"64c777ddd3fcab07cfbb210c\",\n            \"name\": \"Sprint1\",\n            \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n          }\n        ],\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"timeInterval\": {\n          \"duration\": \"PT1H30M\",\n          \"end\": \"1953-08-03T06:56:51.450Z\",\n          \"offsetEnd\": 3837,\n          \"offsetStart\": 1674,\n          \"start\": \"1968-06-25T17:46:00.112Z\",\n          \"timeZone\": \"string\",\n          \"zonedEnd\": \"2004-02-23T17:03:07.727Z\",\n          \"zonedStart\": \"2022-05-21T01:47:18.330Z\"\n        },\n        \"type\": \"REGULAR\"\n      }\n    ],\n    \"expenseTotal\": 7500,\n    \"expenses\": [\n      {\n        \"approvalRequestId\": \"445687e29ae1f428e7ebe893\",\n        \"approvalStatus\": \"PENDING\",\n        \"billable\": false,\n        \"category\": {\n          \"archived\": false,\n          \"hasUnitPrice\": false,\n          \"id\": \"89a687e29ae1f428e7ebe303\",\n          \"name\": \"Procurement\",\n          \"priceInCents\": 1000,\n          \"unit\": \"piece\",\n          \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n        },\n        \"currency\": \"USD\",\n        \"date\": \"2020-01-01\",\n        \"detailedApprovalStatus\": \"PENDING\",\n        \"fileId\": \"745687e29ae1f428e7ebe890\",\n        \"fileName\": \"file_12345.csv\",\n        \"fileUrl\": \"string\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"locked\": false,\n        \"notes\": \"This is a sample note for this expense.\",\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"quantity\": 4934.521282814049,\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"total\": 10500.5,\n        \"userId\": \"89b687e29ae1f428e7ebe912\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      },\n      {\n        \"approvalRequestId\": \"445687e29ae1f428e7ebe893\",\n        \"approvalStatus\": \"PENDING\",\n        \"billable\": false,\n        \"category\": {\n          \"archived\": false,\n          \"hasUnitPrice\": false,\n          \"id\": \"89a687e29ae1f428e7ebe303\",\n          \"name\": \"Procurement\",\n          \"priceInCents\": 1000,\n          \"unit\": \"piece\",\n          \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n        },\n        \"currency\": \"USD\",\n        \"date\": \"2020-01-01\",\n        \"detailedApprovalStatus\": \"PENDING\",\n        \"fileId\": \"745687e29ae1f428e7ebe890\",\n        \"fileName\": \"file_12345.csv\",\n        \"fileUrl\": \"string\",\n        \"id\": \"64c777ddd3fcab07cfbb210c\",\n        \"locked\": false,\n        \"notes\": \"This is a sample note for this expense.\",\n        \"project\": {\n          \"clientId\": \"64c777ddd3fcab07cfbb210c\",\n          \"clientName\": \"Client X\",\n          \"color\": \"#000000\",\n          \"id\": \"5b641568b07987035750505e\",\n          \"name\": \"Software Development\"\n        },\n        \"quantity\": 1876.9842785707147,\n        \"task\": {\n          \"id\": \"5b715448b0798751107918ab\",\n          \"name\": \"Bugfixing\"\n        },\n        \"total\": 10500.5,\n        \"userId\": \"89b687e29ae1f428e7ebe912\",\n        \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n      }\n    ],\n    \"pendingTime\": \"PT1H30M\",\n    \"trackedTime\": \"PT1H30M\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eebc75eb-48ea-41b6-8164-2bff658020f5",
+          "name": "Submit approval request",
+          "request": {
+            "name": "Submit approval request",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "approval-requests"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-approval-requests-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"periodStart\": \"<string>\",\n  \"period\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "944ba1db-bc47-4254-a500-1a6f13b1db73",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "approval-requests"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-approval-requests-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"periodStart\": \"2020-01-01T00:00:00.000Z\",\n  \"period\": \"MONTHLY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"creator\": {\n    \"userEmail\": \"johhndoe@example.com\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johhndoe\"\n  },\n  \"dateRange\": {\n    \"end\": \"1968-06-20T09:40:34.693Z\",\n    \"start\": \"1972-02-17T07:55:44.883Z\"\n  },\n  \"id\": \"567687e29ae1f428e7ebf564\",\n  \"owner\": {\n    \"startOfWeek\": \"MONDAY\",\n    \"timeZone\": \"Europe/Budapest\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johndoe\"\n  },\n  \"status\": {\n    \"note\": \"This is a sample approval request note.\",\n    \"state\": \"APPROVED\",\n    \"updatedAt\": \"2020-01-01T08:00:00Z\",\n    \"updatedBy\": \"5a0ab5acb07987125438b60f\",\n    \"updatedByUserName\": \"juandelacruz\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e6880eb-a33f-4070-aca1-bb99e7fab8bc",
+          "name": "Submit non pending/approved entries/expenses for approval to an existing approval request",
+          "request": {
+            "name": "Submit non pending/approved entries/expenses for approval to an existing approval request",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "approval-requests",
+                "resubmit-entries-for-approval"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-approval-requests-resubmit-entries-for-approval-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"periodStart\": \"<string>\",\n  \"period\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e811f68d-8261-425a-aecb-773a61b346e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "approval-requests",
+                    "resubmit-entries-for-approval"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-approval-requests-resubmit-entries-for-approval-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"periodStart\": \"2020-01-01T00:00:00.000Z\",\n  \"period\": \"MONTHLY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"creator\": {\n    \"userEmail\": \"johhndoe@example.com\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johhndoe\"\n  },\n  \"dateRange\": {\n    \"end\": \"1968-06-20T09:40:34.693Z\",\n    \"start\": \"1972-02-17T07:55:44.883Z\"\n  },\n  \"id\": \"567687e29ae1f428e7ebf564\",\n  \"owner\": {\n    \"startOfWeek\": \"MONDAY\",\n    \"timeZone\": \"Europe/Budapest\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johndoe\"\n  },\n  \"status\": {\n    \"note\": \"This is a sample approval request note.\",\n    \"state\": \"APPROVED\",\n    \"updatedAt\": \"2020-01-01T08:00:00Z\",\n    \"updatedBy\": \"5a0ab5acb07987125438b60f\",\n    \"updatedByUserName\": \"juandelacruz\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7f15f56-aa17-4987-bf80-94537e7d0f15",
+          "name": "Submit an approval request for a user",
+          "request": {
+            "name": "Submit an approval request for a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "approval-requests",
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-approval-requests-users-userId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"periodStart\": \"<string>\",\n  \"period\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c60d35d7-aa6b-4b14-8c83-d809bcbf83f3",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "approval-requests",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-approval-requests-users-userId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"periodStart\": \"2020-01-01T00:00:00.000Z\",\n  \"period\": \"MONTHLY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"creator\": {\n    \"userEmail\": \"johhndoe@example.com\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johhndoe\"\n  },\n  \"dateRange\": {\n    \"end\": \"1968-06-20T09:40:34.693Z\",\n    \"start\": \"1972-02-17T07:55:44.883Z\"\n  },\n  \"id\": \"567687e29ae1f428e7ebf564\",\n  \"owner\": {\n    \"startOfWeek\": \"MONDAY\",\n    \"timeZone\": \"Europe/Budapest\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johndoe\"\n  },\n  \"status\": {\n    \"note\": \"This is a sample approval request note.\",\n    \"state\": \"APPROVED\",\n    \"updatedAt\": \"2020-01-01T08:00:00Z\",\n    \"updatedBy\": \"5a0ab5acb07987125438b60f\",\n    \"updatedByUserName\": \"juandelacruz\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f96b9667-29b0-481d-a5c1-9b37e6baf919",
+          "name": "Re-submit rejected/withdrawn entries/expenses for an approval of a user",
+          "request": {
+            "name": "Re-submit rejected/withdrawn entries/expenses for an approval of a user",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "approval-requests",
+                "users",
+                ":userId",
+                "resubmit-entries-for-approval"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-approval-requests-users-userId-resubmit-entries-for-approval-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Represents a user identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"periodStart\": \"<string>\",\n  \"period\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b3910693-cf4f-45b0-87de-a4ce49b9d4dc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "approval-requests",
+                    "users",
+                    ":userId",
+                    "resubmit-entries-for-approval"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-approval-requests-users-userId-resubmit-entries-for-approval-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Represents a user identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"periodStart\": \"2020-01-01T00:00:00.000Z\",\n  \"period\": \"MONTHLY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"creator\": {\n    \"userEmail\": \"johhndoe@example.com\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johhndoe\"\n  },\n  \"dateRange\": {\n    \"end\": \"1968-06-20T09:40:34.693Z\",\n    \"start\": \"1972-02-17T07:55:44.883Z\"\n  },\n  \"id\": \"567687e29ae1f428e7ebf564\",\n  \"owner\": {\n    \"startOfWeek\": \"MONDAY\",\n    \"timeZone\": \"Europe/Budapest\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johndoe\"\n  },\n  \"status\": {\n    \"note\": \"This is a sample approval request note.\",\n    \"state\": \"APPROVED\",\n    \"updatedAt\": \"2020-01-01T08:00:00Z\",\n    \"updatedBy\": \"5a0ab5acb07987125438b60f\",\n    \"updatedByUserName\": \"juandelacruz\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4b26a15-cea7-4de4-9db7-3456e7c7c5ac",
+          "name": "Update an approval request",
+          "request": {
+            "name": "Update an approval request",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":workspaceId",
+                "approval-requests",
+                ":approvalRequestId"
+              ],
+              "host": [
+                "{{v1-workspaces-workspaceId-approval-requests-approvalRequestId-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) Represents a workspace identifier across the system."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "approvalRequestId",
+                  "description": "(Required) Represents an approval request identifier across the system."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"<string>\",\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c4e43d5-798a-4266-8aca-55295caeb894",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":workspaceId",
+                    "approval-requests",
+                    ":approvalRequestId"
+                  ],
+                  "host": [
+                    "{{v1-workspaces-workspaceId-approval-requests-approvalRequestId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) Represents a workspace identifier across the system."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "approvalRequestId",
+                      "description": "(Required) Represents an approval request identifier across the system."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"PENDING\",\n  \"note\": \"This is a sample note.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"creator\": {\n    \"userEmail\": \"johhndoe@example.com\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johhndoe\"\n  },\n  \"dateRange\": {\n    \"end\": \"1968-06-20T09:40:34.693Z\",\n    \"start\": \"1972-02-17T07:55:44.883Z\"\n  },\n  \"id\": \"567687e29ae1f428e7ebf564\",\n  \"owner\": {\n    \"startOfWeek\": \"MONDAY\",\n    \"timeZone\": \"Europe/Budapest\",\n    \"userId\": \"5a0ab5acb07987125438b60f\",\n    \"userName\": \"johndoe\"\n  },\n  \"status\": {\n    \"note\": \"This is a sample approval request note.\",\n    \"state\": \"APPROVED\",\n    \"updatedAt\": \"2020-01-01T08:00:00Z\",\n    \"updatedBy\": \"5a0ab5acb07987125438b60f\",\n    \"updatedByUserName\": \"juandelacruz\"\n  },\n  \"workspaceId\": \"64a687e29ae1f428e7ebe303\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-approval-requests-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-approval-requests-resubmit-entries-for-approval-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-approval-requests-users-userId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-approval-requests-users-userId-resubmit-entries-for-approval-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.clockify.me/api",
+      "key": "v1-workspaces-workspaceId-approval-requests-approvalRequestId-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "1cc564f8-145f-46fa-9e4f-baa60c290ac9",
+    "name": "Clockify Approval API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates.",
+      "type": "text/plain"
+    }
+  }
+}
