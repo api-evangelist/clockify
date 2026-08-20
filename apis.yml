@@ -47,6 +47,15 @@ apis:
   tags:
   - Time Entries
   - Workspaces
+  - Project
+  - Task
+  - User
+  - Reports
+  - Webhook
+  - APIKeys
+  tags_raw:
+  - Time Entries
+  - Workspaces
   - Projects
   - Tasks
   - Users
@@ -87,6 +96,8 @@ apis:
   humanURL: https://docs.clockify.me/
   baseURL: https://api.clockify.me/api/v1
   tags:
+  - Balances
+  tags_raw:
   - Balance
   properties:
   - type: OpenAPI
@@ -97,6 +108,8 @@ apis:
   humanURL: https://docs.clockify.me/
   baseURL: https://api.clockify.me/api/v1
   tags:
+  - Clients
+  tags_raw:
   - Client
   properties:
   - type: OpenAPI
@@ -107,6 +120,8 @@ apis:
   humanURL: https://docs.clockify.me/
   baseURL: https://api.clockify.me/api/v1
   tags:
+  - Custom Fields
+  tags_raw:
   - Custom fields
   properties:
   - type: OpenAPI
@@ -309,6 +324,8 @@ apis:
   humanURL: https://docs.clockify.me/
   baseURL: https://api.clockify.me/api/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
