@@ -59,7 +59,7 @@ apis:
   baseURL: https://api.clockify.me/api/v1
   tags:
   - Time Entries
-  - Workspaces
+  - Workspace
   - Project
   - Task
   - User
@@ -155,6 +155,8 @@ apis:
   humanURL: https://docs.clockify.me/
   baseURL: https://api.clockify.me/api/v1
   tags:
+  - Expenses
+  tags_raw:
   - Expense
   properties:
   - type: OpenAPI
@@ -195,6 +197,8 @@ apis:
   humanURL: https://docs.clockify.me/
   baseURL: https://api.clockify.me/api/v1
   tags:
+  - Invoices
+  tags_raw:
   - Invoice
   properties:
   - type: OpenAPI
