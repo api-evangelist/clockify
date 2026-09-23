@@ -1,7 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
-  title: Clockify Approval Expense Report API
+  description: '## Introduction
+
+    By using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data
+
+    between Clockify and other tools, and create custom add-ons on CAKE.com Marketplace.'
+  title: Clockify Expense Report API
   version: v1
   x-logo:
     altText: Clockify logo
@@ -44,6 +48,46 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    ContainsUsersFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ALL
+          - ACTIVE_WITH_PENDING
+          - ACTIVE
+          - PENDING
+          - INACTIVE
+          example: ACTIVE
+    invoicingInfo:
+      type: object
+      description: Expense's invoicing info.
+      properties:
+        invoiceId:
+          type: string
+        manuallyInvoiced:
+          type: boolean
     ExpenseReportFilterV1:
       type: object
       properties:
@@ -186,75 +230,6 @@ components:
       required:
       - dateRangeEnd
       - dateRangeStart
-    ContainsTaskFilterV1:
-      type: object
-      description: Represents filter criteria for expenses associated with tasks.
-      properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    invoicingInfo:
-      type: object
-      description: Expense's invoicing info.
-      properties:
-        invoiceId:
-          type: string
-        manuallyInvoiced:
-          type: boolean
-    ExpenseTotalsDtoV1:
-      type: object
-      description: Represents expense totals
-      properties:
-        expensesCount:
-          type: integer
-          format: int32
-          description: Represents expenses count
-          example: 2
-        totalAmount:
-          type: number
-          format: double
-          description: Represents total amount of expenses
-          example: 20
-        totalAmountBillable:
-          type: number
-          format: double
-          description: Represents total billable amount of expenses
-          example: 20
-    ExpenseDetailedReportDtoV1:
-      type: object
-      description: report
-      properties:
-        expenses:
-          type: array
-          description: Represents list of expenses
-          items:
-            $ref: '#/components/schemas/ExpenseReportDtoV1'
-        totals:
-          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
     ExpenseReportDtoV1:
       type: object
       description: Represents list of expenses
@@ -433,8 +408,9 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110791121
-    ContainsUsersFilterV1:
+    ContainsTaskFilterV1:
       type: object
+      description: Represents filter criteria for expenses associated with tasks.
       properties:
         contains:
           type: string
@@ -459,12 +435,21 @@ components:
           type: string
           description: Filter entities in 'contains' by their status.
           enum:
-          - ALL
-          - ACTIVE_WITH_PENDING
           - ACTIVE
-          - PENDING
-          - INACTIVE
+          - ARCHIVED
+          - ALL
           example: ACTIVE
+    ExpenseDetailedReportDtoV1:
+      type: object
+      description: report
+      properties:
+        expenses:
+          type: array
+          description: Represents list of expenses
+          items:
+            $ref: '#/components/schemas/ExpenseReportDtoV1'
+        totals:
+          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
     ContainsArchivedFilterV1:
       type: object
       properties:
@@ -495,6 +480,25 @@ components:
           - ARCHIVED
           - ALL
           example: ACTIVE
+    ExpenseTotalsDtoV1:
+      type: object
+      description: Represents expense totals
+      properties:
+        expensesCount:
+          type: integer
+          format: int32
+          description: Represents expenses count
+          example: 2
+        totalAmount:
+          type: number
+          format: double
+          description: Represents total amount of expenses
+          example: 20
+        totalAmountBillable:
+          type: number
+          format: double
+          description: Represents total billable amount of expenses
+          example: 20
   securitySchemes:
     AddonKeyAuth:
       in: header

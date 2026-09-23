@@ -1,7 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
-  title: Clockify Approval Webhooks API
+  description: '## Introduction
+
+    By using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data
+
+    between Clockify and other tools, and create custom add-ons on CAKE.com Marketplace.'
+  title: Clockify Webhooks API
   version: v1
   x-logo:
     altText: Clockify logo
@@ -529,127 +533,6 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    CreateWebhookRequestV1:
-      required:
-      - triggerSource
-      - triggerSourceType
-      - url
-      - webhookEvent
-      type: object
-      properties:
-        name:
-          maxLength: 30
-          minLength: 2
-          type: string
-          description: Represents a webhook name.
-          example: stripe
-        triggerSource:
-          type: array
-          description: Represents a list of trigger sources.
-          example:
-          - 54a687e29ae1f428e7ebe909
-          - 87p187e29ae1f428e7ebej56
-          items:
-            type: string
-            description: Represents a list of trigger sources.
-            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
-        triggerSourceType:
-          type: string
-          description: Represents a webhook event trigger source type.
-          example: PROJECT_ID
-          enum:
-          - PROJECT_ID
-          - USER_ID
-          - TAG_ID
-          - TASK_ID
-          - WORKSPACE_ID
-          - ASSIGNMENT_ID
-          - EXPENSE_ID
-        url:
-          minLength: 1
-          type: string
-          description: Represents a webhook target url.
-          example: https://example-clockify.com/stripeEndpoint
-        webhookEvent:
-          type: string
-          description: Represents a webhook event type.
-          example: NEW_PROJECT
-          enum:
-          - NEW_PROJECT
-          - NEW_TASK
-          - NEW_CLIENT
-          - NEW_TIMER_STARTED
-          - TIMER_STOPPED
-          - TIME_ENTRY_UPDATED
-          - TIME_ENTRY_DELETED
-          - TIME_ENTRY_SPLIT
-          - NEW_TIME_ENTRY
-          - TIME_ENTRY_RESTORED
-          - NEW_TAG
-          - USER_DELETED_FROM_WORKSPACE
-          - USER_JOINED_WORKSPACE
-          - USER_DEACTIVATED_ON_WORKSPACE
-          - USER_ACTIVATED_ON_WORKSPACE
-          - USER_EMAIL_CHANGED
-          - USER_UPDATED
-          - NEW_INVOICE
-          - INVOICE_UPDATED
-          - NEW_APPROVAL_REQUEST
-          - APPROVAL_REQUEST_STATUS_UPDATED
-          - TIME_OFF_REQUESTED
-          - TIME_OFF_REQUEST_UPDATED
-          - TIME_OFF_REQUEST_APPROVED
-          - TIME_OFF_REQUEST_REJECTED
-          - TIME_OFF_REQUEST_STARTED
-          - TIME_OFF_REQUEST_WITHDRAWN
-          - BALANCE_UPDATED
-          - TAG_UPDATED
-          - TAG_DELETED
-          - TASK_UPDATED
-          - CLIENT_UPDATED
-          - TASK_DELETED
-          - CLIENT_DELETED
-          - EXPENSE_RESTORED
-          - ASSIGNMENT_CREATED
-          - ASSIGNMENT_DELETED
-          - ASSIGNMENT_PUBLISHED
-          - ASSIGNMENT_UPDATED
-          - EXPENSE_CREATED
-          - EXPENSE_DELETED
-          - EXPENSE_UPDATED
-          - PROJECT_UPDATED
-          - PROJECT_DELETED
-          - USER_GROUP_CREATED
-          - USER_GROUP_UPDATED
-          - USER_GROUP_DELETED
-          - USERS_INVITED_TO_WORKSPACE
-          - LIMITED_USERS_ADDED_TO_WORKSPACE
-          - COST_RATE_UPDATED
-          - BILLABLE_RATE_UPDATED
-    WebhookLogSearchRequestV1:
-      type: object
-      properties:
-        from:
-          type: string
-          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred after this value.
-          format: date-time
-          example: '2023-02-01T13:00:46Z'
-        sortByNewest:
-          type: boolean
-          description: If set to true, logs will be sorted with most recent first.
-          default: false
-        status:
-          type: string
-          description: Filters logs by status.
-          enum:
-          - ALL
-          - SUCCEEDED
-          - FAILED
-        to:
-          type: string
-          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred before this value.
-          format: date-time
-          example: '2023-02-05T13:00:46Z'
     WebhookEventType:
       type: object
       description: Represents webhook event type.
@@ -3597,38 +3480,140 @@ components:
             - WORKSPACE_ID
             - ASSIGNMENT_ID
             - EXPENSE_ID
-    WebhookLogDtoV1:
+    WebhooksDtoV1:
       type: object
       properties:
-        id:
-          type: string
-          description: Represents log identifier across the system.
-          example: 65e5b854fe0dfa24f1528ef0
-        requestBody:
-          type: string
-          description: Represents request body.
-          example: '{"id":"65df50f5d2dd8f23a685374e","name":"Webhook"}'
-        respondedAt:
-          type: string
-          description: Represents date and time of response.
-          example: '2024-03-04T12:02:28.125+00:00'
-        responseBody:
-          type: string
-          description: Represents response body.
-          example: '{"id":"h73210f5d2dd8f23685374e","response":"Webhook response"}'
-        statusCode:
+        webhooks:
+          type: array
+          description: Represents a list of webhook objects for the workspace.
+          items:
+            $ref: '#/components/schemas/WebhookDtoV1'
+        workspaceWebhookCount:
           type: integer
-          description: Represents response status code.
+          description: Represents number of webhooks for the workspace.
           format: int32
-          example: 200
-        webhookEventStatusId:
+          example: 5
+    CreateWebhookRequestV1:
+      required:
+      - triggerSource
+      - triggerSourceType
+      - url
+      - webhookEvent
+      type: object
+      properties:
+        name:
+          maxLength: 30
+          minLength: 2
           type: string
-          description: Represents webhook event status identifier across the system.
-          example: 6818c52b391aca499bf8dafc
-        webhookId:
+          description: Represents a webhook name.
+          example: stripe
+        triggerSource:
+          type: array
+          description: Represents a list of trigger sources.
+          example:
+          - 54a687e29ae1f428e7ebe909
+          - 87p187e29ae1f428e7ebej56
+          items:
+            type: string
+            description: Represents a list of trigger sources.
+            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
+        triggerSourceType:
           type: string
-          description: Represents webhook identifier across the system.
-          example: 65df5508d2dd8f23a68537af
+          description: Represents a webhook event trigger source type.
+          example: PROJECT_ID
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        url:
+          minLength: 1
+          type: string
+          description: Represents a webhook target url.
+          example: https://example-clockify.com/stripeEndpoint
+        webhookEvent:
+          type: string
+          description: Represents a webhook event type.
+          example: NEW_PROJECT
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+    WebhookLogSearchRequestV1:
+      type: object
+      properties:
+        from:
+          type: string
+          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred after this value.
+          format: date-time
+          example: '2023-02-01T13:00:46Z'
+        sortByNewest:
+          type: boolean
+          description: If set to true, logs will be sorted with most recent first.
+          default: false
+        status:
+          type: string
+          description: Filters logs by status.
+          enum:
+          - ALL
+          - SUCCEEDED
+          - FAILED
+        to:
+          type: string
+          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred before this value.
+          format: date-time
+          example: '2023-02-05T13:00:46Z'
     UpdateWebhookRequestV1:
       required:
       - triggerSource
@@ -3726,19 +3711,38 @@ components:
           - LIMITED_USERS_ADDED_TO_WORKSPACE
           - COST_RATE_UPDATED
           - BILLABLE_RATE_UPDATED
-    WebhooksDtoV1:
+    WebhookLogDtoV1:
       type: object
       properties:
-        webhooks:
-          type: array
-          description: Represents a list of webhook objects for the workspace.
-          items:
-            $ref: '#/components/schemas/WebhookDtoV1'
-        workspaceWebhookCount:
+        id:
+          type: string
+          description: Represents log identifier across the system.
+          example: 65e5b854fe0dfa24f1528ef0
+        requestBody:
+          type: string
+          description: Represents request body.
+          example: '{"id":"65df50f5d2dd8f23a685374e","name":"Webhook"}'
+        respondedAt:
+          type: string
+          description: Represents date and time of response.
+          example: '2024-03-04T12:02:28.125+00:00'
+        responseBody:
+          type: string
+          description: Represents response body.
+          example: '{"id":"h73210f5d2dd8f23685374e","response":"Webhook response"}'
+        statusCode:
           type: integer
-          description: Represents number of webhooks for the workspace.
+          description: Represents response status code.
           format: int32
-          example: 5
+          example: 200
+        webhookEventStatusId:
+          type: string
+          description: Represents webhook event status identifier across the system.
+          example: 6818c52b391aca499bf8dafc
+        webhookId:
+          type: string
+          description: Represents webhook identifier across the system.
+          example: 65df5508d2dd8f23a68537af
   securitySchemes:
     AddonKeyAuth:
       in: header

@@ -1,7 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
-  title: Clockify Approval Template (Deprecated) API
+  description: '## Introduction
+
+    By using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data
+
+    between Clockify and other tools, and create custom add-ons on CAKE.com Marketplace.'
+  title: Clockify Template (Deprecated) API
   version: v1
   x-logo:
     altText: Clockify logo
@@ -247,39 +251,70 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    TemplateDtoImpl:
+    ProjectTaskTupleDto:
       type: object
       properties:
-        entries:
-          type: array
-          description: Represents a set of template time entries.
-          items:
-            $ref: '#/components/schemas/TimeEntryWithCustomFieldsDto'
-        id:
+        projectId:
           type: string
-          description: Represents a template identifier across the system.
-          example: 5b6d45c4b0798751107762b8
-        name:
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        taskId:
           type: string
-          description: Represents a template name.
-          example: exampleTemplate
-        projectsAndTasks:
-          type: array
-          description: Represents a list of template's projects and tasks.
-          items:
-            $ref: '#/components/schemas/ProjectTaskTupleDto'
-        userId:
+          description: Represents a task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+      description: Represents a list of template's projects and tasks.
+    TimeIntervalDto:
+      type: object
+      properties:
+        duration:
           type: string
-          description: Represents a user identifier across the system.
-          example: 89b687e29ae1f428e7ebe912
-        weekStart:
+          description: Represents a time duration.
+          example: PT1H30M
+        end:
           type: string
-          description: Represents a day of the week.
-          format: date
-        workspaceId:
+          format: date-time
+        offsetEnd:
+          type: integer
+          format: int32
+        offsetStart:
+          type: integer
+          format: int32
+        start:
           type: string
-          description: Represents a workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
+          format: date-time
+        timeZone:
+          type: string
+        zonedEnd:
+          type: string
+          format: date-time
+        zonedStart:
+          type: string
+          format: date-time
+      description: Represents a time interval object.
+    CustomFieldValueDto:
+      type: object
+      properties:
+        customFieldId:
+          type: string
+          description: Represents custom field identifier across the system.
+          example: 44a687e29ae1f428e7ebe305
+        sourceType:
+          type: string
+          description: Represents a custom field value source type.
+          example: WORKSPACE
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - TIMEENTRY
+        timeEntryId:
+          type: string
+          description: Represents time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        value:
+          type: object
+          description: Represents custom field value.
+          example: 20231211-12345
+      description: Represents a list of custom field value objects.
     ProjectTaskTupleRequest:
       required:
       - projectId
@@ -299,28 +334,6 @@ components:
           description: Represents a time entry type.
           example: REGULAR
       description: Represents a list of template's projects and tasks.
-    ProjectTaskTupleDto:
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Represents a project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        taskId:
-          type: string
-          description: Represents a task identifier across the system.
-          example: 54m377ddd3fcab07cfbb432w
-      description: Represents a list of template's projects and tasks.
-    TemplatePatchRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          minLength: 1
-          type: string
-          description: Represents a template name.
-          example: exampleTemplate
     TimeEntryWithCustomFieldsDto:
       type: object
       properties:
@@ -379,30 +392,39 @@ components:
           description: Represents a workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
       description: Represents a set of template time entries.
-    CustomFieldValueDto:
+    TemplateDtoImpl:
       type: object
       properties:
-        customFieldId:
+        entries:
+          type: array
+          description: Represents a set of template time entries.
+          items:
+            $ref: '#/components/schemas/TimeEntryWithCustomFieldsDto'
+        id:
           type: string
-          description: Represents custom field identifier across the system.
-          example: 44a687e29ae1f428e7ebe305
-        sourceType:
+          description: Represents a template identifier across the system.
+          example: 5b6d45c4b0798751107762b8
+        name:
           type: string
-          description: Represents a custom field value source type.
-          example: WORKSPACE
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - TIMEENTRY
-        timeEntryId:
+          description: Represents a template name.
+          example: exampleTemplate
+        projectsAndTasks:
+          type: array
+          description: Represents a list of template's projects and tasks.
+          items:
+            $ref: '#/components/schemas/ProjectTaskTupleDto'
+        userId:
           type: string
-          description: Represents time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        value:
-          type: object
-          description: Represents custom field value.
-          example: 20231211-12345
-      description: Represents a list of custom field value objects.
+          description: Represents a user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+        weekStart:
+          type: string
+          description: Represents a day of the week.
+          format: date
+        workspaceId:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
     TemplateRequest:
       required:
       - name
@@ -453,34 +475,16 @@ components:
           type: string
           description: Represents a workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    TimeIntervalDto:
+    TemplatePatchRequest:
+      required:
+      - name
       type: object
       properties:
-        duration:
+        name:
+          minLength: 1
           type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        end:
-          type: string
-          format: date-time
-        offsetEnd:
-          type: integer
-          format: int32
-        offsetStart:
-          type: integer
-          format: int32
-        start:
-          type: string
-          format: date-time
-        timeZone:
-          type: string
-        zonedEnd:
-          type: string
-          format: date-time
-        zonedStart:
-          type: string
-          format: date-time
-      description: Represents a time interval object.
+          description: Represents a template name.
+          example: exampleTemplate
   securitySchemes:
     AddonKeyAuth:
       in: header

@@ -1,7 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  description: "## Introduction\nBy using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data\nbetween Clockify and other tools, and create custom add-ons on [CAKE.com Marketplace](https://marketplace.cake.com).\nWhether you’re looking to automate time tracking, generate custom reports, or build other custom\nintegrations, our API provides the flexibility and power you need to get the job done. If you\nhave any questions or run into any issues while using our API, don’t hesitate to reach out to us for help.\nYou can also post questions on Stack Overflow with the Clockify tag to get help from the community.\n## Authentication\nTo authenticate your requests to your API, make sure to include either the ‘X-Api-Key’ or the\n‘X-Addon-Token’ in the request header, containing your API or Addon key. If your workspace is\non a subdomain (e.g. subdomain.clockify.me), you’ll need to generate a new API key in your\nProfile Settings that will work specifically for that workspace. This ensures that you’re\naccessing data from the correct workspace and helps maintain the security of your data.\n## Webhooks\nWebhooks can enhance your workflow by keeping your add-on up-to-date with the latest changes in\nClockify. With Clockify’s webhooks you can receive real-time notifications when certain events such as\nstarting a timer or deleting a time entry occur in Clockify.\nDepending on the workspace plan, workspace owners and admins can create:\n\n* Up to 3 webhooks on **FREE** plan\n* Up to 10 webhooks per user, with a total of 100 webhooks per entire workspace\non **BASIC**, **STANDARD** and **PRO** plans\n* Up to 100 webhooks per user, with a total of 300 webhooks per entire workspace on **ENTERPRISE** plan\n\n## Rate limiting\nOur REST API has a specific rate limit of 50 requests per second (by addon on one workspace) when\naccessed using X-Addon-Token. Exceeding this limit will result in an error message with the description\n\"Too many requests\".\n## Pagination\nOur REST API supports pagination for all synchronous GET endpoints that retrieve lists of entities.\nWhen an endpoint accepts the `page` and `pageSize` query parameters, it will return a paginated response.\n\nTo control the data returned in a paginated request, you can use the following optional query parameters.\n\n- **page** (integer): The page number you wish to retrieve. This is 1-indexed. If this parameter is omitted,\nthe API will default to the first page (page=1).\n- **pageSize** (integer): The number of items to include on each page. If this parameter is omitted,\na default page size will be used.\n\nEvery response from an endpoint that supports these parameters will include a custom `Last-Page` header.\nThis header provides a simple way to determine if you have reached the end of the data set.\n\n- **true:** The current page is the final page; no more data is available.\n- **false:** Additional pages can be fetched.\n## API URLs\nRefer to the list on what URL to use base on the subdomain and data region settings of your workspace.\n* Global - can be used by workspaces with or without subdomain.\n    * Regular: https://api.clockify.me/api/v1/file/image\n    * Reports: https://reports.api.clockify.me/v1/workspaces/{workspaceId}/reports/detailed\n* Regional\n    * Non-subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://use2.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n    * Subdomain\n        * Regular: https://euc1.clockify.me/api/v1/file/image\n        * Reports: https://yoursubdomainname.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n* Developer\n    * Regular: https://developer.clockify.me/api/v1/file/image\n    * Reports: https://developer.clockify.me/report/v1/workspaces/{workspaceId}/reports/detailed\n## Regional Server Prefixes\nIf your workspace is in a specific region, you need to change your URL prefix to access v1 API endpoints.\nFor example, this is how **backend** api [v1/file/image](#tag/User/operation/uploadImage) endpoint\nwould look in EU region:\n[https://euc1.clockify.me/api/v1/file/image](https://euc1.clockify.me)\n\nBelow are the available regional server prefixes:\n* **EU (Germany)**: euc1\n* **USA**: use2\n* **UK**: euw2\n* **AU**: apse2\n\n\n## Breaking changes\nBreaking changes in APIs are modifications that disrupt existing integrations,\nrequiring users to update their applications to maintain functionality.\nThese changes can lead to failures or unexpected results if not addressed.\nSee the list of [breaking changes](breaking-changes/).\n\n## Experimental APIs\nThe experimental API has been thoroughly tested and is ready for use in production. However, please note that user feedback may lead to changes in the API’s structure or functionality. If you choose to use the experimental API, be prepared to modify your application code accordingly to accommodate any updates."
-  title: Clockify Approval Workspace API
+  description: '## Introduction
+
+    By using this REST API, you can easily integrate Clockify with your own add-ons, push and pull data
+
+    between Clockify and other tools, and create custom add-ons on CAKE.com Marketplace.'
+  title: Clockify Workspace API
   version: v1
   x-logo:
     altText: Clockify logo
@@ -334,6 +338,328 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    WorkspaceDtoV1:
+      type: object
+      properties:
+        cakeOrganizationId:
+          type: string
+          description: Represents the Cake organization identifier across the system.
+          example: 67d471fb56aa9668b7bfa295
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        currencies:
+          type: array
+          description: Represents currency with default info object.
+          items:
+            $ref: '#/components/schemas/CurrencyWithDefaultInfoDtoV1'
+        featureSubscriptionType:
+          $ref: '#/components/schemas/FeaturePlan'
+        features:
+          $ref: '#/components/schemas/Feature'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateDtoV1'
+        id:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+        imageUrl:
+          type: string
+          description: Represents an image url.
+          example: https://www.url.com/imageurl-1234567890.jpg
+        memberships:
+          type: array
+          description: Represents a list of membership objects.
+          items:
+            $ref: '#/components/schemas/MembershipDtoV1'
+        name:
+          type: string
+          description: Represents workspace name.
+          example: Cool Company
+        subdomain:
+          $ref: '#/components/schemas/WorkspaceSubdomainDtoV1'
+        workspaceSettings:
+          $ref: '#/components/schemas/WorkspaceSettingsDtoV1'
+    WorkspaceSubdomainDtoV1:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates whether subdomain is enabled on workspace
+          default: false
+        name:
+          type: string
+          description: Represents subdomain name
+          example: coolcompany
+      description: Represents the workspace subdomain
+    HourlyRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an hourly rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    RoundDto:
+      type: object
+      properties:
+        minutes:
+          type: string
+          example: '15'
+        round:
+          type: string
+          example: Round to nearest
+      description: Represents a time rounding object.
+    EntityCreationPermission:
+      type: object
+      description: Represents an entity creation permission enum.
+      example: EVERYONE
+      oneOf:
+      - type: string
+        enum:
+        - ADMINS
+        - ADMINS_AND_PROJECT_MANAGERS
+        - EVERYONE
+      properties:
+        ADMINS:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        ADMINS_AND_PROJECT_MANAGERS:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        EVERYONE:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        creators:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    UpdateUserStatusRequest:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+          description: Represents membership status.
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - INACTIVE
+    CreateWorkspaceRequestV1:
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Represents a workspace name.
+          example: Cool Company
+        organizationId:
+          type: string
+          description: Represents the Cake organization identifier across the system.
+          example: 67d471fb56aa9668b7bfa295
+    EntityCreationPermissionsDtoV1:
+      type: object
+      properties:
+        whoCanCreateProjectsAndClients:
+          $ref: '#/components/schemas/EntityCreationPermission'
+        whoCanCreateTags:
+          $ref: '#/components/schemas/EntityCreationPermission'
+        whoCanCreateTasks:
+          $ref: '#/components/schemas/EntityCreationPermission'
+      description: Represents an entity creation permission object.
+    CostRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    FeaturePlan:
+      type: object
+      description: Represents a feature plan type enum.
+      example: STANDARD_2021
+      oneOf:
+      - $ref: '#/components/schemas/FeaturePlan'
+      properties:
+        addonSubscriptionPlan:
+          type: string
+          enum:
+          - FREE
+          - BASIC
+          - STANDARD
+          - PRO
+          - ENTERPRISE
+        featurePermissions:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - ADD_TIME_FOR_OTHERS
+            - ADMIN_PANEL
+            - ALERTS
+            - APPROVAL
+            - AUDIT_LOG
+            - AUTOMATIC_LOCK
+            - BRANDED_REPORTS
+            - BULK_EDIT
+            - CUSTOM_FIELDS
+            - CUSTOM_REPORTING
+            - CUSTOM_SUBDOMAIN
+            - CREATION_PERMISSIONS
+            - DECIMAL_FORMAT
+            - DISABLE_MANUAL_MODE
+            - EDIT_MEMBER_PROFILE
+            - EXCLUDE_NON_BILLABLE_FROM_ESTIMATE
+            - EXPENSES
+            - FILE_IMPORT
+            - TIMESHEET_IMPORT
+            - USER_IMPORT
+            - HIDE_PAGES
+            - HISTORIC_RATES
+            - INVOICING
+            - INVOICE_EMAILS
+            - INVOICE_REMINDERS
+            - LABOR_COST
+            - LOCATIONS
+            - MANAGER_ROLE
+            - MULTI_FACTOR_AUTHENTICATION
+            - PROJECT_BUDGET
+            - PROJECT_TEMPLATES
+            - GRANT_PROJECT_MANAGER_ROLE
+            - PRIVATE_PROJECT_ACCESS
+            - QUICKBOOKS_INTEGRATION
+            - RECURRING_ESTIMATES
+            - RECURRING_INVOICES
+            - REQUIRED_FIELDS
+            - SCHEDULED_REPORTS
+            - SCHEDULING
+            - SCREENSHOTS
+            - SSO
+            - SUMMARY_ESTIMATE
+            - TARGETS_AND_REMINDERS
+            - TASK_RATES
+            - TIME_OFF
+            - UNLIMITED_REPORTS
+            - USER_CUSTOM_FIELDS
+            - WHO_CAN_CHANGE_TIMEENTRY_BILLABILITY
+            - BREAKS
+            - KIOSK_SESSION_DURATION
+            - KIOSK_PIN_REQUIRED
+            - WHO_CAN_SEE_ALL_TIME_ENTRIES
+            - WHO_CAN_SEE_PROJECT_STATUS
+            - WHO_CAN_SEE_PUBLIC_PROJECTS_ENTRIES
+            - WHO_CAN_SEE_TEAMS_DASHBOARD
+            - WORKSPACE_LOCK_TIMEENTRIES
+            - WORKSPACE_TIME_AUDIT
+            - WORKSPACE_TIME_ROUNDING
+            - KIOSK
+            - KIOSK_SIX_DIGIT_PIN
+            - KIOSK_QR_CODE
+            - LIMITED_USERS
+            - FORECASTING
+            - TIME_TRACKING
+            - ATTENDANCE_REPORT
+            - WORKSPACE_TRANSFER
+            - FAVORITE_ENTRIES
+            - SPLIT_TIME_ENTRY
+            - CLIENT_CURRENCY
+            - SCHEDULING_FORECASTING
+            - SCIM
+            - UNLIMITED_USER_SEATS
+            - BILLABLE_HOURS
+            - PROJECT_ESTIMATE
+            - CSV_EXPORT
+            - XLSX_EXPORT
+            - ONE_MONTH_RANGE_REPORTS
+            - ONE_YEAR_RANGE_REPORTS
+            - SHARED_REPORTS
+        legacy:
+          type: boolean
+        paidPlan:
+          type: boolean
+        regionalAllowed:
+          type: boolean
+        weight:
+          type: integer
+          format: int32
+    CurrencyWithDefaultInfoDtoV1:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Represents currency code.
+          example: USD
+        id:
+          type: string
+          description: Represents currency identifier across the system.
+          example: 5b641568b07987035750505e
+        isDefault:
+          type: boolean
+          description: Indicates whether curency should be set as default.
+          example: true
+          default: false
+      description: Represents currency with default info object.
+    MembershipDtoV1:
+      type: object
+      properties:
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateDtoV1'
+        membershipStatus:
+          type: string
+          description: Represents a membership status enum.
+          example: PENDING
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
+          type: string
+          description: Represents membership type enum.
+          example: PROJECT
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        targetId:
+          type: string
+          description: Represents target identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+      description: Represents a list of membership objects.
     WorkspaceSettingsDtoV1:
       type: object
       properties:
@@ -503,130 +829,42 @@ components:
             - SATURDAY
             - SUNDAY
       description: "Workspace settings also include Time Duration Format settings.\n\nSetting Time Duration Format by changing the boolean fields\ndecimalFormat and trackTimeDownToSecond is now deprecated.\n\nTime Duration Format can be set by durationFormat enum field.\n\nThree different Time Duration modes will still map the boolean fields:\n\n    1. Full (hh:mm:ss) -> decimalFormat = false, trackTimeDownToSecond = true,\n\n    2. Compact (h:mm) -> decimalFormat = false, trackTimeDownToSecond = false,\n\n    3. Decimal (h:hh) -> decimalFormat = true, trackTimeDownToSecond = true\n\n"
-    AutomaticLockDtoV1:
-      type: object
-      properties:
-        changeDay:
-          type: string
-          description: Represents a day of the week.
-          example: FRIDAY
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-        dayOfMonth:
-          type: integer
-          description: Represents a day of month as integer.
-          format: int32
-          example: 15
-        firstDay:
-          type: string
-          description: Represents a day of the week.
-          example: MONDAY
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-        olderThanPeriod:
-          type: string
-          description: Represents a time entry automatic lock period enum.
-          example: DAYS
-          enum:
-          - DAYS
-          - WEEKS
-          - MONTHS
-        olderThanValue:
-          type: integer
-          description: Represents an integer as the criteria for locking time entries.
-          format: int32
-          example: 5
-        type:
-          type: string
-          description: Represents a time entry automatic lock type enum.
-          example: WEEKLY
-          enum:
-          - WEEKLY
-          - MONTHLY
-          - OLDER_THAN
-      description: Represents an automatic lock object.
-    UpdateUserStatusRequest:
+    AddUserToWorkspaceRequest:
       required:
-      - status
+      - email
       type: object
       properties:
-        status:
-          type: string
-          description: Represents membership status.
-          example: ACTIVE
-          enum:
-          - ACTIVE
-          - INACTIVE
-    CostRateRequestV1:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 20000
-        since:
-          type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-    EntityCreationPermissionsDtoV1:
-      type: object
-      properties:
-        whoCanCreateProjectsAndClients:
-          $ref: '#/components/schemas/EntityCreationPermission'
-        whoCanCreateTags:
-          $ref: '#/components/schemas/EntityCreationPermission'
-        whoCanCreateTasks:
-          $ref: '#/components/schemas/EntityCreationPermission'
-      description: Represents an entity creation permission object.
-    RoundDto:
-      type: object
-      properties:
-        minutes:
-          type: string
-          example: '15'
-        round:
-          type: string
-          example: Round to nearest
-      description: Represents a time rounding object.
-    RateWithCurrencyRequestV1:
-      required:
-      - amount
-      - currency
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 2000
-        currency:
-          maxLength: 100
+        email:
           minLength: 1
+          type: string
+          description: Represents an email address of the user.
+          example: johndoe@example.com
+    RateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
           type: string
           description: Represents a currency.
           example: USD
-          default: USD
-        since:
+      description: Represents cost rate object.
+    HourlyRateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
           type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
+          description: Represents a currency.
+          example: USD
+      description: Represents an hourly rate object.
     Feature:
       type: object
       description: Represents a list of features.
@@ -7196,317 +7434,83 @@ components:
           - ONE_MONTH_RANGE_REPORTS
           - ONE_YEAR_RANGE_REPORTS
           - SHARED_REPORTS
-    EntityCreationPermission:
-      type: object
-      description: Represents an entity creation permission enum.
-      example: EVERYONE
-      oneOf:
-      - type: string
-        enum:
-        - ADMINS
-        - ADMINS_AND_PROJECT_MANAGERS
-        - EVERYONE
-      properties:
-        ADMINS:
-          type: string
-          enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        ADMINS_AND_PROJECT_MANAGERS:
-          type: string
-          enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        EVERYONE:
-          type: string
-          enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        creators:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-    RateDtoV1:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
-    HourlyRateRequestV1:
+    RateWithCurrencyRequestV1:
       required:
       - amount
+      - currency
       type: object
       properties:
         amount:
           minimum: 0
           type: integer
-          description: Represents an hourly rate amount as integer.
+          description: Represents an amount as integer.
           format: int32
-          example: 20000
+          example: 2000
+        currency:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Represents a currency.
+          example: USD
+          default: USD
         since:
           type: string
           description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
           example: '2020-01-01T00:00:00Z'
-    AddUserToWorkspaceRequest:
-      required:
-      - email
+    AutomaticLockDtoV1:
       type: object
       properties:
-        email:
-          minLength: 1
+        changeDay:
           type: string
-          description: Represents an email address of the user.
-          example: johndoe@example.com
-    FeaturePlan:
-      type: object
-      description: Represents a feature plan type enum.
-      example: STANDARD_2021
-      oneOf:
-      - $ref: '#/components/schemas/FeaturePlan'
-      properties:
-        addonSubscriptionPlan:
-          type: string
+          description: Represents a day of the week.
+          example: FRIDAY
           enum:
-          - FREE
-          - BASIC
-          - STANDARD
-          - PRO
-          - ENTERPRISE
-        featurePermissions:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            enum:
-            - ADD_TIME_FOR_OTHERS
-            - ADMIN_PANEL
-            - ALERTS
-            - APPROVAL
-            - AUDIT_LOG
-            - AUTOMATIC_LOCK
-            - BRANDED_REPORTS
-            - BULK_EDIT
-            - CUSTOM_FIELDS
-            - CUSTOM_REPORTING
-            - CUSTOM_SUBDOMAIN
-            - CREATION_PERMISSIONS
-            - DECIMAL_FORMAT
-            - DISABLE_MANUAL_MODE
-            - EDIT_MEMBER_PROFILE
-            - EXCLUDE_NON_BILLABLE_FROM_ESTIMATE
-            - EXPENSES
-            - FILE_IMPORT
-            - TIMESHEET_IMPORT
-            - USER_IMPORT
-            - HIDE_PAGES
-            - HISTORIC_RATES
-            - INVOICING
-            - INVOICE_EMAILS
-            - INVOICE_REMINDERS
-            - LABOR_COST
-            - LOCATIONS
-            - MANAGER_ROLE
-            - MULTI_FACTOR_AUTHENTICATION
-            - PROJECT_BUDGET
-            - PROJECT_TEMPLATES
-            - GRANT_PROJECT_MANAGER_ROLE
-            - PRIVATE_PROJECT_ACCESS
-            - QUICKBOOKS_INTEGRATION
-            - RECURRING_ESTIMATES
-            - RECURRING_INVOICES
-            - REQUIRED_FIELDS
-            - SCHEDULED_REPORTS
-            - SCHEDULING
-            - SCREENSHOTS
-            - SSO
-            - SUMMARY_ESTIMATE
-            - TARGETS_AND_REMINDERS
-            - TASK_RATES
-            - TIME_OFF
-            - UNLIMITED_REPORTS
-            - USER_CUSTOM_FIELDS
-            - WHO_CAN_CHANGE_TIMEENTRY_BILLABILITY
-            - BREAKS
-            - KIOSK_SESSION_DURATION
-            - KIOSK_PIN_REQUIRED
-            - WHO_CAN_SEE_ALL_TIME_ENTRIES
-            - WHO_CAN_SEE_PROJECT_STATUS
-            - WHO_CAN_SEE_PUBLIC_PROJECTS_ENTRIES
-            - WHO_CAN_SEE_TEAMS_DASHBOARD
-            - WORKSPACE_LOCK_TIMEENTRIES
-            - WORKSPACE_TIME_AUDIT
-            - WORKSPACE_TIME_ROUNDING
-            - KIOSK
-            - KIOSK_SIX_DIGIT_PIN
-            - KIOSK_QR_CODE
-            - LIMITED_USERS
-            - FORECASTING
-            - TIME_TRACKING
-            - ATTENDANCE_REPORT
-            - WORKSPACE_TRANSFER
-            - FAVORITE_ENTRIES
-            - SPLIT_TIME_ENTRY
-            - CLIENT_CURRENCY
-            - SCHEDULING_FORECASTING
-            - SCIM
-            - UNLIMITED_USER_SEATS
-            - BILLABLE_HOURS
-            - PROJECT_ESTIMATE
-            - CSV_EXPORT
-            - XLSX_EXPORT
-            - ONE_MONTH_RANGE_REPORTS
-            - ONE_YEAR_RANGE_REPORTS
-            - SHARED_REPORTS
-        legacy:
-          type: boolean
-        paidPlan:
-          type: boolean
-        regionalAllowed:
-          type: boolean
-        weight:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        dayOfMonth:
           type: integer
+          description: Represents a day of month as integer.
           format: int32
-    HourlyRateDtoV1:
-      type: object
-      properties:
-        amount:
+          example: 15
+        firstDay:
+          type: string
+          description: Represents a day of the week.
+          example: MONDAY
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        olderThanPeriod:
+          type: string
+          description: Represents a time entry automatic lock period enum.
+          example: DAYS
+          enum:
+          - DAYS
+          - WEEKS
+          - MONTHS
+        olderThanValue:
           type: integer
-          description: Represents an amount as integer.
+          description: Represents an integer as the criteria for locking time entries.
           format: int32
-          example: 10500
-        currency:
+          example: 5
+        type:
           type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents an hourly rate object.
-    CreateWorkspaceRequestV1:
-      type: object
-      properties:
-        name:
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: Represents a workspace name.
-          example: Cool Company
-        organizationId:
-          type: string
-          description: Represents the Cake organization identifier across the system.
-          example: 67d471fb56aa9668b7bfa295
-    MembershipDtoV1:
-      type: object
-      properties:
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateDtoV1'
-        membershipStatus:
-          type: string
-          description: Represents a membership status enum.
-          example: PENDING
+          description: Represents a time entry automatic lock type enum.
+          example: WEEKLY
           enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-        membershipType:
-          type: string
-          description: Represents membership type enum.
-          example: PROJECT
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - USERGROUP
-        targetId:
-          type: string
-          description: Represents target identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-      description: Represents a list of membership objects.
-    WorkspaceDtoV1:
-      type: object
-      properties:
-        cakeOrganizationId:
-          type: string
-          description: Represents the Cake organization identifier across the system.
-          example: 67d471fb56aa9668b7bfa295
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        currencies:
-          type: array
-          description: Represents currency with default info object.
-          items:
-            $ref: '#/components/schemas/CurrencyWithDefaultInfoDtoV1'
-        featureSubscriptionType:
-          $ref: '#/components/schemas/FeaturePlan'
-        features:
-          $ref: '#/components/schemas/Feature'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateDtoV1'
-        id:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-        imageUrl:
-          type: string
-          description: Represents an image url.
-          example: https://www.url.com/imageurl-1234567890.jpg
-        memberships:
-          type: array
-          description: Represents a list of membership objects.
-          items:
-            $ref: '#/components/schemas/MembershipDtoV1'
-        name:
-          type: string
-          description: Represents workspace name.
-          example: Cool Company
-        subdomain:
-          $ref: '#/components/schemas/WorkspaceSubdomainDtoV1'
-        workspaceSettings:
-          $ref: '#/components/schemas/WorkspaceSettingsDtoV1'
-    WorkspaceSubdomainDtoV1:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Indicates whether subdomain is enabled on workspace
-          default: false
-        name:
-          type: string
-          description: Represents subdomain name
-          example: coolcompany
-      description: Represents the workspace subdomain
-    CurrencyWithDefaultInfoDtoV1:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Represents currency code.
-          example: USD
-        id:
-          type: string
-          description: Represents currency identifier across the system.
-          example: 5b641568b07987035750505e
-        isDefault:
-          type: boolean
-          description: Indicates whether curency should be set as default.
-          example: true
-          default: false
-      description: Represents currency with default info object.
+          - WEEKLY
+          - MONTHLY
+          - OLDER_THAN
+      description: Represents an automatic lock object.
   securitySchemes:
     AddonKeyAuth:
       in: header
