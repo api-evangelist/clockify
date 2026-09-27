@@ -251,13 +251,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    PageableCollectionLogBinDocumentDto:
-      type: object
-      properties:
-        response:
-          type: array
-          items:
-            $ref: '#/components/schemas/LogBinDocumentDto'
     LogBinDocumentDto:
       type: object
       properties:
@@ -270,6 +263,13 @@ components:
           type: string
         id:
           type: string
+    PageableCollectionLogBinDocumentDto:
+      type: object
+      properties:
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/LogBinDocumentDto'
   securitySchemes:
     AddonKeyAuth:
       in: header

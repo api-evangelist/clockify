@@ -240,33 +240,176 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    TimeOffRequestPeriodV1Request:
+    CreateTimeOffRequestV1Request:
       required:
-      - period
+      - timeOffPeriod
       type: object
       properties:
-        halfDayPeriod:
+        note:
           type: string
-          description: Represents the half day period.
-          example: NOT_DEFINED
-          enum:
-          - FIRST_HALF
-          - SECOND_HALF
-          - NOT_DEFINED
-        isHalfDay:
-          type: boolean
-          description: Indicates whether time off is half day.
-          example: false
-          default: false
-        period:
-          $ref: '#/components/schemas/PeriodV1Request'
-        timeOffHalfDayPeriod:
+          description: Provide the note you would like to use for creating the time off request.
+          example: Create Time Off Note
+        timeOffPeriod:
+          $ref: '#/components/schemas/TimeOffRequestPeriodV1Request'
+    TimeOffRequestV1Dto:
+      type: object
+      properties:
+        balanceDiff:
+          type: number
+          description: Represents the balance difference
+          format: double
+          example: 1
+        createdAt:
+          type: string
+          description: Represents the date when time off request is created. Date is in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          format: date-time
+          example: '2022-08-26T08:32:01.640708Z'
+        id:
+          type: string
+          description: Represents time off requester identifier across the system.
+          example: 5b715612b079875110791111
+        note:
+          type: string
+          description: Represents the note of the time off request.
+          example: Time Off Request Note
+        policyId:
+          type: string
+          description: Represents policy identifier across the system.
+          example: 5b715612b079875110792333
+        status:
+          $ref: '#/components/schemas/TimeOffRequestStatus'
+        timeOffPeriod:
+          $ref: '#/components/schemas/TimeOffRequestPeriodDto'
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5b715612b079875110794444
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 5b715612b079875110792222
+    TimeOffRequestStatus:
+      type: object
+      properties:
+        changedAt:
+          type: string
+          format: date-time
+        changedByUserId:
+          type: string
+        changedByUserName:
+          type: string
+        changedForUserName:
+          type: string
+        note:
+          type: string
+        statusType:
           type: string
           enum:
-          - FIRST_HALF
-          - SECOND_HALF
-          - NOT_DEFINED
-      description: Provide the period you would like to use for creating the time off request. If `timeZone` isn't set, should be aligned with time zone for user in settings. Can be shifted from user time zone with explicit setting of `timeZone`.
+          - PENDING
+          - APPROVED
+          - REJECTED
+          - ALL
+      description: Represents the status the time off request.
+    StatusTimeOffRequestV1Request:
+      type: object
+      properties:
+        note:
+          type: string
+          description: Provide the note you would like to use for changing the time off request.
+          example: Time Off Request Note
+        status:
+          type: string
+          description: Provide the status you would like to use for changing the time off request.
+          example: APPROVED
+          enum:
+          - APPROVED
+          - REJECTED
+    GetTimeOffRequestsV1Request:
+      type: object
+      properties:
+        end:
+          type: string
+          description: Return time off requests created before the specified time in requester's time zone. Provide end in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          format: date-time
+          example: '2022-08-26T23:55:06.281873Z'
+        page:
+          maximum: 1000
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+        pageSize:
+          maximum: 200
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+        start:
+          type: string
+          description: Return time off requests created after the specified time in requester's time zone. Provide start in format YYYY-MM-DDTHH:MM:SS.ssssssZ
+          format: date-time
+          example: '2022-08-26T08:00:06.281873Z'
+        statuses:
+          uniqueItems: true
+          type: array
+          description: Filters time off requests by status.
+          example:
+          - APPROVED
+          - PENDING
+          items:
+            type: string
+            description: Filters time off requests by status.
+            example: '["APPROVED","PENDING"]'
+            enum:
+            - PENDING
+            - APPROVED
+            - REJECTED
+            - ALL
+        userGroups:
+          uniqueItems: true
+          type: array
+          description: Provide the user group ids of time off requests.
+          example:
+          - 5b715612b079875110791342
+          - 5b715612b079875110791324
+          - 5b715612b079875110793142
+          items:
+            type: string
+            description: Provide the user group ids of time off requests.
+            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
+        users:
+          uniqueItems: true
+          type: array
+          description: Provide the user ids of time off requests. If empty, will return time off requests of all users (with a maximum of 5000 users).
+          example:
+          - 5b715612b079875110791432
+          - b715612b079875110791234
+          items:
+            type: string
+            description: Provide the user ids of time off requests. If empty, will return time off requests of all users (with a maximum of 5000 users).
+            example: '["5b715612b079875110791432","b715612b079875110791234"]'
+    PeriodV1Request:
+      type: object
+      properties:
+        days:
+          maximum: 999
+          minimum: 1
+          type: integer
+          description: Provide number of days.
+          format: int32
+          example: 3
+        end:
+          type: string
+          description: Provide end date in YYYY-MM-DD format.
+          example: '2021-12-25'
+        start:
+          type: string
+          description: Provide start date in YYYY-MM-DD format.
+          example: '2021-12-23'
+      description: Represents period of time off request including start and end date.
     TimeOffRequestFullV1Dto:
       type: object
       properties:
@@ -353,174 +496,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TimeOffRequestFullV1Dto'
-    TimeOffRequestV1Dto:
-      type: object
-      properties:
-        balanceDiff:
-          type: number
-          description: Represents the balance difference
-          format: double
-          example: 1
-        createdAt:
-          type: string
-          description: Represents the date when time off request is created. Date is in format YYYY-MM-DDTHH:MM:SS.ssssssZ
-          format: date-time
-          example: '2022-08-26T08:32:01.640708Z'
-        id:
-          type: string
-          description: Represents time off requester identifier across the system.
-          example: 5b715612b079875110791111
-        note:
-          type: string
-          description: Represents the note of the time off request.
-          example: Time Off Request Note
-        policyId:
-          type: string
-          description: Represents policy identifier across the system.
-          example: 5b715612b079875110792333
-        status:
-          $ref: '#/components/schemas/TimeOffRequestStatus'
-        timeOffPeriod:
-          $ref: '#/components/schemas/TimeOffRequestPeriodDto'
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5b715612b079875110794444
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 5b715612b079875110792222
-    GetTimeOffRequestsV1Request:
-      type: object
-      properties:
-        end:
-          type: string
-          description: Return time off requests created before the specified time in requester's time zone. Provide end in format YYYY-MM-DDTHH:MM:SS.ssssssZ
-          format: date-time
-          example: '2022-08-26T23:55:06.281873Z'
-        page:
-          maximum: 1000
-          type: integer
-          description: Page number.
-          format: int32
-          example: 1
-          default: 1
-        pageSize:
-          maximum: 200
-          minimum: 1
-          type: integer
-          description: Page size.
-          format: int32
-          example: 50
-          default: 50
-        start:
-          type: string
-          description: Return time off requests created after the specified time in requester's time zone. Provide start in format YYYY-MM-DDTHH:MM:SS.ssssssZ
-          format: date-time
-          example: '2022-08-26T08:00:06.281873Z'
-        statuses:
-          uniqueItems: true
-          type: array
-          description: Filters time off requests by status.
-          example:
-          - APPROVED
-          - PENDING
-          items:
-            type: string
-            description: Filters time off requests by status.
-            example: '["APPROVED","PENDING"]'
-            enum:
-            - PENDING
-            - APPROVED
-            - REJECTED
-            - ALL
-        userGroups:
-          uniqueItems: true
-          type: array
-          description: Provide the user group ids of time off requests.
-          example:
-          - 5b715612b079875110791342
-          - 5b715612b079875110791324
-          - 5b715612b079875110793142
-          items:
-            type: string
-            description: Provide the user group ids of time off requests.
-            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
-        users:
-          uniqueItems: true
-          type: array
-          description: Provide the user ids of time off requests. If empty, will return time off requests of all users (with a maximum of 5000 users).
-          example:
-          - 5b715612b079875110791432
-          - b715612b079875110791234
-          items:
-            type: string
-            description: Provide the user ids of time off requests. If empty, will return time off requests of all users (with a maximum of 5000 users).
-            example: '["5b715612b079875110791432","b715612b079875110791234"]'
-    TimeOffRequestStatus:
-      type: object
-      properties:
-        changedAt:
-          type: string
-          format: date-time
-        changedByUserId:
-          type: string
-        changedByUserName:
-          type: string
-        changedForUserName:
-          type: string
-        note:
-          type: string
-        statusType:
-          type: string
-          enum:
-          - PENDING
-          - APPROVED
-          - REJECTED
-          - ALL
-      description: Represents the status the time off request.
-    StatusTimeOffRequestV1Request:
-      type: object
-      properties:
-        note:
-          type: string
-          description: Provide the note you would like to use for changing the time off request.
-          example: Time Off Request Note
-        status:
-          type: string
-          description: Provide the status you would like to use for changing the time off request.
-          example: APPROVED
-          enum:
-          - APPROVED
-          - REJECTED
-    PeriodV1Request:
-      type: object
-      properties:
-        days:
-          maximum: 999
-          minimum: 1
-          type: integer
-          description: Provide number of days.
-          format: int32
-          example: 3
-        end:
-          type: string
-          description: Provide end date in YYYY-MM-DD format.
-          example: '2021-12-25'
-        start:
-          type: string
-          description: Provide start date in YYYY-MM-DD format.
-          example: '2021-12-23'
-      description: Represents period of time off request including start and end date.
-    Period:
-      type: object
-      properties:
-        end:
-          type: string
-          format: date-time
-        start:
-          type: string
-          format: date-time
     TimeOffRequestPeriodDto:
       type: object
       properties:
@@ -533,17 +508,42 @@ components:
         period:
           $ref: '#/components/schemas/Period'
       description: Represents the period the time off request.
-    CreateTimeOffRequestV1Request:
+    TimeOffRequestPeriodV1Request:
       required:
-      - timeOffPeriod
+      - period
       type: object
       properties:
-        note:
+        halfDayPeriod:
           type: string
-          description: Provide the note you would like to use for creating the time off request.
-          example: Create Time Off Note
-        timeOffPeriod:
-          $ref: '#/components/schemas/TimeOffRequestPeriodV1Request'
+          description: Represents the half day period.
+          example: NOT_DEFINED
+          enum:
+          - FIRST_HALF
+          - SECOND_HALF
+          - NOT_DEFINED
+        isHalfDay:
+          type: boolean
+          description: Indicates whether time off is half day.
+          example: false
+          default: false
+        period:
+          $ref: '#/components/schemas/PeriodV1Request'
+        timeOffHalfDayPeriod:
+          type: string
+          enum:
+          - FIRST_HALF
+          - SECOND_HALF
+          - NOT_DEFINED
+      description: Provide the period you would like to use for creating the time off request. If `timeZone` isn't set, should be aligned with time zone for user in settings. Can be shifted from user time zone with explicit setting of `timeZone`.
+    Period:
+      type: object
+      properties:
+        end:
+          type: string
+          format: date-time
+        start:
+          type: string
+          format: date-time
   securitySchemes:
     AddonKeyAuth:
       in: header

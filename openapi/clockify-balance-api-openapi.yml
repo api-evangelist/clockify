@@ -208,6 +208,47 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    BalancesWithCountDtoV1:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceDtoV1'
+        count:
+          type: integer
+          description: Represents the count of balances.
+          format: int32
+          example: 2
+    UpdateBalanceRequestV1:
+      required:
+      - userIds
+      - value
+      type: object
+      properties:
+        note:
+          type: string
+          description: Represents a new balance note value.
+          example: Bonus days added.
+        userIds:
+          minItems: 1
+          uniqueItems: true
+          type: array
+          description: Represents the list of users' identifiers whose balance is to be updated.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Represents the list of users' identifiers whose balance is to be updated.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+        value:
+          maximum: 10000
+          minimum: -10000
+          type: number
+          description: Represents a new balance value.
+          format: double
+          example: 22
     BalanceDtoV1:
       type: object
       properties:
@@ -273,47 +314,6 @@ components:
           description: Represent workspace identifier across the system.
           example: 5b715448b079875110791111
       description: Represent the list of balances.
-    UpdateBalanceRequestV1:
-      required:
-      - userIds
-      - value
-      type: object
-      properties:
-        note:
-          type: string
-          description: Represents a new balance note value.
-          example: Bonus days added.
-        userIds:
-          minItems: 1
-          uniqueItems: true
-          type: array
-          description: Represents the list of users' identifiers whose balance is to be updated.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Represents the list of users' identifiers whose balance is to be updated.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-        value:
-          maximum: 10000
-          minimum: -10000
-          type: number
-          description: Represents a new balance value.
-          format: double
-          example: 22
-    BalancesWithCountDtoV1:
-      type: object
-      properties:
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/BalanceDtoV1'
-        count:
-          type: integer
-          description: Represents the count of balances.
-          format: int32
-          example: 2
   securitySchemes:
     AddonKeyAuth:
       in: header

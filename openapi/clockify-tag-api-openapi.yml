@@ -267,6 +267,25 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    TagDtoV1:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether a tag is archived or not.
+          default: false
+        id:
+          type: string
+          description: Represents tag identifier across the system.
+          example: 21s687e29ae1f428e7ebe404
+        name:
+          type: string
+          description: Represents tag name.
+          example: Sprint1
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
     UpdateTagRequest:
       type: object
       properties:
@@ -289,25 +308,6 @@ components:
           type: string
           description: Represents a tag name.
           example: Sprint1
-    TagDtoV1:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Indicates whether a tag is archived or not.
-          default: false
-        id:
-          type: string
-          description: Represents tag identifier across the system.
-          example: 21s687e29ae1f428e7ebe404
-        name:
-          type: string
-          description: Represents tag name.
-          example: Sprint1
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
   securitySchemes:
     AddonKeyAuth:
       in: header

@@ -48,7 +48,7 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    ContainsUsersFilterV1:
+    ContainsArchivedFilterV1:
       type: object
       properties:
         contains:
@@ -74,20 +74,10 @@ components:
           type: string
           description: Filter entities in 'contains' by their status.
           enum:
-          - ALL
-          - ACTIVE_WITH_PENDING
           - ACTIVE
-          - PENDING
-          - INACTIVE
+          - ARCHIVED
+          - ALL
           example: ACTIVE
-    invoicingInfo:
-      type: object
-      description: Expense's invoicing info.
-      properties:
-        invoiceId:
-          type: string
-        manuallyInvoiced:
-          type: boolean
     ExpenseReportFilterV1:
       type: object
       properties:
@@ -230,6 +220,107 @@ components:
       required:
       - dateRangeEnd
       - dateRangeStart
+    ContainsUsersFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ALL
+          - ACTIVE_WITH_PENDING
+          - ACTIVE
+          - PENDING
+          - INACTIVE
+          example: ACTIVE
+    ContainsTaskFilterV1:
+      type: object
+      description: Represents filter criteria for expenses associated with tasks.
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    invoicingInfo:
+      type: object
+      description: Expense's invoicing info.
+      properties:
+        invoiceId:
+          type: string
+        manuallyInvoiced:
+          type: boolean
+    ExpenseDetailedReportDtoV1:
+      type: object
+      description: report
+      properties:
+        expenses:
+          type: array
+          description: Represents list of expenses
+          items:
+            $ref: '#/components/schemas/ExpenseReportDtoV1'
+        totals:
+          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
+    ExpenseTotalsDtoV1:
+      type: object
+      description: Represents expense totals
+      properties:
+        expensesCount:
+          type: integer
+          format: int32
+          description: Represents expenses count
+          example: 2
+        totalAmount:
+          type: number
+          format: double
+          description: Represents total amount of expenses
+          example: 20
+        totalAmountBillable:
+          type: number
+          format: double
+          description: Represents total billable amount of expenses
+          example: 20
     ExpenseReportDtoV1:
       type: object
       description: Represents list of expenses
@@ -408,97 +499,6 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110791121
-    ContainsTaskFilterV1:
-      type: object
-      description: Represents filter criteria for expenses associated with tasks.
-      properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    ExpenseDetailedReportDtoV1:
-      type: object
-      description: report
-      properties:
-        expenses:
-          type: array
-          description: Represents list of expenses
-          items:
-            $ref: '#/components/schemas/ExpenseReportDtoV1'
-        totals:
-          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
-    ContainsArchivedFilterV1:
-      type: object
-      properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    ExpenseTotalsDtoV1:
-      type: object
-      description: Represents expense totals
-      properties:
-        expensesCount:
-          type: integer
-          format: int32
-          description: Represents expenses count
-          example: 2
-        totalAmount:
-          type: number
-          format: double
-          description: Represents total amount of expenses
-          example: 20
-        totalAmountBillable:
-          type: number
-          format: double
-          description: Represents total billable amount of expenses
-          example: 20
   securitySchemes:
     AddonKeyAuth:
       in: header

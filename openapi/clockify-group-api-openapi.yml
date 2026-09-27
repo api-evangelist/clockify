@@ -312,16 +312,16 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    UpdateUserGroupRequest:
+    UserGroupUserRequest:
+      required:
+      - userId
       type: object
       properties:
-        name:
-          maxLength: 100
-          minLength: 0
+        userId:
           type: string
-          description: Represents a user group name.
-          example: development_team
-    UserGroupRequest:
+          description: Represents a user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+    UpdateUserGroupRequest:
       type: object
       properties:
         name:
@@ -341,15 +341,15 @@ components:
       example:
       - id: 672323eb0024343a1585e8a7
         name: Jane Doe
-    UserGroupUserRequest:
-      required:
-      - userId
+    UserGroupRequest:
       type: object
       properties:
-        userId:
+        name:
+          maxLength: 100
+          minLength: 0
           type: string
-          description: Represents a user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
+          description: Represents a user group name.
+          example: development_team
     UserGroupDtoV1:
       type: object
       properties:

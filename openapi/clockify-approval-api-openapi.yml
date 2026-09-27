@@ -296,6 +296,34 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    CreateApprovalRequest:
+      required:
+      - periodStart
+      type: object
+      properties:
+        period:
+          type: string
+          description: Specifies the approval period. It has to match the workspace approval period setting.
+          example: MONTHLY
+          enum:
+          - WEEKLY
+          - SEMI_MONTHLY
+          - MONTHLY
+        periodStart:
+          minLength: 1
+          type: string
+          description: Specifies an approval period start date in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00.000Z'
+    DateRangeDto:
+      type: object
+      properties:
+        end:
+          type: string
+          format: date-time
+        start:
+          type: string
+          format: date-time
+      description: Represents date range object.
     TagDto:
       type: object
       properties:
@@ -316,207 +344,59 @@ components:
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
       description: Represents a list of tag objects.
-    ApprovalRequestOwnerDtoV1:
+    ExpenseCategoryDto:
       type: object
       properties:
-        startOfWeek:
+        archived:
+          type: boolean
+          description: Flag that indicates whether the expense category is archived or not.
+          default: false
+        hasUnitPrice:
+          type: boolean
+          description: Represents whether expense category has unit price or none.
+          default: false
+        id:
           type: string
-          description: Represents a day of the week.
-          example: MONDAY
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-        timeZone:
+          description: Represents expense category identifier across the system.
+          example: 89a687e29ae1f428e7ebe303
+        name:
           type: string
-          description: Represents time zone.
-          example: Europe/Budapest
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        userName:
-          type: string
-          description: Represents user name.
-          example: johndoe
-      description: Represents approval request owner object.
-    ApprovalRequestStatusDtoV1:
-      type: object
-      properties:
-        note:
-          type: string
-          description: Represents an approval requesst note.
-          example: This is a sample approval request note.
-        state:
-          type: string
-          description: Represents approval state enum.
-          example: APPROVED
-          enum:
-          - PENDING
-          - APPROVED
-          - WITHDRAWN_SUBMISSION
-          - WITHDRAWN_APPROVAL
-          - REJECTED
-        updatedAt:
-          type: string
-          description: Represents a date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T08:00:00Z'
-        updatedBy:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        updatedByUserName:
-          type: string
-          description: Represents user name.
-          example: juandelacruz
-      description: Represents approval request status object.
-    DateRangeDto:
-      type: object
-      properties:
-        end:
-          type: string
-          format: date-time
-        start:
-          type: string
-          format: date-time
-      description: Represents date range object.
-    CreateApprovalRequest:
-      required:
-      - periodStart
-      type: object
-      properties:
-        period:
-          type: string
-          description: Specifies the approval period. It has to match the workspace approval period setting.
-          example: MONTHLY
-          enum:
-          - WEEKLY
-          - SEMI_MONTHLY
-          - MONTHLY
-        periodStart:
-          minLength: 1
-          type: string
-          description: Specifies an approval period start date in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00.000Z'
-    TimeIntervalDto:
-      type: object
-      properties:
-        duration:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        end:
-          type: string
-          format: date-time
-        offsetEnd:
+          description: Represents expense category name.
+          example: Procurement
+        priceInCents:
           type: integer
+          description: Represents price in cents as integer.
           format: int32
-        offsetStart:
-          type: integer
-          format: int32
-        start:
+          example: 1000
+        unit:
           type: string
-          format: date-time
-        timeZone:
+          description: Represents expense category unit.
+          example: piece
+        workspaceId:
           type: string
-        zonedEnd:
-          type: string
-          format: date-time
-        zonedStart:
-          type: string
-          format: date-time
-      description: Represents a time interval object.
-    CustomFieldValueDto:
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents an expense category object.
+    ApprovalRequestDtoV1:
       type: object
       properties:
-        customFieldId:
+        creator:
+          $ref: '#/components/schemas/ApprovalRequestCreatorDtoV1'
+        dateRange:
+          $ref: '#/components/schemas/DateRangeDto'
+        id:
           type: string
-          description: Represents custom field identifier across the system.
-          example: 44a687e29ae1f428e7ebe305
-        sourceType:
+          description: Represents approval request identifier across the workspace.
+          example: 567687e29ae1f428e7ebf564
+        owner:
+          $ref: '#/components/schemas/ApprovalRequestOwnerDtoV1'
+        status:
+          $ref: '#/components/schemas/ApprovalRequestStatusDtoV1'
+        workspaceId:
           type: string
-          description: Represents a custom field value source type.
-          example: WORKSPACE
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - TIMEENTRY
-        timeEntryId:
-          type: string
-          description: Represents time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        value:
-          type: object
-          description: Represents custom field value.
-          example: 20231211-12345
-      description: Represents a list of custom field value objects.
-    ApprovalDetailsDtoV1:
-      type: object
-      properties:
-        approvalRequest:
-          $ref: '#/components/schemas/ApprovalRequestDtoV1'
-        approvedTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        billableAmount:
-          type: number
-          format: double
-          example: 2500
-        billableTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        breakTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        costAmount:
-          type: number
-          description: Represents an amount.
-          format: double
-          example: 5000
-        entries:
-          type: array
-          description: Represents a list of time entry info data transfer objects.
-          items:
-            $ref: '#/components/schemas/TimeEntryInfoDto'
-        expenseTotal:
-          type: number
-          description: Represents an amount.
-          format: double
-          example: 7500
-        expenses:
-          type: array
-          description: Represents a list of expense hydrated data transfer objects.
-          items:
-            $ref: '#/components/schemas/ExpenseHydratedDto'
-        pendingTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        trackedTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-    RateDto:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents a valid approval request data transfer object.
     ExpenseHydratedDto:
       type: object
       properties:
@@ -606,30 +486,90 @@ components:
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
       description: Represents a list of expense hydrated data transfer objects.
-    ProjectInfoDto:
+    TaskInfoDto:
       type: object
       properties:
-        clientId:
-          type: string
-          description: Represents client identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        clientName:
-          type: string
-          description: Represents client name.
-          example: Client X
-        color:
-          type: string
-          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#000000'
         id:
           type: string
-          description: Represents project identifier across the system.
-          example: 5b641568b07987035750505e
+          description: Represents task identifier across the system.
+          example: 5b715448b0798751107918ab
         name:
           type: string
-          description: Represents a project name.
-          example: Software Development
+          description: Represents task name.
+          example: Bugfixing
       description: Represents a project info object.
+    ApprovalRequestCreatorDtoV1:
+      type: object
+      properties:
+        userEmail:
+          type: string
+          description: Represents user email.
+          example: johhndoe@example.com
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        userName:
+          type: string
+          description: Represents user name.
+          example: johhndoe
+      description: Represents approval request creator object.
+    ApprovalRequestOwnerDtoV1:
+      type: object
+      properties:
+        startOfWeek:
+          type: string
+          description: Represents a day of the week.
+          example: MONDAY
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        timeZone:
+          type: string
+          description: Represents time zone.
+          example: Europe/Budapest
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        userName:
+          type: string
+          description: Represents user name.
+          example: johndoe
+      description: Represents approval request owner object.
+    TimeIntervalDto:
+      type: object
+      properties:
+        duration:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        end:
+          type: string
+          format: date-time
+        offsetEnd:
+          type: integer
+          format: int32
+        offsetStart:
+          type: integer
+          format: int32
+        start:
+          type: string
+          format: date-time
+        timeZone:
+          type: string
+        zonedEnd:
+          type: string
+          format: date-time
+        zonedStart:
+          type: string
+          format: date-time
+      description: Represents a time interval object.
     TimeEntryInfoDto:
       type: object
       properties:
@@ -683,39 +623,30 @@ components:
           - HOLIDAY
           - TIME_OFF
       description: Represents a list of time entry info data transfer objects.
-    ExpenseCategoryDto:
+    CustomFieldValueDto:
       type: object
       properties:
-        archived:
-          type: boolean
-          description: Flag that indicates whether the expense category is archived or not.
-          default: false
-        hasUnitPrice:
-          type: boolean
-          description: Represents whether expense category has unit price or none.
-          default: false
-        id:
+        customFieldId:
           type: string
-          description: Represents expense category identifier across the system.
-          example: 89a687e29ae1f428e7ebe303
-        name:
+          description: Represents custom field identifier across the system.
+          example: 44a687e29ae1f428e7ebe305
+        sourceType:
           type: string
-          description: Represents expense category name.
-          example: Procurement
-        priceInCents:
-          type: integer
-          description: Represents price in cents as integer.
-          format: int32
-          example: 1000
-        unit:
+          description: Represents a custom field value source type.
+          example: WORKSPACE
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - TIMEENTRY
+        timeEntryId:
           type: string
-          description: Represents expense category unit.
-          example: piece
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-      description: Represents an expense category object.
+          description: Represents time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        value:
+          type: object
+          description: Represents custom field value.
+          example: 20231211-12345
+      description: Represents a list of custom field value objects.
     UpdateApprovalRequest:
       required:
       - state
@@ -735,54 +666,123 @@ components:
           - WITHDRAWN_SUBMISSION
           - WITHDRAWN_APPROVAL
           - REJECTED
-    ApprovalRequestDtoV1:
+    ApprovalRequestStatusDtoV1:
       type: object
       properties:
-        creator:
-          $ref: '#/components/schemas/ApprovalRequestCreatorDtoV1'
-        dateRange:
-          $ref: '#/components/schemas/DateRangeDto'
-        id:
+        note:
           type: string
-          description: Represents approval request identifier across the workspace.
-          example: 567687e29ae1f428e7ebf564
-        owner:
-          $ref: '#/components/schemas/ApprovalRequestOwnerDtoV1'
-        status:
-          $ref: '#/components/schemas/ApprovalRequestStatusDtoV1'
-        workspaceId:
+          description: Represents an approval requesst note.
+          example: This is a sample approval request note.
+        state:
           type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-      description: Represents a valid approval request data transfer object.
-    ApprovalRequestCreatorDtoV1:
-      type: object
-      properties:
-        userEmail:
+          description: Represents approval state enum.
+          example: APPROVED
+          enum:
+          - PENDING
+          - APPROVED
+          - WITHDRAWN_SUBMISSION
+          - WITHDRAWN_APPROVAL
+          - REJECTED
+        updatedAt:
           type: string
-          description: Represents user email.
-          example: johhndoe@example.com
-        userId:
+          description: Represents a date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        updatedBy:
           type: string
           description: Represents user identifier across the system.
           example: 5a0ab5acb07987125438b60f
-        userName:
+        updatedByUserName:
           type: string
           description: Represents user name.
-          example: johhndoe
-      description: Represents approval request creator object.
-    TaskInfoDto:
+          example: juandelacruz
+      description: Represents approval request status object.
+    ProjectInfoDto:
       type: object
       properties:
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        clientName:
+          type: string
+          description: Represents client name.
+          example: Client X
+        color:
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
         id:
           type: string
-          description: Represents task identifier across the system.
-          example: 5b715448b0798751107918ab
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
         name:
           type: string
-          description: Represents task name.
-          example: Bugfixing
+          description: Represents a project name.
+          example: Software Development
       description: Represents a project info object.
+    RateDto:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
+    ApprovalDetailsDtoV1:
+      type: object
+      properties:
+        approvalRequest:
+          $ref: '#/components/schemas/ApprovalRequestDtoV1'
+        approvedTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        billableAmount:
+          type: number
+          format: double
+          example: 2500
+        billableTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        breakTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        costAmount:
+          type: number
+          description: Represents an amount.
+          format: double
+          example: 5000
+        entries:
+          type: array
+          description: Represents a list of time entry info data transfer objects.
+          items:
+            $ref: '#/components/schemas/TimeEntryInfoDto'
+        expenseTotal:
+          type: number
+          description: Represents an amount.
+          format: double
+          example: 7500
+        expenses:
+          type: array
+          description: Represents a list of expense hydrated data transfer objects.
+          items:
+            $ref: '#/components/schemas/ExpenseHydratedDto'
+        pendingTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        trackedTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
   securitySchemes:
     AddonKeyAuth:
       in: header

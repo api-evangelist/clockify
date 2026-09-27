@@ -99,6 +99,15 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    AssignmentPerDayDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        hasAssignment:
+          type: boolean
+      description: Represents a list of assignment per day objects.
     SchedulingProjectsTotalsDtoV1:
       type: object
       properties:
@@ -178,15 +187,6 @@ components:
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
       description: Represents a list of milestone objects.
-    AssignmentPerDayDto:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date-time
-        hasAssignment:
-          type: boolean
-      description: Represents a list of assignment per day objects.
   securitySchemes:
     AddonKeyAuth:
       in: header

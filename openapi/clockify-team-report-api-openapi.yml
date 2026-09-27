@@ -47,6 +47,122 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    CompareOvertimeFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of overtime work (difference between work and capacity) in hours, multiplied by 100. For example, if desired value is 1.5h, input should be 150.
+          example: '150'
+    AttendanceDto:
+      type: object
+      description: List of entities
+      properties:
+        break:
+          type: integer
+          format: int64
+        capacity:
+          type: integer
+          format: int32
+        date:
+          type: string
+        endTime:
+          type: string
+        hasRunningEntry:
+          type: boolean
+        imageUrl:
+          type: string
+        overtime:
+          type: integer
+          format: int64
+        remainingCapacity:
+          type: integer
+          format: int64
+        startTime:
+          type: string
+        timeOff:
+          type: integer
+          format: int64
+        totalDuration:
+          type: integer
+          format: int64
+        userId:
+          type: string
+        userName:
+          type: string
+    DetailedOptionsV1:
+      type: object
+      properties:
+        totals:
+          type: string
+          enum:
+          - CALCULATE
+          - EXCLUDE
+          example: CALCULATE
+    WeeklyFilterV1:
+      type: object
+      description: Represents a weekly report filter.
+      properties:
+        group:
+          type: string
+          description: Weekly filter will include group identifier.
+          example: 5b715448b079875110791111
+        subgroup:
+          type: string
+          description: Weekly filter will include subgroup identifier.
+          example: 5b715448b079875110792222
+    CompareEndFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents end time in 24-hour notation.
+          example: '17:00'
+    AuditFilterV1:
+      type: object
+      properties:
+        duration:
+          type: integer
+          format: int32
+          description: Represent audit duration.
+          example: 2
+        durationShorter:
+          type: boolean
+          description: Represent audit duration shorter.
+          example: false
+        withoutProject:
+          type: boolean
+          description: Indicates whether to filter without a project.
+          example: false
+        withoutTask:
+          type: boolean
+          description: Indicates whether to filter without a task.
+          example: true
+    CompareWorkFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of completed work for day in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
+          example: '750'
     ContainsUsersFilterV1:
       type: object
       properties:
@@ -79,187 +195,36 @@ components:
           - PENDING
           - INACTIVE
           example: ACTIVE
-    CompareOvertimeFilter:
+    SummaryFilterV1:
       type: object
+      description: Represents a summary report filter.
       properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents duration of overtime work (difference between work and capacity) in hours, multiplied by 100. For example, if desired value is 1.5h, input should be 150.
-          example: '150'
-    ContainsTagFilterV1:
-      type: object
-      description: Represents an object for filtering entries by tags.
-      properties:
-        containedInTimeentry:
-          type: string
-          description: If provided, you'll get result filtered by value of contained in time entry.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS_ONLY
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
+        groups:
           type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
+          description: Represents group ids
+          example: '"[5b715448b07987511071111", "5b715448b079875110792222"]'
           items:
             type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    CompareStartFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents start time in 24-hour notation.
-          example: '15:00'
-    ContainsTaskFilterV1:
-      type: object
-      description: Represents filter criteria for expenses associated with tasks.
-      properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    ContainsArchivedFilterV1:
-      type: object
-      properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    CompareWorkFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents duration of completed work for day in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
-          example: '750'
-    CompareCapacityFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents daily work capacity of user in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
-          example: '750'
-    DetailedFilterV1:
-      type: object
-      description: Represents a detailed report filter.
-      properties:
-        auditFilter:
-          $ref: '#/components/schemas/AuditFilterV1'
-        options:
-          $ref: '#/components/schemas/DetailedOptionsV1'
-        page:
-          type: integer
-          format: int32
-          example: 1
-        pageSize:
-          type: integer
-          format: int32
-          example: 20
+            description: Represents group ids
+            example: '"[5b715448b07987511071111", "5b715448b079875110792222"]'
         sortColumn:
           type: string
-          description: If provided, you'll get sorted result by sort column.
+          description: If provided, you'll get sorted result by provided sort column.
           enum:
-          - ID
-          - DESCRIPTION
-          - USER
+          - GROUP
           - DURATION
-          - DATE
-          - ZONED_DATE
-          - NATURAL
-          - USER_DATE
-          example: ID
+          - AMOUNT
+          - EARNED
+          - COST
+          - PROFIT
+          example: GROUP
+        summaryChartType:
+          type: string
+          description: If provided, you'll get sorted result by provided summary chart type.
+          enum:
+          - BILLABILITY
+          - PROJECT
+          example: PROJECT
     AttendanceFilterV1:
       type: object
       description: Represents an attendance report filter.
@@ -315,148 +280,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CompareWorkFilter'
-    CompareBreakFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents duration of breaks in the day in hours, multiplied by 100. For example, if desired value is 0.5h, input should be 50
-          example: '50'
-    CompareEndFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents end time in 24-hour notation.
-          example: '17:00'
-    SummaryFilterV1:
-      type: object
-      description: Represents a summary report filter.
-      properties:
-        groups:
-          type: array
-          description: Represents group ids
-          example: '"[5b715448b07987511071111", "5b715448b079875110792222"]'
-          items:
-            type: string
-            description: Represents group ids
-            example: '"[5b715448b07987511071111", "5b715448b079875110792222"]'
-        sortColumn:
-          type: string
-          description: If provided, you'll get sorted result by provided sort column.
-          enum:
-          - GROUP
-          - DURATION
-          - AMOUNT
-          - EARNED
-          - COST
-          - PROFIT
-          example: GROUP
-        summaryChartType:
-          type: string
-          description: If provided, you'll get sorted result by provided summary chart type.
-          enum:
-          - BILLABILITY
-          - PROJECT
-          example: PROJECT
-    WeeklyFilterV1:
-      type: object
-      description: Represents a weekly report filter.
-      properties:
-        group:
-          type: string
-          description: Weekly filter will include group identifier.
-          example: 5b715448b079875110791111
-        subgroup:
-          type: string
-          description: Weekly filter will include subgroup identifier.
-          example: 5b715448b079875110792222
-    DetailedOptionsV1:
-      type: object
-      properties:
-        totals:
-          type: string
-          enum:
-          - CALCULATE
-          - EXCLUDE
-          example: CALCULATE
-    AuditFilterV1:
-      type: object
-      properties:
-        duration:
-          type: integer
-          format: int32
-          description: Represent audit duration.
-          example: 2
-        durationShorter:
-          type: boolean
-          description: Represent audit duration shorter.
-          example: false
-        withoutProject:
-          type: boolean
-          description: Indicates whether to filter without a project.
-          example: false
-        withoutTask:
-          type: boolean
-          description: Indicates whether to filter without a task.
-          example: true
-    AttendanceDto:
-      type: object
-      description: List of entities
-      properties:
-        break:
-          type: integer
-          format: int64
-        capacity:
-          type: integer
-          format: int32
-        date:
-          type: string
-        endTime:
-          type: string
-        hasRunningEntry:
-          type: boolean
-        imageUrl:
-          type: string
-        overtime:
-          type: integer
-          format: int64
-        remainingCapacity:
-          type: integer
-          format: int64
-        startTime:
-          type: string
-        timeOff:
-          type: integer
-          format: int64
-        totalDuration:
-          type: integer
-          format: int64
-        userId:
-          type: string
-        userName:
-          type: string
-    AttendanceReportDtoV1:
-      type: object
-      description: report
-      properties:
-        entities:
-          type: array
-          description: List of entities
-          items:
-            $ref: '#/components/schemas/AttendanceDto'
     AttendanceReportFilterV1:
       type: object
       properties:
@@ -626,6 +449,183 @@ components:
       - attendanceFilter
       - dateRangeEnd
       - dateRangeStart
+    ContainsArchivedFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    ContainsTagFilterV1:
+      type: object
+      description: Represents an object for filtering entries by tags.
+      properties:
+        containedInTimeentry:
+          type: string
+          description: If provided, you'll get result filtered by value of contained in time entry.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS_ONLY
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    CompareStartFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents start time in 24-hour notation.
+          example: '15:00'
+    CompareBreakFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of breaks in the day in hours, multiplied by 100. For example, if desired value is 0.5h, input should be 50
+          example: '50'
+    ContainsTaskFilterV1:
+      type: object
+      description: Represents filter criteria for expenses associated with tasks.
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    AttendanceReportDtoV1:
+      type: object
+      description: report
+      properties:
+        entities:
+          type: array
+          description: List of entities
+          items:
+            $ref: '#/components/schemas/AttendanceDto'
+    DetailedFilterV1:
+      type: object
+      description: Represents a detailed report filter.
+      properties:
+        auditFilter:
+          $ref: '#/components/schemas/AuditFilterV1'
+        options:
+          $ref: '#/components/schemas/DetailedOptionsV1'
+        page:
+          type: integer
+          format: int32
+          example: 1
+        pageSize:
+          type: integer
+          format: int32
+          example: 20
+        sortColumn:
+          type: string
+          description: If provided, you'll get sorted result by sort column.
+          enum:
+          - ID
+          - DESCRIPTION
+          - USER
+          - DURATION
+          - DATE
+          - ZONED_DATE
+          - NATURAL
+          - USER_DATE
+          example: ID
+    CompareCapacityFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents daily work capacity of user in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
+          example: '750'
     CustomFieldFilterV1:
       type: object
       description: Represents list of time entry custom field filter objects.

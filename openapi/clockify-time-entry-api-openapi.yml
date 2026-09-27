@@ -639,339 +639,7 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    TimeEntryId:
-      type: object
-      properties:
-        dateOfCreationFromObjectId:
-          type: string
-          format: date-time
-      description: Represents a list of invoiced time entry ids
-      example:
-      - 54m377ddd3fcab07cfbb432w
-      - 25b687e29ae1f428e7ebe123
-    UpdateTimeEntryBulkRequest:
-      required:
-      - id
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether a time entry is billable or not.
-          default: false
-        customFields:
-          maxItems: 50
-          minItems: 0
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateCustomFieldRequest'
-        description:
-          maxLength: 3000
-          minLength: 0
-          type: string
-          description: Represents a time entry description.
-          example: This is a sample time entry description.
-        end:
-          type: string
-          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2021-01-01T00:00:00Z'
-        id:
-          minLength: 1
-          type: string
-          description: Represents a time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        projectId:
-          type: string
-          description: Represents a project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        start:
-          type: string
-          description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T00:00:00Z'
-        tagIds:
-          type: array
-          description: Represents a list of tag ids.
-          example:
-          - 321r77ddd3fcab07cfbb567y
-          - 44x777ddd3fcab07cfbb88f
-          items:
-            type: string
-            description: Represents a list of tag ids.
-            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
-        taskId:
-          type: string
-          description: Represents a task identifier across the system.
-          example: 54m377ddd3fcab07cfbb432w
-        type:
-          type: string
-          enum:
-          - REGULAR
-          - BREAK
-    StopTimeEntryRequest:
-      required:
-      - end
-      type: object
-      properties:
-        end:
-          type: string
-          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2021-01-01T00:00:00Z'
-    TimeIntervalDtoV1:
-      type: object
-      properties:
-        duration:
-          type: string
-          description: Represents a time duration.
-          example: '8000'
-        end:
-          type: string
-          description: Represents an end date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2021-01-01T00:00:00Z'
-        start:
-          type: string
-          description: Represents a start date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T00:00:00Z'
-      description: Represents a time interval object.
     TimeEntryDtoImplV1:
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether a time entry is billable.
-          default: false
-        customFieldValues:
-          type: array
-          description: Represents a list of custom field value objects.
-          items:
-            $ref: '#/components/schemas/CustomFieldValueDtoV1'
-        description:
-          type: string
-          description: Represents time entry description.
-          example: This is a sample time entry description.
-        id:
-          type: string
-          description: Represents time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        isLocked:
-          type: boolean
-          description: Represents whether time entry is locked for modification.
-          default: false
-        kioskId:
-          type: string
-          description: Represents kiosk identifier across the system.
-          example: 94c777ddd3fcab07cfbb210d
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        tagIds:
-          type: array
-          description: Represents a list of tag identifiers across the system.
-          example:
-          - 321r77ddd3fcab07cfbb567y
-          - 44x777ddd3fcab07cfbb88f
-          items:
-            type: string
-            description: Represents a list of tag identifiers across the system.
-            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
-        taskId:
-          type: string
-          description: Represents task identifier across the system.
-          example: 54m377ddd3fcab07cfbb432w
-        timeInterval:
-          $ref: '#/components/schemas/TimeIntervalDtoV1'
-        type:
-          type: string
-          description: Represents a time entry type enum.
-          example: BREAK
-          enum:
-          - REGULAR
-          - BREAK
-          - HOLIDAY
-          - TIME_OFF
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-    TimeEntryWithRatesDtoV1:
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether a time entry is billable.
-          default: false
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        customFieldValues:
-          type: array
-          description: Represents a list of custom field value objects.
-          items:
-            $ref: '#/components/schemas/CustomFieldValueDtoV1'
-        description:
-          type: string
-          description: Represents time entry description.
-          example: This is a sample time entry description.
-        hourlyRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        id:
-          type: string
-          description: Represents time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        isLocked:
-          type: boolean
-          description: Represents whether time entry is locked for modification.
-          default: false
-        kioskId:
-          type: string
-          description: Represents kiosk identifier across the system.
-          example: 94c777ddd3fcab07cfbb210d
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        tagIds:
-          type: array
-          description: Represents a list of tag identifiers across the system.
-          example:
-          - 321r77ddd3fcab07cfbb567y
-          - 44x777ddd3fcab07cfbb88f
-          items:
-            type: string
-            description: Represents a list of tag identifiers across the system.
-            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
-        taskId:
-          type: string
-          description: Represents task identifier across the system.
-          example: 54m377ddd3fcab07cfbb432w
-        timeInterval:
-          $ref: '#/components/schemas/TimeIntervalDtoV1'
-        type:
-          type: string
-          description: Represents a time entry type enum.
-          example: BREAK
-          enum:
-          - REGULAR
-          - BREAK
-          - HOLIDAY
-          - TIME_OFF
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-    UpdateCustomFieldRequest:
-      required:
-      - customFieldId
-      type: object
-      properties:
-        customFieldId:
-          type: string
-          description: Represents custom field identifier across the system.
-          example: 5e4117fe8c625f38930d57b7
-        sourceType:
-          type: string
-          description: Represents a custom field value source type.
-          example: WORKSPACE
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - TIMEENTRY
-        value:
-          type: object
-          description: Represents a custom field's value.
-          example: new value
-      description: Represents a list of value objects for user’s custom fields.
-    UpdateTimeEntryRequest:
-      required:
-      - start
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether a time entry is billable or not.
-          default: false
-        customFields:
-          maxItems: 50
-          minItems: 0
-          type: array
-          description: Represents a list of value objects for user’s custom fields.
-          items:
-            $ref: '#/components/schemas/UpdateCustomFieldRequest'
-        description:
-          maxLength: 3000
-          minLength: 0
-          type: string
-          description: Represents time entry description.
-          example: This is a sample time entry description.
-        end:
-          type: string
-          description: Represents an end date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2021-01-01T00:00:00Z'
-        projectId:
-          type: string
-          description: Represents a project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        start:
-          type: string
-          description: Represents a start date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T00:00:00Z'
-        tagIds:
-          type: array
-          description: Represents a list of tag ids.
-          example:
-          - 321r77ddd3fcab07cfbb567y
-          - 44x777ddd3fcab07cfbb88f
-          items:
-            type: string
-            description: Represents a list of tag ids.
-            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
-        taskId:
-          type: string
-          description: Represents a task identifier across the system.
-          example: 54m377ddd3fcab07cfbb432w
-        type:
-          type: string
-          enum:
-          - REGULAR
-          - BREAK
-    CustomFieldValueDtoV1:
-      type: object
-      properties:
-        customFieldId:
-          type: string
-          description: Represents custom field identifier across the system.
-          example: 5e4117fe8c625f38930d57b7
-        name:
-          type: string
-          description: Represents custom field name.
-          example: TIN
-        timeEntryId:
-          type: string
-          description: Represents time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        type:
-          type: string
-          description: Represents a custom field value source type.
-          example: WORKSPACE
-        value:
-          type: object
-          description: Represents custom field value.
-          example: 20231211-12345
-      description: Represents a list of custom field value objects.
-    TimeEntryDtoV1:
       type: object
       properties:
         billable:
@@ -1056,42 +724,52 @@ components:
           - 25b687e29ae1f428e7ebe123
           items:
             $ref: '#/components/schemas/TimeEntryId'
-    CreateCustomAttributeRequest:
-      required:
-      - name
-      - namespace
-      - value
+    CustomFieldValueDtoV1:
       type: object
       properties:
+        customFieldId:
+          type: string
+          description: Represents custom field identifier across the system.
+          example: 5e4117fe8c625f38930d57b7
         name:
-          minLength: 1
           type: string
-          description: Represents custom attribute name.
-          example: race
-        namespace:
-          minLength: 1
+          description: Represents custom field name.
+          example: TIN
+        timeEntryId:
           type: string
-          description: Represents custom attribute namespace.
-          example: user_info
+          description: Represents time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        type:
+          type: string
+          description: Represents a custom field value source type.
+          example: WORKSPACE
         value:
-          minLength: 1
-          type: string
-          description: Represents custom attribute value.
-          example: Asian
-      description: Represents a list of create custom field request objects.
-    RateDtoV1:
+          type: object
+          description: Represents custom field value.
+          example: 20231211-12345
+      description: Represents a list of custom field value objects.
+    UpdateCustomFieldRequest:
+      required:
+      - customFieldId
       type: object
       properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
+        customFieldId:
           type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
+          description: Represents custom field identifier across the system.
+          example: 5e4117fe8c625f38930d57b7
+        sourceType:
+          type: string
+          description: Represents a custom field value source type.
+          example: WORKSPACE
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - TIMEENTRY
+        value:
+          type: object
+          description: Represents a custom field's value.
+          example: new value
+      description: Represents a list of value objects for user’s custom fields.
     CreateTimeEntryRequest:
       type: object
       properties:
@@ -1152,6 +830,328 @@ components:
           enum:
           - REGULAR
           - BREAK
+    CreateCustomAttributeRequest:
+      required:
+      - name
+      - namespace
+      - value
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Represents custom attribute name.
+          example: race
+        namespace:
+          minLength: 1
+          type: string
+          description: Represents custom attribute namespace.
+          example: user_info
+        value:
+          minLength: 1
+          type: string
+          description: Represents custom attribute value.
+          example: Asian
+      description: Represents a list of create custom field request objects.
+    TimeEntryWithRatesDtoV1:
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether a time entry is billable.
+          default: false
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        customFieldValues:
+          type: array
+          description: Represents a list of custom field value objects.
+          items:
+            $ref: '#/components/schemas/CustomFieldValueDtoV1'
+        description:
+          type: string
+          description: Represents time entry description.
+          example: This is a sample time entry description.
+        hourlyRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        id:
+          type: string
+          description: Represents time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        isLocked:
+          type: boolean
+          description: Represents whether time entry is locked for modification.
+          default: false
+        kioskId:
+          type: string
+          description: Represents kiosk identifier across the system.
+          example: 94c777ddd3fcab07cfbb210d
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        tagIds:
+          type: array
+          description: Represents a list of tag identifiers across the system.
+          example:
+          - 321r77ddd3fcab07cfbb567y
+          - 44x777ddd3fcab07cfbb88f
+          items:
+            type: string
+            description: Represents a list of tag identifiers across the system.
+            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
+        taskId:
+          type: string
+          description: Represents task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+        timeInterval:
+          $ref: '#/components/schemas/TimeIntervalDtoV1'
+        type:
+          type: string
+          description: Represents a time entry type enum.
+          example: BREAK
+          enum:
+          - REGULAR
+          - BREAK
+          - HOLIDAY
+          - TIME_OFF
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    TimeEntryId:
+      type: object
+      properties:
+        dateOfCreationFromObjectId:
+          type: string
+          format: date-time
+      description: Represents a list of invoiced time entry ids
+      example:
+      - 54m377ddd3fcab07cfbb432w
+      - 25b687e29ae1f428e7ebe123
+    StopTimeEntryRequest:
+      required:
+      - end
+      type: object
+      properties:
+        end:
+          type: string
+          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+    UpdateTimeEntryRequest:
+      required:
+      - start
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether a time entry is billable or not.
+          default: false
+        customFields:
+          maxItems: 50
+          minItems: 0
+          type: array
+          description: Represents a list of value objects for user’s custom fields.
+          items:
+            $ref: '#/components/schemas/UpdateCustomFieldRequest'
+        description:
+          maxLength: 3000
+          minLength: 0
+          type: string
+          description: Represents time entry description.
+          example: This is a sample time entry description.
+        end:
+          type: string
+          description: Represents an end date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+        projectId:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        start:
+          type: string
+          description: Represents a start date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T00:00:00Z'
+        tagIds:
+          type: array
+          description: Represents a list of tag ids.
+          example:
+          - 321r77ddd3fcab07cfbb567y
+          - 44x777ddd3fcab07cfbb88f
+          items:
+            type: string
+            description: Represents a list of tag ids.
+            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
+        taskId:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+        type:
+          type: string
+          enum:
+          - REGULAR
+          - BREAK
+    TimeIntervalDtoV1:
+      type: object
+      properties:
+        duration:
+          type: string
+          description: Represents a time duration.
+          example: '8000'
+        end:
+          type: string
+          description: Represents an end date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+        start:
+          type: string
+          description: Represents a start date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T00:00:00Z'
+      description: Represents a time interval object.
+    UpdateTimeEntryBulkRequest:
+      required:
+      - id
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether a time entry is billable or not.
+          default: false
+        customFields:
+          maxItems: 50
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateCustomFieldRequest'
+        description:
+          maxLength: 3000
+          minLength: 0
+          type: string
+          description: Represents a time entry description.
+          example: This is a sample time entry description.
+        end:
+          type: string
+          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+        id:
+          minLength: 1
+          type: string
+          description: Represents a time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        projectId:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        start:
+          type: string
+          description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T00:00:00Z'
+        tagIds:
+          type: array
+          description: Represents a list of tag ids.
+          example:
+          - 321r77ddd3fcab07cfbb567y
+          - 44x777ddd3fcab07cfbb88f
+          items:
+            type: string
+            description: Represents a list of tag ids.
+            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
+        taskId:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+        type:
+          type: string
+          enum:
+          - REGULAR
+          - BREAK
+    RateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
+    TimeEntryDtoV1:
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether a time entry is billable.
+          default: false
+        customFieldValues:
+          type: array
+          description: Represents a list of custom field value objects.
+          items:
+            $ref: '#/components/schemas/CustomFieldValueDtoV1'
+        description:
+          type: string
+          description: Represents time entry description.
+          example: This is a sample time entry description.
+        id:
+          type: string
+          description: Represents time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        isLocked:
+          type: boolean
+          description: Represents whether time entry is locked for modification.
+          default: false
+        kioskId:
+          type: string
+          description: Represents kiosk identifier across the system.
+          example: 94c777ddd3fcab07cfbb210d
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        tagIds:
+          type: array
+          description: Represents a list of tag identifiers across the system.
+          example:
+          - 321r77ddd3fcab07cfbb567y
+          - 44x777ddd3fcab07cfbb88f
+          items:
+            type: string
+            description: Represents a list of tag identifiers across the system.
+            example: '["321r77ddd3fcab07cfbb567y","44x777ddd3fcab07cfbb88f"]'
+        taskId:
+          type: string
+          description: Represents task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+        timeInterval:
+          $ref: '#/components/schemas/TimeIntervalDtoV1'
+        type:
+          type: string
+          description: Represents a time entry type enum.
+          example: BREAK
+          enum:
+          - REGULAR
+          - BREAK
+          - HOLIDAY
+          - TIME_OFF
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
   securitySchemes:
     AddonKeyAuth:
       in: header
