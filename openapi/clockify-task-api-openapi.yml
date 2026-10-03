@@ -434,6 +434,52 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    TaskStatus:
+      type: object
+      description: Represents task status.
+      example: DONE
+      oneOf:
+      - type: string
+        enum:
+        - ACTIVE
+        - DONE
+        - ALL
+      properties:
+        ACTIVE:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        ALL:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        DONE:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        active:
+          type: boolean
+    HourlyRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an hourly rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
     CostRateRequestV1:
       required:
       - amount
@@ -449,69 +495,19 @@ components:
           type: string
           description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
           example: '2020-01-01T00:00:00Z'
-    TaskDtoV1:
+    RateDtoV1:
       type: object
       properties:
-        assigneeId:
-          type: string
-          deprecated: true
-        assigneeIds:
-          uniqueItems: true
-          type: array
-          description: Represents list of assignee ids for the task.
-          example:
-          - 45b687e29ae1f428e7ebe123
-          - 67s687e29ae1f428e7ebe678
-          items:
-            type: string
-            description: Represents list of assignee ids for the task.
-            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
-        billable:
-          type: boolean
-          description: Indicates whether a task is billable or not.
-          default: false
-        budgetEstimate:
+        amount:
           type: integer
-          description: Represents a task budget estimate as long.
-          format: int64
-          example: 10000
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        duration:
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
           type: string
-          description: Represents a task duration.
-          example: PT1H30M
-        estimate:
-          type: string
-          description: Represents a task duration estimate.
-          example: PT1H30M
-        hourlyRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        id:
-          type: string
-          description: Represents task identifier across the system.
-          example: 57a687e29ae1f428e7ebe107
-        name:
-          type: string
-          description: Represents task name.
-          example: Bugfixing
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        userGroupIds:
-          uniqueItems: true
-          type: array
-          description: Represents list of user group ids for the task.
-          example:
-          - 67b687e29ae1f428e7ebe123
-          - 12s687e29ae1f428e7ebe678
-          items:
-            type: string
-            description: Represents list of user group ids for the task.
-            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
     TaskRequestV1:
       required:
       - name
@@ -628,65 +624,69 @@ components:
             type: string
             description: Represents list of user group ids for the task.
             example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
-    TaskStatus:
+    TaskDtoV1:
       type: object
-      description: Represents task status.
-      example: DONE
-      oneOf:
-      - type: string
-        enum:
-        - ACTIVE
-        - DONE
-        - ALL
       properties:
-        ACTIVE:
+        assigneeId:
           type: string
-          enum:
-          - ACTIVE
-          - DONE
-          - ALL
-        ALL:
-          type: string
-          enum:
-          - ACTIVE
-          - DONE
-          - ALL
-        DONE:
-          type: string
-          enum:
-          - ACTIVE
-          - DONE
-          - ALL
-        active:
+          deprecated: true
+        assigneeIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of assignee ids for the task.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of assignee ids for the task.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+        billable:
           type: boolean
-    HourlyRateRequestV1:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
+          description: Indicates whether a task is billable or not.
+          default: false
+        budgetEstimate:
           type: integer
-          description: Represents an hourly rate amount as integer.
-          format: int32
-          example: 20000
-        since:
+          description: Represents a task budget estimate as long.
+          format: int64
+          example: 10000
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        duration:
           type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-    RateDtoV1:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
+          description: Represents a task duration.
+          example: PT1H30M
+        estimate:
           type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
+          description: Represents a task duration estimate.
+          example: PT1H30M
+        hourlyRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        id:
+          type: string
+          description: Represents task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+        name:
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of user group ids for the task.
+          example:
+          - 67b687e29ae1f428e7ebe123
+          - 12s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of user group ids for the task.
+            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
   securitySchemes:
     AddonKeyAuth:
       in: header

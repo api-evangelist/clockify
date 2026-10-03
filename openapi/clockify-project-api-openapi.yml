@@ -759,21 +759,15 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    CostRateRequestV1:
-      required:
-      - amount
+    ProjectEstimateRequest:
       type: object
       properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 20000
-        since:
-          type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
+        budgetEstimate:
+          $ref: '#/components/schemas/EstimateWithOptionsRequest'
+        estimateReset:
+          $ref: '#/components/schemas/EstimateResetRequest'
+        timeEstimate:
+          $ref: '#/components/schemas/TimeEstimateRequest'
     EstimateResetRequest:
       type: object
       properties:
@@ -834,6 +828,107 @@ components:
           - NOVEMBER
           - DECEMBER
       description: Represents estimate reset request object.
+    HourlyRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an hourly rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    UpdateProjectMembershipsRequest:
+      required:
+      - memberships
+      type: object
+      properties:
+        memberships:
+          type: array
+          description: Represents a list of users with id and rates request objects.
+          items:
+            $ref: '#/components/schemas/UserIdWithRatesRequest'
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+    TimeEstimateRequest:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Flag whether to include only active or inactive estimates.
+          default: false
+        estimate:
+          type: string
+          description: Represents a time duration in ISO-8601 format.
+          example: PT1H30M
+        includeNonBillable:
+          type: boolean
+          description: Flag whether to include non-billable expenses.
+          default: false
+        resetOption:
+          type: string
+          description: Represents a reset option enum.
+          example: MONTHLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents project time estimate request object.
+    HourlyRateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents an hourly rate object.
+    CostRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    EstimateRequest:
+      type: object
+      properties:
+        estimate:
+          type: string
+          description: Represents a time duration in ISO-8601 format.
+          example: PT1H30M
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents an estimate request object.
     EstimateWithOptionsRequest:
       type: object
       properties:
@@ -867,19 +962,481 @@ components:
           - AUTO
           - MANUAL
       description: Represents estimate with options request object.
-    HourlyRateDtoV1:
+    TaskRequest:
+      required:
+      - name
+      type: object
+      properties:
+        assigneeId:
+          type: string
+          deprecated: true
+        assigneeIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of assignee ids for the task.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of assignee ids for the task.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+        billable:
+          type: boolean
+          description: Flag to set whether task is billable or not
+          default: false
+        budgetEstimate:
+          minimum: 0
+          type: integer
+          format: int64
+          example: 10000
+        costRate:
+          $ref: '#/components/schemas/CostRateRequest'
+        estimate:
+          type: string
+          description: Represents a task duration estimate.
+          example: PT1H30M
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequest'
+        id:
+          type: string
+          description: Represents task identifier across the system.
+          example: 57a687e29ae1f428e7ebe107
+        name:
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        status:
+          type: string
+          example: DONE
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents list of user group ids for the task.
+          example:
+          - 67b687e29ae1f428e7ebe123
+          - 12s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents list of user group ids for the task.
+            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+      description: Represents a list of task request objects.
+    ProjectRequest:
+      required:
+      - name
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether project is billable or not.
+          default: false
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 9t641568b07987035750704
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        costRate:
+          $ref: '#/components/schemas/CostRateRequestV1'
+        estimate:
+          $ref: '#/components/schemas/EstimateRequest'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequestV1'
+        isPublic:
+          type: boolean
+          description: Indicates whether project is public or not.
+          default: false
+        memberships:
+          type: array
+          description: Represents a list of membership request objects.
+          items:
+            $ref: '#/components/schemas/MembershipRequest'
+        name:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        note:
+          maxLength: 16384
+          type: string
+          description: Represents project note.
+          example: This is a sample note for the project.
+        tasks:
+          type: array
+          description: Represents a list of task request objects.
+          items:
+            $ref: '#/components/schemas/TaskRequest'
+    EstimateWithOptionsDto:
+      type: object
+      properties:
+        active:
+          type: boolean
+        estimate:
+          type: integer
+          description: Represents an estimate as long.
+          format: int64
+          example: 600000
+        includeExpenses:
+          type: boolean
+          description: Indicates whether estimate includes non-billable or not.
+          default: false
+        resetOption:
+          type: string
+          description: Represents a reset option enum.
+          example: WEEKLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents a project budget estimate object.
+    MembershipRequest:
+      type: object
+      properties:
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequest'
+        membershipStatus:
+          type: string
+          description: Represents a membership status enum.
+          example: PENDING
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
+          type: string
+          description: Represents membership type enum.
+          example: PROJECT
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 12t687e29ae1f428e7ebe202
+      description: Represents a list of membership request objects.
+    UserIdWithRatesRequest:
+      required:
+      - userId
+      type: object
+      properties:
+        costRate:
+          $ref: '#/components/schemas/CostRateRequestV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequestV1'
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 12t687e29ae1f428e7ebe202
+      description: Represents a list of users with id and rates request objects.
+    PatchProjectTemplateRequest:
+      type: object
+      properties:
+        isTemplate:
+          type: boolean
+          description: Indicates whether project is a template or not.
+          default: false
+    CostRateRequest:
       type: object
       properties:
         amount:
+          minimum: 0
           type: integer
           description: Represents an amount as integer.
           format: int32
-          example: 10500
-        currency:
+          example: 2000
+        since:
           type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents an hourly rate object.
+          description: Represents a datetime in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+        sinceAsInstant:
+          type: string
+          format: date-time
+      description: Represents a cost rate request object.
+    ProjectDtoV1:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether project is archived or not.
+          default: false
+        billable:
+          type: boolean
+          description: Indicates whether project is billable or not.
+          default: false
+        budgetEstimate:
+          $ref: '#/components/schemas/EstimateWithOptionsDto'
+        color:
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        duration:
+          type: string
+          description: Represents project duration in milliseconds.
+          example: '60000'
+        estimate:
+          $ref: '#/components/schemas/EstimateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        id:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        memberships:
+          type: array
+          description: Represents a list of membership objects.
+          items:
+            $ref: '#/components/schemas/MembershipDtoV1'
+        name:
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        note:
+          type: string
+          description: Represents project note.
+          example: This is a sample note for the project.
+        public:
+          type: boolean
+          description: Indicates whether project is public or not.
+          default: false
+        template:
+          type: boolean
+          description: Indicates whether project is a template or not.
+          default: false
+        timeEstimate:
+          $ref: '#/components/schemas/TimeEstimateDto'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    AddUsersToProjectRequestV1:
+      type: object
+      properties:
+        remove:
+          type: boolean
+          description: Setting this flag to 'true' will remove the given users from the project.
+          default: false
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+        userIds:
+          type: array
+          description: Represents array of user ids which should be added/removed.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          items:
+            type: string
+            description: Represents array of user ids which should be added/removed.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
+    MembershipDtoV1:
+      type: object
+      properties:
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateDtoV1'
+        membershipStatus:
+          type: string
+          description: Represents a membership status enum.
+          example: PENDING
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
+          type: string
+          description: Represents membership type enum.
+          example: PROJECT
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        targetId:
+          type: string
+          description: Represents target identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+      description: Represents a list of membership objects.
+    UpdateProjectRequest:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether project is archived or not.
+          default: false
+        billable:
+          type: boolean
+          description: Indicates whether project is billable or not.
+          default: false
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 9t641568b07987035750704
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        costRate:
+          $ref: '#/components/schemas/CostRateRequestV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateRequestV1'
+        isPublic:
+          type: boolean
+          description: Indicates whether project is public or not.
+          default: false
+        name:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        note:
+          maxLength: 16384
+          type: string
+          description: Represents project note.
+          example: This is a sample note for the project.
+    CreateProjectFromTemplateV1:
+      required:
+      - name
+      - templateProjectId
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Represents a client identifier across the system.
+          example: 9t641568b07987035750704
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        isPublic:
+          type: boolean
+          description: Indicates whether the project is public or not.
+          default: false
+        name:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Represents a project name.
+          example: Software Development
+        templateProjectId:
+          minLength: 1
+          type: string
+          description: Represents a project identifier across the system.
+          example: 5b641568b07987035750505e
+    TimeEstimateDto:
+      type: object
+      properties:
+        active:
+          type: boolean
+        estimate:
+          type: string
+          description: Represents project duration in milliseconds.
+          example: '60000'
+        includeNonBillable:
+          type: boolean
+        resetOption:
+          type: string
+          description: Represents a reset option enum.
+          example: WEEKLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - YEARLY
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents a project time estimate object.
+    UserGroupIdsSchema:
+      type: object
+      properties:
+        contains:
+          type: string
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents ids upon which filtering is performed.
+          example:
+          - 5b715612b079875110791111
+          - 5b715612b079875110791222
+          items:
+            type: string
+            description: Represents ids upon which filtering is performed.
+            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
+        status:
+          type: string
+          description: Represents user status.
+          example: ALL
+          enum:
+          - ALL
+          - ACTIVE
+          - INACTIVE
+      description: Provide list with user group ids and corresponding status.
+    EstimateDtoV1:
+      type: object
+      properties:
+        estimate:
+          type: string
+          description: Represents a task duration estimate.
+          example: PT1H30M
+        type:
+          type: string
+          description: Represents an estimate type enum.
+          example: AUTO
+          enum:
+          - AUTO
+          - MANUAL
+      description: Represents a project estimate object.
+    HourlyRateRequest:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents a cost rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a datetime in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+      description: Represents an hourly rate request object.
     RateDtoV1:
       type: object
       properties:
@@ -1008,563 +1565,6 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    ProjectDtoV1:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Indicates whether project is archived or not.
-          default: false
-        billable:
-          type: boolean
-          description: Indicates whether project is billable or not.
-          default: false
-        budgetEstimate:
-          $ref: '#/components/schemas/EstimateWithOptionsDto'
-        color:
-          type: string
-          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#000000'
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        duration:
-          type: string
-          description: Represents project duration in milliseconds.
-          example: '60000'
-        estimate:
-          $ref: '#/components/schemas/EstimateDtoV1'
-        hourlyRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        id:
-          type: string
-          description: Represents project identifier across the system.
-          example: 5b641568b07987035750505e
-        memberships:
-          type: array
-          description: Represents a list of membership objects.
-          items:
-            $ref: '#/components/schemas/MembershipDtoV1'
-        name:
-          type: string
-          description: Represents a project name.
-          example: Software Development
-        note:
-          type: string
-          description: Represents project note.
-          example: This is a sample note for the project.
-        public:
-          type: boolean
-          description: Indicates whether project is public or not.
-          default: false
-        template:
-          type: boolean
-          description: Indicates whether project is a template or not.
-          default: false
-        timeEstimate:
-          $ref: '#/components/schemas/TimeEstimateDto'
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-    UpdateProjectMembershipsRequest:
-      required:
-      - memberships
-      type: object
-      properties:
-        memberships:
-          type: array
-          description: Represents a list of users with id and rates request objects.
-          items:
-            $ref: '#/components/schemas/UserIdWithRatesRequest'
-        userGroups:
-          $ref: '#/components/schemas/UserGroupIdsSchema'
-    EstimateRequest:
-      type: object
-      properties:
-        estimate:
-          type: string
-          description: Represents a time duration in ISO-8601 format.
-          example: PT1H30M
-        type:
-          type: string
-          description: Represents an estimate type enum.
-          example: AUTO
-          enum:
-          - AUTO
-          - MANUAL
-      description: Represents an estimate request object.
-    UserIdWithRatesRequest:
-      required:
-      - userId
-      type: object
-      properties:
-        costRate:
-          $ref: '#/components/schemas/CostRateRequestV1'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateRequestV1'
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 12t687e29ae1f428e7ebe202
-      description: Represents a list of users with id and rates request objects.
-    CostRateRequest:
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 2000
-        since:
-          type: string
-          description: Represents a datetime in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-        sinceAsInstant:
-          type: string
-          format: date-time
-      description: Represents a cost rate request object.
-    TaskRequest:
-      required:
-      - name
-      type: object
-      properties:
-        assigneeId:
-          type: string
-          deprecated: true
-        assigneeIds:
-          uniqueItems: true
-          type: array
-          description: Represents list of assignee ids for the task.
-          example:
-          - 45b687e29ae1f428e7ebe123
-          - 67s687e29ae1f428e7ebe678
-          items:
-            type: string
-            description: Represents list of assignee ids for the task.
-            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
-        billable:
-          type: boolean
-          description: Flag to set whether task is billable or not
-          default: false
-        budgetEstimate:
-          minimum: 0
-          type: integer
-          format: int64
-          example: 10000
-        costRate:
-          $ref: '#/components/schemas/CostRateRequest'
-        estimate:
-          type: string
-          description: Represents a task duration estimate.
-          example: PT1H30M
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateRequest'
-        id:
-          type: string
-          description: Represents task identifier across the system.
-          example: 57a687e29ae1f428e7ebe107
-        name:
-          type: string
-          description: Represents task name.
-          example: Bugfixing
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-          example: 5b641568b07987035750505e
-        status:
-          type: string
-          example: DONE
-        userGroupIds:
-          uniqueItems: true
-          type: array
-          description: Represents list of user group ids for the task.
-          example:
-          - 67b687e29ae1f428e7ebe123
-          - 12s687e29ae1f428e7ebe678
-          items:
-            type: string
-            description: Represents list of user group ids for the task.
-            example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
-      description: Represents a list of task request objects.
-    EstimateWithOptionsDto:
-      type: object
-      properties:
-        active:
-          type: boolean
-        estimate:
-          type: integer
-          description: Represents an estimate as long.
-          format: int64
-          example: 600000
-        includeExpenses:
-          type: boolean
-          description: Indicates whether estimate includes non-billable or not.
-          default: false
-        resetOption:
-          type: string
-          description: Represents a reset option enum.
-          example: WEEKLY
-          enum:
-          - WEEKLY
-          - MONTHLY
-          - YEARLY
-        type:
-          type: string
-          description: Represents an estimate type enum.
-          example: AUTO
-          enum:
-          - AUTO
-          - MANUAL
-      description: Represents a project budget estimate object.
-    TimeEstimateRequest:
-      type: object
-      properties:
-        active:
-          type: boolean
-          description: Flag whether to include only active or inactive estimates.
-          default: false
-        estimate:
-          type: string
-          description: Represents a time duration in ISO-8601 format.
-          example: PT1H30M
-        includeNonBillable:
-          type: boolean
-          description: Flag whether to include non-billable expenses.
-          default: false
-        resetOption:
-          type: string
-          description: Represents a reset option enum.
-          example: MONTHLY
-          enum:
-          - WEEKLY
-          - MONTHLY
-          - YEARLY
-        type:
-          type: string
-          description: Represents an estimate type enum.
-          example: AUTO
-          enum:
-          - AUTO
-          - MANUAL
-      description: Represents project time estimate request object.
-    TimeEstimateDto:
-      type: object
-      properties:
-        active:
-          type: boolean
-        estimate:
-          type: string
-          description: Represents project duration in milliseconds.
-          example: '60000'
-        includeNonBillable:
-          type: boolean
-        resetOption:
-          type: string
-          description: Represents a reset option enum.
-          example: WEEKLY
-          enum:
-          - WEEKLY
-          - MONTHLY
-          - YEARLY
-        type:
-          type: string
-          description: Represents an estimate type enum.
-          example: AUTO
-          enum:
-          - AUTO
-          - MANUAL
-      description: Represents a project time estimate object.
-    CreateProjectFromTemplateV1:
-      required:
-      - name
-      - templateProjectId
-      type: object
-      properties:
-        clientId:
-          type: string
-          description: Represents a client identifier across the system.
-          example: 9t641568b07987035750704
-        color:
-          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
-          type: string
-          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#000000'
-        isPublic:
-          type: boolean
-          description: Indicates whether the project is public or not.
-          default: false
-        name:
-          maxLength: 250
-          minLength: 2
-          type: string
-          description: Represents a project name.
-          example: Software Development
-        templateProjectId:
-          minLength: 1
-          type: string
-          description: Represents a project identifier across the system.
-          example: 5b641568b07987035750505e
-    PatchProjectTemplateRequest:
-      type: object
-      properties:
-        isTemplate:
-          type: boolean
-          description: Indicates whether project is a template or not.
-          default: false
-    UserGroupIdsSchema:
-      type: object
-      properties:
-        contains:
-          type: string
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-        ids:
-          uniqueItems: true
-          type: array
-          description: Represents ids upon which filtering is performed.
-          example:
-          - 5b715612b079875110791111
-          - 5b715612b079875110791222
-          items:
-            type: string
-            description: Represents ids upon which filtering is performed.
-            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
-        status:
-          type: string
-          description: Represents user status.
-          example: ALL
-          enum:
-          - ALL
-          - ACTIVE
-          - INACTIVE
-      description: Provide list with user group ids and corresponding status.
-    HourlyRateRequest:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents a cost rate amount as integer.
-          format: int32
-          example: 20000
-        since:
-          type: string
-          description: Represents a datetime in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-      description: Represents an hourly rate request object.
-    MembershipDtoV1:
-      type: object
-      properties:
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateDtoV1'
-        membershipStatus:
-          type: string
-          description: Represents a membership status enum.
-          example: PENDING
-          enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-        membershipType:
-          type: string
-          description: Represents membership type enum.
-          example: PROJECT
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - USERGROUP
-        targetId:
-          type: string
-          description: Represents target identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-      description: Represents a list of membership objects.
-    UpdateProjectRequest:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Indicates whether project is archived or not.
-          default: false
-        billable:
-          type: boolean
-          description: Indicates whether project is billable or not.
-          default: false
-        clientId:
-          type: string
-          description: Represents client identifier across the system.
-          example: 9t641568b07987035750704
-        color:
-          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
-          type: string
-          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#000000'
-        costRate:
-          $ref: '#/components/schemas/CostRateRequestV1'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateRequestV1'
-        isPublic:
-          type: boolean
-          description: Indicates whether project is public or not.
-          default: false
-        name:
-          maxLength: 250
-          minLength: 2
-          type: string
-          description: Represents a project name.
-          example: Software Development
-        note:
-          maxLength: 16384
-          type: string
-          description: Represents project note.
-          example: This is a sample note for the project.
-    EstimateDtoV1:
-      type: object
-      properties:
-        estimate:
-          type: string
-          description: Represents a task duration estimate.
-          example: PT1H30M
-        type:
-          type: string
-          description: Represents an estimate type enum.
-          example: AUTO
-          enum:
-          - AUTO
-          - MANUAL
-      description: Represents a project estimate object.
-    ProjectEstimateRequest:
-      type: object
-      properties:
-        budgetEstimate:
-          $ref: '#/components/schemas/EstimateWithOptionsRequest'
-        estimateReset:
-          $ref: '#/components/schemas/EstimateResetRequest'
-        timeEstimate:
-          $ref: '#/components/schemas/TimeEstimateRequest'
-    ProjectRequest:
-      required:
-      - name
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether project is billable or not.
-          default: false
-        clientId:
-          type: string
-          description: Represents client identifier across the system.
-          example: 9t641568b07987035750704
-        color:
-          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
-          type: string
-          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#000000'
-        costRate:
-          $ref: '#/components/schemas/CostRateRequestV1'
-        estimate:
-          $ref: '#/components/schemas/EstimateRequest'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateRequestV1'
-        isPublic:
-          type: boolean
-          description: Indicates whether project is public or not.
-          default: false
-        memberships:
-          type: array
-          description: Represents a list of membership request objects.
-          items:
-            $ref: '#/components/schemas/MembershipRequest'
-        name:
-          maxLength: 250
-          minLength: 2
-          type: string
-          description: Represents a project name.
-          example: Software Development
-        note:
-          maxLength: 16384
-          type: string
-          description: Represents project note.
-          example: This is a sample note for the project.
-        tasks:
-          type: array
-          description: Represents a list of task request objects.
-          items:
-            $ref: '#/components/schemas/TaskRequest'
-    AddUsersToProjectRequestV1:
-      type: object
-      properties:
-        remove:
-          type: boolean
-          description: Setting this flag to 'true' will remove the given users from the project.
-          default: false
-        userGroups:
-          $ref: '#/components/schemas/UserGroupIdsSchema'
-        userIds:
-          type: array
-          description: Represents array of user ids which should be added/removed.
-          example:
-          - 45b687e29ae1f428e7ebe123
-          - 67s687e29ae1f428e7ebe678
-          items:
-            type: string
-            description: Represents array of user ids which should be added/removed.
-            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678"]'
-    HourlyRateRequestV1:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an hourly rate amount as integer.
-          format: int32
-          example: 20000
-        since:
-          type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-    MembershipRequest:
-      type: object
-      properties:
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateRequest'
-        membershipStatus:
-          type: string
-          description: Represents a membership status enum.
-          example: PENDING
-          enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-        membershipType:
-          type: string
-          description: Represents membership type enum.
-          example: PROJECT
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - USERGROUP
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 12t687e29ae1f428e7ebe202
-      description: Represents a list of membership request objects.
   securitySchemes:
     AddonKeyAuth:
       in: header

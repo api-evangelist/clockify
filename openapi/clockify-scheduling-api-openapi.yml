@@ -571,51 +571,154 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    GetUserTotalsRequestV1:
-      required:
-      - end
-      - start
+    AssignmentPerDayDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        hasAssignment:
+          type: boolean
+      description: Represents a list of assignment per day objects.
+    DateRangeDto:
       type: object
       properties:
         end:
           type: string
-          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
           format: date-time
-          example: '2021-01-01T00:00:00Z'
-        page:
-          type: integer
-          description: Page number.
-          format: int32
-          example: 1
-          default: 1
-        pageSize:
-          maximum: 200
-          type: integer
-          description: Page size.
-          format: int32
-          example: 50
-          default: 50
-        search:
-          type: string
-          description: Represents the keyword for searching users by name or email.
-          example: keyword
         start:
           type: string
-          description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
           format: date-time
-          example: '2020-01-01T00:00:00Z'
-        statusFilter:
+      description: Represents date range object.
+    ContainsUsersFilterRequestV1:
+      type: object
+      properties:
+        contains:
           type: string
-          description: Filters assignments by status.
-          example: PUBLISHED
+          description: Filter type.
+          example: CONTAINS
           enum:
-          - PUBLISHED
-          - UNPUBLISHED
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents a list of filter identifiers.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: Represents a list of filter identifiers.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+        sourceType:
+          type: string
+          description: Valid authorization source type.
+          example: USER_GROUP
+          enum:
+          - USER_GROUP
+        status:
+          type: string
+          description: Filters entities by status.
+          example: ACTIVE
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
           - ALL
-        userFilter:
-          $ref: '#/components/schemas/ContainsUsersFilterRequestV1'
-        userGroupFilter:
-          $ref: '#/components/schemas/ContainsUserGroupFilterRequestV1'
+        statuses:
+          type: array
+          description: Valid array of membership statuses.
+          example:
+          - PENDING
+          - INACTIVE
+          items:
+            type: string
+            description: Valid array of membership statuses.
+            example: '["PENDING","INACTIVE"]'
+            enum:
+            - PENDING
+            - ACTIVE
+            - DECLINED
+            - INACTIVE
+            - ALL
+      description: Represents a user filter request object.
+    RecurringAssignmentRequestV1:
+      required:
+      - weeks
+      type: object
+      properties:
+        repeat:
+          type: boolean
+          description: Indicates whether assignment is recurring or not.
+          default: false
+        weeks:
+          maximum: 99
+          minimum: 1
+          type: integer
+          description: Indicates number of weeks for assignment.
+          format: int32
+          example: 5
+    AssignmentDtoV1:
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether assignment is billable or not.
+          default: false
+        excludeDays:
+          uniqueItems: true
+          type: array
+          description: Represents a list of excluded days objects
+          items:
+            $ref: '#/components/schemas/SchedulingExcludeDay'
+        hoursPerDay:
+          type: number
+          description: Represents assignment total hours per day.
+          format: double
+          example: 7.5
+        id:
+          type: string
+          description: Represents assignment identifier across the system.
+          example: 74a687e29ae1f428e7ebe505
+        includeNonWorkingDays:
+          type: boolean
+          description: Indicates whether assignment should include non-working days or not.
+          default: false
+        note:
+          type: string
+          description: Represents assignment note.
+          example: This is a sample note for an assignment.
+        period:
+          $ref: '#/components/schemas/DateRangeDto'
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 56b687e29ae1f428e7ebe504
+        published:
+          type: boolean
+          description: Indicates whether assignment is published or not.
+          default: false
+        recurring:
+          $ref: '#/components/schemas/RecurringAssignmentDto'
+        startTime:
+          type: string
+          description: Represents start time in hh:mm:ss format.
+          example: '10:00:00'
+        taskId:
+          type: string
+          description: Represents task identifier across the system.
+          example: 36b687e29ae1f428e7ebe109
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 72k687e29ae1f428e7ebe109
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
     AssignmentHydratedDtoV1:
       type: object
       properties:
@@ -686,64 +789,50 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    ContainsUserGroupFilterRequestV1:
+    SchedulingUsersTotalsDtoV1:
       type: object
       properties:
-        contains:
-          type: string
-          description: Filter type.
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-        ids:
-          uniqueItems: true
+        capacityPerDay:
+          type: number
+          description: Represents capacity per day in seconds. For a 7hr work day, value is 25200.
+          format: double
+          example: 25200
+        totalHoursPerDay:
           type: array
-          description: Represents a list of filter identifiers.
-          example:
-          - 5a0ab5acb07987125438b60f
-          - 64c777ddd3fcab07cfbb210c
+          description: Represents total hours per day object.
           items:
-            type: string
-            description: Represents a list of filter identifiers.
-            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
-        status:
+            $ref: '#/components/schemas/TotalsPerDayDto'
+        userId:
           type: string
-          description: Filters entities by status.
+          description: Represents user identifier across the system.
+          example: 72k687e29ae1f428e7ebe109
+        userImage:
+          type: string
+          description: Represents url path to user image.
+        userName:
+          type: string
+          description: Represents user name.
+          example: John Doe
+        userStatus:
+          type: string
+          description: Represents user status.
           example: ACTIVE
+        workingDays:
+          type: string
+          description: Represents list of days of the week.
+          example: '["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY"]'
           enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-      description: Represents a user group filter request object.
-    MilestoneDto:
-      type: object
-      properties:
-        date:
-          type: string
-          description: Represents a date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T08:00:00Z'
-        id:
-          type: string
-          description: Represents milestone identifier across the system.
-          example: 34a687e29ae1f428e7ebe303
-        name:
-          type: string
-          description: Represents milestone name.
-          example: Q3
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-          example: 5b641568b07987035750505e
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
         workspaceId:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-      description: Represents a list of milestone objects.
     AssignmentUpdateRequestV1:
       required:
       - end
@@ -793,105 +882,89 @@ components:
           type: string
           description: Represents task identifier across the system.
           example: 56b687e29ae1f428e7ebe505
-    ContainsUsersFilterRequestV1:
+    ProjectTotalsRequestV1:
+      required:
+      - end
+      - start
       type: object
       properties:
-        contains:
+        end:
           type: string
-          description: Filter type.
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-        ids:
-          uniqueItems: true
-          type: array
-          description: Represents a list of filter identifiers.
-          example:
-          - 5a0ab5acb07987125438b60f
-          - 64c777ddd3fcab07cfbb210c
-          items:
-            type: string
-            description: Represents a list of filter identifiers.
-            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
-        sourceType:
+          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2021-01-01T00:00:00Z'
+        page:
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+        pageSize:
+          maximum: 200
+          type: integer
+          description: Page size.
+          format: int32
+          example: 50
+          default: 50
+        search:
           type: string
-          description: Valid authorization source type.
-          example: USER_GROUP
-          enum:
-          - USER_GROUP
-        status:
+          description: Represents a term for searching projects and clients by name.
+          example: Project name
+        start:
           type: string
-          description: Filters entities by status.
-          example: ACTIVE
+          description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T00:00:00Z'
+        statusFilter:
+          type: string
+          description: Filters assignments by status.
+          example: PUBLISHED
           enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
+          - PUBLISHED
+          - UNPUBLISHED
           - ALL
-        statuses:
-          type: array
-          description: Valid array of membership statuses.
-          example:
-          - PENDING
-          - INACTIVE
-          items:
-            type: string
-            description: Valid array of membership statuses.
-            example: '["PENDING","INACTIVE"]'
-            enum:
-            - PENDING
-            - ACTIVE
-            - DECLINED
-            - INACTIVE
-            - ALL
-      description: Represents a user filter request object.
-    SchedulingUsersTotalsDtoV1:
+    RecurringAssignmentDto:
       type: object
       properties:
-        capacityPerDay:
-          type: number
-          description: Represents capacity per day in seconds. For a 7hr work day, value is 25200.
-          format: double
-          example: 25200
-        totalHoursPerDay:
-          type: array
-          description: Represents total hours per day object.
-          items:
-            $ref: '#/components/schemas/TotalsPerDayDto'
-        userId:
+        repeat:
+          type: boolean
+          description: Indicates whether assignment is recurring or not.
+          default: false
+        seriesId:
           type: string
-          description: Represents user identifier across the system.
-          example: 72k687e29ae1f428e7ebe109
-        userImage:
+          description: Represents series identifier.
+          example: 64c777ddd3fcab07cfbb210c
+        weeks:
+          type: integer
+          description: Represents number of weeks for thhis assignment.
+          format: int32
+          example: 5
+      description: Represents recurring assignment object.
+    MilestoneDto:
+      type: object
+      properties:
+        date:
           type: string
-          description: Represents url path to user image.
-        userName:
+          description: Represents a date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        id:
           type: string
-          description: Represents user name.
-          example: John Doe
-        userStatus:
+          description: Represents milestone identifier across the system.
+          example: 34a687e29ae1f428e7ebe303
+        name:
           type: string
-          description: Represents user status.
-          example: ACTIVE
-        workingDays:
+          description: Represents milestone name.
+          example: Q3
+        projectId:
           type: string
-          description: Represents list of days of the week.
-          example: '["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY"]'
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
         workspaceId:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
+      description: Represents a list of milestone objects.
     AssignmentCreateRequestV1:
       required:
       - end
@@ -948,6 +1021,50 @@ components:
           type: string
           description: Represents a user identifier across the system.
           example: 72k687e29ae1f428e7ebe109
+    PublishAssignmentsRequestV1:
+      required:
+      - end
+      - start
+      type: object
+      properties:
+        end:
+          type: string
+          description: Represents end date in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2021-01-01T00:00:00Z'
+        notifyUsers:
+          type: boolean
+          description: Indicates whether to notify users when assignment is published.
+          default: false
+        search:
+          type: string
+          description: Represents a search string.
+          example: search keyword
+        start:
+          type: string
+          description: Represents start date in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+        userFilter:
+          $ref: '#/components/schemas/ContainsUsersFilterRequestV1'
+        userGroupFilter:
+          $ref: '#/components/schemas/ContainsUserGroupFilterRequestV1'
+        viewType:
+          type: string
+          description: Represents view type.
+          example: PROJECTS
+          enum:
+          - PROJECTS
+          - TEAM
+          - ALL
+    TotalsPerDayDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        totalHours:
+          type: number
+          format: double
+      description: Represents total hours per day object.
     CopyAssignmentRequestV1:
       required:
       - userId
@@ -965,109 +1082,7 @@ components:
           type: string
           description: Represents a user identifier across the system.
           example: 72k687e29ae1f428e7ebe109
-    AssignmentDtoV1:
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether assignment is billable or not.
-          default: false
-        excludeDays:
-          uniqueItems: true
-          type: array
-          description: Represents a list of excluded days objects
-          items:
-            $ref: '#/components/schemas/SchedulingExcludeDay'
-        hoursPerDay:
-          type: number
-          description: Represents assignment total hours per day.
-          format: double
-          example: 7.5
-        id:
-          type: string
-          description: Represents assignment identifier across the system.
-          example: 74a687e29ae1f428e7ebe505
-        includeNonWorkingDays:
-          type: boolean
-          description: Indicates whether assignment should include non-working days or not.
-          default: false
-        note:
-          type: string
-          description: Represents assignment note.
-          example: This is a sample note for an assignment.
-        period:
-          $ref: '#/components/schemas/DateRangeDto'
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-          example: 56b687e29ae1f428e7ebe504
-        published:
-          type: boolean
-          description: Indicates whether assignment is published or not.
-          default: false
-        recurring:
-          $ref: '#/components/schemas/RecurringAssignmentDto'
-        startTime:
-          type: string
-          description: Represents start time in hh:mm:ss format.
-          example: '10:00:00'
-        taskId:
-          type: string
-          description: Represents task identifier across the system.
-          example: 36b687e29ae1f428e7ebe109
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 72k687e29ae1f428e7ebe109
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-    DateRangeDto:
-      type: object
-      properties:
-        end:
-          type: string
-          format: date-time
-        start:
-          type: string
-          format: date-time
-      description: Represents date range object.
-    SchedulingExcludeDay:
-      type: object
-      properties:
-        date:
-          type: string
-          description: Represents a datetimr in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T08:00:00Z'
-        type:
-          type: string
-          description: Represents the scheduling exclude day enum.
-          example: WEEKEND
-          enum:
-          - WEEKEND
-          - HOLIDAY
-          - TIME_OFF
-      description: Represents a list of excluded days objects
-    RecurringAssignmentDto:
-      type: object
-      properties:
-        repeat:
-          type: boolean
-          description: Indicates whether assignment is recurring or not.
-          default: false
-        seriesId:
-          type: string
-          description: Represents series identifier.
-          example: 64c777ddd3fcab07cfbb210c
-        weeks:
-          type: integer
-          description: Represents number of weeks for thhis assignment.
-          format: int32
-          example: 5
-      description: Represents recurring assignment object.
-    ProjectTotalsRequestV1:
+    GetUserTotalsRequestV1:
       required:
       - end
       - start
@@ -1093,8 +1108,8 @@ components:
           default: 50
         search:
           type: string
-          description: Represents a term for searching projects and clients by name.
-          example: Project name
+          description: Represents the keyword for searching users by name or email.
+          example: keyword
         start:
           type: string
           description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
@@ -1108,41 +1123,27 @@ components:
           - PUBLISHED
           - UNPUBLISHED
           - ALL
-    RecurringAssignmentRequestV1:
-      required:
-      - weeks
-      type: object
-      properties:
-        repeat:
-          type: boolean
-          description: Indicates whether assignment is recurring or not.
-          default: false
-        weeks:
-          maximum: 99
-          minimum: 1
-          type: integer
-          description: Indicates number of weeks for assignment.
-          format: int32
-          example: 5
-    AssignmentPerDayDto:
+        userFilter:
+          $ref: '#/components/schemas/ContainsUsersFilterRequestV1'
+        userGroupFilter:
+          $ref: '#/components/schemas/ContainsUserGroupFilterRequestV1'
+    SchedulingExcludeDay:
       type: object
       properties:
         date:
           type: string
+          description: Represents a datetimr in yyyy-MM-ddThh:mm:ssZ format.
           format: date-time
-        hasAssignment:
-          type: boolean
-      description: Represents a list of assignment per day objects.
-    TotalsPerDayDto:
-      type: object
-      properties:
-        date:
+          example: '2020-01-01T08:00:00Z'
+        type:
           type: string
-          format: date-time
-        totalHours:
-          type: number
-          format: double
-      description: Represents total hours per day object.
+          description: Represents the scheduling exclude day enum.
+          example: WEEKEND
+          enum:
+          - WEEKEND
+          - HOLIDAY
+          - TIME_OFF
+      description: Represents a list of excluded days objects
     SchedulingProjectsTotalsDtoV1:
       type: object
       properties:
@@ -1197,40 +1198,39 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    PublishAssignmentsRequestV1:
-      required:
-      - end
-      - start
+    ContainsUserGroupFilterRequestV1:
       type: object
       properties:
-        end:
+        contains:
           type: string
-          description: Represents end date in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2021-01-01T00:00:00Z'
-        notifyUsers:
-          type: boolean
-          description: Indicates whether to notify users when assignment is published.
-          default: false
-        search:
-          type: string
-          description: Represents a search string.
-          example: search keyword
-        start:
-          type: string
-          description: Represents start date in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-        userFilter:
-          $ref: '#/components/schemas/ContainsUsersFilterRequestV1'
-        userGroupFilter:
-          $ref: '#/components/schemas/ContainsUserGroupFilterRequestV1'
-        viewType:
-          type: string
-          description: Represents view type.
-          example: PROJECTS
+          description: Filter type.
+          example: CONTAINS
           enum:
-          - PROJECTS
-          - TEAM
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents a list of filter identifiers.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: Represents a list of filter identifiers.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+        status:
+          type: string
+          description: Filters entities by status.
+          example: ACTIVE
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
           - ALL
+      description: Represents a user group filter request object.
   securitySchemes:
     AddonKeyAuth:
       in: header

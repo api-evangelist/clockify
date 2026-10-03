@@ -48,8 +48,9 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    ContainsArchivedFilterV1:
+    ContainsTaskFilterV1:
       type: object
+      description: Represents filter criteria for expenses associated with tasks.
       properties:
         contains:
           type: string
@@ -220,41 +221,19 @@ components:
       required:
       - dateRangeEnd
       - dateRangeStart
-    ContainsUsersFilterV1:
+    ExpenseDetailedReportDtoV1:
       type: object
+      description: report
       properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
+        expenses:
           type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
+          description: Represents list of expenses
           items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ALL
-          - ACTIVE_WITH_PENDING
-          - ACTIVE
-          - PENDING
-          - INACTIVE
-          example: ACTIVE
-    ContainsTaskFilterV1:
+            $ref: '#/components/schemas/ExpenseReportDtoV1'
+        totals:
+          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
+    ContainsArchivedFilterV1:
       type: object
-      description: Represents filter criteria for expenses associated with tasks.
       properties:
         contains:
           type: string
@@ -291,17 +270,6 @@ components:
           type: string
         manuallyInvoiced:
           type: boolean
-    ExpenseDetailedReportDtoV1:
-      type: object
-      description: report
-      properties:
-        expenses:
-          type: array
-          description: Represents list of expenses
-          items:
-            $ref: '#/components/schemas/ExpenseReportDtoV1'
-        totals:
-          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
     ExpenseTotalsDtoV1:
       type: object
       description: Represents expense totals
@@ -499,6 +467,38 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110791121
+    ContainsUsersFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ALL
+          - ACTIVE_WITH_PENDING
+          - ACTIVE
+          - PENDING
+          - INACTIVE
+          example: ACTIVE
   securitySchemes:
     AddonKeyAuth:
       in: header

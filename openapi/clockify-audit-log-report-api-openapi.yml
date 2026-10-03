@@ -133,32 +133,6 @@ components:
           type: string
           description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
           example: '2025-05-01T00:00:00Z'
-    authors:
-      required:
-      - authorIds
-      - contains
-      type: object
-      properties:
-        authorIds:
-          uniqueItems: true
-          type: array
-          description: Represents a set of author user ids. Include "SYSTEM" in this set to retrieve system related audit logs.
-          example:
-          - 45b687e29ae1f428e7ebe123
-          - 67s687e29ae1f428e7ebe678
-          - SYSTEM
-          items:
-            type: string
-            description: Represents a set of author user ids. Include "SYSTEM" in this set to retrieve system related audit logs.
-            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678","SYSTEM"]'
-        contains:
-          minLength: 1
-          type: string
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-      description: Represents the audit log author filter.
     AuditLogDtoV1:
       type: object
       properties:
@@ -239,6 +213,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AuditLogDtoV1'
+    authors:
+      required:
+      - authorIds
+      - contains
+      type: object
+      properties:
+        authorIds:
+          uniqueItems: true
+          type: array
+          description: Represents a set of author user ids. Include "SYSTEM" in this set to retrieve system related audit logs.
+          example:
+          - 45b687e29ae1f428e7ebe123
+          - 67s687e29ae1f428e7ebe678
+          - SYSTEM
+          items:
+            type: string
+            description: Represents a set of author user ids. Include "SYSTEM" in this set to retrieve system related audit logs.
+            example: '["45b687e29ae1f428e7ebe123","67s687e29ae1f428e7ebe678","SYSTEM"]'
+        contains:
+          minLength: 1
+          type: string
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+      description: Represents the audit log author filter.
   securitySchemes:
     AddonKeyAuth:
       in: header

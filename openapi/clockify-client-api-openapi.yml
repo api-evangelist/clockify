@@ -280,47 +280,6 @@ components:
           type: string
           description: Represents additional notes for the client.
           example: This is a sample note for the client.
-    UpdateClientRequestV1:
-      type: object
-      properties:
-        address:
-          maxLength: 3000
-          minLength: 0
-          type: string
-          description: Represents a client's address.
-          example: Ground Floor, ABC Bldg., Palo Alto, California, USA 94020
-        archived:
-          type: boolean
-          description: Indicates if client will be archived or not.
-          default: false
-        ccEmails:
-          maxItems: 3
-          minItems: 0
-          type: array
-          items:
-            type: string
-            format: email
-        currencyId:
-          type: string
-          description: Represents a currency identifier across the system.
-          example: 53a687e29ae1f428e7ebe888
-        email:
-          type: string
-          format: email
-          description: Represents a client email.
-          example: clientx@example.com
-        name:
-          maxLength: 100
-          minLength: 0
-          type: string
-          description: Represents a client name.
-          example: Client X
-        note:
-          maxLength: 3000
-          minLength: 0
-          type: string
-          description: Represents additional notes for the client.
-          example: This is a sample note for the client.
     ClientDtoV1:
       type: object
       properties:
@@ -364,6 +323,47 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
+    UpdateClientRequestV1:
+      type: object
+      properties:
+        address:
+          maxLength: 3000
+          minLength: 0
+          type: string
+          description: Represents a client's address.
+          example: Ground Floor, ABC Bldg., Palo Alto, California, USA 94020
+        archived:
+          type: boolean
+          description: Indicates if client will be archived or not.
+          default: false
+        ccEmails:
+          maxItems: 3
+          minItems: 0
+          type: array
+          items:
+            type: string
+            format: email
+        currencyId:
+          type: string
+          description: Represents a currency identifier across the system.
+          example: 53a687e29ae1f428e7ebe888
+        email:
+          type: string
+          format: email
+          description: Represents a client email.
+          example: clientx@example.com
+        name:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Represents a client name.
+          example: Client X
+        note:
+          maxLength: 3000
+          minLength: 0
+          type: string
+          description: Represents additional notes for the client.
+          example: This is a sample note for the client.
     ClientWithCurrencyDtoV1:
       type: object
       properties:

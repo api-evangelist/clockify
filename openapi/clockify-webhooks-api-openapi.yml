@@ -335,193 +335,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    WebhooksDtoV1:
-      type: object
-      properties:
-        webhooks:
-          type: array
-          description: Represents a list of webhook objects for the workspace.
-          items:
-            $ref: '#/components/schemas/WebhookDtoV1'
-        workspaceWebhookCount:
-          type: integer
-          description: Represents number of webhooks for the workspace.
-          format: int32
-          example: 5
-    UpdateWebhookRequestV1:
-      required:
-      - triggerSource
-      - triggerSourceType
-      - url
-      - webhookEvent
-      type: object
-      properties:
-        name:
-          maxLength: 30
-          minLength: 2
-          type: string
-          description: Represents a webhook name.
-          example: Stripe
-        triggerSource:
-          type: array
-          description: Represents a list of trigger sources.
-          example:
-          - 54a687e29ae1f428e7ebe909
-          - 87p187e29ae1f428e7ebej56
-          items:
-            type: string
-            description: Represents a list of trigger sources.
-            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
-        triggerSourceType:
-          type: string
-          description: Represents a webhook event trigger source type.
-          example: PROJECT_ID
-          enum:
-          - PROJECT_ID
-          - USER_ID
-          - TAG_ID
-          - TASK_ID
-          - WORKSPACE_ID
-          - ASSIGNMENT_ID
-          - EXPENSE_ID
-        url:
-          minLength: 1
-          type: string
-          description: Represents a workspace identifier across the system.
-          example: https://example-clockify.com/stripeEndpoint
-        webhookEvent:
-          type: string
-          description: Represents a webhook event type.
-          example: NEW_PROJECT
-          enum:
-          - NEW_PROJECT
-          - NEW_TASK
-          - NEW_CLIENT
-          - NEW_TIMER_STARTED
-          - TIMER_STOPPED
-          - TIME_ENTRY_UPDATED
-          - TIME_ENTRY_DELETED
-          - TIME_ENTRY_SPLIT
-          - NEW_TIME_ENTRY
-          - TIME_ENTRY_RESTORED
-          - NEW_TAG
-          - USER_DELETED_FROM_WORKSPACE
-          - USER_JOINED_WORKSPACE
-          - USER_DEACTIVATED_ON_WORKSPACE
-          - USER_ACTIVATED_ON_WORKSPACE
-          - USER_EMAIL_CHANGED
-          - USER_UPDATED
-          - NEW_INVOICE
-          - INVOICE_UPDATED
-          - NEW_APPROVAL_REQUEST
-          - APPROVAL_REQUEST_STATUS_UPDATED
-          - TIME_OFF_REQUESTED
-          - TIME_OFF_REQUEST_UPDATED
-          - TIME_OFF_REQUEST_APPROVED
-          - TIME_OFF_REQUEST_REJECTED
-          - TIME_OFF_REQUEST_STARTED
-          - TIME_OFF_REQUEST_WITHDRAWN
-          - BALANCE_UPDATED
-          - TAG_UPDATED
-          - TAG_DELETED
-          - TASK_UPDATED
-          - CLIENT_UPDATED
-          - TASK_DELETED
-          - CLIENT_DELETED
-          - EXPENSE_RESTORED
-          - ASSIGNMENT_CREATED
-          - ASSIGNMENT_DELETED
-          - ASSIGNMENT_PUBLISHED
-          - ASSIGNMENT_UPDATED
-          - EXPENSE_CREATED
-          - EXPENSE_DELETED
-          - EXPENSE_UPDATED
-          - PROJECT_UPDATED
-          - PROJECT_DELETED
-          - USER_GROUP_CREATED
-          - USER_GROUP_UPDATED
-          - USER_GROUP_DELETED
-          - USERS_INVITED_TO_WORKSPACE
-          - LIMITED_USERS_ADDED_TO_WORKSPACE
-          - COST_RATE_UPDATED
-          - BILLABLE_RATE_UPDATED
-    WebhookDtoV1:
-      type: object
-      properties:
-        authToken:
-          type: string
-          description: Represents an authentication token.
-          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI2NGI3YmU3YmUwODM1Yjc2ZDYzOTY5YTciLCJtdWx0aUZhY3RvciI6dHJ1ZSwiaXNzIjoiY2xvY2tpZnkiLCJuYW1lIjoiTWFydGluIExsb3lkIiwiZXhwIjoxNjkzMzY5MzEwLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNjkzMzI2MTEwLCJqdGkiOiJZVGcxT0Raak9XTXRPRGRsWVMwME5qZ3hMVGxpTlRndE5UQmlOVEprTmpOaE
-        deliveryEnabled:
-          type: boolean
-          description: Indicates whether webhook delivery is enabled or not. It can be disabled if delivery failed for too many times.
-          default: false
-        enabled:
-          type: boolean
-          description: Indicates whether webhook is enabled or not.
-          default: false
-        id:
-          type: string
-          description: Represents webhook identifier across the system.
-          example: 76a687e29ae1f428e7ebe101
-        name:
-          type: string
-          description: Represents webhook name.
-          example: stripe
-        planEnabled:
-          type: boolean
-          description: Indicates whether webhook is supported by current plan. It can be disabled if number of webhooks exceeds plan limit or if the feature is not supported on current plan.
-          default: false
-        triggerSource:
-          type: array
-          description: Represents a list of trigger sources.
-          example:
-          - 54a687e29ae1f428e7ebe909
-          - 87p187e29ae1f428e7ebej56
-          items:
-            type: string
-            description: Represents a list of trigger sources.
-            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
-        triggerSourceType:
-          $ref: '#/components/schemas/WebhookEventTriggerSourceType'
-        url:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: https://example-clockify.com/stripeEndpoint
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        webhookEvent:
-          $ref: '#/components/schemas/WebhookEventType'
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-    WebhookLogSearchRequestV1:
-      type: object
-      properties:
-        from:
-          type: string
-          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred after this value.
-          format: date-time
-          example: '2023-02-01T13:00:46Z'
-        sortByNewest:
-          type: boolean
-          description: If set to true, logs will be sorted with most recent first.
-          default: false
-        status:
-          type: string
-          description: Filters logs by status.
-          enum:
-          - ALL
-          - SUCCEEDED
-          - FAILED
-        to:
-          type: string
-          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred before this value.
-          format: date-time
-          example: '2023-02-05T13:00:46Z'
     WebhookEventType:
       type: object
       description: Represents webhook event type.
@@ -3469,6 +3282,38 @@ components:
             - WORKSPACE_ID
             - ASSIGNMENT_ID
             - EXPENSE_ID
+    WebhookLogDtoV1:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Represents log identifier across the system.
+          example: 65e5b854fe0dfa24f1528ef0
+        requestBody:
+          type: string
+          description: Represents request body.
+          example: '{"id":"65df50f5d2dd8f23a685374e","name":"Webhook"}'
+        respondedAt:
+          type: string
+          description: Represents date and time of response.
+          example: '2024-03-04T12:02:28.125+00:00'
+        responseBody:
+          type: string
+          description: Represents response body.
+          example: '{"id":"h73210f5d2dd8f23685374e","response":"Webhook response"}'
+        statusCode:
+          type: integer
+          description: Represents response status code.
+          format: int32
+          example: 200
+        webhookEventStatusId:
+          type: string
+          description: Represents webhook event status identifier across the system.
+          example: 6818c52b391aca499bf8dafc
+        webhookId:
+          type: string
+          description: Represents webhook identifier across the system.
+          example: 65df5508d2dd8f23a68537af
     CreateWebhookRequestV1:
       required:
       - triggerSource
@@ -3566,38 +3411,193 @@ components:
           - LIMITED_USERS_ADDED_TO_WORKSPACE
           - COST_RATE_UPDATED
           - BILLABLE_RATE_UPDATED
-    WebhookLogDtoV1:
+    WebhookLogSearchRequestV1:
       type: object
       properties:
+        from:
+          type: string
+          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred after this value.
+          format: date-time
+          example: '2023-02-01T13:00:46Z'
+        sortByNewest:
+          type: boolean
+          description: If set to true, logs will be sorted with most recent first.
+          default: false
+        status:
+          type: string
+          description: Filters logs by status.
+          enum:
+          - ALL
+          - SUCCEEDED
+          - FAILED
+        to:
+          type: string
+          description: Represents date and time in yyyy-MM-ddThh:mm:ssZ format. If provided, results will include logs which occurred before this value.
+          format: date-time
+          example: '2023-02-05T13:00:46Z'
+    WebhookDtoV1:
+      type: object
+      properties:
+        authToken:
+          type: string
+          description: Represents an authentication token.
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI2NGI3YmU3YmUwODM1Yjc2ZDYzOTY5YTciLCJtdWx0aUZhY3RvciI6dHJ1ZSwiaXNzIjoiY2xvY2tpZnkiLCJuYW1lIjoiTWFydGluIExsb3lkIiwiZXhwIjoxNjkzMzY5MzEwLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNjkzMzI2MTEwLCJqdGkiOiJZVGcxT0Raak9XTXRPRGRsWVMwME5qZ3hMVGxpTlRndE5UQmlOVEprTmpOaE
+        deliveryEnabled:
+          type: boolean
+          description: Indicates whether webhook delivery is enabled or not. It can be disabled if delivery failed for too many times.
+          default: false
+        enabled:
+          type: boolean
+          description: Indicates whether webhook is enabled or not.
+          default: false
         id:
           type: string
-          description: Represents log identifier across the system.
-          example: 65e5b854fe0dfa24f1528ef0
-        requestBody:
-          type: string
-          description: Represents request body.
-          example: '{"id":"65df50f5d2dd8f23a685374e","name":"Webhook"}'
-        respondedAt:
-          type: string
-          description: Represents date and time of response.
-          example: '2024-03-04T12:02:28.125+00:00'
-        responseBody:
-          type: string
-          description: Represents response body.
-          example: '{"id":"h73210f5d2dd8f23685374e","response":"Webhook response"}'
-        statusCode:
-          type: integer
-          description: Represents response status code.
-          format: int32
-          example: 200
-        webhookEventStatusId:
-          type: string
-          description: Represents webhook event status identifier across the system.
-          example: 6818c52b391aca499bf8dafc
-        webhookId:
-          type: string
           description: Represents webhook identifier across the system.
-          example: 65df5508d2dd8f23a68537af
+          example: 76a687e29ae1f428e7ebe101
+        name:
+          type: string
+          description: Represents webhook name.
+          example: stripe
+        planEnabled:
+          type: boolean
+          description: Indicates whether webhook is supported by current plan. It can be disabled if number of webhooks exceeds plan limit or if the feature is not supported on current plan.
+          default: false
+        triggerSource:
+          type: array
+          description: Represents a list of trigger sources.
+          example:
+          - 54a687e29ae1f428e7ebe909
+          - 87p187e29ae1f428e7ebej56
+          items:
+            type: string
+            description: Represents a list of trigger sources.
+            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
+        triggerSourceType:
+          $ref: '#/components/schemas/WebhookEventTriggerSourceType'
+        url:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: https://example-clockify.com/stripeEndpoint
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        webhookEvent:
+          $ref: '#/components/schemas/WebhookEventType'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    UpdateWebhookRequestV1:
+      required:
+      - triggerSource
+      - triggerSourceType
+      - url
+      - webhookEvent
+      type: object
+      properties:
+        name:
+          maxLength: 30
+          minLength: 2
+          type: string
+          description: Represents a webhook name.
+          example: Stripe
+        triggerSource:
+          type: array
+          description: Represents a list of trigger sources.
+          example:
+          - 54a687e29ae1f428e7ebe909
+          - 87p187e29ae1f428e7ebej56
+          items:
+            type: string
+            description: Represents a list of trigger sources.
+            example: '["54a687e29ae1f428e7ebe909","87p187e29ae1f428e7ebej56"]'
+        triggerSourceType:
+          type: string
+          description: Represents a webhook event trigger source type.
+          example: PROJECT_ID
+          enum:
+          - PROJECT_ID
+          - USER_ID
+          - TAG_ID
+          - TASK_ID
+          - WORKSPACE_ID
+          - ASSIGNMENT_ID
+          - EXPENSE_ID
+        url:
+          minLength: 1
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: https://example-clockify.com/stripeEndpoint
+        webhookEvent:
+          type: string
+          description: Represents a webhook event type.
+          example: NEW_PROJECT
+          enum:
+          - NEW_PROJECT
+          - NEW_TASK
+          - NEW_CLIENT
+          - NEW_TIMER_STARTED
+          - TIMER_STOPPED
+          - TIME_ENTRY_UPDATED
+          - TIME_ENTRY_DELETED
+          - TIME_ENTRY_SPLIT
+          - NEW_TIME_ENTRY
+          - TIME_ENTRY_RESTORED
+          - NEW_TAG
+          - USER_DELETED_FROM_WORKSPACE
+          - USER_JOINED_WORKSPACE
+          - USER_DEACTIVATED_ON_WORKSPACE
+          - USER_ACTIVATED_ON_WORKSPACE
+          - USER_EMAIL_CHANGED
+          - USER_UPDATED
+          - NEW_INVOICE
+          - INVOICE_UPDATED
+          - NEW_APPROVAL_REQUEST
+          - APPROVAL_REQUEST_STATUS_UPDATED
+          - TIME_OFF_REQUESTED
+          - TIME_OFF_REQUEST_UPDATED
+          - TIME_OFF_REQUEST_APPROVED
+          - TIME_OFF_REQUEST_REJECTED
+          - TIME_OFF_REQUEST_STARTED
+          - TIME_OFF_REQUEST_WITHDRAWN
+          - BALANCE_UPDATED
+          - TAG_UPDATED
+          - TAG_DELETED
+          - TASK_UPDATED
+          - CLIENT_UPDATED
+          - TASK_DELETED
+          - CLIENT_DELETED
+          - EXPENSE_RESTORED
+          - ASSIGNMENT_CREATED
+          - ASSIGNMENT_DELETED
+          - ASSIGNMENT_PUBLISHED
+          - ASSIGNMENT_UPDATED
+          - EXPENSE_CREATED
+          - EXPENSE_DELETED
+          - EXPENSE_UPDATED
+          - PROJECT_UPDATED
+          - PROJECT_DELETED
+          - USER_GROUP_CREATED
+          - USER_GROUP_UPDATED
+          - USER_GROUP_DELETED
+          - USERS_INVITED_TO_WORKSPACE
+          - LIMITED_USERS_ADDED_TO_WORKSPACE
+          - COST_RATE_UPDATED
+          - BILLABLE_RATE_UPDATED
+    WebhooksDtoV1:
+      type: object
+      properties:
+        webhooks:
+          type: array
+          description: Represents a list of webhook objects for the workspace.
+          items:
+            $ref: '#/components/schemas/WebhookDtoV1'
+        workspaceWebhookCount:
+          type: integer
+          description: Represents number of webhooks for the workspace.
+          format: int32
+          example: 5
     WebhookEventTriggerSourceType:
       type: object
       description: Represents a webhook event trigger source type.

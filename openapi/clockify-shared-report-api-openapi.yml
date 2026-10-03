@@ -241,80 +241,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    CompareOvertimeFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents duration of overtime work (difference between work and capacity) in hours, multiplied by 100. For example, if desired value is 1.5h, input should be 150.
-          example: '150'
-    SharedReportRequestV1:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/ReportFilterV1'
-        fixedDate:
-          type: boolean
-          description: Indicates whether the shared report has a fixed date range.
-        isPublic:
-          type: boolean
-          description: Indicates whether the shared report is public or not
-          example: false
-        name:
-          type: string
-          description: Represents a shared report's name
-          example: Weekly 1
-        type:
-          type: string
-          description: Represent the type of shared report.
-          enum:
-          - DETAILED
-          - WEEKLY
-          - SUMMARY
-          - SCHEDULED
-          - EXPENSE_DETAILED
-          - EXPENSE_RECEIPT
-          - PTO_REQUESTS
-          - PTO_BALANCE
-          - ATTENDANCE
-          - INVOICE_EXPENSE
-          - INVOICE_TIME
-          - PROJECT
-          - TEAM_FULL
-          - TEAM_LIMITED
-          - TEAM_GROUPS
-          - INVOICES
-          - KIOSK_PIN_LIST
-          - KIOSK_ASSIGNEES
-          - USER_DATA_EXPORT
-          example: WEEKLY
-        visibleToUserGroups:
-          type: array
-          description: Represents user group ids.
-          example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
-          items:
-            type: string
-            description: Represents user group ids.
-            example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
-          uniqueItems: true
-        visibleToUsers:
-          type: array
-          description: Represents user ids.
-          example:
-          - 5b715448b079875110791234
-          - 5b715448b079875110791432
-          - 5b715448b079875110791324
-          items:
-            type: string
-            description: Represents user ids.
-            example: '["5b715448b079875110791234","5b715448b079875110791432","5b715448b079875110791324"]'
-          uniqueItems: true
     DetailedOptionsV1:
       type: object
       properties:
@@ -324,29 +250,33 @@ components:
           - CALCULATE
           - EXCLUDE
           example: CALCULATE
-    DailyTotalDto:
+    TimeEntryReportTotals:
       type: object
-      description: Represents list of days
+      description: List of totals
       properties:
-        amount:
+        amounts:
+          type: array
+          description: List of amounts
+          items:
+            $ref: '#/components/schemas/AmountDto'
+        entriesCount:
+          type: integer
+          format: int32
+          description: Represents entries count
+          example: 1
+        id:
+          type: string
+          description: Represents time entry report identifier across the system.
+          example: 5b715612b079875110791122
+        totalBillableTime:
           type: number
-        date:
-          type: string
-        duration:
+          description: Represents total billable time
+          example: 1000
+        totalTime:
           type: number
-    WeeklyFilterV1:
-      type: object
-      description: Represents a weekly report filter.
-      properties:
-        group:
-          type: string
-          description: Weekly filter will include group identifier.
-          example: 5b715448b079875110791111
-        subgroup:
-          type: string
-          description: Weekly filter will include subgroup identifier.
-          example: 5b715448b079875110792222
-    CompareEndFilter:
+          description: Represents total time
+          example: 1200
+    CompareStartFilter:
       type: object
       properties:
         filtrationType:
@@ -357,126 +287,47 @@ components:
           - SMALLER_THAN
         value:
           type: string
-          description: Represents end time in 24-hour notation.
-          example: '17:00'
-    SharedReportV1:
+          description: Represents start time in 24-hour notation.
+          example: '15:00'
+    ContainsTagFilterV1:
       type: object
+      description: Represents an object for filtering entries by tags.
       properties:
-        filter:
-          $ref: '#/components/schemas/ReportFilterV1'
-        fixedDate:
-          type: boolean
-          description: Indicates whether the shared report has a fixed date range
-        id:
+        containedInTimeentry:
           type: string
-          description: Represents a shared report identifier across the system.
-          example: 5b715612b079875110791111
-        isPublic:
-          type: boolean
-          description: Indicates whether the shared report is public or not
-          example: false
-        name:
-          type: string
-          description: Represents shared report name
-          example: Weekly 1
-        type:
-          type: string
+          description: If provided, you'll get result filtered by value of contained in time entry.
           enum:
-          - DETAILED
-          - WEEKLY
-          - SUMMARY
-          - SCHEDULED
-          - EXPENSE_DETAILED
-          - EXPENSE_RECEIPT
-          - PTO_REQUESTS
-          - PTO_BALANCE
-          - ATTENDANCE
-          - INVOICE_EXPENSE
-          - INVOICE_TIME
-          - PROJECT
-          - TEAM_FULL
-          - TEAM_LIMITED
-          - TEAM_GROUPS
-          - INVOICES
-          - KIOSK_PIN_LIST
-          - KIOSK_ASSIGNEES
-          - USER_DATA_EXPORT
-          example: WEEKLY
-        userId:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS_ONLY
+        contains:
           type: string
-          description: Represents user identifier across the system.
-          example: 5b715612b079875110791113
-        visibleToUserGroups:
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
           type: array
-          description: Indicates to which user groups are visible shared report
+          description: Filter includes provided list of ids.
           example:
-          - 5b715612b079875110791342
-          - 5b715612b079875110791324
-          - 5b715612b079875110793142
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
           items:
             type: string
-            description: Indicates to which user groups are visible shared report
-            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
           uniqueItems: true
-        visibleToUsers:
-          type: array
-          description: Indicates to whom users are visible shared report
-          example:
-          - 5b715612b079875110791432
-          - 5b715612b079875110791234
-          items:
-            type: string
-            description: Indicates to whom users are visible shared report
-            example: '["5b715612b079875110791432","5b715612b079875110791234"]'
-          uniqueItems: true
-        workspaceId:
+        status:
           type: string
-          description: Represents workspace identifier across the system.
-          example: 5b715612b079875110791112
-    SummaryReportChartDto:
-      type: object
-      description: List of summary report charts
-      properties:
-        earned:
-          type: number
-          description: Represents how much is earned
-          example: 1000
-        id:
-          type: string
-          description: Represents summary report identifier across the system.
-          example: 5b715612b079875110791111
-        totalAmount:
-          type: number
-          description: Represents total amount
-          example: 11000
-        totalBillableTime:
-          type: number
-          description: Represents total billable time
-          example: 19000
-        totalTime:
-          type: number
-          description: Represents total time
-          example: 20000
-    AuditFilterV1:
-      type: object
-      properties:
-        duration:
-          type: integer
-          format: int32
-          description: Represent audit duration.
-          example: 2
-        durationShorter:
-          type: boolean
-          description: Represent audit duration shorter.
-          example: false
-        withoutProject:
-          type: boolean
-          description: Indicates whether to filter without a project.
-          example: false
-        withoutTask:
-          type: boolean
-          description: Indicates whether to filter without a task.
-          example: true
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
     ReportFilterV1:
       type: object
       properties:
@@ -650,46 +501,7 @@ components:
       required:
       - dateRangeEnd
       - dateRangeStart
-    TimeEntryReportTotals:
-      type: object
-      description: List of totals
-      properties:
-        amounts:
-          type: array
-          description: List of amounts
-          items:
-            $ref: '#/components/schemas/AmountDto'
-        entriesCount:
-          type: integer
-          format: int32
-          description: Represents entries count
-          example: 1
-        id:
-          type: string
-          description: Represents time entry report identifier across the system.
-          example: 5b715612b079875110791122
-        totalBillableTime:
-          type: number
-          description: Represents total billable time
-          example: 1000
-        totalTime:
-          type: number
-          description: Represents total time
-          example: 1200
-    CompareWorkFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents duration of completed work for day in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
-          example: '750'
-    ContainsUsersFilterV1:
+    ContainsArchivedFilterV1:
       type: object
       properties:
         contains:
@@ -715,12 +527,30 @@ components:
           type: string
           description: Filter entities in 'contains' by their status.
           enum:
-          - ALL
-          - ACTIVE_WITH_PENDING
           - ACTIVE
-          - PENDING
-          - INACTIVE
+          - ARCHIVED
+          - ALL
           example: ACTIVE
+    AuditFilterV1:
+      type: object
+      properties:
+        duration:
+          type: integer
+          format: int32
+          description: Represent audit duration.
+          example: 2
+        durationShorter:
+          type: boolean
+          description: Represent audit duration shorter.
+          example: false
+        withoutProject:
+          type: boolean
+          description: Indicates whether to filter without a project.
+          example: false
+        withoutTask:
+          type: boolean
+          description: Indicates whether to filter without a task.
+          example: true
     TimeEntrySummaryReportDto:
       type: object
       description: report
@@ -740,6 +570,79 @@ components:
           description: List of totals
           items:
             $ref: '#/components/schemas/TimeEntryReportTotals'
+    DailyTotalDto:
+      type: object
+      description: Represents list of days
+      properties:
+        amount:
+          type: number
+        date:
+          type: string
+        duration:
+          type: number
+    CompareCapacityFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents daily work capacity of user in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
+          example: '750'
+    UpdateSharedReportRequestV1:
+      type: object
+      properties:
+        fixedDate:
+          type: boolean
+          description: Indicates whether the shared report has a fixed date range.
+          example: false
+        isPublic:
+          type: boolean
+          description: Indicates whether the shared report is public.
+          example: false
+        name:
+          type: string
+          description: Represents a shared reports name.
+          example: Weekly Updated Report
+        visibleToUserGroups:
+          type: array
+          description: Provide user groups ids to which the shared report is visible.
+          example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
+          items:
+            type: string
+            description: Provide user groups ids to which the shared report is visible.
+            example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
+          uniqueItems: true
+        visibleToUsers:
+          type: array
+          description: Provide user ids to which the shared report is visible.
+          example:
+          - 5b715448b079875110791234
+          - 5b715448b079875110791432
+          - 5b715448b079875110791324
+          items:
+            type: string
+            description: Provide user ids to which the shared report is visible.
+            example: '["5b715448b079875110791234","5b715448b079875110791432","5b715448b079875110791324"]'
+          uniqueItems: true
+      required:
+      - name
+    WeeklyFilterV1:
+      type: object
+      description: Represents a weekly report filter.
+      properties:
+        group:
+          type: string
+          description: Weekly filter will include group identifier.
+          example: 5b715448b079875110791111
+        subgroup:
+          type: string
+          description: Weekly filter will include subgroup identifier.
+          example: 5b715448b079875110792222
     SharedReportsAndCountDtoV1:
       type: object
       properties:
@@ -811,44 +714,175 @@ components:
           example: '[userId1, userId2, userId3]'
           items:
             $ref: '#/components/schemas/EntityName'
-    UpdateSharedReportRequestV1:
+    SummaryReportChartDto:
+      type: object
+      description: List of summary report charts
+      properties:
+        earned:
+          type: number
+          description: Represents how much is earned
+          example: 1000
+        id:
+          type: string
+          description: Represents summary report identifier across the system.
+          example: 5b715612b079875110791111
+        totalAmount:
+          type: number
+          description: Represents total amount
+          example: 11000
+        totalBillableTime:
+          type: number
+          description: Represents total billable time
+          example: 19000
+        totalTime:
+          type: number
+          description: Represents total time
+          example: 20000
+    SharedReportV1:
       type: object
       properties:
+        filter:
+          $ref: '#/components/schemas/ReportFilterV1'
         fixedDate:
           type: boolean
-          description: Indicates whether the shared report has a fixed date range.
-          example: false
+          description: Indicates whether the shared report has a fixed date range
+        id:
+          type: string
+          description: Represents a shared report identifier across the system.
+          example: 5b715612b079875110791111
         isPublic:
           type: boolean
-          description: Indicates whether the shared report is public.
+          description: Indicates whether the shared report is public or not
           example: false
         name:
           type: string
-          description: Represents a shared reports name.
-          example: Weekly Updated Report
+          description: Represents shared report name
+          example: Weekly 1
+        type:
+          type: string
+          enum:
+          - DETAILED
+          - WEEKLY
+          - SUMMARY
+          - SCHEDULED
+          - EXPENSE_DETAILED
+          - EXPENSE_RECEIPT
+          - PTO_REQUESTS
+          - PTO_BALANCE
+          - ATTENDANCE
+          - INVOICE_EXPENSE
+          - INVOICE_TIME
+          - PROJECT
+          - TEAM_FULL
+          - TEAM_LIMITED
+          - TEAM_GROUPS
+          - INVOICES
+          - KIOSK_PIN_LIST
+          - KIOSK_ASSIGNEES
+          - USER_DATA_EXPORT
+          example: WEEKLY
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5b715612b079875110791113
         visibleToUserGroups:
           type: array
-          description: Provide user groups ids to which the shared report is visible.
-          example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
+          description: Indicates to which user groups are visible shared report
+          example:
+          - 5b715612b079875110791342
+          - 5b715612b079875110791324
+          - 5b715612b079875110793142
           items:
             type: string
-            description: Provide user groups ids to which the shared report is visible.
-            example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
+            description: Indicates to which user groups are visible shared report
+            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
           uniqueItems: true
         visibleToUsers:
           type: array
-          description: Provide user ids to which the shared report is visible.
+          description: Indicates to whom users are visible shared report
           example:
-          - 5b715448b079875110791234
-          - 5b715448b079875110791432
-          - 5b715448b079875110791324
+          - 5b715612b079875110791432
+          - 5b715612b079875110791234
           items:
             type: string
-            description: Provide user ids to which the shared report is visible.
-            example: '["5b715448b079875110791234","5b715448b079875110791432","5b715448b079875110791324"]'
+            description: Indicates to whom users are visible shared report
+            example: '["5b715612b079875110791432","5b715612b079875110791234"]'
           uniqueItems: true
-      required:
-      - name
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 5b715612b079875110791112
+    CompareOvertimeFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of overtime work (difference between work and capacity) in hours, multiplied by 100. For example, if desired value is 1.5h, input should be 150.
+          example: '150'
+    CompareEndFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents end time in 24-hour notation.
+          example: '17:00'
+    GroupOneDto:
+      type: object
+      description: List of groups
+      properties:
+        amount:
+          type: number
+          description: Represents group one amount
+          example: 100
+        children:
+          type: array
+          description: Represents list of children groups
+          items:
+            $ref: '#/components/schemas/GroupOneDto'
+        clientName:
+          type: string
+          description: Represents client name
+          example: Cake.com
+        days:
+          type: array
+          description: Represents list of days
+          items:
+            $ref: '#/components/schemas/DailyTotalDto'
+        duration:
+          type: number
+          description: Represents duration
+          example: 10
+        id:
+          type: string
+          description: Represents group one identifier across the system.
+          example: 5b715612b079875110791111
+        name:
+          type: string
+          description: Represents name
+          example: Name
+        nameLowerCase:
+          type: string
+          description: Represents lower case name
+          example: name
+    EntityName:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
     SummaryFilterV1:
       type: object
       description: Represents a summary report filter.
@@ -934,81 +968,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CompareWorkFilter'
-    ContainsArchivedFilterV1:
-      type: object
-      properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    GroupOneDto:
-      type: object
-      description: List of groups
-      properties:
-        amount:
-          type: number
-          description: Represents group one amount
-          example: 100
-        children:
-          type: array
-          description: Represents list of children groups
-          items:
-            $ref: '#/components/schemas/GroupOneDto'
-        clientName:
-          type: string
-          description: Represents client name
-          example: Cake.com
-        days:
-          type: array
-          description: Represents list of days
-          items:
-            $ref: '#/components/schemas/DailyTotalDto'
-        duration:
-          type: number
-          description: Represents duration
-          example: 10
-        id:
-          type: string
-          description: Represents group one identifier across the system.
-          example: 5b715612b079875110791111
-        name:
-          type: string
-          description: Represents name
-          example: Name
-        nameLowerCase:
-          type: string
-          description: Represents lower case name
-          example: name
-    EntityName:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     AmountDto:
       type: object
       description: List of amounts
@@ -1027,71 +986,6 @@ components:
           type: number
           description: Represents amount value
           example: 1000
-    ContainsTagFilterV1:
-      type: object
-      description: Represents an object for filtering entries by tags.
-      properties:
-        containedInTimeentry:
-          type: string
-          description: If provided, you'll get result filtered by value of contained in time entry.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS_ONLY
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-          example: ACTIVE
-    CompareStartFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents start time in 24-hour notation.
-          example: '15:00'
-    CompareBreakFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents duration of breaks in the day in hours, multiplied by 100. For example, if desired value is 0.5h, input should be 50
-          example: '50'
     ContainsTaskFilterV1:
       type: object
       description: Represents filter criteria for expenses associated with tasks.
@@ -1123,48 +1017,6 @@ components:
           - ARCHIVED
           - ALL
           example: ACTIVE
-    DetailedFilterV1:
-      type: object
-      description: Represents a detailed report filter.
-      properties:
-        auditFilter:
-          $ref: '#/components/schemas/AuditFilterV1'
-        options:
-          $ref: '#/components/schemas/DetailedOptionsV1'
-        page:
-          type: integer
-          format: int32
-          example: 1
-        pageSize:
-          type: integer
-          format: int32
-          example: 20
-        sortColumn:
-          type: string
-          description: If provided, you'll get sorted result by sort column.
-          enum:
-          - ID
-          - DESCRIPTION
-          - USER
-          - DURATION
-          - DATE
-          - ZONED_DATE
-          - NATURAL
-          - USER_DATE
-          example: ID
-    CompareCapacityFilter:
-      type: object
-      properties:
-        filtrationType:
-          type: string
-          enum:
-          - EXACTLY
-          - LARGER_THAN
-          - SMALLER_THAN
-        value:
-          type: string
-          description: Represents daily work capacity of user in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
-          example: '750'
     CustomFieldFilterV1:
       type: object
       description: Represents list of time entry custom field filter objects.
@@ -1200,6 +1052,154 @@ components:
           type: object
           description: Represents a custom field value.
           example: 2000
+    SharedReportRequestV1:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/ReportFilterV1'
+        fixedDate:
+          type: boolean
+          description: Indicates whether the shared report has a fixed date range.
+        isPublic:
+          type: boolean
+          description: Indicates whether the shared report is public or not
+          example: false
+        name:
+          type: string
+          description: Represents a shared report's name
+          example: Weekly 1
+        type:
+          type: string
+          description: Represent the type of shared report.
+          enum:
+          - DETAILED
+          - WEEKLY
+          - SUMMARY
+          - SCHEDULED
+          - EXPENSE_DETAILED
+          - EXPENSE_RECEIPT
+          - PTO_REQUESTS
+          - PTO_BALANCE
+          - ATTENDANCE
+          - INVOICE_EXPENSE
+          - INVOICE_TIME
+          - PROJECT
+          - TEAM_FULL
+          - TEAM_LIMITED
+          - TEAM_GROUPS
+          - INVOICES
+          - KIOSK_PIN_LIST
+          - KIOSK_ASSIGNEES
+          - USER_DATA_EXPORT
+          example: WEEKLY
+        visibleToUserGroups:
+          type: array
+          description: Represents user group ids.
+          example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
+          items:
+            type: string
+            description: Represents user group ids.
+            example: '"[5b715448b079875110792222", "5b715448b079875110791111"]'
+          uniqueItems: true
+        visibleToUsers:
+          type: array
+          description: Represents user ids.
+          example:
+          - 5b715448b079875110791234
+          - 5b715448b079875110791432
+          - 5b715448b079875110791324
+          items:
+            type: string
+            description: Represents user ids.
+            example: '["5b715448b079875110791234","5b715448b079875110791432","5b715448b079875110791324"]'
+          uniqueItems: true
+    CompareWorkFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of completed work for day in hours, multiplied by 100. For example, if desired value is 7.5h, input should be 750.
+          example: '750'
+    CompareBreakFilter:
+      type: object
+      properties:
+        filtrationType:
+          type: string
+          enum:
+          - EXACTLY
+          - LARGER_THAN
+          - SMALLER_THAN
+        value:
+          type: string
+          description: Represents duration of breaks in the day in hours, multiplied by 100. For example, if desired value is 0.5h, input should be 50
+          example: '50'
+    DetailedFilterV1:
+      type: object
+      description: Represents a detailed report filter.
+      properties:
+        auditFilter:
+          $ref: '#/components/schemas/AuditFilterV1'
+        options:
+          $ref: '#/components/schemas/DetailedOptionsV1'
+        page:
+          type: integer
+          format: int32
+          example: 1
+        pageSize:
+          type: integer
+          format: int32
+          example: 20
+        sortColumn:
+          type: string
+          description: If provided, you'll get sorted result by sort column.
+          enum:
+          - ID
+          - DESCRIPTION
+          - USER
+          - DURATION
+          - DATE
+          - ZONED_DATE
+          - NATURAL
+          - USER_DATE
+          example: ID
+    ContainsUsersFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ALL
+          - ACTIVE_WITH_PENDING
+          - ACTIVE
+          - PENDING
+          - INACTIVE
+          example: ACTIVE
   securitySchemes:
     AddonKeyAuth:
       in: header

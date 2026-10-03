@@ -347,6 +347,135 @@ components:
           description: Represents a custom field's default value
           example: Manila
       description: Represents a list of custom field default values data transfer objects.
+    CustomFieldRequestV1:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        allowedValues:
+          type: array
+          description: Represents a list of custom field's allowed values.
+          example:
+          - New York
+          - London
+          - Manila
+          - Sydney
+          - Belgrade
+          items:
+            type: string
+            description: Represents a list of custom field's allowed values.
+            example: '["New York","London","Manila","Sydney","Belgrade"]'
+        description:
+          type: string
+          description: Represents custom field description.
+          example: This field contains a location.
+        entityType:
+          type: string
+          description: Represents custom field entity type
+          example: TIMEENTRY
+          enum:
+          - TIMEENTRY
+          - USER
+        name:
+          type: string
+          description: Represents custom field name.
+          example: location
+        onlyAdminCanEdit:
+          type: boolean
+          description: Flag to set whether custom field is modifiable only by admin users.
+          default: false
+        placeholder:
+          type: string
+          description: Represents custom field placeholder value.
+          example: Location
+        status:
+          type: string
+          description: Represents custom field status
+          example: VISIBLE
+          enum:
+          - INACTIVE
+          - VISIBLE
+          - INVISIBLE
+        type:
+          type: string
+          description: Represents custom field type.
+          example: DROPDOWN_MULTIPLE
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        workspaceDefaultValue:
+          type: object
+          description: Represents a custom field's default value in the workspace.<li>if type = NUMBER, then value must be a number</li><li>if type = DROPDOWN_MULTIPLE, value must be a list</li><li>if type = CHECKBOX, value must be true/false</li><li>otherwise any string</li>
+          example: Manila
+    UpdateCustomFieldRequestV1:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        allowedValues:
+          type: array
+          description: Represents a list of custom field's allowed values.
+          example:
+          - New York
+          - London
+          - Manila
+          - Sydney
+          - Belgrade
+          items:
+            type: string
+            description: Represents a list of custom field's allowed values.
+            example: '["New York","London","Manila","Sydney","Belgrade"]'
+        description:
+          type: string
+          description: Represents a custom field description.
+          example: This field contains a location.
+        name:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Represents a custom field name.
+          example: location
+        onlyAdminCanEdit:
+          type: boolean
+          description: Flag to set whether custom field is modifiable only by admin users.
+          default: false
+        placeholder:
+          type: string
+          description: Represents a custom field placeholder value.
+          example: This is a sample placeholder.
+        required:
+          type: boolean
+          description: Flag to set whether custom field is mandatory or not.
+          default: false
+        status:
+          type: string
+          description: Represents a custom field status
+          example: VISIBLE
+          enum:
+          - INACTIVE
+          - VISIBLE
+          - INVISIBLE
+        type:
+          type: string
+          description: Represents a custom field type.
+          example: DROPDOWN_MULTIPLE
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        workspaceDefaultValue:
+          type: object
+          description: Represents a custom field's default value in the workspace.
+          example: Manila
     CustomFieldDtoV1:
       type: object
       properties:
@@ -427,135 +556,6 @@ components:
           - INACTIVE
           - VISIBLE
           - INVISIBLE
-    UpdateCustomFieldRequestV1:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        allowedValues:
-          type: array
-          description: Represents a list of custom field's allowed values.
-          example:
-          - New York
-          - London
-          - Manila
-          - Sydney
-          - Belgrade
-          items:
-            type: string
-            description: Represents a list of custom field's allowed values.
-            example: '["New York","London","Manila","Sydney","Belgrade"]'
-        description:
-          type: string
-          description: Represents a custom field description.
-          example: This field contains a location.
-        name:
-          maxLength: 250
-          minLength: 2
-          type: string
-          description: Represents a custom field name.
-          example: location
-        onlyAdminCanEdit:
-          type: boolean
-          description: Flag to set whether custom field is modifiable only by admin users.
-          default: false
-        placeholder:
-          type: string
-          description: Represents a custom field placeholder value.
-          example: This is a sample placeholder.
-        required:
-          type: boolean
-          description: Flag to set whether custom field is mandatory or not.
-          default: false
-        status:
-          type: string
-          description: Represents a custom field status
-          example: VISIBLE
-          enum:
-          - INACTIVE
-          - VISIBLE
-          - INVISIBLE
-        type:
-          type: string
-          description: Represents a custom field type.
-          example: DROPDOWN_MULTIPLE
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        workspaceDefaultValue:
-          type: object
-          description: Represents a custom field's default value in the workspace.
-          example: Manila
-    CustomFieldRequestV1:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        allowedValues:
-          type: array
-          description: Represents a list of custom field's allowed values.
-          example:
-          - New York
-          - London
-          - Manila
-          - Sydney
-          - Belgrade
-          items:
-            type: string
-            description: Represents a list of custom field's allowed values.
-            example: '["New York","London","Manila","Sydney","Belgrade"]'
-        description:
-          type: string
-          description: Represents custom field description.
-          example: This field contains a location.
-        entityType:
-          type: string
-          description: Represents custom field entity type
-          example: TIMEENTRY
-          enum:
-          - TIMEENTRY
-          - USER
-        name:
-          type: string
-          description: Represents custom field name.
-          example: location
-        onlyAdminCanEdit:
-          type: boolean
-          description: Flag to set whether custom field is modifiable only by admin users.
-          default: false
-        placeholder:
-          type: string
-          description: Represents custom field placeholder value.
-          example: Location
-        status:
-          type: string
-          description: Represents custom field status
-          example: VISIBLE
-          enum:
-          - INACTIVE
-          - VISIBLE
-          - INVISIBLE
-        type:
-          type: string
-          description: Represents custom field type.
-          example: DROPDOWN_MULTIPLE
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        workspaceDefaultValue:
-          type: object
-          description: Represents a custom field's default value in the workspace.<li>if type = NUMBER, then value must be a number</li><li>if type = DROPDOWN_MULTIPLE, value must be a list</li><li>if type = CHECKBOX, value must be true/false</li><li>otherwise any string</li>
-          example: Manila
   securitySchemes:
     AddonKeyAuth:
       in: header

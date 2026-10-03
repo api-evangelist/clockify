@@ -276,48 +276,31 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    NegativeBalanceDto:
+    ChangePolicyStatusRequestV1:
+      required:
+      - status
       type: object
       properties:
-        amount:
-          type: number
-          format: double
-        period:
-          type: string
-        shouldReset:
-          type: boolean
-        timeUnit:
-          type: string
-      description: Represents the data about negative balance including amount, time unit and period.
-    UserIdsSchema:
-      type: object
-      properties:
-        contains:
-          type: string
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-        ids:
-          uniqueItems: true
-          type: array
-          description: Represents ids upon which filtering is performed.
-          example:
-          - 5b715612b079875110791111
-          - 5b715612b079875110791222
-          items:
-            type: string
-            description: Represents ids upon which filtering is performed.
-            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
         status:
           type: string
-          description: Represents user status.
-          example: ALL
+          description: Provide the status you would like to use for changing the policy.
+          example: ACTIVE
           enum:
-          - ALL
           - ACTIVE
-          - INACTIVE
-      description: Provide list with user ids and corresponding status.
+          - ARCHIVED
+          - ALL
+    AutomaticTimeEntryCreationRequest:
+      required:
+      - defaultEntities
+      type: object
+      properties:
+        defaultEntities:
+          $ref: '#/components/schemas/DefaultEntitiesRequest'
+        enabled:
+          type: boolean
+          description: Indicates that automatic time entry creation is enabled.
+          default: false
+      description: Provides automatic time entry creation settings.
     PolicyDtoV1:
       type: object
       properties:
@@ -394,7 +377,7 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110792222
-    UserGroupIdsSchema:
+    UserIdsSchema:
       type: object
       properties:
         contains:
@@ -422,7 +405,28 @@ components:
           - ALL
           - ACTIVE
           - INACTIVE
-      description: Provide list with user group ids and corresponding status.
+      description: Provide list with user ids and corresponding status.
+    NegativeBalanceDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        period:
+          type: string
+        shouldReset:
+          type: boolean
+        timeUnit:
+          type: string
+      description: Represents the data about negative balance including amount, time unit and period.
+    AutomaticTimeEntryCreationDto:
+      type: object
+      properties:
+        defaultEntities:
+          $ref: '#/components/schemas/DefaultEntitiesDto'
+        enabled:
+          type: boolean
+      description: Represents automatic time entry creation settings.
     PolicyApprovalDto:
       type: object
       properties:
@@ -453,86 +457,42 @@ components:
             description: Represents set of user's identifier across the system
             example: '["6579d126c2fe3b25f20ea001","6579d126c2fe3b25f20ea002"]'
       description: Represents approval settings.
-    AutomaticAccrualRequest:
-      required:
-      - amount
+    UserGroupIdsSchema:
       type: object
       properties:
-        amount:
-          minimum: 0
-          type: number
-          description: Represents amount of automatic accrual.
-          format: double
-          example: 2
-        period:
+        contains:
           type: string
-          description: Represents automatic accrual period.
-          example: MONTH
+          example: CONTAINS
           enum:
-          - MONTH
-          - YEAR
-        timeUnit:
-          type: string
-          description: Represents automatic accrual time unit.
-          example: DAYS
-          enum:
-          - DAYS
-          - HOURS
-      description: Provide automatic accrual settings.
-    NegativeBalanceRequest:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: number
-          description: Represents negative balance amount.
-          format: double
-          example: 2
-        amountValidForTimeUnit:
-          type: boolean
-        period:
-          type: string
-          description: Represents negative balance period.
-          example: MONTH
-          enum:
-          - MONTH
-          - YEAR
-        shouldReset:
-          type: boolean
-          description: Indicates whether negative balance should be reset at the end of the negative balance period.
-          example: true
-          default: false
-        timeUnit:
-          type: string
-          description: Represents negative balance time unit.
-          example: DAYS
-          enum:
-          - DAYS
-          - HOURS
-      description: Provide the negative balance data you would like to use for updating the policy.
-    AutomaticTimeEntryCreationDto:
-      type: object
-      properties:
-        defaultEntities:
-          $ref: '#/components/schemas/DefaultEntitiesDto'
-        enabled:
-          type: boolean
-      description: Represents automatic time entry creation settings.
-    ChangePolicyStatusRequestV1:
-      required:
-      - status
-      type: object
-      properties:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents ids upon which filtering is performed.
+          example:
+          - 5b715612b079875110791111
+          - 5b715612b079875110791222
+          items:
+            type: string
+            description: Represents ids upon which filtering is performed.
+            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
         status:
           type: string
-          description: Provide the status you would like to use for changing the policy.
-          example: ACTIVE
+          description: Represents user status.
+          example: ALL
           enum:
-          - ACTIVE
-          - ARCHIVED
           - ALL
+          - ACTIVE
+          - INACTIVE
+      description: Provide list with user group ids and corresponding status.
+    DefaultEntitiesDto:
+      type: object
+      properties:
+        projectId:
+          type: string
+        taskId:
+          type: string
     UpdatePolicyRequestV1:
       required:
       - allowHalfDay
@@ -609,6 +569,62 @@ components:
           $ref: '#/components/schemas/UserGroupIdsSchema'
         users:
           $ref: '#/components/schemas/UserIdsSchema'
+    NegativeBalanceRequest:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: number
+          description: Represents negative balance amount.
+          format: double
+          example: 2
+        amountValidForTimeUnit:
+          type: boolean
+        period:
+          type: string
+          description: Represents negative balance period.
+          example: MONTH
+          enum:
+          - MONTH
+          - YEAR
+        shouldReset:
+          type: boolean
+          description: Indicates whether negative balance should be reset at the end of the negative balance period.
+          example: true
+          default: false
+        timeUnit:
+          type: string
+          description: Represents negative balance time unit.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Provide the negative balance data you would like to use for updating the policy.
+    AutomaticAccrualDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Represents automatic accrual's amount
+          format: double
+          example: 20
+        period:
+          type: string
+          description: Represents automatic accrual's period
+          example: YEAR
+          enum:
+          - MONTH
+          - YEAR
+        timeUnit:
+          type: string
+          description: Represents automatic accrual's time unit
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Represents automatic approval settings.
     CreatePolicyRequestV1:
       required:
       - approve
@@ -695,48 +711,32 @@ components:
           type: string
           description: Default task for automatically created time entries
       description: Provides information about default project and task for automatically created time entries.
-    AutomaticTimeEntryCreationRequest:
+    AutomaticAccrualRequest:
       required:
-      - defaultEntities
-      type: object
-      properties:
-        defaultEntities:
-          $ref: '#/components/schemas/DefaultEntitiesRequest'
-        enabled:
-          type: boolean
-          description: Indicates that automatic time entry creation is enabled.
-          default: false
-      description: Provides automatic time entry creation settings.
-    DefaultEntitiesDto:
-      type: object
-      properties:
-        projectId:
-          type: string
-        taskId:
-          type: string
-    AutomaticAccrualDto:
+      - amount
       type: object
       properties:
         amount:
+          minimum: 0
           type: number
-          description: Represents automatic accrual's amount
+          description: Represents amount of automatic accrual.
           format: double
-          example: 20
+          example: 2
         period:
           type: string
-          description: Represents automatic accrual's period
-          example: YEAR
+          description: Represents automatic accrual period.
+          example: MONTH
           enum:
           - MONTH
           - YEAR
         timeUnit:
           type: string
-          description: Represents automatic accrual's time unit
+          description: Represents automatic accrual time unit.
           example: DAYS
           enum:
           - DAYS
           - HOURS
-      description: Represents automatic approval settings.
+      description: Provide automatic accrual settings.
   securitySchemes:
     AddonKeyAuth:
       in: header

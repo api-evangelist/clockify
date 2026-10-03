@@ -267,6 +267,19 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    UpdateTagRequest:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether a tag will be archived or not.
+          default: false
+        name:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Represents a tag name.
+          example: Sprint1
     TagDtoV1:
       type: object
       properties:
@@ -286,19 +299,6 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    UpdateTagRequest:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Indicates whether a tag will be archived or not.
-          default: false
-        name:
-          maxLength: 100
-          minLength: 0
-          type: string
-          description: Represents a tag name.
-          example: Sprint1
     TagRequest:
       type: object
       properties:
