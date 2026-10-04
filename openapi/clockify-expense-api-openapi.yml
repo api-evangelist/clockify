@@ -493,271 +493,13 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    ExpensesWithCountDtoV1:
-      type: object
-      properties:
-        count:
-          type: integer
-          description: Represent result count.
-          format: int32
-          example: 25
-        expenses:
-          type: array
-          description: Represent a list of hydrated expense objects.
-          items:
-            $ref: '#/components/schemas/ExpenseHydratedDtoV1'
-      description: Represents an expense with count data transfer object.
-    ExpenseDtoV1:
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether expense is billable or not.
-          default: false
-        categoryId:
-          type: string
-          description: Represents category identifier across the system.
-          example: 45y687e29ae1f428e7ebe890
-        date:
-          type: string
-          description: Represents a date in yyyy-MM-dd format.
-          example: '2020-01-01'
-        fileId:
-          type: string
-          description: Represents file identifier across the system.
-          example: 745687e29ae1f428e7ebe890
-        id:
-          type: string
-          description: Represents expense identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        isLocked:
-          type: boolean
-          writeOnly: true
-        locked:
-          type: boolean
-        notes:
-          type: string
-          description: Represents notes for an expense.
-          example: This is a sample note for this expense.
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        quantity:
-          type: number
-          description: Represents expense quantity as double data type.
-          format: double
-        taskId:
-          type: string
-          description: Represents task identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        total:
-          type: number
-          description: Represents expense total as double data type.
-          format: double
-          example: 10500.5
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 89b687e29ae1f428e7ebe912
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-    ExpenseWeeklyTotalsDtoV1:
-      type: object
-      properties:
-        date:
-          type: string
-          description: Represents a date in yyyy-MM-dd format.
-          example: '2020-01-01'
-        total:
-          type: number
-          description: Represents expense total.
-          format: double
-          example: 20000.75
-      description: Represents a list of expense weekly total data transfer objects.
-    ExpenseHydratedDtoV1:
-      type: object
-      properties:
-        billable:
-          type: boolean
-          description: Indicates whether expense is billable or not.
-          default: false
-        category:
-          $ref: '#/components/schemas/ExpenseCategoryDto'
-        date:
-          type: string
-          description: Represents a date in yyyy-MM-dd format.
-          example: 89b687e29ae1f428e7ebe912
-        fileId:
-          type: string
-          description: Represents file identifier across the system.
-          example: 745687e29ae1f428e7ebe890
-        fileName:
-          type: string
-          description: Represents file name.
-          example: expense_20200101
-        id:
-          type: string
-          description: Represents expense identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        isLocked:
-          type: boolean
-          writeOnly: true
-        locked:
-          type: boolean
-        notes:
-          type: string
-          description: Represents notes for an expense.
-          example: This is a sample note for this expense.
-        project:
-          $ref: '#/components/schemas/ProjectInfoDto'
-        quantity:
-          type: number
-          description: Represents expense quantity as double data type.
-          format: double
-        task:
-          $ref: '#/components/schemas/TaskInfoDto'
-        total:
-          type: number
-          description: Represents expense total as double data type.
-          format: double
-          example: 10500.5
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 89b687e29ae1f428e7ebe912
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-      description: Represent a list of hydrated expense objects.
-    ExpenseCategoryV1Request:
-      required:
-      - name
-      type: object
-      properties:
-        hasUnitPrice:
-          type: boolean
-          description: Flag whether expense category has unit price or none.
-          default: false
-        name:
-          maxLength: 250
-          minLength: 0
-          type: string
-          description: Represents a valid expense category name.
-          example: Procurement
-        priceInCents:
-          type: integer
-          description: Represents price in cents as integer.
-          format: int32
-          example: 1000
-        unit:
-          type: string
-          description: Represents a valid expense category unit.
-          example: piece
-    ExpenseCategoriesWithCountDtoV1:
-      type: object
-      properties:
-        categories:
-          type: array
-          description: Represents a list of expense categories data transfer object.
-          items:
-            $ref: '#/components/schemas/ExpenseCategoryDtoV1'
-        count:
-          type: integer
-          description: Indicates the number of expense categories returned.
-          format: int32
-          example: 20
-    ProjectInfoDto:
-      type: object
-      properties:
-        clientId:
-          type: string
-          description: Represents client identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        clientName:
-          type: string
-          description: Represents client name.
-          example: Client X
-        color:
-          type: string
-          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#000000'
-        id:
-          type: string
-          description: Represents project identifier across the system.
-          example: 5b641568b07987035750505e
-        name:
-          type: string
-          description: Represents a project name.
-          example: Software Development
-      description: Represents a project info object.
-    ExpensesAndTotalsDtoV1:
-      type: object
-      properties:
-        dailyTotals:
-          type: array
-          description: Represents a list of expense daily total data transfer objects.
-          items:
-            $ref: '#/components/schemas/ExpenseDailyTotalsDtoV1'
-        expenses:
-          $ref: '#/components/schemas/ExpensesWithCountDtoV1'
-        weeklyTotals:
-          type: array
-          description: Represents a list of expense weekly total data transfer objects.
-          items:
-            $ref: '#/components/schemas/ExpenseWeeklyTotalsDtoV1'
-    ExpenseDailyTotalsDtoV1:
-      type: object
-      properties:
-        date:
-          type: string
-          description: Represents a date in yyyy-MM-dd format.
-          example: '2020-01-01'
-        dateAsInstant:
-          type: string
-          format: date-time
-        total:
-          type: number
-          description: Represents expense total.
-          format: double
-          example: 1500.75
-      description: Represents a list of expense daily total data transfer objects.
-    ExpenseCategoryDto:
+    ExpenseCategoryArchiveV1Request:
       type: object
       properties:
         archived:
           type: boolean
-          description: Flag that indicates whether the expense category is archived or not.
+          description: Flag whether to archive the expense category or not.
           default: false
-        hasUnitPrice:
-          type: boolean
-          description: Represents whether expense category has unit price or none.
-          default: false
-        id:
-          type: string
-          description: Represents expense category identifier across the system.
-          example: 89a687e29ae1f428e7ebe303
-        name:
-          type: string
-          description: Represents expense category name.
-          example: Procurement
-        priceInCents:
-          type: integer
-          description: Represents price in cents as integer.
-          format: int32
-          example: 1000
-        unit:
-          type: string
-          description: Represents expense category unit.
-          example: piece
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-      description: Represents an expense category object.
     UpdateExpenseV1Request:
       required:
       - amount
@@ -831,6 +573,66 @@ components:
           type: string
           description: Represents a user identifier across the system.
           example: 89b687e29ae1f428e7ebe912
+    ExpenseCategoryV1Request:
+      required:
+      - name
+      type: object
+      properties:
+        hasUnitPrice:
+          type: boolean
+          description: Flag whether expense category has unit price or none.
+          default: false
+        name:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Represents a valid expense category name.
+          example: Procurement
+        priceInCents:
+          type: integer
+          description: Represents price in cents as integer.
+          format: int32
+          example: 1000
+        unit:
+          type: string
+          description: Represents a valid expense category unit.
+          example: piece
+    TaskInfoDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Represents task identifier across the system.
+          example: 5b715448b0798751107918ab
+        name:
+          type: string
+          description: Represents task name.
+          example: Bugfixing
+      description: Represents a project info object.
+    ProjectInfoDto:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        clientName:
+          type: string
+          description: Represents client name.
+          example: Client X
+        color:
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        id:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        name:
+          type: string
+          description: Represents a project name.
+          example: Software Development
+      description: Represents a project info object.
     ExpenseCategoryDtoV1:
       type: object
       properties:
@@ -864,25 +666,6 @@ components:
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
       description: Represents a list of expense categories data transfer object.
-    TaskInfoDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Represents task identifier across the system.
-          example: 5b715448b0798751107918ab
-        name:
-          type: string
-          description: Represents task name.
-          example: Bugfixing
-      description: Represents a project info object.
-    ExpenseCategoryArchiveV1Request:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Flag whether to archive the expense category or not.
-          default: false
     CreateExpenseV1Request:
       required:
       - amount
@@ -934,6 +717,223 @@ components:
           type: string
           description: Represents a user identifier across the system.
           example: 89b687e29ae1f428e7ebe912
+    ExpenseHydratedDtoV1:
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether expense is billable or not.
+          default: false
+        category:
+          $ref: '#/components/schemas/ExpenseCategoryDto'
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: 89b687e29ae1f428e7ebe912
+        fileId:
+          type: string
+          description: Represents file identifier across the system.
+          example: 745687e29ae1f428e7ebe890
+        fileName:
+          type: string
+          description: Represents file name.
+          example: expense_20200101
+        id:
+          type: string
+          description: Represents expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        isLocked:
+          type: boolean
+          writeOnly: true
+        locked:
+          type: boolean
+        notes:
+          type: string
+          description: Represents notes for an expense.
+          example: This is a sample note for this expense.
+        project:
+          $ref: '#/components/schemas/ProjectInfoDto'
+        quantity:
+          type: number
+          description: Represents expense quantity as double data type.
+          format: double
+        task:
+          $ref: '#/components/schemas/TaskInfoDto'
+        total:
+          type: number
+          description: Represents expense total as double data type.
+          format: double
+          example: 10500.5
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represent a list of hydrated expense objects.
+    ExpenseCategoryDto:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Flag that indicates whether the expense category is archived or not.
+          default: false
+        hasUnitPrice:
+          type: boolean
+          description: Represents whether expense category has unit price or none.
+          default: false
+        id:
+          type: string
+          description: Represents expense category identifier across the system.
+          example: 89a687e29ae1f428e7ebe303
+        name:
+          type: string
+          description: Represents expense category name.
+          example: Procurement
+        priceInCents:
+          type: integer
+          description: Represents price in cents as integer.
+          format: int32
+          example: 1000
+        unit:
+          type: string
+          description: Represents expense category unit.
+          example: piece
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents an expense category object.
+    ExpenseDtoV1:
+      type: object
+      properties:
+        billable:
+          type: boolean
+          description: Indicates whether expense is billable or not.
+          default: false
+        categoryId:
+          type: string
+          description: Represents category identifier across the system.
+          example: 45y687e29ae1f428e7ebe890
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        fileId:
+          type: string
+          description: Represents file identifier across the system.
+          example: 745687e29ae1f428e7ebe890
+        id:
+          type: string
+          description: Represents expense identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        isLocked:
+          type: boolean
+          writeOnly: true
+        locked:
+          type: boolean
+        notes:
+          type: string
+          description: Represents notes for an expense.
+          example: This is a sample note for this expense.
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        quantity:
+          type: number
+          description: Represents expense quantity as double data type.
+          format: double
+        taskId:
+          type: string
+          description: Represents task identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        total:
+          type: number
+          description: Represents expense total as double data type.
+          format: double
+          example: 10500.5
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    ExpensesAndTotalsDtoV1:
+      type: object
+      properties:
+        dailyTotals:
+          type: array
+          description: Represents a list of expense daily total data transfer objects.
+          items:
+            $ref: '#/components/schemas/ExpenseDailyTotalsDtoV1'
+        expenses:
+          $ref: '#/components/schemas/ExpensesWithCountDtoV1'
+        weeklyTotals:
+          type: array
+          description: Represents a list of expense weekly total data transfer objects.
+          items:
+            $ref: '#/components/schemas/ExpenseWeeklyTotalsDtoV1'
+    ExpensesWithCountDtoV1:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Represent result count.
+          format: int32
+          example: 25
+        expenses:
+          type: array
+          description: Represent a list of hydrated expense objects.
+          items:
+            $ref: '#/components/schemas/ExpenseHydratedDtoV1'
+      description: Represents an expense with count data transfer object.
+    ExpenseCategoriesWithCountDtoV1:
+      type: object
+      properties:
+        categories:
+          type: array
+          description: Represents a list of expense categories data transfer object.
+          items:
+            $ref: '#/components/schemas/ExpenseCategoryDtoV1'
+        count:
+          type: integer
+          description: Indicates the number of expense categories returned.
+          format: int32
+          example: 20
+    ExpenseWeeklyTotalsDtoV1:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        total:
+          type: number
+          description: Represents expense total.
+          format: double
+          example: 20000.75
+      description: Represents a list of expense weekly total data transfer objects.
+    ExpenseDailyTotalsDtoV1:
+      type: object
+      properties:
+        date:
+          type: string
+          description: Represents a date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        dateAsInstant:
+          type: string
+          format: date-time
+        total:
+          type: number
+          description: Represents expense total.
+          format: double
+          example: 1500.75
+      description: Represents a list of expense daily total data transfer objects.
   securitySchemes:
     AddonKeyAuth:
       in: header

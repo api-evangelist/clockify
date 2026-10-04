@@ -49,90 +49,6 @@ paths:
       - ApiKeyAuth: []
 components:
   schemas:
-    AuditLogGetRequestV1:
-      required:
-      - actions
-      - authors
-      - end
-      - start
-      type: object
-      properties:
-        actions:
-          minItems: 1
-          uniqueItems: true
-          type: array
-          description: Represents a set of audit log actions.
-          example:
-          - CREATE_TIME_PERSONAL_MANUAL
-          - CREATE_TIME_PERSONAL_TIMER
-          - CREATE_PROJECT
-          items:
-            type: string
-            description: Represents a set of audit log actions.
-            example: '["CREATE_TIME_PERSONAL_MANUAL","CREATE_TIME_PERSONAL_TIMER","CREATE_PROJECT"]'
-            enum:
-            - CREATE_TIME_PERSONAL_TIMER
-            - CREATE_TIME_PERSONAL_MANUAL
-            - CREATE_TIME_IMPORT
-            - CREATE_TIME_KIOSK
-            - CREATE_TIME_FOR_OTHER
-            - RESTORE_TIME
-            - RESTORE_TIME_FOR_OTHER
-            - UPDATE_TIME_PERSONAL
-            - UPDATE_TIME_FOR_OTHER
-            - DELETE_TIME_PERSONAL
-            - DELETE_TIME_FOR_OTHER
-            - CREATE_PROJECT
-            - CREATE_PROJECT_IMPORT
-            - CREATE_PROJECT_QUICKBOOKS
-            - UPDATE_PROJECT
-            - DELETE_PROJECT
-            - CREATE_TASK
-            - CREATE_TASK_IMPORT
-            - UPDATE_TASK
-            - DELETE_TASK
-            - CREATE_CLIENT
-            - CREATE_CLIENT_IMPORT
-            - CREATE_CLIENT_QUICKBOOKS
-            - UPDATE_CLIENT
-            - DELETE_CLIENT
-            - CREATE_TAG
-            - CREATE_TAG_IMPORT
-            - UPDATE_TAG
-            - DELETE_TAG
-            - CREATE_EXPENSE
-            - CREATE_EXPENSE_FOR_OTHER
-            - RESTORE_EXPENSE
-            - RESTORE_EXPENSE_FOR_OTHER
-            - UPDATE_EXPENSE
-            - UPDATE_EXPENSE_FOR_OTHER
-            - DELETE_EXPENSE
-            - DELETE_EXPENSE_FOR_OTHER
-        authors:
-          $ref: '#/components/schemas/authors'
-        end:
-          type: string
-          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
-          example: '2025-05-01T23:59:59Z'
-        page:
-          minimum: 0
-          type: integer
-          description: Page number.
-          format: int32
-          example: 1
-          default: 1
-        page-size:
-          maximum: 50
-          minimum: 1
-          type: integer
-          description: Page size.
-          format: int32
-          example: 20
-          default: 20
-        start:
-          type: string
-          description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
-          example: '2025-05-01T00:00:00Z'
     AuditLogDtoV1:
       type: object
       properties:
@@ -239,6 +155,90 @@ components:
           - CONTAINS
           - DOES_NOT_CONTAIN
       description: Represents the audit log author filter.
+    AuditLogGetRequestV1:
+      required:
+      - actions
+      - authors
+      - end
+      - start
+      type: object
+      properties:
+        actions:
+          minItems: 1
+          uniqueItems: true
+          type: array
+          description: Represents a set of audit log actions.
+          example:
+          - CREATE_TIME_PERSONAL_MANUAL
+          - CREATE_TIME_PERSONAL_TIMER
+          - CREATE_PROJECT
+          items:
+            type: string
+            description: Represents a set of audit log actions.
+            example: '["CREATE_TIME_PERSONAL_MANUAL","CREATE_TIME_PERSONAL_TIMER","CREATE_PROJECT"]'
+            enum:
+            - CREATE_TIME_PERSONAL_TIMER
+            - CREATE_TIME_PERSONAL_MANUAL
+            - CREATE_TIME_IMPORT
+            - CREATE_TIME_KIOSK
+            - CREATE_TIME_FOR_OTHER
+            - RESTORE_TIME
+            - RESTORE_TIME_FOR_OTHER
+            - UPDATE_TIME_PERSONAL
+            - UPDATE_TIME_FOR_OTHER
+            - DELETE_TIME_PERSONAL
+            - DELETE_TIME_FOR_OTHER
+            - CREATE_PROJECT
+            - CREATE_PROJECT_IMPORT
+            - CREATE_PROJECT_QUICKBOOKS
+            - UPDATE_PROJECT
+            - DELETE_PROJECT
+            - CREATE_TASK
+            - CREATE_TASK_IMPORT
+            - UPDATE_TASK
+            - DELETE_TASK
+            - CREATE_CLIENT
+            - CREATE_CLIENT_IMPORT
+            - CREATE_CLIENT_QUICKBOOKS
+            - UPDATE_CLIENT
+            - DELETE_CLIENT
+            - CREATE_TAG
+            - CREATE_TAG_IMPORT
+            - UPDATE_TAG
+            - DELETE_TAG
+            - CREATE_EXPENSE
+            - CREATE_EXPENSE_FOR_OTHER
+            - RESTORE_EXPENSE
+            - RESTORE_EXPENSE_FOR_OTHER
+            - UPDATE_EXPENSE
+            - UPDATE_EXPENSE_FOR_OTHER
+            - DELETE_EXPENSE
+            - DELETE_EXPENSE_FOR_OTHER
+        authors:
+          $ref: '#/components/schemas/authors'
+        end:
+          type: string
+          description: Represents an end date in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-05-01T23:59:59Z'
+        page:
+          minimum: 0
+          type: integer
+          description: Page number.
+          format: int32
+          example: 1
+          default: 1
+        page-size:
+          maximum: 50
+          minimum: 1
+          type: integer
+          description: Page size.
+          format: int32
+          example: 20
+          default: 20
+        start:
+          type: string
+          description: Represents a start date in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-05-01T00:00:00Z'
   securitySchemes:
     AddonKeyAuth:
       in: header

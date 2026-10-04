@@ -56,6 +56,50 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    EntityCreationPermission:
+      type: object
+      description: Represents an entity creation permission enum.
+      example: EVERYONE
+      oneOf:
+      - type: string
+        enum:
+        - ADMINS
+        - ADMINS_AND_PROJECT_MANAGERS
+        - EVERYONE
+      properties:
+        ADMINS:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        ADMINS_AND_PROJECT_MANAGERS:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        EVERYONE:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        creators:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    EntityCreationPermissionsDtoV1:
+      type: object
+      properties:
+        whoCanCreateProjectsAndClients:
+          $ref: '#/components/schemas/EntityCreationPermission'
+        whoCanCreateTags:
+          $ref: '#/components/schemas/EntityCreationPermission'
+        whoCanCreateTasks:
+          $ref: '#/components/schemas/EntityCreationPermission'
+      description: Represents an entity creation permission object.
     WorkspaceDtoV1:
       type: object
       properties:
@@ -97,40 +141,106 @@ components:
           $ref: '#/components/schemas/WorkspaceSubdomainDtoV1'
         workspaceSettings:
           $ref: '#/components/schemas/WorkspaceSettingsDtoV1'
-    EntityCreationPermission:
+    MembershipDtoV1:
       type: object
-      description: Represents an entity creation permission enum.
-      example: EVERYONE
-      oneOf:
-      - type: string
-        enum:
-        - ADMINS
-        - ADMINS_AND_PROJECT_MANAGERS
-        - EVERYONE
       properties:
-        ADMINS:
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateDtoV1'
+        membershipStatus:
           type: string
+          description: Represents a membership status enum.
+          example: PENDING
           enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        ADMINS_AND_PROJECT_MANAGERS:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
           type: string
+          description: Represents membership type enum.
+          example: PROJECT
           enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        EVERYONE:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        targetId:
           type: string
+          description: Represents target identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+      description: Represents a list of membership objects.
+    WorkspaceSubdomainDtoV1:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates whether subdomain is enabled on workspace
+          default: false
+        name:
+          type: string
+          description: Represents subdomain name
+          example: coolcompany
+      description: Represents the workspace subdomain
+    AutomaticLockDtoV1:
+      type: object
+      properties:
+        changeDay:
+          type: string
+          description: Represents a day of the week.
+          example: FRIDAY
           enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        creators:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        dayOfMonth:
+          type: integer
+          description: Represents a day of month as integer.
+          format: int32
+          example: 15
+        firstDay:
+          type: string
+          description: Represents a day of the week.
+          example: MONDAY
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        olderThanPeriod:
+          type: string
+          description: Represents a time entry automatic lock period enum.
+          example: DAYS
+          enum:
+          - DAYS
+          - WEEKS
+          - MONTHS
+        olderThanValue:
+          type: integer
+          description: Represents an integer as the criteria for locking time entries.
+          format: int32
+          example: 5
+        type:
+          type: string
+          description: Represents a time entry automatic lock type enum.
+          example: WEEKLY
+          enum:
+          - WEEKLY
+          - MONTHLY
+          - OLDER_THAN
+      description: Represents an automatic lock object.
     FeaturePlan:
       type: object
       description: Represents a feature plan type enum.
@@ -240,29 +350,7 @@ components:
         weight:
           type: integer
           format: int32
-    WorkspaceSubdomainDtoV1:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Indicates whether subdomain is enabled on workspace
-          default: false
-        name:
-          type: string
-          description: Represents subdomain name
-          example: coolcompany
-      description: Represents the workspace subdomain
-    RoundDto:
-      type: object
-      properties:
-        minutes:
-          type: string
-          example: '15'
-        round:
-          type: string
-          example: Round to nearest
-      description: Represents a time rounding object.
-    HourlyRateDtoV1:
+    RateDtoV1:
       type: object
       properties:
         amount:
@@ -274,7 +362,7 @@ components:
           type: string
           description: Represents a currency.
           example: USD
-      description: Represents an hourly rate object.
+      description: Represents cost rate object.
     CurrencyWithDefaultInfoDtoV1:
       type: object
       properties:
@@ -292,53 +380,6 @@ components:
           example: true
           default: false
       description: Represents currency with default info object.
-    MembershipDtoV1:
-      type: object
-      properties:
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateDtoV1'
-        membershipStatus:
-          type: string
-          description: Represents a membership status enum.
-          example: PENDING
-          enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-        membershipType:
-          type: string
-          description: Represents membership type enum.
-          example: PROJECT
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - USERGROUP
-        targetId:
-          type: string
-          description: Represents target identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-      description: Represents a list of membership objects.
-    RateDtoV1:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
     Feature:
       type: object
       description: Represents a list of features.
@@ -6908,6 +6949,29 @@ components:
           - ONE_MONTH_RANGE_REPORTS
           - ONE_YEAR_RANGE_REPORTS
           - SHARED_REPORTS
+    RoundDto:
+      type: object
+      properties:
+        minutes:
+          type: string
+          example: '15'
+        round:
+          type: string
+          example: Round to nearest
+      description: Represents a time rounding object.
+    HourlyRateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents an hourly rate object.
     WorkspaceSettingsDtoV1:
       type: object
       properties:
@@ -7077,70 +7141,6 @@ components:
             - SATURDAY
             - SUNDAY
       description: "Workspace settings also include Time Duration Format settings.\n\nSetting Time Duration Format by changing the boolean fields\ndecimalFormat and trackTimeDownToSecond is now deprecated.\n\nTime Duration Format can be set by durationFormat enum field.\n\nThree different Time Duration modes will still map the boolean fields:\n\n    1. Full (hh:mm:ss) -> decimalFormat = false, trackTimeDownToSecond = true,\n\n    2. Compact (h:mm) -> decimalFormat = false, trackTimeDownToSecond = false,\n\n    3. Decimal (h:hh) -> decimalFormat = true, trackTimeDownToSecond = true\n\n"
-    EntityCreationPermissionsDtoV1:
-      type: object
-      properties:
-        whoCanCreateProjectsAndClients:
-          $ref: '#/components/schemas/EntityCreationPermission'
-        whoCanCreateTags:
-          $ref: '#/components/schemas/EntityCreationPermission'
-        whoCanCreateTasks:
-          $ref: '#/components/schemas/EntityCreationPermission'
-      description: Represents an entity creation permission object.
-    AutomaticLockDtoV1:
-      type: object
-      properties:
-        changeDay:
-          type: string
-          description: Represents a day of the week.
-          example: FRIDAY
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-        dayOfMonth:
-          type: integer
-          description: Represents a day of month as integer.
-          format: int32
-          example: 15
-        firstDay:
-          type: string
-          description: Represents a day of the week.
-          example: MONDAY
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-        olderThanPeriod:
-          type: string
-          description: Represents a time entry automatic lock period enum.
-          example: DAYS
-          enum:
-          - DAYS
-          - WEEKS
-          - MONTHS
-        olderThanValue:
-          type: integer
-          description: Represents an integer as the criteria for locking time entries.
-          format: int32
-          example: 5
-        type:
-          type: string
-          description: Represents a time entry automatic lock type enum.
-          example: WEEKLY
-          enum:
-          - WEEKLY
-          - MONTHLY
-          - OLDER_THAN
-      description: Represents an automatic lock object.
   securitySchemes:
     AddonKeyAuth:
       in: header

@@ -48,9 +48,16 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    ContainsTaskFilterV1:
+    invoicingInfo:
       type: object
-      description: Represents filter criteria for expenses associated with tasks.
+      description: Expense's invoicing info.
+      properties:
+        invoiceId:
+          type: string
+        manuallyInvoiced:
+          type: boolean
+    ContainsUsersFilterV1:
+      type: object
       properties:
         contains:
           type: string
@@ -75,10 +82,23 @@ components:
           type: string
           description: Filter entities in 'contains' by their status.
           enum:
-          - ACTIVE
-          - ARCHIVED
           - ALL
+          - ACTIVE_WITH_PENDING
+          - ACTIVE
+          - PENDING
+          - INACTIVE
           example: ACTIVE
+    ExpenseDetailedReportDtoV1:
+      type: object
+      description: report
+      properties:
+        expenses:
+          type: array
+          description: Represents list of expenses
+          items:
+            $ref: '#/components/schemas/ExpenseReportDtoV1'
+        totals:
+          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
     ExpenseReportFilterV1:
       type: object
       properties:
@@ -221,17 +241,6 @@ components:
       required:
       - dateRangeEnd
       - dateRangeStart
-    ExpenseDetailedReportDtoV1:
-      type: object
-      description: report
-      properties:
-        expenses:
-          type: array
-          description: Represents list of expenses
-          items:
-            $ref: '#/components/schemas/ExpenseReportDtoV1'
-        totals:
-          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
     ContainsArchivedFilterV1:
       type: object
       properties:
@@ -262,33 +271,6 @@ components:
           - ARCHIVED
           - ALL
           example: ACTIVE
-    invoicingInfo:
-      type: object
-      description: Expense's invoicing info.
-      properties:
-        invoiceId:
-          type: string
-        manuallyInvoiced:
-          type: boolean
-    ExpenseTotalsDtoV1:
-      type: object
-      description: Represents expense totals
-      properties:
-        expensesCount:
-          type: integer
-          format: int32
-          description: Represents expenses count
-          example: 2
-        totalAmount:
-          type: number
-          format: double
-          description: Represents total amount of expenses
-          example: 20
-        totalAmountBillable:
-          type: number
-          format: double
-          description: Represents total billable amount of expenses
-          example: 20
     ExpenseReportDtoV1:
       type: object
       description: Represents list of expenses
@@ -467,8 +449,9 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110791121
-    ContainsUsersFilterV1:
+    ContainsTaskFilterV1:
       type: object
+      description: Represents filter criteria for expenses associated with tasks.
       properties:
         contains:
           type: string
@@ -493,12 +476,29 @@ components:
           type: string
           description: Filter entities in 'contains' by their status.
           enum:
-          - ALL
-          - ACTIVE_WITH_PENDING
           - ACTIVE
-          - PENDING
-          - INACTIVE
+          - ARCHIVED
+          - ALL
           example: ACTIVE
+    ExpenseTotalsDtoV1:
+      type: object
+      description: Represents expense totals
+      properties:
+        expensesCount:
+          type: integer
+          format: int32
+          description: Represents expenses count
+          example: 2
+        totalAmount:
+          type: number
+          format: double
+          description: Represents total amount of expenses
+          example: 20
+        totalAmountBillable:
+          type: number
+          format: double
+          description: Represents total billable amount of expenses
+          example: 20
   securitySchemes:
     AddonKeyAuth:
       in: header

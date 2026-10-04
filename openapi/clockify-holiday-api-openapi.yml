@@ -220,6 +220,136 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
+    UpdateHolidayRequestV1:
+      required:
+      - datePeriod
+      - name
+      - occursAnnually
+      type: object
+      properties:
+        automaticTimeEntryCreation:
+          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#8BC34A'
+        datePeriod:
+          $ref: '#/components/schemas/DatePeriodRequest'
+        everyoneIncludingNew:
+          type: boolean
+          description: Indicates whether the holiday is shown to new users.
+          example: false
+          default: false
+        name:
+          minLength: 1
+          type: string
+          description: Provide the name you would like to use for updating the holiday.
+          example: New Year's Day
+        occursAnnually:
+          type: boolean
+          description: Indicates whether the holiday occurs annually.
+          example: true
+          default: false
+        userGroups:
+          $ref: '#/components/schemas/ContainsUserGroupFilterRequest'
+        users:
+          $ref: '#/components/schemas/ContainsUsersFilterRequestForHoliday'
+    DefaultEntitiesDto:
+      type: object
+      properties:
+        projectId:
+          type: string
+        taskId:
+          type: string
+    DatePeriod:
+      type: object
+      properties:
+        endDate:
+          type: string
+          format: date
+        startDate:
+          type: string
+          format: date
+      description: Represents startDate and endDate of the holiday. Date is in format yyyy-mm-dd
+    ContainsUsersFilterRequestForHoliday:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Filter type.
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents a list of filter identifiers.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: Represents a list of filter identifiers.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+        status:
+          type: string
+          description: Filters entities by status.
+          example: ACTIVE
+          enum:
+          - ALL
+          - ACTIVE
+          - INACTIVE
+        statuses:
+          type: array
+          items:
+            type: string
+      description: Provide list with users ids and corresponding status.
+    CreateHolidayRequestV1:
+      required:
+      - datePeriod
+      - name
+      type: object
+      properties:
+        automaticTimeEntryCreation:
+          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
+          type: string
+          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#8BC34A'
+        datePeriod:
+          $ref: '#/components/schemas/DatePeriodRequest'
+        everyoneIncludingNew:
+          type: boolean
+          description: Indicates whether the holiday is shown to new users.
+          example: true
+          default: false
+        name:
+          maxLength: 100
+          minLength: 2
+          type: string
+          description: Provide the name of the holiday.
+          example: Labour Day
+        occursAnnually:
+          type: boolean
+          description: Indicates whether the holiday occurs annually.
+          example: true
+          default: false
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+        users:
+          $ref: '#/components/schemas/UserIdsSchema'
+    EntityIdNameDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      description: Contains names of user groups that are assigned to holiday.
     HolidayDto:
       type: object
       properties:
@@ -286,6 +416,103 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110792222
+    UserGroupIdsSchema:
+      type: object
+      properties:
+        contains:
+          type: string
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents ids upon which filtering is performed.
+          example:
+          - 5b715612b079875110791111
+          - 5b715612b079875110791222
+          items:
+            type: string
+            description: Represents ids upon which filtering is performed.
+            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
+        status:
+          type: string
+          description: Represents user status.
+          example: ALL
+          enum:
+          - ALL
+          - ACTIVE
+          - INACTIVE
+      description: Provide list with user group ids and corresponding status.
+    AutomaticTimeEntryCreationDto:
+      type: object
+      properties:
+        defaultEntities:
+          $ref: '#/components/schemas/DefaultEntitiesDto'
+        enabled:
+          type: boolean
+      description: Represents automatic time entry creation settings.
+    ContainsUserGroupFilterRequest:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Filter type.
+          example: CONTAINS
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents a list of filter identifiers.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: Represents a list of filter identifiers.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+        status:
+          type: string
+          description: Filters entities by status.
+          example: ACTIVE
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+      description: Provide list with user group ids and corresponding status.
+    DatePeriodRequest:
+      required:
+      - endDate
+      - startDate
+      type: object
+      properties:
+        endDate:
+          minLength: 1
+          type: string
+          description: yyyy-MM-dd format date
+          example: '2023-02-16'
+        startDate:
+          minLength: 1
+          type: string
+          description: yyyy-MM-dd format date
+          example: '2023-02-14'
+      description: Provide startDate and endDate for the holiday.
+    DefaultEntitiesRequest:
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Default project for automatically created time entries
+        taskId:
+          type: string
+          description: Default task for automatically created time entries
+      description: Provides information about default project and task for automatically created time entries.
     AutomaticTimeEntryCreationRequest:
       required:
       - defaultEntities
@@ -327,57 +554,6 @@ components:
           - ACTIVE
           - INACTIVE
       description: Provide list with user ids and corresponding status.
-    EntityIdNameDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      description: Contains names of user groups that are assigned to holiday.
-    CreateHolidayRequestV1:
-      required:
-      - datePeriod
-      - name
-      type: object
-      properties:
-        automaticTimeEntryCreation:
-          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
-        color:
-          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
-          type: string
-          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#8BC34A'
-        datePeriod:
-          $ref: '#/components/schemas/DatePeriodRequest'
-        everyoneIncludingNew:
-          type: boolean
-          description: Indicates whether the holiday is shown to new users.
-          example: true
-          default: false
-        name:
-          maxLength: 100
-          minLength: 2
-          type: string
-          description: Provide the name of the holiday.
-          example: Labour Day
-        occursAnnually:
-          type: boolean
-          description: Indicates whether the holiday occurs annually.
-          example: true
-          default: false
-        userGroups:
-          $ref: '#/components/schemas/UserGroupIdsSchema'
-        users:
-          $ref: '#/components/schemas/UserIdsSchema'
-    AutomaticTimeEntryCreationDto:
-      type: object
-      properties:
-        defaultEntities:
-          $ref: '#/components/schemas/DefaultEntitiesDto'
-        enabled:
-          type: boolean
-      description: Represents automatic time entry creation settings.
     HolidayDtoV1:
       type: object
       properties:
@@ -441,182 +617,6 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110792222
-    DatePeriod:
-      type: object
-      properties:
-        endDate:
-          type: string
-          format: date
-        startDate:
-          type: string
-          format: date
-      description: Represents startDate and endDate of the holiday. Date is in format yyyy-mm-dd
-    DefaultEntitiesDto:
-      type: object
-      properties:
-        projectId:
-          type: string
-        taskId:
-          type: string
-    DatePeriodRequest:
-      required:
-      - endDate
-      - startDate
-      type: object
-      properties:
-        endDate:
-          minLength: 1
-          type: string
-          description: yyyy-MM-dd format date
-          example: '2023-02-16'
-        startDate:
-          minLength: 1
-          type: string
-          description: yyyy-MM-dd format date
-          example: '2023-02-14'
-      description: Provide startDate and endDate for the holiday.
-    UserGroupIdsSchema:
-      type: object
-      properties:
-        contains:
-          type: string
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-        ids:
-          uniqueItems: true
-          type: array
-          description: Represents ids upon which filtering is performed.
-          example:
-          - 5b715612b079875110791111
-          - 5b715612b079875110791222
-          items:
-            type: string
-            description: Represents ids upon which filtering is performed.
-            example: '["5b715612b079875110791111","5b715612b079875110791222"]'
-        status:
-          type: string
-          description: Represents user status.
-          example: ALL
-          enum:
-          - ALL
-          - ACTIVE
-          - INACTIVE
-      description: Provide list with user group ids and corresponding status.
-    UpdateHolidayRequestV1:
-      required:
-      - datePeriod
-      - name
-      - occursAnnually
-      type: object
-      properties:
-        automaticTimeEntryCreation:
-          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
-        color:
-          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
-          type: string
-          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#8BC34A'
-        datePeriod:
-          $ref: '#/components/schemas/DatePeriodRequest'
-        everyoneIncludingNew:
-          type: boolean
-          description: Indicates whether the holiday is shown to new users.
-          example: false
-          default: false
-        name:
-          minLength: 1
-          type: string
-          description: Provide the name you would like to use for updating the holiday.
-          example: New Year's Day
-        occursAnnually:
-          type: boolean
-          description: Indicates whether the holiday occurs annually.
-          example: true
-          default: false
-        userGroups:
-          $ref: '#/components/schemas/ContainsUserGroupFilterRequest'
-        users:
-          $ref: '#/components/schemas/ContainsUsersFilterRequestForHoliday'
-    ContainsUsersFilterRequestForHoliday:
-      type: object
-      properties:
-        contains:
-          type: string
-          description: Filter type.
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-        ids:
-          uniqueItems: true
-          type: array
-          description: Represents a list of filter identifiers.
-          example:
-          - 5a0ab5acb07987125438b60f
-          - 64c777ddd3fcab07cfbb210c
-          items:
-            type: string
-            description: Represents a list of filter identifiers.
-            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
-        status:
-          type: string
-          description: Filters entities by status.
-          example: ACTIVE
-          enum:
-          - ALL
-          - ACTIVE
-          - INACTIVE
-        statuses:
-          type: array
-          items:
-            type: string
-      description: Provide list with users ids and corresponding status.
-    ContainsUserGroupFilterRequest:
-      type: object
-      properties:
-        contains:
-          type: string
-          description: Filter type.
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-        ids:
-          uniqueItems: true
-          type: array
-          description: Represents a list of filter identifiers.
-          example:
-          - 5a0ab5acb07987125438b60f
-          - 64c777ddd3fcab07cfbb210c
-          items:
-            type: string
-            description: Represents a list of filter identifiers.
-            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
-        status:
-          type: string
-          description: Filters entities by status.
-          example: ACTIVE
-          enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-      description: Provide list with user group ids and corresponding status.
-    DefaultEntitiesRequest:
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Default project for automatically created time entries
-        taskId:
-          type: string
-          description: Default task for automatically created time entries
-      description: Provides information about default project and task for automatically created time entries.
   securitySchemes:
     AddonKeyAuth:
       in: header

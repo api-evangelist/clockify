@@ -434,80 +434,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    TaskStatus:
-      type: object
-      description: Represents task status.
-      example: DONE
-      oneOf:
-      - type: string
-        enum:
-        - ACTIVE
-        - DONE
-        - ALL
-      properties:
-        ACTIVE:
-          type: string
-          enum:
-          - ACTIVE
-          - DONE
-          - ALL
-        ALL:
-          type: string
-          enum:
-          - ACTIVE
-          - DONE
-          - ALL
-        DONE:
-          type: string
-          enum:
-          - ACTIVE
-          - DONE
-          - ALL
-        active:
-          type: boolean
-    HourlyRateRequestV1:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an hourly rate amount as integer.
-          format: int32
-          example: 20000
-        since:
-          type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-    CostRateRequestV1:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 20000
-        since:
-          type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-    RateDtoV1:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
     TaskRequestV1:
       required:
       - name
@@ -566,6 +492,52 @@ components:
             type: string
             description: Represents list of user group ids for the task.
             example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+    TaskStatus:
+      type: object
+      description: Represents task status.
+      example: DONE
+      oneOf:
+      - type: string
+        enum:
+        - ACTIVE
+        - DONE
+        - ALL
+      properties:
+        ACTIVE:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        ALL:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        DONE:
+          type: string
+          enum:
+          - ACTIVE
+          - DONE
+          - ALL
+        active:
+          type: boolean
+    CostRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
     UpdateTaskRequest:
       required:
       - name
@@ -624,6 +596,34 @@ components:
             type: string
             description: Represents list of user group ids for the task.
             example: '["67b687e29ae1f428e7ebe123","12s687e29ae1f428e7ebe678"]'
+    HourlyRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an hourly rate amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    RateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
     TaskDtoV1:
       type: object
       properties:

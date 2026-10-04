@@ -312,18 +312,7 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    UserRedactedDtoV1:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      description: Represents a list of assigned team managers for this user group.
-      example:
-      - id: 672323eb0024343a1585e8a7
-        name: Jane Doe
-    UserGroupRequest:
+    UpdateUserGroupRequest:
       type: object
       properties:
         name:
@@ -341,7 +330,7 @@ components:
           type: string
           description: Represents a user identifier across the system.
           example: 5a0ab5acb07987125438b60f
-    UpdateUserGroupRequest:
+    UserGroupRequest:
       type: object
       properties:
         name:
@@ -350,6 +339,17 @@ components:
           type: string
           description: Represents a user group name.
           example: development_team
+    UserRedactedDtoV1:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      description: Represents a list of assigned team managers for this user group.
+      example:
+      - id: 672323eb0024343a1585e8a7
+        name: Jane Doe
     UserGroupDtoV1:
       type: object
       properties:

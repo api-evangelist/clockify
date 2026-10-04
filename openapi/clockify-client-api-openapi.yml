@@ -254,7 +254,7 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    CreateClientRequestV1:
+    UpdateClientRequestV1:
       type: object
       properties:
         address:
@@ -263,6 +263,21 @@ components:
           type: string
           description: Represents a client's address.
           example: Ground Floor, ABC Bldg., Palo Alto, California, USA 94020
+        archived:
+          type: boolean
+          description: Indicates if client will be archived or not.
+          default: false
+        ccEmails:
+          maxItems: 3
+          minItems: 0
+          type: array
+          items:
+            type: string
+            format: email
+        currencyId:
+          type: string
+          description: Represents a currency identifier across the system.
+          example: 53a687e29ae1f428e7ebe888
         email:
           type: string
           format: email
@@ -323,7 +338,7 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    UpdateClientRequestV1:
+    CreateClientRequestV1:
       type: object
       properties:
         address:
@@ -332,21 +347,6 @@ components:
           type: string
           description: Represents a client's address.
           example: Ground Floor, ABC Bldg., Palo Alto, California, USA 94020
-        archived:
-          type: boolean
-          description: Indicates if client will be archived or not.
-          default: false
-        ccEmails:
-          maxItems: 3
-          minItems: 0
-          type: array
-          items:
-            type: string
-            format: email
-        currencyId:
-          type: string
-          description: Represents a currency identifier across the system.
-          example: 53a687e29ae1f428e7ebe888
         email:
           type: string
           format: email

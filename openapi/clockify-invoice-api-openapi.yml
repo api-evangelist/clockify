@@ -739,57 +739,40 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    InvoiceDtoV1:
+    InvoiceExportFieldsRequest:
       type: object
       properties:
-        amount:
-          type: integer
-          description: Represents an invoice amount as long.
-          format: int64
-          example: 100
-        balance:
-          type: integer
-          description: Represents an invoice balance amount as long.
-          format: int64
-          example: 50
-        clientId:
+        itemType:
+          type: boolean
+          description: Indicates whether to export item type.
+          default: false
+        quantity:
+          type: boolean
+          description: Indicates whether to export quantity.
+          default: false
+        rtl:
+          type: boolean
+          description: Indicates whether to export RTL.
+          default: false
+        tax:
+          type: boolean
+          description: Indicates whether to export tax.
+          default: false
+        tax2:
+          type: boolean
+          description: Indicates whether to export tax2.
+          default: false
+        unitPrice:
+          type: boolean
+          description: Indicates whether to export unit price.
+          default: false
+      description: Represents an invoice export fields object.
+    ChangeInvoiceStatusRequestV1:
+      type: object
+      properties:
+        invoiceStatus:
           type: string
-          description: Represents client identifier across the system.
-          example: 98h687e29ae1f428e7ebe707
-        clientName:
-          type: string
-          description: Represents client name for an invoice.
-          example: Client X
-        currency:
-          type: string
-          description: Represents the currency used by the invoice.
-          example: USD
-        dueDate:
-          type: string
-          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-06-01T08:00:00Z'
-        id:
-          type: string
-          description: Represents invoice identifier across the system.
-          example: 78a687e29ae1f428e7ebe303
-        issuedDate:
-          type: string
-          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T08:00:00Z'
-        number:
-          type: string
-          description: Represents an invoice number.
-          example: '202306121129'
-        paid:
-          type: integer
-          description: Represents an invoice paid amount as long.
-          format: int64
-          example: 50
-        status:
-          type: string
-          description: Represents the status of an invoice.
+          description: Represents the invoice status to be set.
           example: PAID
           enum:
           - UNSENT
@@ -798,7 +781,99 @@ components:
           - PARTIALLY_PAID
           - VOID
           - OVERDUE
-      description: Represents a list of invoices.
+    InvoiceFilterRequestV1:
+      type: object
+      properties:
+        clients:
+          $ref: '#/components/schemas/ContainsArchivedFilterRequest'
+        companies:
+          $ref: '#/components/schemas/BaseFilterRequest'
+        exactAmount:
+          type: integer
+          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has the equal amount as specified.
+          format: int64
+          example: 1000
+        exactBalance:
+          type: integer
+          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has the equal balance as specified.
+          format: int64
+          example: 1000
+        greaterThanAmount:
+          type: integer
+          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has amount greater than specified.
+          format: int64
+          example: 500
+        greaterThanBalance:
+          type: integer
+          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has balance greater than specified.
+          format: int64
+          example: 500
+        invoiceNumber:
+          type: string
+          description: If provided, you'll get a filtered list of invoices that contain the provided string in their invoice number.
+          example: Invoice-01
+        issueDate:
+          $ref: '#/components/schemas/TimeRangeRequestDtoV1'
+        lessThanAmount:
+          type: integer
+          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has amount less than specified.
+          format: int64
+          example: 500
+        lessThanBalance:
+          type: integer
+          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has balance less than specified.
+          format: int64
+          example: 500
+        page:
+          type: integer
+          description: Page number.
+          format: int32
+          default: 1
+        pageSize:
+          type: integer
+          description: Page size.
+          format: int32
+          default: 50
+        sortColumn:
+          type: string
+          description: Represents the column name to be used as sorting criteria.
+          example: ID
+          enum:
+          - ID
+          - CLIENT
+          - DUE_ON
+          - ISSUE_DATE
+          - AMOUNT
+          - BALANCE
+        sortOrder:
+          type: string
+          description: Represents the sorting order.
+          example: ASCENDING
+          enum:
+          - ASCENDING
+          - DESCENDING
+        statuses:
+          type: array
+          description: Represents a list of invoice statuses. If provided, you'll get a filtered list of invoices that matches any of the invoice status provided.
+          example:
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          items:
+            type: string
+            description: Represents a list of invoice statuses. If provided, you'll get a filtered list of invoices that matches any of the invoice status provided.
+            example: '["SENT","PAID","PARTIALLY_PAID"]'
+            enum:
+            - UNSENT
+            - SENT
+            - PAID
+            - PARTIALLY_PAID
+            - VOID
+            - OVERDUE
+        strictSearch:
+          type: boolean
+          description: Flag to toggle on/off strict search mode. When set to true, search by invoice number only will return invoices whose number exactly matches the string value given for the 'invoiceNumber' parameter. When set to false, results will also include invoices whose number contain the string value, but could be longer than the string value itself. For example, if there is an invoice with the number '123456', and the search value is '123', setting strict-name-search to true will not return that invoice in the results, whereas setting it to false will.
+          default: false
     ContainsArchivedFilterRequest:
       type: object
       properties:
@@ -830,6 +905,44 @@ components:
           - ARCHIVED
           - ALL
       description: Represents a project filter for imported items.
+    InvoiceInfoResponseDtoV1:
+      type: object
+      properties:
+        invoices:
+          type: array
+          description: Represents a list of invoice info.
+          items:
+            $ref: '#/components/schemas/InvoiceInfoV1'
+        total:
+          type: integer
+          description: Represents the total invoice count.
+          format: int64
+          example: 100
+    InvoicePaymentDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an invoice payment amount as long.
+          format: int64
+          example: 100
+        author:
+          type: string
+          description: Represents an invoice payment author.
+          example: John Doe
+        date:
+          type: string
+          description: Represents an invoice payment date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2021-01-01T12:00:00Z'
+        id:
+          type: string
+          description: Represents invoice payment identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        note:
+          type: string
+          description: Represents an invoice payment note.
+          example: This is a sample note for this invoice payment.
     InvoiceDefaultSettingsRequestV1:
       required:
       - notes
@@ -876,38 +989,29 @@ components:
           - SIMPLE
           - NONE
       description: Represents an invoice default settings object.
-    VisibleZeroFieldsInvoice:
+    BaseFilterRequest:
       type: object
-      description: Represents a list of zero value invoice fields that will be visible.
-      example:
-      - TAX
-      - TAX_2
-      - DISCOUNT
-      oneOf:
-      - type: string
-        enum:
-        - TAX
-        - TAX_2
-        - DISCOUNT
       properties:
-        DISCOUNT:
+        contains:
           type: string
+          description: Filter type.
+          example: CONTAINS
           enum:
-          - TAX
-          - TAX_2
-          - DISCOUNT
-        TAX:
-          type: string
-          enum:
-          - TAX
-          - TAX_2
-          - DISCOUNT
-        TAX_2:
-          type: string
-          enum:
-          - TAX
-          - TAX_2
-          - DISCOUNT
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+        ids:
+          uniqueItems: true
+          type: array
+          description: Represents a list of filter identifiers.
+          example:
+          - 5a0ab5acb07987125438b60f
+          - 64c777ddd3fcab07cfbb210c
+          items:
+            type: string
+            description: Represents a list of filter identifiers.
+            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
+      description: Represents a company filter object. If provided, you'll get a filtered list of invoices that matches the specified company filter.
     CreateInvoiceItemRequestV1:
       required:
       - applyTaxes
@@ -945,184 +1049,98 @@ components:
           description: Represents an item unit price.
           format: int64
           example: 500
-    InvoiceItemDto:
+    InvoiceSettingsDtoV1:
+      type: object
+      properties:
+        defaults:
+          $ref: '#/components/schemas/InvoiceDefaultSettingsDto'
+        exportFields:
+          $ref: '#/components/schemas/InvoiceExportFields'
+        labels:
+          $ref: '#/components/schemas/LabelsCustomization'
+    LabelsCustomization:
       type: object
       properties:
         amount:
-          type: integer
-          description: Represents item amount.
-          format: int64
-          example: 5000
-        applyTaxes:
-          $ref: '#/components/schemas/ApplyTaxes'
-        description:
           type: string
-          description: Represents an invoice item description.
-          example: This is a description of an invoice item.
-        expenseIds:
-          type: array
-          description: Represents a list of imported expense ids.
-          example: []
-          items:
-            type: string
-            description: Represents a list of imported expense ids.
-            example: '[]'
-        importType:
-          type: string
-          description: Represents the invoice item import type.
-          example: NOT_IMPORTED
-          enum:
-          - NOT_IMPORTED
-          - TIME_ENTRY_IMPORT
-          - EXPENSE_IMPORT
-        itemType:
-          type: string
-          description: Represents item type.
-          example: Goods
-        order:
-          type: integer
-          description: Represents an integer.
-          format: int32
-          example: 100
-        quantity:
-          type: integer
-          description: Represents item quantity.
-          format: int64
-          example: 10
-        timeEntryIds:
-          type: array
-          description: Represents a list of imported time entry ids.
-          example: []
-          items:
-            type: string
-            description: Represents a list of imported time entry ids.
-            example: '[]'
-        unitPrice:
-          type: integer
-          description: Represents item unit price.
-          format: int64
-          example: 500
-      description: Represents a list of invoice item datatransfer objects.
-    UpdateInvoiceRequestV1:
-      required:
-      - currency
-      - discountPercent
-      - dueDate
-      - issuedDate
-      - number
-      - tax2Percent
-      - taxPercent
-      type: object
-      properties:
-        clientId:
-          type: string
-          description: Represents client identifier across the system.
-          example: 98h687e29ae1f428e7ebe707
-        companyId:
-          type: string
-          description: Represents company identifier across the system.
-          example: 04g687e29ae1f428e7ebe123
-        currency:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: Represents the currency used by the invoice.
-          example: USD
-        discountPercent:
-          type: number
-          description: Represents an invoice discount percent as double.
-          format: double
-          example: 1.5
-        dueDate:
-          type: string
-          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-06-01T08:00:00Z'
-        issuedDate:
-          type: string
-          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T08:00:00Z'
-        note:
-          type: string
-          description: Represents an invoice note.
-          example: This is a sample note for this invoice.
-        number:
-          minLength: 1
-          type: string
-          description: Represents an invoice number.
-          example: '202306121129'
-        subject:
-          type: string
-          description: Represents an invoice subject.
-          example: January salary
-        tax2Percent:
-          type: number
-          description: Represents an invoice tax 2 percent as double.
-          format: double
-          example: 0
-        taxPercent:
-          type: number
-          description: Represents an invoice tax percent as double.
-          format: double
-          example: 0.5
-        taxType:
-          $ref: '#/components/schemas/TaxType'
-        visibleZeroFields:
-          type: string
-          description: Represents a list of zero value invoice fields that will be visible.
-          example: '["TAX","TAX_2","DISCOUNT"]'
-          enum:
-          - TAX
-          - TAX_2
-          - DISCOUNT
-    CreateInvoiceDtoV1:
-      type: object
-      properties:
+          description: Represents invoice amount.
+          example: '1000'
         billFrom:
           type: string
-          description: Represents to whom the invoice should be billed from.
-          example: Business X
-        clientId:
+          description: Represents a string an invoice is billed from.
+          example: Entity A
+        billTo:
           type: string
-          description: Represents client identifier across the system.
-          example: 34p687e29ae1f428e7ebe562
-        currency:
+          description: Represents a string an invoice is billed to.
+          example: Entity B
+        description:
           type: string
-          description: Represents the currency used by the invoice.
-          example: USD
+          description: Represents a description of an invoice.
+          example: This is a sample description for this invoice.
+        discount:
+          type: string
+          description: Represents invoice discount amount.
+          example: '0'
         dueDate:
           type: string
-          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-06-01T08:00:00Z'
-        id:
+          description: Represents a due date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        issueDate:
           type: string
-          description: Represents invoice identifier across the system.
-          example: 78a687e29ae1f428e7ebe303
-        issuedDate:
+          description: Represents an issue date in yyyy-MM-dd format.
+          example: '2020-01-01'
+        itemType:
           type: string
-          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
-          format: date-time
-          example: '2020-01-01T08:00:00Z'
-        number:
+          description: Represents an item type.
+          example: Service
+        notes:
           type: string
-          description: Represents an invoice number.
-          example: '202306121129'
-    ChangeInvoiceStatusRequestV1:
+          description: Represents notes for an invoice.
+          example: This is a sample note for this invoice.
+        paid:
+          type: string
+          description: Represents invoice paid amount.
+          example: '1000'
+        quantity:
+          type: string
+          description: Represents quantity.
+          example: '10'
+        subtotal:
+          type: string
+          description: Represents invoice subtotal.
+          example: '1000'
+        tax:
+          type: string
+          description: Represents invoice tax amount.
+          example: '10'
+        tax2:
+          type: string
+          description: Represents invoice tax amount.
+          example: '0'
+        total:
+          type: string
+          description: Represents invoice total amount.
+          example: '1010'
+        totalAmount:
+          type: string
+          description: Represents invoice total amount.
+          example: '1010'
+        unitPrice:
+          type: string
+          description: Represents unit price.
+          example: '100'
+      description: Represents a label customization object.
+    UpdateInvoiceSettingsRequestV1:
+      required:
+      - labels
       type: object
       properties:
-        invoiceStatus:
-          type: string
-          description: Represents the invoice status to be set.
-          example: PAID
-          enum:
-          - UNSENT
-          - SENT
-          - PAID
-          - PARTIALLY_PAID
-          - VOID
-          - OVERDUE
+        defaults:
+          $ref: '#/components/schemas/InvoiceDefaultSettingsRequestV1'
+        exportFields:
+          $ref: '#/components/schemas/InvoiceExportFieldsRequest'
+        labels:
+          $ref: '#/components/schemas/LabelsCustomizationRequest'
     LabelsCustomizationRequest:
       required:
       - amount
@@ -1247,25 +1265,6 @@ components:
           description: Represents invoice unit price label.
           example: UNIT PRICE
       description: Represents a label customization object.
-    CreateInvoicePaymentRequest:
-      type: object
-      properties:
-        amount:
-          minimum: 1
-          type: integer
-          description: Represents an invoice payment amount as long.
-          format: int64
-          example: 100
-        note:
-          maxLength: 1000
-          minLength: 0
-          type: string
-          description: Represents an invoice payment note.
-          example: This is a sample note for this invoice payment.
-        paymentDate:
-          type: string
-          description: Represents an invoice payment date in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2021-01-01T12:00:00Z'
     InvoiceInfoV1:
       type: object
       properties:
@@ -1337,56 +1336,545 @@ components:
         visibleZeroFields:
           $ref: '#/components/schemas/VisibleZeroFieldsInvoice'
       description: Represents a list of invoice info.
-    InvoicesListDtoV1:
+    InvoiceExportFields:
       type: object
       properties:
-        invoices:
+        RTL:
+          type: boolean
+          writeOnly: true
+        itemType:
+          type: boolean
+        quantity:
+          type: boolean
+        rtl:
+          type: boolean
+        tax:
+          type: boolean
+        tax2:
+          type: boolean
+        unitPrice:
+          type: boolean
+      description: Represents an invoice export fields object.
+    CreateInvoiceDtoV1:
+      type: object
+      properties:
+        billFrom:
+          type: string
+          description: Represents to whom the invoice should be billed from.
+          example: Business X
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 34p687e29ae1f428e7ebe562
+        currency:
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        id:
+          type: string
+          description: Represents invoice identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        number:
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+    ApplyTaxes:
+      type: object
+      description: Represents item applyTaxes type.
+      example: TAX1TAX2
+      oneOf:
+      - type: string
+        enum:
+        - TAX1
+        - TAX2
+        - TAX1TAX2
+        - NONE
+      properties:
+        NONE:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        TAX1:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        TAX1TAX2:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        TAX2:
+          type: string
+          enum:
+          - TAX1
+          - TAX2
+          - TAX1TAX2
+          - NONE
+        value:
+          type: string
+    ImportTimeEntriesAndExpensesRequestV1:
+      required:
+      - from
+      - importExpenses
+      - projectFilter
+      - timeEntryGroupType
+      - to
+      type: object
+      properties:
+        expenseFieldsForDetailedGroup:
+          uniqueItems: true
           type: array
-          description: Represents a list of invoices.
+          description: Represents a set of expense fields to include when using the DETAILED expense grouping type.
+          example:
+          - NOTE
           items:
-            $ref: '#/components/schemas/InvoiceDtoV1'
-        total:
+            type: string
+            description: Represents a set of expense fields to include when using the DETAILED expense grouping type.
+            example: '["NOTE"]'
+            enum:
+            - PROJECT
+            - TASK
+            - CATEGORY
+            - NOTE
+            - DATE
+            - USER
+            default: NOTE
+          default: NOTE
+        expensesGroupBy:
+          type: string
+          description: Represents a group field when using the GROUPED expense group type.
+          example: CATEGORY
+          enum:
+          - CATEGORY
+          - PROJECT
+          - USER
+          default: PROJECT
+        expensesGroupType:
+          type: string
+          description: Represents an expense group type.
+          enum:
+          - GROUPED
+          - DETAILED
+          default: DETAILED
+        from:
+          type: string
+          description: Represents date and time in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-06-01T00:00:00Z'
+        importExpenses:
+          type: boolean
+          description: Indicates if billable expenses should be imported alongside time entries.
+          default: false
+        projectFilter:
+          $ref: '#/components/schemas/ContainsArchivedFilterRequest'
+        roundTimeEntryDuration:
+          type: boolean
+          description: Indicates if imported time entry durations should be rounded to the nearest 15 minute interval.
+          default: false
+        timeEntryFieldsForDetailedGroup:
+          uniqueItems: true
+          type: array
+          description: Represents a set of time entry fields to include when using DETAILED time entry grouping type.
+          example:
+          - PROJECT
+          - DESCRIPTION
+          items:
+            type: string
+            description: Represents a set of time entry fields to include when using DETAILED time entry grouping type.
+            example: '["PROJECT","DESCRIPTION"]'
+            enum:
+            - PROJECT
+            - TASK
+            - TAGS
+            - DESCRIPTION
+            - DATE
+            - USER
+        timeEntryGroupType:
+          type: string
+          description: Represents a time entry group type.
+          example: GROUPED
+          enum:
+          - SINGLE_ITEM
+          - GROUPED
+          - DETAILED
+        timeEntryPrimaryGroupBy:
+          type: string
+          description: Represents a primary group field when using the GROUPED time entry grouping type.
+          example: PROJECT
+          enum:
+          - USER
+          - PROJECT
+          - DATE
+        timeEntrySecondaryGroupBy:
+          type: string
+          description: Represents a secondary group field when using the GROUPED time entry grouping type. Should not have the same grouping type as the primary group field.
+          example: TASK
+          enum:
+          - PROJECT
+          - USER
+          - TASK
+          - DATE
+          - DESCRIPTION
+          - NONE
+        to:
+          type: string
+          description: Represents date and time in the yyyy-MM-ddThh:mm:ssZ format.
+          example: '2025-06-07T00:00:00Z'
+    TaxType:
+      type: object
+      description: Represents an invoice taxation type.
+      example: SIMPLE
+      oneOf:
+      - type: string
+        enum:
+        - COMPOUND
+        - SIMPLE
+        - NONE
+      properties:
+        COMPOUND:
+          type: string
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+        NONE:
+          type: string
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+        SIMPLE:
+          type: string
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+        value:
+          type: string
+    InvoiceDefaultSettingsDto:
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: Represents company identifier across the system.
+          example: 34a687e29ae1f428e7ebe101
+        defaultImportExpenseItemTypeId:
+          type: string
+          description: Represents item type identifier across the system.
+          example: 88a687e29ae1f428e7ebe303
+        defaultImportTimeItemTypeId:
+          type: string
+          description: Represents item type identifier across the system.
+          example: 18a687e29ae1f428e7ebe303
+        dueDays:
           type: integer
-          description: Represents the total invoice count.
+          description: Represents an invoice number of due days.
+          format: int32
+          example: 2
+        itemType:
+          type: string
+          writeOnly: true
+        itemTypeId:
+          type: string
+          description: Represents item type identifier across the system.
+          example: 78a687e29ae1f428e7ebe303
+        notes:
+          type: string
+          description: Represents an invoice note.
+          example: This is a sample note for this invoice.
+        subject:
+          type: string
+          description: Represents an invoice subject.
+          example: January salary
+        tax:
+          type: integer
           format: int64
-          example: 100
-    InvoicePaymentDtoV1:
+          deprecated: true
+        tax2:
+          type: integer
+          format: int64
+          deprecated: true
+        tax2Percent:
+          type: number
+          description: Represents a tax amount in percentage.
+          format: double
+          example: 1
+        taxPercent:
+          type: number
+          description: Represents a tax amount in percentage.
+          format: double
+          example: 5
+        taxType:
+          type: string
+          description: Represents a tax type.
+          example: COMPOUND
+          enum:
+          - COMPOUND
+          - SIMPLE
+          - NONE
+      description: Represents an invoice default settings object.
+    InvoiceDtoV1:
       type: object
       properties:
         amount:
           type: integer
-          description: Represents an invoice payment amount as long.
+          description: Represents an invoice amount as long.
           format: int64
           example: 100
-        author:
+        balance:
+          type: integer
+          description: Represents an invoice balance amount as long.
+          format: int64
+          example: 50
+        clientId:
           type: string
-          description: Represents an invoice payment author.
-          example: John Doe
-        date:
+          description: Represents client identifier across the system.
+          example: 98h687e29ae1f428e7ebe707
+        clientName:
           type: string
-          description: Represents an invoice payment date in yyyy-MM-ddThh:mm:ssZ format.
+          description: Represents client name for an invoice.
+          example: Client X
+        currency:
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
           format: date-time
-          example: '2021-01-01T12:00:00Z'
+          example: '2020-06-01T08:00:00Z'
         id:
           type: string
-          description: Represents invoice payment identifier across the system.
+          description: Represents invoice identifier across the system.
           example: 78a687e29ae1f428e7ebe303
-        note:
+        issuedDate:
           type: string
-          description: Represents an invoice payment note.
-          example: This is a sample note for this invoice payment.
-    TimeRangeRequestDtoV1:
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        number:
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+        paid:
+          type: integer
+          description: Represents an invoice paid amount as long.
+          format: int64
+          example: 50
+        status:
+          type: string
+          description: Represents the status of an invoice.
+          example: PAID
+          enum:
+          - UNSENT
+          - SENT
+          - PAID
+          - PARTIALLY_PAID
+          - VOID
+          - OVERDUE
+      description: Represents a list of invoices.
+    UpdateInvoiceRequestV1:
+      required:
+      - currency
+      - discountPercent
+      - dueDate
+      - issuedDate
+      - number
+      - tax2Percent
+      - taxPercent
       type: object
       properties:
-        issue-date-end:
+        clientId:
           type: string
-          description: Represents a date in yyyy-MM-dd format. This is the lower bound of the time range.
-          example: '2020-01-01'
-        issue-date-start:
+          description: Represents client identifier across the system.
+          example: 98h687e29ae1f428e7ebe707
+        companyId:
           type: string
-          description: Represents a date in yyyy-MM-dd format. This is the lower bound of the time range.
-          example: '2020-01-01'
-      description: Represents a time range object. If provided, you'll get a filtered list of invoices that has issue date within the time range specified.
+          description: Represents company identifier across the system.
+          example: 04g687e29ae1f428e7ebe123
+        currency:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Represents the currency used by the invoice.
+          example: USD
+        discountPercent:
+          type: number
+          description: Represents an invoice discount percent as double.
+          format: double
+          example: 1.5
+        dueDate:
+          type: string
+          description: Represents an invoice due date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-06-01T08:00:00Z'
+        issuedDate:
+          type: string
+          description: Represents an invoice issued date in yyyy-MM-ddThh:mm:ssZ format.
+          format: date-time
+          example: '2020-01-01T08:00:00Z'
+        note:
+          type: string
+          description: Represents an invoice note.
+          example: This is a sample note for this invoice.
+        number:
+          minLength: 1
+          type: string
+          description: Represents an invoice number.
+          example: '202306121129'
+        subject:
+          type: string
+          description: Represents an invoice subject.
+          example: January salary
+        tax2Percent:
+          type: number
+          description: Represents an invoice tax 2 percent as double.
+          format: double
+          example: 0
+        taxPercent:
+          type: number
+          description: Represents an invoice tax percent as double.
+          format: double
+          example: 0.5
+        taxType:
+          $ref: '#/components/schemas/TaxType'
+        visibleZeroFields:
+          type: string
+          description: Represents a list of zero value invoice fields that will be visible.
+          example: '["TAX","TAX_2","DISCOUNT"]'
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+    VisibleZeroFieldsInvoice:
+      type: object
+      description: Represents a list of zero value invoice fields that will be visible.
+      example:
+      - TAX
+      - TAX_2
+      - DISCOUNT
+      oneOf:
+      - type: string
+        enum:
+        - TAX
+        - TAX_2
+        - DISCOUNT
+      properties:
+        DISCOUNT:
+          type: string
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+        TAX:
+          type: string
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+        TAX_2:
+          type: string
+          enum:
+          - TAX
+          - TAX_2
+          - DISCOUNT
+    CalculationType:
+      type: object
+      description: Represents an enum if tax is calculated as item based or invoice based.
+      example: INVOICE_BASED
+      oneOf:
+      - type: string
+        enum:
+        - INVOICE_BASED
+        - ITEM_BASED
+      properties:
+        INVOICE_BASED:
+          type: string
+          enum:
+          - INVOICE_BASED
+          - ITEM_BASED
+        ITEM_BASED:
+          type: string
+          enum:
+          - INVOICE_BASED
+          - ITEM_BASED
+        value:
+          type: string
+    InvoiceItemDto:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents item amount.
+          format: int64
+          example: 5000
+        applyTaxes:
+          $ref: '#/components/schemas/ApplyTaxes'
+        description:
+          type: string
+          description: Represents an invoice item description.
+          example: This is a description of an invoice item.
+        expenseIds:
+          type: array
+          description: Represents a list of imported expense ids.
+          example: []
+          items:
+            type: string
+            description: Represents a list of imported expense ids.
+            example: '[]'
+        importType:
+          type: string
+          description: Represents the invoice item import type.
+          example: NOT_IMPORTED
+          enum:
+          - NOT_IMPORTED
+          - TIME_ENTRY_IMPORT
+          - EXPENSE_IMPORT
+        itemType:
+          type: string
+          description: Represents item type.
+          example: Goods
+        order:
+          type: integer
+          description: Represents an integer.
+          format: int32
+          example: 100
+        quantity:
+          type: integer
+          description: Represents item quantity.
+          format: int64
+          example: 10
+        timeEntryIds:
+          type: array
+          description: Represents a list of imported time entry ids.
+          example: []
+          items:
+            type: string
+            description: Represents a list of imported time entry ids.
+            example: '[]'
+        unitPrice:
+          type: integer
+          description: Represents item unit price.
+          format: int64
+          example: 500
+      description: Represents a list of invoice item datatransfer objects.
     InvoiceOverviewDtoV1:
       type: object
       properties:
@@ -1524,538 +2012,37 @@ components:
           example: 12t687e29ae1f428e7ebe202
         visibleZeroFields:
           $ref: '#/components/schemas/VisibleZeroFieldsInvoice'
-    InvoiceExportFieldsRequest:
-      type: object
-      properties:
-        itemType:
-          type: boolean
-          description: Indicates whether to export item type.
-          default: false
-        quantity:
-          type: boolean
-          description: Indicates whether to export quantity.
-          default: false
-        rtl:
-          type: boolean
-          description: Indicates whether to export RTL.
-          default: false
-        tax:
-          type: boolean
-          description: Indicates whether to export tax.
-          default: false
-        tax2:
-          type: boolean
-          description: Indicates whether to export tax2.
-          default: false
-        unitPrice:
-          type: boolean
-          description: Indicates whether to export unit price.
-          default: false
-      description: Represents an invoice export fields object.
-    CalculationType:
-      type: object
-      description: Represents an enum if tax is calculated as item based or invoice based.
-      example: INVOICE_BASED
-      oneOf:
-      - type: string
-        enum:
-        - INVOICE_BASED
-        - ITEM_BASED
-      properties:
-        INVOICE_BASED:
-          type: string
-          enum:
-          - INVOICE_BASED
-          - ITEM_BASED
-        ITEM_BASED:
-          type: string
-          enum:
-          - INVOICE_BASED
-          - ITEM_BASED
-        value:
-          type: string
-    LabelsCustomization:
+    CreateInvoicePaymentRequest:
       type: object
       properties:
         amount:
-          type: string
-          description: Represents invoice amount.
-          example: '1000'
-        billFrom:
-          type: string
-          description: Represents a string an invoice is billed from.
-          example: Entity A
-        billTo:
-          type: string
-          description: Represents a string an invoice is billed to.
-          example: Entity B
-        description:
-          type: string
-          description: Represents a description of an invoice.
-          example: This is a sample description for this invoice.
-        discount:
-          type: string
-          description: Represents invoice discount amount.
-          example: '0'
-        dueDate:
-          type: string
-          description: Represents a due date in yyyy-MM-dd format.
-          example: '2020-01-01'
-        issueDate:
-          type: string
-          description: Represents an issue date in yyyy-MM-dd format.
-          example: '2020-01-01'
-        itemType:
-          type: string
-          description: Represents an item type.
-          example: Service
-        notes:
-          type: string
-          description: Represents notes for an invoice.
-          example: This is a sample note for this invoice.
-        paid:
-          type: string
-          description: Represents invoice paid amount.
-          example: '1000'
-        quantity:
-          type: string
-          description: Represents quantity.
-          example: '10'
-        subtotal:
-          type: string
-          description: Represents invoice subtotal.
-          example: '1000'
-        tax:
-          type: string
-          description: Represents invoice tax amount.
-          example: '10'
-        tax2:
-          type: string
-          description: Represents invoice tax amount.
-          example: '0'
-        total:
-          type: string
-          description: Represents invoice total amount.
-          example: '1010'
-        totalAmount:
-          type: string
-          description: Represents invoice total amount.
-          example: '1010'
-        unitPrice:
-          type: string
-          description: Represents unit price.
-          example: '100'
-      description: Represents a label customization object.
-    InvoiceDefaultSettingsDto:
-      type: object
-      properties:
-        companyId:
-          type: string
-          description: Represents company identifier across the system.
-          example: 34a687e29ae1f428e7ebe101
-        defaultImportExpenseItemTypeId:
-          type: string
-          description: Represents item type identifier across the system.
-          example: 88a687e29ae1f428e7ebe303
-        defaultImportTimeItemTypeId:
-          type: string
-          description: Represents item type identifier across the system.
-          example: 18a687e29ae1f428e7ebe303
-        dueDays:
+          minimum: 1
           type: integer
-          description: Represents an invoice number of due days.
-          format: int32
-          example: 2
-        itemType:
-          type: string
-          writeOnly: true
-        itemTypeId:
-          type: string
-          description: Represents item type identifier across the system.
-          example: 78a687e29ae1f428e7ebe303
-        notes:
-          type: string
-          description: Represents an invoice note.
-          example: This is a sample note for this invoice.
-        subject:
-          type: string
-          description: Represents an invoice subject.
-          example: January salary
-        tax:
-          type: integer
-          format: int64
-          deprecated: true
-        tax2:
-          type: integer
-          format: int64
-          deprecated: true
-        tax2Percent:
-          type: number
-          description: Represents a tax amount in percentage.
-          format: double
-          example: 1
-        taxPercent:
-          type: number
-          description: Represents a tax amount in percentage.
-          format: double
-          example: 5
-        taxType:
-          type: string
-          description: Represents a tax type.
-          example: COMPOUND
-          enum:
-          - COMPOUND
-          - SIMPLE
-          - NONE
-      description: Represents an invoice default settings object.
-    ImportTimeEntriesAndExpensesRequestV1:
-      required:
-      - from
-      - importExpenses
-      - projectFilter
-      - timeEntryGroupType
-      - to
-      type: object
-      properties:
-        expenseFieldsForDetailedGroup:
-          uniqueItems: true
-          type: array
-          description: Represents a set of expense fields to include when using the DETAILED expense grouping type.
-          example:
-          - NOTE
-          items:
-            type: string
-            description: Represents a set of expense fields to include when using the DETAILED expense grouping type.
-            example: '["NOTE"]'
-            enum:
-            - PROJECT
-            - TASK
-            - CATEGORY
-            - NOTE
-            - DATE
-            - USER
-            default: NOTE
-          default: NOTE
-        expensesGroupBy:
-          type: string
-          description: Represents a group field when using the GROUPED expense group type.
-          example: CATEGORY
-          enum:
-          - CATEGORY
-          - PROJECT
-          - USER
-          default: PROJECT
-        expensesGroupType:
-          type: string
-          description: Represents an expense group type.
-          enum:
-          - GROUPED
-          - DETAILED
-          default: DETAILED
-        from:
-          type: string
-          description: Represents date and time in the yyyy-MM-ddThh:mm:ssZ format.
-          example: '2025-06-01T00:00:00Z'
-        importExpenses:
-          type: boolean
-          description: Indicates if billable expenses should be imported alongside time entries.
-          default: false
-        projectFilter:
-          $ref: '#/components/schemas/ContainsArchivedFilterRequest'
-        roundTimeEntryDuration:
-          type: boolean
-          description: Indicates if imported time entry durations should be rounded to the nearest 15 minute interval.
-          default: false
-        timeEntryFieldsForDetailedGroup:
-          uniqueItems: true
-          type: array
-          description: Represents a set of time entry fields to include when using DETAILED time entry grouping type.
-          example:
-          - PROJECT
-          - DESCRIPTION
-          items:
-            type: string
-            description: Represents a set of time entry fields to include when using DETAILED time entry grouping type.
-            example: '["PROJECT","DESCRIPTION"]'
-            enum:
-            - PROJECT
-            - TASK
-            - TAGS
-            - DESCRIPTION
-            - DATE
-            - USER
-        timeEntryGroupType:
-          type: string
-          description: Represents a time entry group type.
-          example: GROUPED
-          enum:
-          - SINGLE_ITEM
-          - GROUPED
-          - DETAILED
-        timeEntryPrimaryGroupBy:
-          type: string
-          description: Represents a primary group field when using the GROUPED time entry grouping type.
-          example: PROJECT
-          enum:
-          - USER
-          - PROJECT
-          - DATE
-        timeEntrySecondaryGroupBy:
-          type: string
-          description: Represents a secondary group field when using the GROUPED time entry grouping type. Should not have the same grouping type as the primary group field.
-          example: TASK
-          enum:
-          - PROJECT
-          - USER
-          - TASK
-          - DATE
-          - DESCRIPTION
-          - NONE
-        to:
-          type: string
-          description: Represents date and time in the yyyy-MM-ddThh:mm:ssZ format.
-          example: '2025-06-07T00:00:00Z'
-    UpdateInvoiceSettingsRequestV1:
-      required:
-      - labels
-      type: object
-      properties:
-        defaults:
-          $ref: '#/components/schemas/InvoiceDefaultSettingsRequestV1'
-        exportFields:
-          $ref: '#/components/schemas/InvoiceExportFieldsRequest'
-        labels:
-          $ref: '#/components/schemas/LabelsCustomizationRequest'
-    InvoiceSettingsDtoV1:
-      type: object
-      properties:
-        defaults:
-          $ref: '#/components/schemas/InvoiceDefaultSettingsDto'
-        exportFields:
-          $ref: '#/components/schemas/InvoiceExportFields'
-        labels:
-          $ref: '#/components/schemas/LabelsCustomization'
-    InvoiceFilterRequestV1:
-      type: object
-      properties:
-        clients:
-          $ref: '#/components/schemas/ContainsArchivedFilterRequest'
-        companies:
-          $ref: '#/components/schemas/BaseFilterRequest'
-        exactAmount:
-          type: integer
-          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has the equal amount as specified.
-          format: int64
-          example: 1000
-        exactBalance:
-          type: integer
-          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has the equal balance as specified.
-          format: int64
-          example: 1000
-        greaterThanAmount:
-          type: integer
-          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has amount greater than specified.
-          format: int64
-          example: 500
-        greaterThanBalance:
-          type: integer
-          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has balance greater than specified.
-          format: int64
-          example: 500
-        invoiceNumber:
-          type: string
-          description: If provided, you'll get a filtered list of invoices that contain the provided string in their invoice number.
-          example: Invoice-01
-        issueDate:
-          $ref: '#/components/schemas/TimeRangeRequestDtoV1'
-        lessThanAmount:
-          type: integer
-          description: Represents an invoice amount. If provided, you'll get a filtered list of invoices that has amount less than specified.
-          format: int64
-          example: 500
-        lessThanBalance:
-          type: integer
-          description: Represents an invoice balance. If provided, you'll get a filtered list of invoices that has balance less than specified.
-          format: int64
-          example: 500
-        page:
-          type: integer
-          description: Page number.
-          format: int32
-          default: 1
-        pageSize:
-          type: integer
-          description: Page size.
-          format: int32
-          default: 50
-        sortColumn:
-          type: string
-          description: Represents the column name to be used as sorting criteria.
-          example: ID
-          enum:
-          - ID
-          - CLIENT
-          - DUE_ON
-          - ISSUE_DATE
-          - AMOUNT
-          - BALANCE
-        sortOrder:
-          type: string
-          description: Represents the sorting order.
-          example: ASCENDING
-          enum:
-          - ASCENDING
-          - DESCENDING
-        statuses:
-          type: array
-          description: Represents a list of invoice statuses. If provided, you'll get a filtered list of invoices that matches any of the invoice status provided.
-          example:
-          - SENT
-          - PAID
-          - PARTIALLY_PAID
-          items:
-            type: string
-            description: Represents a list of invoice statuses. If provided, you'll get a filtered list of invoices that matches any of the invoice status provided.
-            example: '["SENT","PAID","PARTIALLY_PAID"]'
-            enum:
-            - UNSENT
-            - SENT
-            - PAID
-            - PARTIALLY_PAID
-            - VOID
-            - OVERDUE
-        strictSearch:
-          type: boolean
-          description: Flag to toggle on/off strict search mode. When set to true, search by invoice number only will return invoices whose number exactly matches the string value given for the 'invoiceNumber' parameter. When set to false, results will also include invoices whose number contain the string value, but could be longer than the string value itself. For example, if there is an invoice with the number '123456', and the search value is '123', setting strict-name-search to true will not return that invoice in the results, whereas setting it to false will.
-          default: false
-    BaseFilterRequest:
-      type: object
-      properties:
-        contains:
-          type: string
-          description: Filter type.
-          example: CONTAINS
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-        ids:
-          uniqueItems: true
-          type: array
-          description: Represents a list of filter identifiers.
-          example:
-          - 5a0ab5acb07987125438b60f
-          - 64c777ddd3fcab07cfbb210c
-          items:
-            type: string
-            description: Represents a list of filter identifiers.
-            example: '["5a0ab5acb07987125438b60f","64c777ddd3fcab07cfbb210c"]'
-      description: Represents a company filter object. If provided, you'll get a filtered list of invoices that matches the specified company filter.
-    InvoiceInfoResponseDtoV1:
-      type: object
-      properties:
-        invoices:
-          type: array
-          description: Represents a list of invoice info.
-          items:
-            $ref: '#/components/schemas/InvoiceInfoV1'
-        total:
-          type: integer
-          description: Represents the total invoice count.
+          description: Represents an invoice payment amount as long.
           format: int64
           example: 100
-    ApplyTaxes:
-      type: object
-      description: Represents item applyTaxes type.
-      example: TAX1TAX2
-      oneOf:
-      - type: string
-        enum:
-        - TAX1
-        - TAX2
-        - TAX1TAX2
-        - NONE
-      properties:
-        NONE:
+        note:
+          maxLength: 1000
+          minLength: 0
           type: string
-          enum:
-          - TAX1
-          - TAX2
-          - TAX1TAX2
-          - NONE
-        TAX1:
+          description: Represents an invoice payment note.
+          example: This is a sample note for this invoice payment.
+        paymentDate:
           type: string
-          enum:
-          - TAX1
-          - TAX2
-          - TAX1TAX2
-          - NONE
-        TAX1TAX2:
-          type: string
-          enum:
-          - TAX1
-          - TAX2
-          - TAX1TAX2
-          - NONE
-        TAX2:
-          type: string
-          enum:
-          - TAX1
-          - TAX2
-          - TAX1TAX2
-          - NONE
-        value:
-          type: string
-    TaxType:
-      type: object
-      description: Represents an invoice taxation type.
-      example: SIMPLE
-      oneOf:
-      - type: string
-        enum:
-        - COMPOUND
-        - SIMPLE
-        - NONE
-      properties:
-        COMPOUND:
-          type: string
-          enum:
-          - COMPOUND
-          - SIMPLE
-          - NONE
-        NONE:
-          type: string
-          enum:
-          - COMPOUND
-          - SIMPLE
-          - NONE
-        SIMPLE:
-          type: string
-          enum:
-          - COMPOUND
-          - SIMPLE
-          - NONE
-        value:
-          type: string
-    InvoiceExportFields:
+          description: Represents an invoice payment date in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2021-01-01T12:00:00Z'
+    TimeRangeRequestDtoV1:
       type: object
       properties:
-        RTL:
-          type: boolean
-          writeOnly: true
-        itemType:
-          type: boolean
-        quantity:
-          type: boolean
-        rtl:
-          type: boolean
-        tax:
-          type: boolean
-        tax2:
-          type: boolean
-        unitPrice:
-          type: boolean
-      description: Represents an invoice export fields object.
+        issue-date-end:
+          type: string
+          description: Represents a date in yyyy-MM-dd format. This is the lower bound of the time range.
+          example: '2020-01-01'
+        issue-date-start:
+          type: string
+          description: Represents a date in yyyy-MM-dd format. This is the lower bound of the time range.
+          example: '2020-01-01'
+      description: Represents a time range object. If provided, you'll get a filtered list of invoices that has issue date within the time range specified.
     CreateInvoiceRequest:
       required:
       - clientId
@@ -2095,6 +2082,19 @@ components:
           enum:
           - TIME_SENSITIVE_VIEW
           - AGGREGATED_TIME_VIEW
+    InvoicesListDtoV1:
+      type: object
+      properties:
+        invoices:
+          type: array
+          description: Represents a list of invoices.
+          items:
+            $ref: '#/components/schemas/InvoiceDtoV1'
+        total:
+          type: integer
+          description: Represents the total invoice count.
+          format: int64
+          example: 100
   securitySchemes:
     AddonKeyAuth:
       in: header

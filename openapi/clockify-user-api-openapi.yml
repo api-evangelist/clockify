@@ -553,102 +553,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    SummaryReportSettingsDtoV1:
-      required:
-      - group
-      - subgroup
-      type: object
-      properties:
-        group:
-          minLength: 1
-          type: string
-          example: PROJECT
-        subgroup:
-          minLength: 1
-          type: string
-          example: CLIENT
-      description: Represents a summary report settings object.
-    HourlyRateDtoV1:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents an hourly rate object.
-    CustomFieldType:
-      type: object
-      description: Represents custom field type.
-      example: TXT
-      oneOf:
-      - type: string
-        enum:
-        - TXT
-        - NUMBER
-        - DROPDOWN_SINGLE
-        - DROPDOWN_MULTIPLE
-        - CHECKBOX
-        - LINK
-      properties:
-        CHECKBOX:
-          type: string
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        DROPDOWN_MULTIPLE:
-          type: string
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        DROPDOWN_SINGLE:
-          type: string
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        LINK:
-          type: string
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        NUMBER:
-          type: string
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        TXT:
-          type: string
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
     AuthorizationSourceDtoV1:
       type: object
       properties:
@@ -663,6 +567,97 @@ components:
           enum:
           - USER_GROUP
       description: Represents an authorization data transfer object.
+    RateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
+    HourlyRateDtoV1:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents an hourly rate object.
+    RoleDtoV1:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Represents role identifier across the system.
+          example: 60f91b3ffdaf031696ec61a8
+        name:
+          type: string
+          description: Represents a role name.
+          example: Administrator
+        source:
+          $ref: '#/components/schemas/AuthorizationSourceDtoV1'
+      description: Represents a role data transfer object.
+    MemberProfileFullRequestV1:
+      type: object
+      properties:
+        imageUrl:
+          type: string
+          description: Represents an image url. A field that can only be updated for limited users.
+          example: https://www.url.com/imageurl-1234567890.jpg
+        name:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: This body field is deprecated and can only be updated for limited users. Represents name of the user and can be changed on the CAKE.com Account profile page.
+          example: John Doe
+          deprecated: true
+        removeProfileImage:
+          type: boolean
+          description: Indicates whether to remove profile image or not. A field that can only be updated for limited users.
+          default: false
+        userCustomFields:
+          type: array
+          description: Represents a list of upsert user custom field objects.
+          items:
+            $ref: '#/components/schemas/UpsertUserCustomFieldRequest'
+        weekStart:
+          type: string
+          description: Represents a day of the week.
+          example: MONDAY
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        workCapacity:
+          type: string
+          description: Represents work capacity as a time duration in the ISO-8601 format. For example, for a 7hr work day, input should be PT7H.
+          example: PT7H
+        workingDays:
+          type: string
+          description: Represents a list of days of the week.
+          example: '["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY"]'
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
     UpsertUserCustomFieldRequestV1:
       type: object
       properties:
@@ -670,91 +665,167 @@ components:
           type: object
           description: Represents custom field value.
           example: 20231211-12345
-    AccountStatus:
-      type: object
-      description: Represents account status enum.
-      example: ACTIVE
-      oneOf:
-      - type: string
-        enum:
-        - ACTIVE
-        - PENDING_EMAIL_VERIFICATION
-        - DELETED
-        - NOT_REGISTERED
-        - LIMITED
-        - LIMITED_DELETED
-      properties:
-        ACTIVE:
-          type: string
-          enum:
-          - ACTIVE
-          - PENDING_EMAIL_VERIFICATION
-          - DELETED
-          - NOT_REGISTERED
-          - LIMITED
-          - LIMITED_DELETED
-        DELETED:
-          type: string
-          enum:
-          - ACTIVE
-          - PENDING_EMAIL_VERIFICATION
-          - DELETED
-          - NOT_REGISTERED
-          - LIMITED
-          - LIMITED_DELETED
-        LIMITED:
-          type: string
-          enum:
-          - ACTIVE
-          - PENDING_EMAIL_VERIFICATION
-          - DELETED
-          - NOT_REGISTERED
-          - LIMITED
-          - LIMITED_DELETED
-        LIMITED_DELETED:
-          type: string
-          enum:
-          - ACTIVE
-          - PENDING_EMAIL_VERIFICATION
-          - DELETED
-          - NOT_REGISTERED
-          - LIMITED
-          - LIMITED_DELETED
-        NOT_REGISTERED:
-          type: string
-          enum:
-          - ACTIVE
-          - PENDING_EMAIL_VERIFICATION
-          - DELETED
-          - NOT_REGISTERED
-          - LIMITED
-          - LIMITED_DELETED
-        PENDING_EMAIL_VERIFICATION:
-          type: string
-          enum:
-          - ACTIVE
-          - PENDING_EMAIL_VERIFICATION
-          - DELETED
-          - NOT_REGISTERED
-          - LIMITED
-          - LIMITED_DELETED
-        active:
-          type: boolean
-        limitedAccount:
-          type: boolean
-        notRegistered:
-          type: boolean
-    UploadFileResponseV1:
+    MembershipDtoV1:
       type: object
       properties:
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateDtoV1'
+        membershipStatus:
+          type: string
+          description: Represents a membership status enum.
+          example: PENDING
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
+          type: string
+          description: Represents membership type enum.
+          example: PROJECT
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        targetId:
+          type: string
+          description: Represents target identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+      description: Represents a list of membership objects.
+    CustomFieldDtoV1:
+      type: object
+      properties:
+        allowedValues:
+          type: array
+          description: Represents a list of custom field's allowed values.
+          example:
+          - New York
+          - London
+          - Manila
+          - Sydney
+          - Belgrade
+          items:
+            type: string
+            description: Represents a list of custom field's allowed values.
+            example: '["New York","London","Manila","Sydney","Belgrade"]'
+        description:
+          type: string
+          description: Represents custom field description.
+          example: This field contains a location.
+        entityType:
+          type: string
+          description: Represents custom field entity type
+          example: USER
+        id:
+          type: string
+          description: Represents custom field identifier across the system.
+          example: 44a687e29ae1f428e7ebe305
         name:
           type: string
-          description: File name of the uploaded image
-          example: image-01234567.jpg
-        url:
+          description: Represents custom field name.
+          example: location
+        onlyAdminCanEdit:
+          type: boolean
+          description: Flag to set whether custom field is modifiable only by admin users.
+          default: false
+        placeholder:
           type: string
-          description: The URL of the uploaded image in the server
-          example: https://clockify.com/image-01234567.jpg
+          description: Represents custom field placeholder value.
+          example: Location
+        projectDefaultValues:
+          type: array
+          description: Represents a list of custom field default values data transfer objects.
+          items:
+            $ref: '#/components/schemas/CustomFieldDefaultValuesDtoV1'
+        required:
+          type: boolean
+          description: Flag to set whether custom field is mandatory or not.
+          default: false
+        status:
+          type: string
+          description: Represents custom field status
+          example: VISIBLE
+        type:
+          type: string
+          description: Represents custom field type.
+          example: DROPDOWN_MULTIPLE
+        workspaceDefaultValue:
+          type: object
+          description: Represents a custom field's default value in the workspace.
+          example: Manila
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    UserCustomFieldValueFullDtoV1:
+      type: object
+      properties:
+        customField:
+          $ref: '#/components/schemas/CustomFieldDtoV1'
+        customFieldId:
+          type: string
+          description: Represents custom field identifier across the system.
+          example: 5e4117fe8c625f38930d57b7
+        name:
+          type: string
+          description: Represents user custom field name.
+          example: race
+        sourceType:
+          type: string
+          description: Represents user custom field source type.
+          example: WORKSPACE
+          enum:
+          - WORKSPACE
+          - USER
+        type:
+          type: string
+          description: Represents custom field type.
+          example: DROPDOWN_MULTIPLE
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        value:
+          type: object
+          description: Represents user custom field value.
+          example: Asian
+      description: Represents a list of value objects for user’s custom fields.
+    UserCustomFieldValueDtoV1:
+      type: object
+      properties:
+        customFieldId:
+          type: string
+          description: Represents custom field identifier across the system.
+          example: 5e4117fe8c625f38930d57b7
+        customFieldName:
+          type: string
+          description: Represents custom field name.
+          example: TIN
+        customFieldType:
+          $ref: '#/components/schemas/CustomFieldType'
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        value:
+          type: object
+          description: Represents custom field value.
+          example: 20231211-12345
+      description: Represents a list of value objects for user’s custom fields.
     GetUsersRequestV1:
       type: object
       properties:
@@ -865,22 +936,61 @@ components:
             type: string
             description: If provided, you'll get a list of users that belong to the specified user group IDs.
             example: '["5a0ab5acb07987125438b60f","72wab5acb07987125438b564"]'
-    CustomFieldDefaultValuesDtoV1:
+    RoleDetailsDtoV1:
       type: object
       properties:
-        projectId:
+        role:
+          $ref: '#/components/schemas/RoleDtoV1'
+        userId:
           type: string
-          description: Represents project identifier across the system.
-          example: 5b641568b07987035750505e
-        status:
+          description: Represents workspace identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        workspaceId:
           type: string
-          description: Represents custom field status
-          example: VISIBLE
-        value:
-          type: object
-          description: Represents a custom field's default value
-          example: Manila
-      description: Represents a list of custom field default values data transfer objects.
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    UploadFileResponseV1:
+      type: object
+      properties:
+        name:
+          type: string
+          description: File name of the uploaded image
+          example: image-01234567.jpg
+        url:
+          type: string
+          description: The URL of the uploaded image in the server
+          example: https://clockify.com/image-01234567.jpg
+    RoleRequestV1:
+      required:
+      - entityId
+      - role
+      type: object
+      properties:
+        entityId:
+          minLength: 1
+          type: string
+          description: Represents an entity identifier across the system.
+          example: 60f924bafdaf031696ec6218
+        role:
+          type: string
+          description: Represents a valid role.
+          example: TEAM_MANAGER
+          enum:
+          - WORKSPACE_ADMIN
+          - TEAM_MANAGER
+          - PROJECT_MANAGER
+        sourceType:
+          type: string
+          description: 'Optional field used to indicate that the target of the operation is a
+
+            user group, in which case the value USER_GROUP should be used, alongside a valid user group
+
+            ID for the entityId field. If omitted, a user ID should be used for the entityId field.
+
+            '
+          example: USER_GROUP
+          enum:
+          - USER_GROUP
     UserDtoV1:
       type: object
       properties:
@@ -922,56 +1032,96 @@ components:
           $ref: '#/components/schemas/UserSettingsDtoV1'
         status:
           $ref: '#/components/schemas/AccountStatus'
-    UpsertUserCustomFieldRequest:
-      required:
-      - customFieldId
+    CustomFieldDefaultValuesDtoV1:
       type: object
       properties:
-        customFieldId:
+        projectId:
           type: string
-          description: Represents custom field identifier across the system.
-          example: 5e4117fe8c625f38930d57b7
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        status:
+          type: string
+          description: Represents custom field status
+          example: VISIBLE
         value:
           type: object
-          description: Represents custom field value.
-          example: 20231211-12345
-      description: Represents a list of upsert user custom field objects.
-    UserCustomFieldValueDtoV1:
+          description: Represents a custom field's default value
+          example: Manila
+      description: Represents a list of custom field default values data transfer objects.
+    AccountStatus:
       type: object
+      description: Represents account status enum.
+      example: ACTIVE
+      oneOf:
+      - type: string
+        enum:
+        - ACTIVE
+        - PENDING_EMAIL_VERIFICATION
+        - DELETED
+        - NOT_REGISTERED
+        - LIMITED
+        - LIMITED_DELETED
       properties:
-        customFieldId:
+        ACTIVE:
           type: string
-          description: Represents custom field identifier across the system.
-          example: 5e4117fe8c625f38930d57b7
-        customFieldName:
+          enum:
+          - ACTIVE
+          - PENDING_EMAIL_VERIFICATION
+          - DELETED
+          - NOT_REGISTERED
+          - LIMITED
+          - LIMITED_DELETED
+        DELETED:
           type: string
-          description: Represents custom field name.
-          example: TIN
-        customFieldType:
-          $ref: '#/components/schemas/CustomFieldType'
-        userId:
+          enum:
+          - ACTIVE
+          - PENDING_EMAIL_VERIFICATION
+          - DELETED
+          - NOT_REGISTERED
+          - LIMITED
+          - LIMITED_DELETED
+        LIMITED:
           type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        value:
-          type: object
-          description: Represents custom field value.
-          example: 20231211-12345
-      description: Represents a list of value objects for user’s custom fields.
-    RoleDtoV1:
-      type: object
-      properties:
-        id:
+          enum:
+          - ACTIVE
+          - PENDING_EMAIL_VERIFICATION
+          - DELETED
+          - NOT_REGISTERED
+          - LIMITED
+          - LIMITED_DELETED
+        LIMITED_DELETED:
           type: string
-          description: Represents role identifier across the system.
-          example: 60f91b3ffdaf031696ec61a8
-        name:
+          enum:
+          - ACTIVE
+          - PENDING_EMAIL_VERIFICATION
+          - DELETED
+          - NOT_REGISTERED
+          - LIMITED
+          - LIMITED_DELETED
+        NOT_REGISTERED:
           type: string
-          description: Represents a role name.
-          example: Administrator
-        source:
-          $ref: '#/components/schemas/AuthorizationSourceDtoV1'
-      description: Represents a role data transfer object.
+          enum:
+          - ACTIVE
+          - PENDING_EMAIL_VERIFICATION
+          - DELETED
+          - NOT_REGISTERED
+          - LIMITED
+          - LIMITED_DELETED
+        PENDING_EMAIL_VERIFICATION:
+          type: string
+          enum:
+          - ACTIVE
+          - PENDING_EMAIL_VERIFICATION
+          - DELETED
+          - NOT_REGISTERED
+          - LIMITED
+          - LIMITED_DELETED
+        active:
+          type: boolean
+        limitedAccount:
+          type: boolean
+        notRegistered:
+          type: boolean
     MemberProfileDtoV1:
       type: object
       properties:
@@ -1033,80 +1183,21 @@ components:
           description: Represents the number of workspace(s) the user is associated to.
           format: int32
           example: 3
-    MembershipDtoV1:
+    SummaryReportSettingsDtoV1:
+      required:
+      - group
+      - subgroup
       type: object
       properties:
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateDtoV1'
-        membershipStatus:
+        group:
+          minLength: 1
           type: string
-          description: Represents a membership status enum.
-          example: PENDING
-          enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-        membershipType:
-          type: string
-          description: Represents membership type enum.
           example: PROJECT
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - USERGROUP
-        targetId:
+        subgroup:
+          minLength: 1
           type: string
-          description: Represents target identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-      description: Represents a list of membership objects.
-    UserCustomFieldValueFullDtoV1:
-      type: object
-      properties:
-        customField:
-          $ref: '#/components/schemas/CustomFieldDtoV1'
-        customFieldId:
-          type: string
-          description: Represents custom field identifier across the system.
-          example: 5e4117fe8c625f38930d57b7
-        name:
-          type: string
-          description: Represents user custom field name.
-          example: race
-        sourceType:
-          type: string
-          description: Represents user custom field source type.
-          example: WORKSPACE
-          enum:
-          - WORKSPACE
-          - USER
-        type:
-          type: string
-          description: Represents custom field type.
-          example: DROPDOWN_MULTIPLE
-          enum:
-          - TXT
-          - NUMBER
-          - DROPDOWN_SINGLE
-          - DROPDOWN_MULTIPLE
-          - CHECKBOX
-          - LINK
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        value:
-          type: object
-          description: Represents user custom field value.
-          example: Asian
-      description: Represents a list of value objects for user’s custom fields.
+          example: CLIENT
+      description: Represents a summary report settings object.
     UserSettingsDtoV1:
       required:
       - dateFormat
@@ -1251,179 +1342,88 @@ components:
           example: false
           default: false
       description: Represents user settings object.
-    MemberProfileFullRequestV1:
-      type: object
-      properties:
-        imageUrl:
-          type: string
-          description: Represents an image url. A field that can only be updated for limited users.
-          example: https://www.url.com/imageurl-1234567890.jpg
-        name:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: This body field is deprecated and can only be updated for limited users. Represents name of the user and can be changed on the CAKE.com Account profile page.
-          example: John Doe
-          deprecated: true
-        removeProfileImage:
-          type: boolean
-          description: Indicates whether to remove profile image or not. A field that can only be updated for limited users.
-          default: false
-        userCustomFields:
-          type: array
-          description: Represents a list of upsert user custom field objects.
-          items:
-            $ref: '#/components/schemas/UpsertUserCustomFieldRequest'
-        weekStart:
-          type: string
-          description: Represents a day of the week.
-          example: MONDAY
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-        workCapacity:
-          type: string
-          description: Represents work capacity as a time duration in the ISO-8601 format. For example, for a 7hr work day, input should be PT7H.
-          example: PT7H
-        workingDays:
-          type: string
-          description: Represents a list of days of the week.
-          example: '["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY"]'
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-    RoleRequestV1:
+    UpsertUserCustomFieldRequest:
       required:
-      - entityId
-      - role
+      - customFieldId
       type: object
       properties:
-        entityId:
-          minLength: 1
-          type: string
-          description: Represents an entity identifier across the system.
-          example: 60f924bafdaf031696ec6218
-        role:
-          type: string
-          description: Represents a valid role.
-          example: TEAM_MANAGER
-          enum:
-          - WORKSPACE_ADMIN
-          - TEAM_MANAGER
-          - PROJECT_MANAGER
-        sourceType:
-          type: string
-          description: 'Optional field used to indicate that the target of the operation is a
-
-            user group, in which case the value USER_GROUP should be used, alongside a valid user group
-
-            ID for the entityId field. If omitted, a user ID should be used for the entityId field.
-
-            '
-          example: USER_GROUP
-          enum:
-          - USER_GROUP
-    RateDtoV1:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
-    RoleDetailsDtoV1:
-      type: object
-      properties:
-        role:
-          $ref: '#/components/schemas/RoleDtoV1'
-        userId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-    CustomFieldDtoV1:
-      type: object
-      properties:
-        allowedValues:
-          type: array
-          description: Represents a list of custom field's allowed values.
-          example:
-          - New York
-          - London
-          - Manila
-          - Sydney
-          - Belgrade
-          items:
-            type: string
-            description: Represents a list of custom field's allowed values.
-            example: '["New York","London","Manila","Sydney","Belgrade"]'
-        description:
-          type: string
-          description: Represents custom field description.
-          example: This field contains a location.
-        entityType:
-          type: string
-          description: Represents custom field entity type
-          example: USER
-        id:
+        customFieldId:
           type: string
           description: Represents custom field identifier across the system.
-          example: 44a687e29ae1f428e7ebe305
-        name:
-          type: string
-          description: Represents custom field name.
-          example: location
-        onlyAdminCanEdit:
-          type: boolean
-          description: Flag to set whether custom field is modifiable only by admin users.
-          default: false
-        placeholder:
-          type: string
-          description: Represents custom field placeholder value.
-          example: Location
-        projectDefaultValues:
-          type: array
-          description: Represents a list of custom field default values data transfer objects.
-          items:
-            $ref: '#/components/schemas/CustomFieldDefaultValuesDtoV1'
-        required:
-          type: boolean
-          description: Flag to set whether custom field is mandatory or not.
-          default: false
-        status:
-          type: string
-          description: Represents custom field status
-          example: VISIBLE
-        type:
-          type: string
-          description: Represents custom field type.
-          example: DROPDOWN_MULTIPLE
-        workspaceDefaultValue:
+          example: 5e4117fe8c625f38930d57b7
+        value:
           type: object
-          description: Represents a custom field's default value in the workspace.
-          example: Manila
-        workspaceId:
+          description: Represents custom field value.
+          example: 20231211-12345
+      description: Represents a list of upsert user custom field objects.
+    CustomFieldType:
+      type: object
+      description: Represents custom field type.
+      example: TXT
+      oneOf:
+      - type: string
+        enum:
+        - TXT
+        - NUMBER
+        - DROPDOWN_SINGLE
+        - DROPDOWN_MULTIPLE
+        - CHECKBOX
+        - LINK
+      properties:
+        CHECKBOX:
           type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        DROPDOWN_MULTIPLE:
+          type: string
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        DROPDOWN_SINGLE:
+          type: string
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        LINK:
+          type: string
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        NUMBER:
+          type: string
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
+        TXT:
+          type: string
+          enum:
+          - TXT
+          - NUMBER
+          - DROPDOWN_SINGLE
+          - DROPDOWN_MULTIPLE
+          - CHECKBOX
+          - LINK
   securitySchemes:
     AddonKeyAuth:
       in: header
