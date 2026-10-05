@@ -1,0 +1,76 @@
+slug: clockify
+provider: Clockify
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Invoice
+  spec_file: clockify-invoice-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.8
+  evidence: POST /v1/workspaces/{workspaceId}/invoices  createInvoice  Add an invoice; CreateInvoicePaymentRequest
+  reason: Customer invoice creation, items, export and payment capture is accounts receivable / customer
+    invoicing.
+- tag: Webhooks
+  spec_file: clockify-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: POST /v1/workspaces/{workspaceId}/webhooks  createWebhook  Create a webhook; POST .../webhooks/{webhookId}/logs  getLogsForWebhook;
+    schemas WebhookEventType, WebhookLogDtoV1
+  reason: Operations manage the lifecycle of outbound webhook subscriptions (create/update/delete, event
+    types, delivery logs, token rotation) exposed to integrators of this SaaS platform — the surface described
+    by Webhook & Event Subscription Management. Mapped as platform/ecosystem plumbing rather than any
+    time-tracking business function.
+- tag: Time Off
+  spec_file: clockify-time-off-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.78
+  evidence: POST .../time-off/policies/{policyId}/requests  createTimeOffRequest  Create a time off request;
+    changeTimeOffRequestStatus
+  reason: Leave request submission and approval workflow is HR operations / absence administration within
+    Human Capital Management.
+- tag: Policy
+  spec_file: clockify-policy-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.72
+  evidence: POST /v1/workspaces/{workspaceId}/time-off/policies  createPolicy  Create a time off policy;
+    AutomaticAccrualRequest
+  reason: 'Not corporate policy management: these are leave/time-off policies with accrual rules, an HR
+    leave administration capability.'
+- tag: Balance
+  spec_file: clockify-balance-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.7
+  evidence: GET /v1/workspaces/{workspaceId}/time-off/balance/user/{userId}  getBalancesForUser  Get balance
+    for a user
+  reason: '''Balance'' here is a time-off/leave entitlement balance per user, an HR administration function,
+    not a financial account balance.'
+- tag: Project
+  spec_file: clockify-project-api-openapi.yml
+  capability_id: BC-900.30
+  capability_id_l1: BC-900
+  capability_name: Project Management
+  confidence: 0.7
+  evidence: POST /v1/workspaces/{workspaceId}/projects  createNewProject; PATCH .../projects/{projectId}/estimate  updateEstimate  Update
+    project estimate
+  reason: Project records with memberships, estimates and rates used for time tracking support project
+    execution and tracking; sub-capability choice carries some ambiguity.
