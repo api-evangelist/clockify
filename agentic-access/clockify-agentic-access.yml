@@ -1,93 +1,31 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/clockify-openapi.json
+source: openapi/clockify-approval-api-openapi.yml, openapi/clockify-audit-log-report-api-openapi.yml,
+  openapi/clockify-balance-api-openapi.yml, openapi/clockify-client-api-openapi.yml, openapi/clockify-custom-fields-api-openapi.yml,
+  openapi/clockify-entity-changes-experimental-api-openapi.yml, openapi/clockify-expense-api-openapi.yml,
+  openapi/clockify-expense-report-api-openapi.yml, openapi/clockify-group-api-openapi.yml, openapi/clockify-holiday-api-openapi.yml,
+  openapi/clockify-invoice-api-openapi.yml, openapi/clockify-policy-api-openapi.yml, openapi/clockify-project-api-openapi.yml,
+  openapi/clockify-scheduling-api-openapi.yml, openapi/clockify-scheduling-deprecated-api-openapi.yml,
+  openapi/clockify-shared-report-api-openapi.yml, openapi/clockify-tag-api-openapi.yml, openapi/clockify-task-api-openapi.yml,
+  openapi/clockify-team-report-api-openapi.yml, openapi/clockify-template-deprecated-api-openapi.yml,
+  openapi/clockify-time-entry-api-openapi.yml, openapi/clockify-time-entry-report-api-openapi.yml,
+  openapi/clockify-time-off-api-openapi.yml, openapi/clockify-user-api-openapi.yml, openapi/clockify-webhooks-api-openapi.yml,
+  openapi/clockify-workspace-api-openapi.yml, openapi/clockify-workspace-deprecated-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 166
   by_action_class:
-    acting: 116
-    connected: 50
+    connected: 56
+    acting: 110
   by_consequence:
-    write: 99
-    read: 50
-    physical: 15
+    read: 56
+    write: 94
+    physical: 14
     safety-critical: 2
   human_in_the_loop_required: 2
 operations:
-- path: /v1/file/image
-  method: post
-  operationId: uploadImage
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/user
-  method: get
-  operationId: getLoggedUser
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces
-  method: get
-  operationId: getWorkspacesOfUser
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces
-  method: post
-  operationId: createWorkspace
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}
-  method: get
-  operationId: getWorkspaceOfUser
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/addons/{addonId}/webhooks
-  method: get
-  operationId: getAddonWebhooks
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /v1/workspaces/{workspaceId}/approval-requests
   method: get
   operationId: getApprovalRequests
@@ -180,6 +118,52 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/workspaces/{workspaceId}/audit-log
+  method: post
+  operationId: getAuditLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/time-off/balance/policy/{policyId}
+  method: get
+  operationId: getBalancesForPolicy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/time-off/balance/policy/{policyId}
+  method: patch
+  operationId: updateBalance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/balance/user/{userId}
+  method: get
+  operationId: getBalancesForUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/workspaces/{workspaceId}/clients
   method: get
   operationId: getClients
@@ -248,22 +232,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/cost-rate
-  method: put
-  operationId: setWorkspaceCostRate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/workspaces/{workspaceId}/custom-fields
   method: get
   operationId: ofWorkspace
@@ -309,6 +277,48 @@ operations:
 - path: /v1/workspaces/{workspaceId}/custom-fields/{customFieldId}
   method: put
   operationId: editCustomField
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/projects/{projectId}/custom-fields
+  method: get
+  operationId: getCustomFieldsOfProject
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/projects/{projectId}/custom-fields/{customFieldId}
+  method: delete
+  operationId: removeDefaultValueOfProject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/projects/{projectId}/custom-fields/{customFieldId}
+  method: patch
+  operationId: editProjectCustomFieldDefaultValue
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -504,6 +514,112 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /v1/workspaces/{workspaceId}/reports/expenses/detailed
+  method: post
+  operationId: generateDetailedReportV1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/user-groups
+  method: get
+  operationId: getUserGroups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/user-groups
+  method: post
+  operationId: createUserGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/user-groups/{id}
+  method: delete
+  operationId: deleteUserGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/user-groups/{id}
+  method: put
+  operationId: updateUserGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/user-groups/{userGroupId}/users
+  method: post
+  operationId: addUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/user-groups/{userGroupId}/users/{userId}
+  method: delete
+  operationId: deleteUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/workspaces/{workspaceId}/holidays
   method: get
   operationId: getHolidays
@@ -572,22 +688,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/hourly-rate
-  method: put
-  operationId: setWorkspaceHourlyRate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/workspaces/{workspaceId}/invoices
   method: get
   operationId: getInvoices
@@ -620,20 +720,12 @@ operations:
   method: post
   operationId: getInvoicesInfo
   x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/workspaces/{workspaceId}/invoices/settings
   method: get
   operationId: getInvoiceSettings
@@ -854,9 +946,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/member-profile/{userId}
+- path: /v1/workspaces/{workspaceId}/time-off/policies
   method: get
-  operationId: getMemberProfile
+  operationId: findPoliciesForWorkspace
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -864,9 +956,67 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/workspaces/{workspaceId}/member-profile/{userId}
+- path: /v1/workspaces/{workspaceId}/time-off/policies
+  method: post
+  operationId: createPolicy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
+  method: delete
+  operationId: deletePolicy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
+  method: get
+  operationId: getPolicy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
   method: patch
-  operationId: updateMemberProfileWithAdditionalData
+  operationId: updatePolicyStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
+  method: put
+  operationId: updatePolicy
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -964,48 +1114,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/projects/{projectId}/custom-fields
-  method: get
-  operationId: getCustomFieldsOfProject
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/projects/{projectId}/custom-fields/{customFieldId}
-  method: delete
-  operationId: removeDefaultValueOfProject
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/projects/{projectId}/custom-fields/{customFieldId}
-  method: patch
-  operationId: editProjectCustomFieldDefaultValue
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/workspaces/{workspaceId}/projects/{projectId}/estimate
   method: patch
   operationId: updateEstimate
@@ -1055,6 +1163,346 @@ operations:
       proof-of-possession: true
     escalation:
       human-in-the-loop: required
+    audit: required
+- path: /v1/workspaces/{workspaceId}/projects/{projectId}/template
+  method: patch
+  operationId: updateIsProjectTemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/projects/{projectId}/users/{userId}/cost-rate
+  method: put
+  operationId: addUsersCostRate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/projects/{projectId}/users/{userId}/hourly-rate
+  method: put
+  operationId: addUsersHourlyRate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/all
+  method: get
+  operationId: getAllAssignments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/projects/totals
+  method: post
+  operationId: getFilteredProjectTotals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/projects/totals/{projectId}
+  method: get
+  operationId: getProjectTotalsForSingleProject
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/publish
+  method: put
+  operationId: publishAssignments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/recurring
+  method: post
+  operationId: createRecurring
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/recurring/{assignmentId}
+  method: delete
+  operationId: deleteRRecurringAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/recurring/{assignmentId}
+  method: patch
+  operationId: editRecurring
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/series/{assignmentId}
+  method: put
+  operationId: editRecurringPeriod
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/user-filter/totals
+  method: post
+  operationId: getUserTotals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/users/{userId}/totals
+  method: get
+  operationId: getUserTotalsForSingleUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/{assignmentId}/copy
+  method: post
+  operationId: copyAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/scheduling/assignments/projects/totals
+  method: get
+  operationId: getProjectTotals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/shared-reports/{id}
+  method: get
+  operationId: generateSharedReportV1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/shared-reports
+  method: get
+  operationId: getSharedReportsV1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/shared-reports
+  method: post
+  operationId: saveSharedReportV1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/shared-reports/{id}
+  method: delete
+  operationId: deleteSharedReportV1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/shared-reports/{id}
+  method: put
+  operationId: updateSharedReportV1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/tags
+  method: get
+  operationId: getTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/tags
+  method: post
+  operationId: createNewTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/tags/{id}
+  method: delete
+  operationId: deleteTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/tags/{id}
+  method: get
+  operationId: getTag
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/tags/{id}
+  method: put
+  operationId: updateTag
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
     audit: required
 - path: /v1/workspaces/{workspaceId}/projects/{projectId}/tasks
   method: get
@@ -1156,277 +1604,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/projects/{projectId}/template
-  method: patch
-  operationId: updateIsProjectTemplate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/projects/{projectId}/users/{userId}/cost-rate
-  method: put
-  operationId: addUsersCostRate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/projects/{projectId}/users/{userId}/hourly-rate
-  method: put
-  operationId: addUsersHourlyRate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/all
-  method: get
-  operationId: getAllAssignments
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/projects/totals
-  method: get
-  operationId: getProjectTotals
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/projects/totals
+- path: /v1/workspaces/{workspaceId}/reports/attendance
   method: post
-  operationId: getFilteredProjectTotals
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/projects/totals/{projectId}
-  method: get
-  operationId: getProjectTotalsForSingleProject
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/publish
-  method: put
-  operationId: publishAssignments
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/recurring
-  method: post
-  operationId: createRecurring
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/recurring/{assignmentId}
-  method: delete
-  operationId: deleteRRecurringAssignment
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/recurring/{assignmentId}
-  method: patch
-  operationId: editRecurring
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/series/{assignmentId}
-  method: put
-  operationId: editRecurringPeriod
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/user-filter/totals
-  method: post
-  operationId: getUserTotals
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/users/{userId}/totals
-  method: get
-  operationId: getUserTotalsForSingleUser
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/scheduling/assignments/{assignmentId}/copy
-  method: post
-  operationId: copyAssignment
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/tags
-  method: get
-  operationId: getTags
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/tags
-  method: post
-  operationId: createNewTag
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/tags/{id}
-  method: delete
-  operationId: deleteTag
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/tags/{id}
-  method: get
-  operationId: getTag
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/tags/{id}
-  method: put
-  operationId: updateTag
+  operationId: generateAttendanceReport
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1594,296 +1774,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/balance/policy/{policyId}
-  method: get
-  operationId: getBalancesForPolicy
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/time-off/balance/policy/{policyId}
-  method: patch
-  operationId: updateBalance
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/balance/user/{userId}
-  method: get
-  operationId: getBalancesForUser
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/time-off/policies
-  method: get
-  operationId: findPoliciesForWorkspace
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/time-off/policies
-  method: post
-  operationId: createPolicy
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
-  method: delete
-  operationId: deletePolicy
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
-  method: get
-  operationId: getPolicy
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
-  method: patch
-  operationId: updatePolicyStatus
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{id}
-  method: put
-  operationId: updatePolicy
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests
-  method: post
-  operationId: createTimeOffRequest
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests/{requestId}
-  method: delete
-  operationId: deleteTimeOffRequest
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests/{requestId}
-  method: patch
-  operationId: changeTimeOffRequestStatus
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/users/{userId}/requests
-  method: post
-  operationId: createTimeOffRequestForOther
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/time-off/requests
-  method: post
-  operationId: getTimeOffRequest
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/user-groups
-  method: get
-  operationId: getUserGroups
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/user-groups
-  method: post
-  operationId: createUserGroup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/user-groups/{id}
-  method: delete
-  operationId: deleteUserGroup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/user-groups/{id}
-  method: put
-  operationId: updateUserGroup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/user-groups/{userGroupId}/users
-  method: post
-  operationId: addUser
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/user-groups/{userGroupId}/users/{userId}
-  method: delete
-  operationId: deleteUser
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/workspaces/{workspaceId}/user/{userId}/time-entries
   method: delete
   operationId: deleteMany
@@ -1974,19 +1864,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/users
-  method: get
-  operationId: getUsersOfWorkspace
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/workspaces/{workspaceId}/users
+- path: /v1/workspaces/{workspaceId}/reports/detailed
   method: post
-  operationId: addUsers
+  operationId: generateDetailedReport
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2000,6 +1880,174 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/workspaces/{workspaceId}/reports/summary
+  method: post
+  operationId: generateSummaryReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/reports/weekly
+  method: post
+  operationId: generateWeeklyReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests
+  method: post
+  operationId: createTimeOffRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests/{requestId}
+  method: delete
+  operationId: deleteTimeOffRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/requests/{requestId}
+  method: patch
+  operationId: changeTimeOffRequestStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/policies/{policyId}/users/{userId}/requests
+  method: post
+  operationId: createTimeOffRequestForOther
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/time-off/requests
+  method: post
+  operationId: getTimeOffRequest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/file/image
+  method: post
+  operationId: uploadImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/user
+  method: get
+  operationId: getLoggedUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/member-profile/{userId}
+  method: get
+  operationId: getMemberProfile
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/workspaces/{workspaceId}/member-profile/{userId}
+  method: patch
+  operationId: updateMemberProfileWithAdditionalData
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/users
+  method: get
+  operationId: getUsersOfWorkspace
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/workspaces/{workspaceId}/users/info
   method: post
   operationId: filterUsersOfWorkspace
@@ -2016,73 +2064,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/users/{userId}
-  method: delete
-  operationId: removeMember
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/users/{userId}
-  method: put
-  operationId: updateUserStatus
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/users/{userId}/cost-rate
-  method: put
-  operationId: setCostRateForUser
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/workspaces/{workspaceId}/users/{userId}/custom-field/{customFieldId}/value
   method: put
   operationId: upsertUserCustomFieldValue
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/users/{userId}/hourly-rate
-  method: put
-  operationId: setHourlyRateForUser
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2138,6 +2122,16 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/workspaces/{workspaceId}/addons/{addonId}/webhooks
+  method: get
+  operationId: getAddonWebhooks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/workspaces/{workspaceId}/webhooks
   method: get
   operationId: getWebhooks
@@ -2210,18 +2204,12 @@ operations:
   method: post
   operationId: getLogsForWebhook
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/workspaces/{workspaceId}/webhooks/{webhookId}/token
   method: patch
   operationId: generateNewToken
@@ -2238,9 +2226,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/shared-reports/{id}
+- path: /v1/workspaces
   method: get
-  operationId: generateSharedReportV1
+  operationId: getWorkspacesOfUser
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2248,9 +2236,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/workspaces/{workspaceId}/reports/attendance
+- path: /v1/workspaces
   method: post
-  operationId: generateAttendanceReport
+  operationId: createWorkspace
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2264,73 +2252,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/reports/detailed
-  method: post
-  operationId: generateDetailedReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/reports/expenses/detailed
-  method: post
-  operationId: generateDetailedReportV1
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/reports/summary
-  method: post
-  operationId: generateSummaryReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/reports/weekly
-  method: post
-  operationId: generateWeeklyReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/shared-reports
+- path: /v1/workspaces/{workspaceId}
   method: get
-  operationId: getSharedReportsV1
+  operationId: getWorkspaceOfUser
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2338,41 +2262,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/workspaces/{workspaceId}/shared-reports
-  method: post
-  operationId: saveSharedReportV1
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/shared-reports/{id}
-  method: delete
-  operationId: deleteSharedReportV1
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/workspaces/{workspaceId}/shared-reports/{id}
+- path: /v1/workspaces/{workspaceId}/cost-rate
   method: put
-  operationId: updateSharedReportV1
+  operationId: setWorkspaceCostRate
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2386,9 +2278,89 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/workspaces/{workspaceId}/audit-log
+- path: /v1/workspaces/{workspaceId}/hourly-rate
+  method: put
+  operationId: setWorkspaceHourlyRate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/users
   method: post
-  operationId: getAuditLogs
+  operationId: addUsers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/users/{userId}
+  method: put
+  operationId: updateUserStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/users/{userId}/cost-rate
+  method: put
+  operationId: setCostRateForUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/users/{userId}/hourly-rate
+  method: put
+  operationId: setHourlyRateForUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/workspaces/{workspaceId}/users/{userId}
+  method: delete
+  operationId: removeMember
   x-agentic-access:
     action-class: acting
     consequence: write
