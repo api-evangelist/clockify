@@ -276,244 +276,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    PolicyDtoV1:
-      type: object
-      properties:
-        allowHalfDay:
-          type: boolean
-          description: Indicates whether the half day is allowed.
-          example: false
-          default: false
-        allowNegativeBalance:
-          type: boolean
-          description: Indicates whether the negative balance is allowed.
-          example: true
-          default: false
-        approve:
-          $ref: '#/components/schemas/PolicyApprovalDto'
-        archived:
-          type: boolean
-          description: Indicates whether the policy is archived.
-          example: true
-          default: false
-        automaticAccrual:
-          $ref: '#/components/schemas/AutomaticAccrualDto'
-        automaticTimeEntryCreation:
-          $ref: '#/components/schemas/AutomaticTimeEntryCreationDto'
-        everyoneIncludingNew:
-          type: boolean
-          description: Indicates whether the policy is applied to future new users.
-          example: false
-          default: false
-        id:
-          type: string
-          description: Represents policy identifier across the system.
-          example: 5b715612b079875110791111
-        name:
-          type: string
-          description: Represents the name of the policy.
-          example: Days
-        negativeBalance:
-          $ref: '#/components/schemas/NegativeBalanceDto'
-        projectId:
-          type: string
-          description: Represents project identifier across the system.
-        timeUnit:
-          type: string
-          description: Represents the time unit of the policy.
-          example: DAYS
-          enum:
-          - DAYS
-          - HOURS
-        userGroupIds:
-          uniqueItems: true
-          type: array
-          description: Represents user groups' identifiers across the system. Indicates which user groups are included in the policy.
-          example:
-          - 5b715612b079875110791342
-          - 5b715612b079875110791324
-          - 5b715612b079875110793142
-          items:
-            type: string
-            description: Represents user groups' identifiers across the system. Indicates which user groups are included in the policy.
-            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
-        userIds:
-          uniqueItems: true
-          type: array
-          description: Represents users' identifiers across the system. Indicates which users are included in the policy.
-          example:
-          - 5b715612b079875110791432
-          - 5b715612b079875110791234
-          items:
-            type: string
-            description: Represents users' identifiers across the system. Indicates which users are included in the policy.
-            example: '["5b715612b079875110791432","5b715612b079875110791234"]'
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 5b715612b079875110792222
-    AutomaticAccrualDto:
-      type: object
-      properties:
-        amount:
-          type: number
-          description: Represents automatic accrual's amount
-          format: double
-          example: 20
-        period:
-          type: string
-          description: Represents automatic accrual's period
-          example: YEAR
-          enum:
-          - MONTH
-          - YEAR
-        timeUnit:
-          type: string
-          description: Represents automatic accrual's time unit
-          example: DAYS
-          enum:
-          - DAYS
-          - HOURS
-      description: Represents automatic approval settings.
-    NegativeBalanceRequest:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: number
-          description: Represents negative balance amount.
-          format: double
-          example: 2
-        amountValidForTimeUnit:
-          type: boolean
-        period:
-          type: string
-          description: Represents negative balance period.
-          example: MONTH
-          enum:
-          - MONTH
-          - YEAR
-        shouldReset:
-          type: boolean
-          description: Indicates whether negative balance should be reset at the end of the negative balance period.
-          example: true
-          default: false
-        timeUnit:
-          type: string
-          description: Represents negative balance time unit.
-          example: DAYS
-          enum:
-          - DAYS
-          - HOURS
-      description: Provide the negative balance data you would like to use for updating the policy.
-    UpdatePolicyRequestV1:
-      required:
-      - allowHalfDay
-      - allowNegativeBalance
-      - approve
-      - archived
-      - everyoneIncludingNew
-      - hasExpiration
-      - name
-      - userGroups
-      - users
-      type: object
-      properties:
-        allowHalfDay:
-          type: boolean
-          description: Indicates whether policy allows half day.
-          example: true
-          default: false
-        allowNegativeBalance:
-          type: boolean
-          description: Indicates whether policy allows negative balance.
-          example: false
-          default: false
-        approve:
-          $ref: '#/components/schemas/PolicyApprovalDto'
-        archived:
-          type: boolean
-          description: Indicates whether policy is archived.
-          example: false
-          default: false
-        automaticAccrual:
-          $ref: '#/components/schemas/AutomaticAccrualRequest'
-        automaticTimeEntryCreation:
-          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
-        color:
-          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
-          type: string
-          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#8BC34A'
-        everyoneIncludingNew:
-          type: boolean
-          description: Indicates whether the policy is shown to new users.
-          example: false
-          default: false
-        hasExpiration:
-          type: boolean
-          description: Indicates whether the policy has expiration.
-          example: false
-          default: false
-        icon:
-          type: string
-          description: Provide icon.
-          example: UMBRELLA
-          enum:
-          - UMBRELLA
-          - SNOWFLAKE
-          - FAMILY
-          - PLANE
-          - STETHOSCOPE
-          - HEALTH_METRICS
-          - CHILDCARE
-          - LUGGAGE
-          - MONETIZATION
-          - CALENDAR
-        name:
-          maxLength: 100
-          minLength: 2
-          type: string
-          description: Provide the name you would like to use for updating the policy.
-          example: Days
-        negativeBalance:
-          $ref: '#/components/schemas/NegativeBalanceRequest'
-        userGroups:
-          $ref: '#/components/schemas/UserGroupIdsSchema'
-        users:
-          $ref: '#/components/schemas/UserIdsSchema'
-    PolicyApprovalDto:
-      type: object
-      properties:
-        requiresApproval:
-          type: boolean
-          description: Indicates whether it requires approval
-          example: true
-          default: false
-        specificMembers:
-          type: boolean
-          description: Indicates whether it requires specific members
-          example: false
-          default: false
-        teamManagers:
-          type: boolean
-          description: Indicates whether it requires team manager's approval
-          example: false
-          default: false
-        userIds:
-          uniqueItems: true
-          type: array
-          description: Represents set of user's identifier across the system
-          example:
-          - 6579d126c2fe3b25f20ea001
-          - 6579d126c2fe3b25f20ea002
-          items:
-            type: string
-            description: Represents set of user's identifier across the system
-            example: '["6579d126c2fe3b25f20ea001","6579d126c2fe3b25f20ea002"]'
-      description: Represents approval settings.
     CreatePolicyRequestV1:
       required:
       - approve
@@ -590,45 +352,82 @@ components:
           $ref: '#/components/schemas/UserGroupIdsSchema'
         users:
           $ref: '#/components/schemas/UserIdsSchema'
-    ChangePolicyStatusRequestV1:
+    UpdatePolicyRequestV1:
       required:
-      - status
+      - allowHalfDay
+      - allowNegativeBalance
+      - approve
+      - archived
+      - everyoneIncludingNew
+      - hasExpiration
+      - name
+      - userGroups
+      - users
       type: object
       properties:
-        status:
+        allowHalfDay:
+          type: boolean
+          description: Indicates whether policy allows half day.
+          example: true
+          default: false
+        allowNegativeBalance:
+          type: boolean
+          description: Indicates whether policy allows negative balance.
+          example: false
+          default: false
+        approve:
+          $ref: '#/components/schemas/PolicyApprovalDto'
+        archived:
+          type: boolean
+          description: Indicates whether policy is archived.
+          example: false
+          default: false
+        automaticAccrual:
+          $ref: '#/components/schemas/AutomaticAccrualRequest'
+        automaticTimeEntryCreation:
+          $ref: '#/components/schemas/AutomaticTimeEntryCreationRequest'
+        color:
+          pattern: ^#(?:[0-9a-fA-F]{6}){1}$
           type: string
-          description: Provide the status you would like to use for changing the policy.
-          example: ACTIVE
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
-    AutomaticAccrualRequest:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: number
-          description: Represents amount of automatic accrual.
-          format: double
-          example: 2
-        period:
+          description: 'Provide color in format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#8BC34A'
+        everyoneIncludingNew:
+          type: boolean
+          description: Indicates whether the policy is shown to new users.
+          example: false
+          default: false
+        hasExpiration:
+          type: boolean
+          description: Indicates whether the policy has expiration.
+          example: false
+          default: false
+        icon:
           type: string
-          description: Represents automatic accrual period.
-          example: MONTH
+          description: Provide icon.
+          example: UMBRELLA
           enum:
-          - MONTH
-          - YEAR
-        timeUnit:
+          - UMBRELLA
+          - SNOWFLAKE
+          - FAMILY
+          - PLANE
+          - STETHOSCOPE
+          - HEALTH_METRICS
+          - CHILDCARE
+          - LUGGAGE
+          - MONETIZATION
+          - CALENDAR
+        name:
+          maxLength: 100
+          minLength: 2
           type: string
-          description: Represents automatic accrual time unit.
-          example: DAYS
-          enum:
-          - DAYS
-          - HOURS
-      description: Provide automatic accrual settings.
+          description: Provide the name you would like to use for updating the policy.
+          example: Days
+        negativeBalance:
+          $ref: '#/components/schemas/NegativeBalanceRequest'
+        userGroups:
+          $ref: '#/components/schemas/UserGroupIdsSchema'
+        users:
+          $ref: '#/components/schemas/UserIdsSchema'
     AutomaticTimeEntryCreationDto:
       type: object
       properties:
@@ -637,19 +436,29 @@ components:
         enabled:
           type: boolean
       description: Represents automatic time entry creation settings.
-    NegativeBalanceDto:
+    AutomaticAccrualDto:
       type: object
       properties:
         amount:
           type: number
+          description: Represents automatic accrual's amount
           format: double
+          example: 20
         period:
           type: string
-        shouldReset:
-          type: boolean
+          description: Represents automatic accrual's period
+          example: YEAR
+          enum:
+          - MONTH
+          - YEAR
         timeUnit:
           type: string
-      description: Represents the data about negative balance including amount, time unit and period.
+          description: Represents automatic accrual's time unit
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Represents automatic approval settings.
     DefaultEntitiesRequest:
       type: object
       properties:
@@ -660,18 +469,6 @@ components:
           type: string
           description: Default task for automatically created time entries
       description: Provides information about default project and task for automatically created time entries.
-    AutomaticTimeEntryCreationRequest:
-      required:
-      - defaultEntities
-      type: object
-      properties:
-        defaultEntities:
-          $ref: '#/components/schemas/DefaultEntitiesRequest'
-        enabled:
-          type: boolean
-          description: Indicates that automatic time entry creation is enabled.
-          default: false
-      description: Provides automatic time entry creation settings.
     UserGroupIdsSchema:
       type: object
       properties:
@@ -730,6 +527,184 @@ components:
           - ACTIVE
           - INACTIVE
       description: Provide list with user ids and corresponding status.
+    PolicyDtoV1:
+      type: object
+      properties:
+        allowHalfDay:
+          type: boolean
+          description: Indicates whether the half day is allowed.
+          example: false
+          default: false
+        allowNegativeBalance:
+          type: boolean
+          description: Indicates whether the negative balance is allowed.
+          example: true
+          default: false
+        approve:
+          $ref: '#/components/schemas/PolicyApprovalDto'
+        archived:
+          type: boolean
+          description: Indicates whether the policy is archived.
+          example: true
+          default: false
+        automaticAccrual:
+          $ref: '#/components/schemas/AutomaticAccrualDto'
+        automaticTimeEntryCreation:
+          $ref: '#/components/schemas/AutomaticTimeEntryCreationDto'
+        everyoneIncludingNew:
+          type: boolean
+          description: Indicates whether the policy is applied to future new users.
+          example: false
+          default: false
+        id:
+          type: string
+          description: Represents policy identifier across the system.
+          example: 5b715612b079875110791111
+        name:
+          type: string
+          description: Represents the name of the policy.
+          example: Days
+        negativeBalance:
+          $ref: '#/components/schemas/NegativeBalanceDto'
+        projectId:
+          type: string
+          description: Represents project identifier across the system.
+        timeUnit:
+          type: string
+          description: Represents the time unit of the policy.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+        userGroupIds:
+          uniqueItems: true
+          type: array
+          description: Represents user groups' identifiers across the system. Indicates which user groups are included in the policy.
+          example:
+          - 5b715612b079875110791342
+          - 5b715612b079875110791324
+          - 5b715612b079875110793142
+          items:
+            type: string
+            description: Represents user groups' identifiers across the system. Indicates which user groups are included in the policy.
+            example: '["5b715612b079875110791342","5b715612b079875110791324","5b715612b079875110793142"]'
+        userIds:
+          uniqueItems: true
+          type: array
+          description: Represents users' identifiers across the system. Indicates which users are included in the policy.
+          example:
+          - 5b715612b079875110791432
+          - 5b715612b079875110791234
+          items:
+            type: string
+            description: Represents users' identifiers across the system. Indicates which users are included in the policy.
+            example: '["5b715612b079875110791432","5b715612b079875110791234"]'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 5b715612b079875110792222
+    PolicyApprovalDto:
+      type: object
+      properties:
+        requiresApproval:
+          type: boolean
+          description: Indicates whether it requires approval
+          example: true
+          default: false
+        specificMembers:
+          type: boolean
+          description: Indicates whether it requires specific members
+          example: false
+          default: false
+        teamManagers:
+          type: boolean
+          description: Indicates whether it requires team manager's approval
+          example: false
+          default: false
+        userIds:
+          uniqueItems: true
+          type: array
+          description: Represents set of user's identifier across the system
+          example:
+          - 6579d126c2fe3b25f20ea001
+          - 6579d126c2fe3b25f20ea002
+          items:
+            type: string
+            description: Represents set of user's identifier across the system
+            example: '["6579d126c2fe3b25f20ea001","6579d126c2fe3b25f20ea002"]'
+      description: Represents approval settings.
+    ChangePolicyStatusRequestV1:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+          description: Provide the status you would like to use for changing the policy.
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+    AutomaticAccrualRequest:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: number
+          description: Represents amount of automatic accrual.
+          format: double
+          example: 2
+        period:
+          type: string
+          description: Represents automatic accrual period.
+          example: MONTH
+          enum:
+          - MONTH
+          - YEAR
+        timeUnit:
+          type: string
+          description: Represents automatic accrual time unit.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Provide automatic accrual settings.
+    NegativeBalanceRequest:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: number
+          description: Represents negative balance amount.
+          format: double
+          example: 2
+        amountValidForTimeUnit:
+          type: boolean
+        period:
+          type: string
+          description: Represents negative balance period.
+          example: MONTH
+          enum:
+          - MONTH
+          - YEAR
+        shouldReset:
+          type: boolean
+          description: Indicates whether negative balance should be reset at the end of the negative balance period.
+          example: true
+          default: false
+        timeUnit:
+          type: string
+          description: Represents negative balance time unit.
+          example: DAYS
+          enum:
+          - DAYS
+          - HOURS
+      description: Provide the negative balance data you would like to use for updating the policy.
     DefaultEntitiesDto:
       type: object
       properties:
@@ -737,6 +712,31 @@ components:
           type: string
         taskId:
           type: string
+    NegativeBalanceDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        period:
+          type: string
+        shouldReset:
+          type: boolean
+        timeUnit:
+          type: string
+      description: Represents the data about negative balance including amount, time unit and period.
+    AutomaticTimeEntryCreationRequest:
+      required:
+      - defaultEntities
+      type: object
+      properties:
+        defaultEntities:
+          $ref: '#/components/schemas/DefaultEntitiesRequest'
+        enabled:
+          type: boolean
+          description: Indicates that automatic time entry creation is enabled.
+          default: false
+      description: Provides automatic time entry creation settings.
   securitySchemes:
     AddonKeyAuth:
       in: header

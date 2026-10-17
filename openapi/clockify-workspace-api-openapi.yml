@@ -338,29 +338,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    EntityCreationPermissionsDtoV1:
-      type: object
-      properties:
-        whoCanCreateProjectsAndClients:
-          $ref: '#/components/schemas/EntityCreationPermission'
-        whoCanCreateTags:
-          $ref: '#/components/schemas/EntityCreationPermission'
-        whoCanCreateTasks:
-          $ref: '#/components/schemas/EntityCreationPermission'
-      description: Represents an entity creation permission object.
-    RateDtoV1:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
     CurrencyWithDefaultInfoDtoV1:
       type: object
       properties:
@@ -378,6 +355,16 @@ components:
           example: true
           default: false
       description: Represents currency with default info object.
+    AddUserToWorkspaceRequest:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          minLength: 1
+          type: string
+          description: Represents an email address of the user.
+          example: johndoe@example.com
     RoundDto:
       type: object
       properties:
@@ -388,7 +375,42 @@ components:
           type: string
           example: Round to nearest
       description: Represents a time rounding object.
-    HourlyRateDtoV1:
+    UpdateUserStatusRequest:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+          description: Represents membership status.
+          example: ACTIVE
+          enum:
+          - ACTIVE
+          - INACTIVE
+    RateWithCurrencyRequestV1:
+      required:
+      - amount
+      - currency
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 2000
+        currency:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Represents a currency.
+          example: USD
+          default: USD
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
+    RateDtoV1:
       type: object
       properties:
         amount:
@@ -400,41 +422,35 @@ components:
           type: string
           description: Represents a currency.
           example: USD
-      description: Represents an hourly rate object.
-    EntityCreationPermission:
+      description: Represents cost rate object.
+    CreateWorkspaceRequestV1:
       type: object
-      description: Represents an entity creation permission enum.
-      example: EVERYONE
-      oneOf:
-      - type: string
-        enum:
-        - ADMINS
-        - ADMINS_AND_PROJECT_MANAGERS
-        - EVERYONE
       properties:
-        ADMINS:
+        name:
+          maxLength: 50
+          minLength: 1
           type: string
-          enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        ADMINS_AND_PROJECT_MANAGERS:
+          description: Represents a workspace name.
+          example: Cool Company
+        organizationId:
           type: string
-          enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        EVERYONE:
+          description: Represents the Cake organization identifier across the system.
+          example: 67d471fb56aa9668b7bfa295
+    HourlyRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an hourly rate amount as integer.
+          format: int32
+          example: 20000
+        since:
           type: string
-          enum:
-          - ADMINS
-          - ADMINS_AND_PROJECT_MANAGERS
-          - EVERYONE
-        creators:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
     WorkspaceDtoV1:
       type: object
       properties:
@@ -476,188 +492,6 @@ components:
           $ref: '#/components/schemas/WorkspaceSubdomainDtoV1'
         workspaceSettings:
           $ref: '#/components/schemas/WorkspaceSettingsDtoV1'
-    MembershipDtoV1:
-      type: object
-      properties:
-        costRate:
-          $ref: '#/components/schemas/RateDtoV1'
-        hourlyRate:
-          $ref: '#/components/schemas/HourlyRateDtoV1'
-        membershipStatus:
-          type: string
-          description: Represents a membership status enum.
-          example: PENDING
-          enum:
-          - PENDING
-          - ACTIVE
-          - DECLINED
-          - INACTIVE
-          - ALL
-        membershipType:
-          type: string
-          description: Represents membership type enum.
-          example: PROJECT
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - USERGROUP
-        targetId:
-          type: string
-          description: Represents target identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-      description: Represents a list of membership objects.
-    UpdateUserStatusRequest:
-      required:
-      - status
-      type: object
-      properties:
-        status:
-          type: string
-          description: Represents membership status.
-          example: ACTIVE
-          enum:
-          - ACTIVE
-          - INACTIVE
-    CostRateRequestV1:
-      required:
-      - amount
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 20000
-        since:
-          type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
-    WorkspaceSubdomainDtoV1:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Indicates whether subdomain is enabled on workspace
-          default: false
-        name:
-          type: string
-          description: Represents subdomain name
-          example: coolcompany
-      description: Represents the workspace subdomain
-    FeaturePlan:
-      type: object
-      description: Represents a feature plan type enum.
-      example: STANDARD_2021
-      oneOf:
-      - $ref: '#/components/schemas/FeaturePlan'
-      properties:
-        addonSubscriptionPlan:
-          type: string
-          enum:
-          - FREE
-          - BASIC
-          - STANDARD
-          - PRO
-          - ENTERPRISE
-        featurePermissions:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            enum:
-            - ADD_TIME_FOR_OTHERS
-            - ADMIN_PANEL
-            - ALERTS
-            - APPROVAL
-            - AUDIT_LOG
-            - AUTOMATIC_LOCK
-            - BRANDED_REPORTS
-            - BULK_EDIT
-            - CUSTOM_FIELDS
-            - CUSTOM_REPORTING
-            - CUSTOM_SUBDOMAIN
-            - CREATION_PERMISSIONS
-            - DECIMAL_FORMAT
-            - DISABLE_MANUAL_MODE
-            - EDIT_MEMBER_PROFILE
-            - EXCLUDE_NON_BILLABLE_FROM_ESTIMATE
-            - EXPENSES
-            - FILE_IMPORT
-            - TIMESHEET_IMPORT
-            - USER_IMPORT
-            - HIDE_PAGES
-            - HISTORIC_RATES
-            - INVOICING
-            - INVOICE_EMAILS
-            - INVOICE_REMINDERS
-            - LABOR_COST
-            - LOCATIONS
-            - MANAGER_ROLE
-            - MULTI_FACTOR_AUTHENTICATION
-            - PROJECT_BUDGET
-            - PROJECT_TEMPLATES
-            - GRANT_PROJECT_MANAGER_ROLE
-            - PRIVATE_PROJECT_ACCESS
-            - QUICKBOOKS_INTEGRATION
-            - RECURRING_ESTIMATES
-            - RECURRING_INVOICES
-            - REQUIRED_FIELDS
-            - SCHEDULED_REPORTS
-            - SCHEDULING
-            - SCREENSHOTS
-            - SSO
-            - SUMMARY_ESTIMATE
-            - TARGETS_AND_REMINDERS
-            - TASK_RATES
-            - TIME_OFF
-            - UNLIMITED_REPORTS
-            - USER_CUSTOM_FIELDS
-            - WHO_CAN_CHANGE_TIMEENTRY_BILLABILITY
-            - BREAKS
-            - KIOSK_SESSION_DURATION
-            - KIOSK_PIN_REQUIRED
-            - WHO_CAN_SEE_ALL_TIME_ENTRIES
-            - WHO_CAN_SEE_PROJECT_STATUS
-            - WHO_CAN_SEE_PUBLIC_PROJECTS_ENTRIES
-            - WHO_CAN_SEE_TEAMS_DASHBOARD
-            - WORKSPACE_LOCK_TIMEENTRIES
-            - WORKSPACE_TIME_AUDIT
-            - WORKSPACE_TIME_ROUNDING
-            - KIOSK
-            - KIOSK_SIX_DIGIT_PIN
-            - KIOSK_QR_CODE
-            - LIMITED_USERS
-            - FORECASTING
-            - TIME_TRACKING
-            - ATTENDANCE_REPORT
-            - WORKSPACE_TRANSFER
-            - FAVORITE_ENTRIES
-            - SPLIT_TIME_ENTRY
-            - CLIENT_CURRENCY
-            - SCHEDULING_FORECASTING
-            - SCIM
-            - UNLIMITED_USER_SEATS
-            - BILLABLE_HOURS
-            - PROJECT_ESTIMATE
-            - CSV_EXPORT
-            - XLSX_EXPORT
-            - ONE_MONTH_RANGE_REPORTS
-            - ONE_YEAR_RANGE_REPORTS
-            - SHARED_REPORTS
-        legacy:
-          type: boolean
-        paidPlan:
-          type: boolean
-        regionalAllowed:
-          type: boolean
-        weight:
-          type: integer
-          format: int32
     WorkspaceSettingsDtoV1:
       type: object
       properties:
@@ -827,39 +661,6 @@ components:
             - SATURDAY
             - SUNDAY
       description: "Workspace settings also include Time Duration Format settings.\n\nSetting Time Duration Format by changing the boolean fields\ndecimalFormat and trackTimeDownToSecond is now deprecated.\n\nTime Duration Format can be set by durationFormat enum field.\n\nThree different Time Duration modes will still map the boolean fields:\n\n    1. Full (hh:mm:ss) -> decimalFormat = false, trackTimeDownToSecond = true,\n\n    2. Compact (h:mm) -> decimalFormat = false, trackTimeDownToSecond = false,\n\n    3. Decimal (h:hh) -> decimalFormat = true, trackTimeDownToSecond = true\n\n"
-    AddUserToWorkspaceRequest:
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          minLength: 1
-          type: string
-          description: Represents an email address of the user.
-          example: johndoe@example.com
-    RateWithCurrencyRequestV1:
-      required:
-      - amount
-      - currency
-      type: object
-      properties:
-        amount:
-          minimum: 0
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 2000
-        currency:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: Represents a currency.
-          example: USD
-          default: USD
-        since:
-          type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
     Feature:
       type: object
       description: Represents a list of features.
@@ -7429,19 +7230,65 @@ components:
           - ONE_MONTH_RANGE_REPORTS
           - ONE_YEAR_RANGE_REPORTS
           - SHARED_REPORTS
-    CreateWorkspaceRequestV1:
+    MembershipDtoV1:
       type: object
       properties:
-        name:
-          maxLength: 50
-          minLength: 1
+        costRate:
+          $ref: '#/components/schemas/RateDtoV1'
+        hourlyRate:
+          $ref: '#/components/schemas/HourlyRateDtoV1'
+        membershipStatus:
           type: string
-          description: Represents a workspace name.
-          example: Cool Company
-        organizationId:
+          description: Represents a membership status enum.
+          example: PENDING
+          enum:
+          - PENDING
+          - ACTIVE
+          - DECLINED
+          - INACTIVE
+          - ALL
+        membershipType:
           type: string
-          description: Represents the Cake organization identifier across the system.
-          example: 67d471fb56aa9668b7bfa295
+          description: Represents membership type enum.
+          example: PROJECT
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - USERGROUP
+        targetId:
+          type: string
+          description: Represents target identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+      description: Represents a list of membership objects.
+    EntityCreationPermissionsDtoV1:
+      type: object
+      properties:
+        whoCanCreateProjectsAndClients:
+          $ref: '#/components/schemas/EntityCreationPermission'
+        whoCanCreateTags:
+          $ref: '#/components/schemas/EntityCreationPermission'
+        whoCanCreateTasks:
+          $ref: '#/components/schemas/EntityCreationPermission'
+      description: Represents an entity creation permission object.
+    CostRateRequestV1:
+      required:
+      - amount
+      type: object
+      properties:
+        amount:
+          minimum: 0
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 20000
+        since:
+          type: string
+          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
+          example: '2020-01-01T00:00:00Z'
     AutomaticLockDtoV1:
       type: object
       properties:
@@ -7496,21 +7343,174 @@ components:
           - MONTHLY
           - OLDER_THAN
       description: Represents an automatic lock object.
-    HourlyRateRequestV1:
-      required:
-      - amount
+    HourlyRateDtoV1:
       type: object
       properties:
         amount:
-          minimum: 0
           type: integer
-          description: Represents an hourly rate amount as integer.
+          description: Represents an amount as integer.
           format: int32
-          example: 20000
-        since:
+          example: 10500
+        currency:
           type: string
-          description: Represents a date and time in yyyy-MM-ddThh:mm:ssZ format.
-          example: '2020-01-01T00:00:00Z'
+          description: Represents a currency.
+          example: USD
+      description: Represents an hourly rate object.
+    WorkspaceSubdomainDtoV1:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Indicates whether subdomain is enabled on workspace
+          default: false
+        name:
+          type: string
+          description: Represents subdomain name
+          example: coolcompany
+      description: Represents the workspace subdomain
+    EntityCreationPermission:
+      type: object
+      description: Represents an entity creation permission enum.
+      example: EVERYONE
+      oneOf:
+      - type: string
+        enum:
+        - ADMINS
+        - ADMINS_AND_PROJECT_MANAGERS
+        - EVERYONE
+      properties:
+        ADMINS:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        ADMINS_AND_PROJECT_MANAGERS:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        EVERYONE:
+          type: string
+          enum:
+          - ADMINS
+          - ADMINS_AND_PROJECT_MANAGERS
+          - EVERYONE
+        creators:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    FeaturePlan:
+      type: object
+      description: Represents a feature plan type enum.
+      example: STANDARD_2021
+      oneOf:
+      - $ref: '#/components/schemas/FeaturePlan'
+      properties:
+        addonSubscriptionPlan:
+          type: string
+          enum:
+          - FREE
+          - BASIC
+          - STANDARD
+          - PRO
+          - ENTERPRISE
+        featurePermissions:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - ADD_TIME_FOR_OTHERS
+            - ADMIN_PANEL
+            - ALERTS
+            - APPROVAL
+            - AUDIT_LOG
+            - AUTOMATIC_LOCK
+            - BRANDED_REPORTS
+            - BULK_EDIT
+            - CUSTOM_FIELDS
+            - CUSTOM_REPORTING
+            - CUSTOM_SUBDOMAIN
+            - CREATION_PERMISSIONS
+            - DECIMAL_FORMAT
+            - DISABLE_MANUAL_MODE
+            - EDIT_MEMBER_PROFILE
+            - EXCLUDE_NON_BILLABLE_FROM_ESTIMATE
+            - EXPENSES
+            - FILE_IMPORT
+            - TIMESHEET_IMPORT
+            - USER_IMPORT
+            - HIDE_PAGES
+            - HISTORIC_RATES
+            - INVOICING
+            - INVOICE_EMAILS
+            - INVOICE_REMINDERS
+            - LABOR_COST
+            - LOCATIONS
+            - MANAGER_ROLE
+            - MULTI_FACTOR_AUTHENTICATION
+            - PROJECT_BUDGET
+            - PROJECT_TEMPLATES
+            - GRANT_PROJECT_MANAGER_ROLE
+            - PRIVATE_PROJECT_ACCESS
+            - QUICKBOOKS_INTEGRATION
+            - RECURRING_ESTIMATES
+            - RECURRING_INVOICES
+            - REQUIRED_FIELDS
+            - SCHEDULED_REPORTS
+            - SCHEDULING
+            - SCREENSHOTS
+            - SSO
+            - SUMMARY_ESTIMATE
+            - TARGETS_AND_REMINDERS
+            - TASK_RATES
+            - TIME_OFF
+            - UNLIMITED_REPORTS
+            - USER_CUSTOM_FIELDS
+            - WHO_CAN_CHANGE_TIMEENTRY_BILLABILITY
+            - BREAKS
+            - KIOSK_SESSION_DURATION
+            - KIOSK_PIN_REQUIRED
+            - WHO_CAN_SEE_ALL_TIME_ENTRIES
+            - WHO_CAN_SEE_PROJECT_STATUS
+            - WHO_CAN_SEE_PUBLIC_PROJECTS_ENTRIES
+            - WHO_CAN_SEE_TEAMS_DASHBOARD
+            - WORKSPACE_LOCK_TIMEENTRIES
+            - WORKSPACE_TIME_AUDIT
+            - WORKSPACE_TIME_ROUNDING
+            - KIOSK
+            - KIOSK_SIX_DIGIT_PIN
+            - KIOSK_QR_CODE
+            - LIMITED_USERS
+            - FORECASTING
+            - TIME_TRACKING
+            - ATTENDANCE_REPORT
+            - WORKSPACE_TRANSFER
+            - FAVORITE_ENTRIES
+            - SPLIT_TIME_ENTRY
+            - CLIENT_CURRENCY
+            - SCHEDULING_FORECASTING
+            - SCIM
+            - UNLIMITED_USER_SEATS
+            - BILLABLE_HOURS
+            - PROJECT_ESTIMATE
+            - CSV_EXPORT
+            - XLSX_EXPORT
+            - ONE_MONTH_RANGE_REPORTS
+            - ONE_YEAR_RANGE_REPORTS
+            - SHARED_REPORTS
+        legacy:
+          type: boolean
+        paidPlan:
+          type: boolean
+        regionalAllowed:
+          type: boolean
+        weight:
+          type: integer
+          format: int32
   securitySchemes:
     AddonKeyAuth:
       in: header

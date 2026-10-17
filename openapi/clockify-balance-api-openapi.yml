@@ -208,18 +208,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    BalancesWithCountDtoV1:
-      type: object
-      properties:
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/BalanceDtoV1'
-        count:
-          type: integer
-          description: Represents the count of balances.
-          format: int32
-          example: 2
     BalanceDtoV1:
       type: object
       properties:
@@ -314,6 +302,18 @@ components:
           description: Represents a new balance value.
           format: double
           example: 22
+    BalancesWithCountDtoV1:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceDtoV1'
+        count:
+          type: integer
+          description: Represents the count of balances.
+          format: int32
+          example: 2
   securitySchemes:
     AddonKeyAuth:
       in: header

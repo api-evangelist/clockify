@@ -251,9 +251,33 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    TemplateDto:
+    ProjectTaskTupleRequest:
+      required:
+      - projectId
       type: object
       properties:
+        projectId:
+          minLength: 1
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        taskId:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+        type:
+          type: string
+          description: Represents a time entry type.
+          example: REGULAR
+      description: Represents a list of template's projects and tasks.
+    TemplateDtoImpl:
+      type: object
+      properties:
+        entries:
+          type: array
+          description: Represents a set of template time entries.
+          items:
+            $ref: '#/components/schemas/TimeEntryWithCustomFieldsDto'
         id:
           type: string
           description: Represents a template identifier across the system.
@@ -262,60 +286,23 @@ components:
           type: string
           description: Represents a template name.
           example: exampleTemplate
+        projectsAndTasks:
+          type: array
+          description: Represents a list of template's projects and tasks.
+          items:
+            $ref: '#/components/schemas/ProjectTaskTupleDto'
         userId:
           type: string
           description: Represents a user identifier across the system.
           example: 89b687e29ae1f428e7ebe912
+        weekStart:
+          type: string
+          description: Represents a day of the week.
+          format: date
         workspaceId:
           type: string
           description: Represents a workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
-    ProjectTaskTupleDto:
-      type: object
-      properties:
-        projectId:
-          type: string
-          description: Represents a project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        taskId:
-          type: string
-          description: Represents a task identifier across the system.
-          example: 54m377ddd3fcab07cfbb432w
-      description: Represents a list of template's projects and tasks.
-    CustomFieldValueDto:
-      type: object
-      properties:
-        customFieldId:
-          type: string
-          description: Represents custom field identifier across the system.
-          example: 44a687e29ae1f428e7ebe305
-        sourceType:
-          type: string
-          description: Represents a custom field value source type.
-          example: WORKSPACE
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - TIMEENTRY
-        timeEntryId:
-          type: string
-          description: Represents time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        value:
-          type: object
-          description: Represents custom field value.
-          example: 20231211-12345
-      description: Represents a list of custom field value objects.
-    TemplatePatchRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          minLength: 1
-          type: string
-          description: Represents a template name.
-          example: exampleTemplate
     TimeEntryWithCustomFieldsDto:
       type: object
       properties:
@@ -374,6 +361,99 @@ components:
           description: Represents a workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
       description: Represents a set of template time entries.
+    TemplateDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Represents a template identifier across the system.
+          example: 5b6d45c4b0798751107762b8
+        name:
+          type: string
+          description: Represents a template name.
+          example: exampleTemplate
+        userId:
+          type: string
+          description: Represents a user identifier across the system.
+          example: 89b687e29ae1f428e7ebe912
+        workspaceId:
+          type: string
+          description: Represents a workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+    TimeIntervalDto:
+      type: object
+      properties:
+        duration:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        end:
+          type: string
+          format: date-time
+        offsetEnd:
+          type: integer
+          format: int32
+        offsetStart:
+          type: integer
+          format: int32
+        start:
+          type: string
+          format: date-time
+        timeZone:
+          type: string
+        zonedEnd:
+          type: string
+          format: date-time
+        zonedStart:
+          type: string
+          format: date-time
+      description: Represents a time interval object.
+    CustomFieldValueDto:
+      type: object
+      properties:
+        customFieldId:
+          type: string
+          description: Represents custom field identifier across the system.
+          example: 44a687e29ae1f428e7ebe305
+        sourceType:
+          type: string
+          description: Represents a custom field value source type.
+          example: WORKSPACE
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - TIMEENTRY
+        timeEntryId:
+          type: string
+          description: Represents time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        value:
+          type: object
+          description: Represents custom field value.
+          example: 20231211-12345
+      description: Represents a list of custom field value objects.
+    ProjectTaskTupleDto:
+      type: object
+      properties:
+        projectId:
+          type: string
+          description: Represents a project identifier across the system.
+          example: 25b687e29ae1f428e7ebe123
+        taskId:
+          type: string
+          description: Represents a task identifier across the system.
+          example: 54m377ddd3fcab07cfbb432w
+      description: Represents a list of template's projects and tasks.
+    TemplatePatchRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Represents a template name.
+          example: exampleTemplate
     TemplateRequest:
       required:
       - name
@@ -405,86 +485,6 @@ components:
           description: Represents a date of the starting day of the week in the yyyy-MM-dd format.
           format: date
           example: '2019-08-24'
-    ProjectTaskTupleRequest:
-      required:
-      - projectId
-      type: object
-      properties:
-        projectId:
-          minLength: 1
-          type: string
-          description: Represents a project identifier across the system.
-          example: 25b687e29ae1f428e7ebe123
-        taskId:
-          type: string
-          description: Represents a task identifier across the system.
-          example: 54m377ddd3fcab07cfbb432w
-        type:
-          type: string
-          description: Represents a time entry type.
-          example: REGULAR
-      description: Represents a list of template's projects and tasks.
-    TimeIntervalDto:
-      type: object
-      properties:
-        duration:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        end:
-          type: string
-          format: date-time
-        offsetEnd:
-          type: integer
-          format: int32
-        offsetStart:
-          type: integer
-          format: int32
-        start:
-          type: string
-          format: date-time
-        timeZone:
-          type: string
-        zonedEnd:
-          type: string
-          format: date-time
-        zonedStart:
-          type: string
-          format: date-time
-      description: Represents a time interval object.
-    TemplateDtoImpl:
-      type: object
-      properties:
-        entries:
-          type: array
-          description: Represents a set of template time entries.
-          items:
-            $ref: '#/components/schemas/TimeEntryWithCustomFieldsDto'
-        id:
-          type: string
-          description: Represents a template identifier across the system.
-          example: 5b6d45c4b0798751107762b8
-        name:
-          type: string
-          description: Represents a template name.
-          example: exampleTemplate
-        projectsAndTasks:
-          type: array
-          description: Represents a list of template's projects and tasks.
-          items:
-            $ref: '#/components/schemas/ProjectTaskTupleDto'
-        userId:
-          type: string
-          description: Represents a user identifier across the system.
-          example: 89b687e29ae1f428e7ebe912
-        weekStart:
-          type: string
-          description: Represents a day of the week.
-          format: date
-        workspaceId:
-          type: string
-          description: Represents a workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
   securitySchemes:
     AddonKeyAuth:
       in: header

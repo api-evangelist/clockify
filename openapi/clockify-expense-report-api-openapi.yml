@@ -56,6 +56,25 @@ components:
           type: string
         manuallyInvoiced:
           type: boolean
+    ExpenseTotalsDtoV1:
+      type: object
+      description: Represents expense totals
+      properties:
+        expensesCount:
+          type: integer
+          format: int32
+          description: Represents expenses count
+          example: 2
+        totalAmount:
+          type: number
+          format: double
+          description: Represents total amount of expenses
+          example: 20
+        totalAmountBillable:
+          type: number
+          format: double
+          description: Represents total billable amount of expenses
+          example: 20
     ContainsUsersFilterV1:
       type: object
       properties:
@@ -87,189 +106,6 @@ components:
           - ACTIVE
           - PENDING
           - INACTIVE
-          example: ACTIVE
-    ExpenseDetailedReportDtoV1:
-      type: object
-      description: report
-      properties:
-        expenses:
-          type: array
-          description: Represents list of expenses
-          items:
-            $ref: '#/components/schemas/ExpenseReportDtoV1'
-        totals:
-          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
-    ExpenseReportFilterV1:
-      type: object
-      properties:
-        approvalState:
-          type: string
-          description: Represents an approval state
-          enum:
-          - APPROVED
-          - UNAPPROVED
-          - ALL
-          example: APPROVED
-        billable:
-          type: boolean
-          description: Indicates whether report is billable
-          example: true
-        categories:
-          $ref: '#/components/schemas/ContainsArchivedFilterV1'
-        clients:
-          $ref: '#/components/schemas/ContainsArchivedFilterV1'
-        currency:
-          $ref: '#/components/schemas/ContainsArchivedFilterV1'
-        dateRangeEnd:
-          type: string
-          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
-          example: '2021-10-27T23:59:59.999'
-          minLength: 1
-        dateRangeStart:
-          type: string
-          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
-          example: '2021-10-27T00:00:00'
-          minLength: 1
-        dateRangeType:
-          type: string
-          description: Represents date range type of expense report
-          enum:
-          - ABSOLUTE
-          - TODAY
-          - YESTERDAY
-          - THIS_WEEK
-          - LAST_WEEK
-          - PAST_TWO_WEEKS
-          - THIS_MONTH
-          - LAST_MONTH
-          - THIS_YEAR
-          - LAST_YEAR
-          example: TODAY
-        exportType:
-          type: string
-          description: Represents an export type
-          enum:
-          - JSON
-          - JSON_V1
-          - PDF
-          - CSV
-          - XLSX
-          - ZIP
-          example: JSON
-        invoicingState:
-          type: string
-          description: Represents an invoicing state
-          enum:
-          - INVOICED
-          - UNINVOICED
-          - ALL
-          example: INVOICED
-        note:
-          type: string
-          description: Represents a search term for filtering report entries by note
-          example: some note keyword
-        page:
-          type: integer
-          format: int32
-          description: Page number.
-          example: 1
-          minimum: 1
-        pageSize:
-          type: integer
-          format: int32
-          description: Page size.
-          example: 50
-          minimum: 1
-        projects:
-          $ref: '#/components/schemas/ContainsArchivedFilterV1'
-        sortColumn:
-          type: string
-          description: Represents expenses sort column
-          enum:
-          - ID
-          - PROJECT
-          - USER
-          - CATEGORY
-          - DATE
-          - AMOUNT
-          example: ID
-        sortOrder:
-          type: string
-          description: Represents a sort order
-          enum:
-          - ASCENDING
-          - DESCENDING
-          example: ASCENDING
-        tasks:
-          $ref: '#/components/schemas/ContainsTaskFilterV1'
-        timeZone:
-          type: string
-          description: Represents a time zone
-          example: Europe/Budapest
-        userGroups:
-          $ref: '#/components/schemas/ContainsUsersFilterV1'
-        userLocale:
-          type: string
-          description: Represents a user locale
-          example: en
-        users:
-          $ref: '#/components/schemas/ContainsUsersFilterV1'
-        weekStart:
-          type: string
-          description: Represents week start
-          enum:
-          - MONDAY
-          - TUESDAY
-          - WEDNESDAY
-          - THURSDAY
-          - FRIDAY
-          - SATURDAY
-          - SUNDAY
-          example: MONDAY
-        withoutNote:
-          type: boolean
-          description: If set to 'true', report will only include entries with empty note
-          example: false
-        zoomLevel:
-          type: string
-          description: Represents a zoom level
-          enum:
-          - WEEK
-          - MONTH
-          - YEAR
-          example: WEEK
-      required:
-      - dateRangeEnd
-      - dateRangeStart
-    ContainsArchivedFilterV1:
-      type: object
-      properties:
-        contains:
-          type: string
-          description: Represents a contains type.
-          enum:
-          - CONTAINS
-          - DOES_NOT_CONTAIN
-          - CONTAINS_ONLY
-          example: CONTAINS
-        ids:
-          type: array
-          description: Filter includes provided list of ids.
-          example:
-          - 5b715448b079875110792222
-          - 5b715448b079875110791111
-          items:
-            type: string
-            description: Filter includes provided list of ids.
-            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
-          uniqueItems: true
-        status:
-          type: string
-          description: Filter entities in 'contains' by their status.
-          enum:
-          - ACTIVE
-          - ARCHIVED
-          - ALL
           example: ACTIVE
     ExpenseReportDtoV1:
       type: object
@@ -449,6 +285,189 @@ components:
           type: string
           description: Represents workspace identifier across the system.
           example: 5b715612b079875110791121
+    ContainsArchivedFilterV1:
+      type: object
+      properties:
+        contains:
+          type: string
+          description: Represents a contains type.
+          enum:
+          - CONTAINS
+          - DOES_NOT_CONTAIN
+          - CONTAINS_ONLY
+          example: CONTAINS
+        ids:
+          type: array
+          description: Filter includes provided list of ids.
+          example:
+          - 5b715448b079875110792222
+          - 5b715448b079875110791111
+          items:
+            type: string
+            description: Filter includes provided list of ids.
+            example: '["5b715448b079875110792222","5b715448b079875110791111"]'
+          uniqueItems: true
+        status:
+          type: string
+          description: Filter entities in 'contains' by their status.
+          enum:
+          - ACTIVE
+          - ARCHIVED
+          - ALL
+          example: ACTIVE
+    ExpenseReportFilterV1:
+      type: object
+      properties:
+        approvalState:
+          type: string
+          description: Represents an approval state
+          enum:
+          - APPROVED
+          - UNAPPROVED
+          - ALL
+          example: APPROVED
+        billable:
+          type: boolean
+          description: Indicates whether report is billable
+          example: true
+        categories:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        clients:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        currency:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        dateRangeEnd:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2021-10-27T23:59:59.999'
+          minLength: 1
+        dateRangeStart:
+          type: string
+          description: Provide date in format YYYY-MM-DDTHH:MM:SS.ssssss. The system interprets this value based on the user's timezone (provided in the timeZone request parameter or the timezone configured in the user profile)
+          example: '2021-10-27T00:00:00'
+          minLength: 1
+        dateRangeType:
+          type: string
+          description: Represents date range type of expense report
+          enum:
+          - ABSOLUTE
+          - TODAY
+          - YESTERDAY
+          - THIS_WEEK
+          - LAST_WEEK
+          - PAST_TWO_WEEKS
+          - THIS_MONTH
+          - LAST_MONTH
+          - THIS_YEAR
+          - LAST_YEAR
+          example: TODAY
+        exportType:
+          type: string
+          description: Represents an export type
+          enum:
+          - JSON
+          - JSON_V1
+          - PDF
+          - CSV
+          - XLSX
+          - ZIP
+          example: JSON
+        invoicingState:
+          type: string
+          description: Represents an invoicing state
+          enum:
+          - INVOICED
+          - UNINVOICED
+          - ALL
+          example: INVOICED
+        note:
+          type: string
+          description: Represents a search term for filtering report entries by note
+          example: some note keyword
+        page:
+          type: integer
+          format: int32
+          description: Page number.
+          example: 1
+          minimum: 1
+        pageSize:
+          type: integer
+          format: int32
+          description: Page size.
+          example: 50
+          minimum: 1
+        projects:
+          $ref: '#/components/schemas/ContainsArchivedFilterV1'
+        sortColumn:
+          type: string
+          description: Represents expenses sort column
+          enum:
+          - ID
+          - PROJECT
+          - USER
+          - CATEGORY
+          - DATE
+          - AMOUNT
+          example: ID
+        sortOrder:
+          type: string
+          description: Represents a sort order
+          enum:
+          - ASCENDING
+          - DESCENDING
+          example: ASCENDING
+        tasks:
+          $ref: '#/components/schemas/ContainsTaskFilterV1'
+        timeZone:
+          type: string
+          description: Represents a time zone
+          example: Europe/Budapest
+        userGroups:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        userLocale:
+          type: string
+          description: Represents a user locale
+          example: en
+        users:
+          $ref: '#/components/schemas/ContainsUsersFilterV1'
+        weekStart:
+          type: string
+          description: Represents week start
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+          example: MONDAY
+        withoutNote:
+          type: boolean
+          description: If set to 'true', report will only include entries with empty note
+          example: false
+        zoomLevel:
+          type: string
+          description: Represents a zoom level
+          enum:
+          - WEEK
+          - MONTH
+          - YEAR
+          example: WEEK
+      required:
+      - dateRangeEnd
+      - dateRangeStart
+    ExpenseDetailedReportDtoV1:
+      type: object
+      description: report
+      properties:
+        expenses:
+          type: array
+          description: Represents list of expenses
+          items:
+            $ref: '#/components/schemas/ExpenseReportDtoV1'
+        totals:
+          $ref: '#/components/schemas/ExpenseTotalsDtoV1'
     ContainsTaskFilterV1:
       type: object
       description: Represents filter criteria for expenses associated with tasks.
@@ -480,25 +499,6 @@ components:
           - ARCHIVED
           - ALL
           example: ACTIVE
-    ExpenseTotalsDtoV1:
-      type: object
-      description: Represents expense totals
-      properties:
-        expensesCount:
-          type: integer
-          format: int32
-          description: Represents expenses count
-          example: 2
-        totalAmount:
-          type: number
-          format: double
-          description: Represents total amount of expenses
-          example: 20
-        totalAmountBillable:
-          type: number
-          format: double
-          description: Represents total billable amount of expenses
-          example: 20
   securitySchemes:
     AddonKeyAuth:
       in: header

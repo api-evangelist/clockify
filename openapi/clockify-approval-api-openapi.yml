@@ -296,92 +296,6 @@ paths:
       - AddonKeyAuth: []
 components:
   schemas:
-    TagDto:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Indicates whether tag is archived or not.
-          default: false
-        id:
-          type: string
-          description: Represents tag identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        name:
-          type: string
-          description: Represents tag name.
-          example: Sprint1
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-      description: Represents a list of tag objects.
-    TimeEntryInfoDto:
-      type: object
-      properties:
-        approvalRequestId:
-          type: string
-          description: Represents approval identifier across the system.
-          example: 5e4117fe8c625f38930d57b7
-        billable:
-          type: boolean
-          description: Indicates whether time entry is billable or not.
-          default: false
-        costRate:
-          $ref: '#/components/schemas/RateDto'
-        customFieldValues:
-          type: array
-          description: Represents a list of custom field value objects.
-          items:
-            $ref: '#/components/schemas/CustomFieldValueDto'
-        description:
-          type: string
-          description: Represents a time entry description.
-          example: This is a sample time entry description.
-        hourlyRate:
-          $ref: '#/components/schemas/RateDto'
-        id:
-          type: string
-          description: Represents time entry identifier across the system.
-          example: 5b715448b0798751107918ab
-        isLocked:
-          type: boolean
-          description: Indicates whether time entry is locked or not.
-          default: false
-        project:
-          $ref: '#/components/schemas/ProjectInfoDto'
-        tags:
-          type: array
-          description: Represents a list of tag objects.
-          items:
-            $ref: '#/components/schemas/TagDto'
-        task:
-          $ref: '#/components/schemas/TaskInfoDto'
-        timeInterval:
-          $ref: '#/components/schemas/TimeIntervalDto'
-        type:
-          type: string
-          description: Represents a time entry type enum.
-          example: REGULAR
-          enum:
-          - REGULAR
-          - BREAK
-          - HOLIDAY
-          - TIME_OFF
-      description: Represents a list of time entry info data transfer objects.
-    RateDto:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Represents an amount as integer.
-          format: int32
-          example: 10500
-        currency:
-          type: string
-          description: Represents a currency.
-          example: USD
-      description: Represents cost rate object.
     ApprovalRequestOwnerDtoV1:
       type: object
       properties:
@@ -410,135 +324,6 @@ components:
           description: Represents user name.
           example: johndoe
       description: Represents approval request owner object.
-    ApprovalRequestCreatorDtoV1:
-      type: object
-      properties:
-        userEmail:
-          type: string
-          description: Represents user email.
-          example: johhndoe@example.com
-        userId:
-          type: string
-          description: Represents user identifier across the system.
-          example: 5a0ab5acb07987125438b60f
-        userName:
-          type: string
-          description: Represents user name.
-          example: johhndoe
-      description: Represents approval request creator object.
-    TaskInfoDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Represents task identifier across the system.
-          example: 5b715448b0798751107918ab
-        name:
-          type: string
-          description: Represents task name.
-          example: Bugfixing
-      description: Represents a project info object.
-    CustomFieldValueDto:
-      type: object
-      properties:
-        customFieldId:
-          type: string
-          description: Represents custom field identifier across the system.
-          example: 44a687e29ae1f428e7ebe305
-        sourceType:
-          type: string
-          description: Represents a custom field value source type.
-          example: WORKSPACE
-          enum:
-          - WORKSPACE
-          - PROJECT
-          - TIMEENTRY
-        timeEntryId:
-          type: string
-          description: Represents time entry identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        value:
-          type: object
-          description: Represents custom field value.
-          example: 20231211-12345
-      description: Represents a list of custom field value objects.
-    ApprovalRequestDtoV1:
-      type: object
-      properties:
-        creator:
-          $ref: '#/components/schemas/ApprovalRequestCreatorDtoV1'
-        dateRange:
-          $ref: '#/components/schemas/DateRangeDto'
-        id:
-          type: string
-          description: Represents approval request identifier across the workspace.
-          example: 567687e29ae1f428e7ebf564
-        owner:
-          $ref: '#/components/schemas/ApprovalRequestOwnerDtoV1'
-        status:
-          $ref: '#/components/schemas/ApprovalRequestStatusDtoV1'
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-      description: Represents a valid approval request data transfer object.
-    ProjectInfoDto:
-      type: object
-      properties:
-        clientId:
-          type: string
-          description: Represents client identifier across the system.
-          example: 64c777ddd3fcab07cfbb210c
-        clientName:
-          type: string
-          description: Represents client name.
-          example: Client X
-        color:
-          type: string
-          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
-          example: '#000000'
-        id:
-          type: string
-          description: Represents project identifier across the system.
-          example: 5b641568b07987035750505e
-        name:
-          type: string
-          description: Represents a project name.
-          example: Software Development
-      description: Represents a project info object.
-    ExpenseCategoryDto:
-      type: object
-      properties:
-        archived:
-          type: boolean
-          description: Flag that indicates whether the expense category is archived or not.
-          default: false
-        hasUnitPrice:
-          type: boolean
-          description: Represents whether expense category has unit price or none.
-          default: false
-        id:
-          type: string
-          description: Represents expense category identifier across the system.
-          example: 89a687e29ae1f428e7ebe303
-        name:
-          type: string
-          description: Represents expense category name.
-          example: Procurement
-        priceInCents:
-          type: integer
-          description: Represents price in cents as integer.
-          format: int32
-          example: 1000
-        unit:
-          type: string
-          description: Represents expense category unit.
-          example: piece
-        workspaceId:
-          type: string
-          description: Represents workspace identifier across the system.
-          example: 64a687e29ae1f428e7ebe303
-      description: Represents an expense category object.
     CreateApprovalRequest:
       required:
       - periodStart
@@ -557,55 +342,6 @@ components:
           type: string
           description: Specifies an approval period start date in yyyy-MM-ddThh:mm:ssZ format.
           example: '2020-01-01T00:00:00.000Z'
-    ApprovalDetailsDtoV1:
-      type: object
-      properties:
-        approvalRequest:
-          $ref: '#/components/schemas/ApprovalRequestDtoV1'
-        approvedTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        billableAmount:
-          type: number
-          format: double
-          example: 2500
-        billableTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        breakTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        costAmount:
-          type: number
-          description: Represents an amount.
-          format: double
-          example: 5000
-        entries:
-          type: array
-          description: Represents a list of time entry info data transfer objects.
-          items:
-            $ref: '#/components/schemas/TimeEntryInfoDto'
-        expenseTotal:
-          type: number
-          description: Represents an amount.
-          format: double
-          example: 7500
-        expenses:
-          type: array
-          description: Represents a list of expense hydrated data transfer objects.
-          items:
-            $ref: '#/components/schemas/ExpenseHydratedDto'
-        pendingTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
-        trackedTime:
-          type: string
-          description: Represents a time duration.
-          example: PT1H30M
     ApprovalRequestStatusDtoV1:
       type: object
       properties:
@@ -637,25 +373,18 @@ components:
           description: Represents user name.
           example: juandelacruz
       description: Represents approval request status object.
-    UpdateApprovalRequest:
-      required:
-      - state
+    TaskInfoDto:
       type: object
       properties:
-        note:
+        id:
           type: string
-          description: Additional notes for the approval request.
-          example: This is a sample note.
-        state:
+          description: Represents task identifier across the system.
+          example: 5b715448b0798751107918ab
+        name:
           type: string
-          description: Specifies the approval state to set.
-          example: PENDING
-          enum:
-          - PENDING
-          - APPROVED
-          - WITHDRAWN_SUBMISSION
-          - WITHDRAWN_APPROVAL
-          - REJECTED
+          description: Represents task name.
+          example: Bugfixing
+      description: Represents a project info object.
     ExpenseHydratedDto:
       type: object
       properties:
@@ -745,16 +474,78 @@ components:
           description: Represents workspace identifier across the system.
           example: 64a687e29ae1f428e7ebe303
       description: Represents a list of expense hydrated data transfer objects.
-    DateRangeDto:
+    ExpenseCategoryDto:
       type: object
       properties:
-        end:
+        archived:
+          type: boolean
+          description: Flag that indicates whether the expense category is archived or not.
+          default: false
+        hasUnitPrice:
+          type: boolean
+          description: Represents whether expense category has unit price or none.
+          default: false
+        id:
           type: string
-          format: date-time
-        start:
+          description: Represents expense category identifier across the system.
+          example: 89a687e29ae1f428e7ebe303
+        name:
           type: string
-          format: date-time
-      description: Represents date range object.
+          description: Represents expense category name.
+          example: Procurement
+        priceInCents:
+          type: integer
+          description: Represents price in cents as integer.
+          format: int32
+          example: 1000
+        unit:
+          type: string
+          description: Represents expense category unit.
+          example: piece
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents an expense category object.
+    UpdateApprovalRequest:
+      required:
+      - state
+      type: object
+      properties:
+        note:
+          type: string
+          description: Additional notes for the approval request.
+          example: This is a sample note.
+        state:
+          type: string
+          description: Specifies the approval state to set.
+          example: PENDING
+          enum:
+          - PENDING
+          - APPROVED
+          - WITHDRAWN_SUBMISSION
+          - WITHDRAWN_APPROVAL
+          - REJECTED
+    TagDto:
+      type: object
+      properties:
+        archived:
+          type: boolean
+          description: Indicates whether tag is archived or not.
+          default: false
+        id:
+          type: string
+          description: Represents tag identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        name:
+          type: string
+          description: Represents tag name.
+          example: Sprint1
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents a list of tag objects.
     TimeIntervalDto:
       type: object
       properties:
@@ -783,6 +574,215 @@ components:
           type: string
           format: date-time
       description: Represents a time interval object.
+    ApprovalRequestDtoV1:
+      type: object
+      properties:
+        creator:
+          $ref: '#/components/schemas/ApprovalRequestCreatorDtoV1'
+        dateRange:
+          $ref: '#/components/schemas/DateRangeDto'
+        id:
+          type: string
+          description: Represents approval request identifier across the workspace.
+          example: 567687e29ae1f428e7ebf564
+        owner:
+          $ref: '#/components/schemas/ApprovalRequestOwnerDtoV1'
+        status:
+          $ref: '#/components/schemas/ApprovalRequestStatusDtoV1'
+        workspaceId:
+          type: string
+          description: Represents workspace identifier across the system.
+          example: 64a687e29ae1f428e7ebe303
+      description: Represents a valid approval request data transfer object.
+    ProjectInfoDto:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Represents client identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        clientName:
+          type: string
+          description: Represents client name.
+          example: Client X
+        color:
+          type: string
+          description: 'Color format ^#(?:[0-9a-fA-F]{6}){1}$. Explanation: A valid color code should start with ''#'' and consist of six hexadecimal characters, representing a color in hexadecimal format. Color value is in standard RGB hexadecimal format.'
+          example: '#000000'
+        id:
+          type: string
+          description: Represents project identifier across the system.
+          example: 5b641568b07987035750505e
+        name:
+          type: string
+          description: Represents a project name.
+          example: Software Development
+      description: Represents a project info object.
+    CustomFieldValueDto:
+      type: object
+      properties:
+        customFieldId:
+          type: string
+          description: Represents custom field identifier across the system.
+          example: 44a687e29ae1f428e7ebe305
+        sourceType:
+          type: string
+          description: Represents a custom field value source type.
+          example: WORKSPACE
+          enum:
+          - WORKSPACE
+          - PROJECT
+          - TIMEENTRY
+        timeEntryId:
+          type: string
+          description: Represents time entry identifier across the system.
+          example: 64c777ddd3fcab07cfbb210c
+        value:
+          type: object
+          description: Represents custom field value.
+          example: 20231211-12345
+      description: Represents a list of custom field value objects.
+    ApprovalRequestCreatorDtoV1:
+      type: object
+      properties:
+        userEmail:
+          type: string
+          description: Represents user email.
+          example: johhndoe@example.com
+        userId:
+          type: string
+          description: Represents user identifier across the system.
+          example: 5a0ab5acb07987125438b60f
+        userName:
+          type: string
+          description: Represents user name.
+          example: johhndoe
+      description: Represents approval request creator object.
+    DateRangeDto:
+      type: object
+      properties:
+        end:
+          type: string
+          format: date-time
+        start:
+          type: string
+          format: date-time
+      description: Represents date range object.
+    RateDto:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Represents an amount as integer.
+          format: int32
+          example: 10500
+        currency:
+          type: string
+          description: Represents a currency.
+          example: USD
+      description: Represents cost rate object.
+    ApprovalDetailsDtoV1:
+      type: object
+      properties:
+        approvalRequest:
+          $ref: '#/components/schemas/ApprovalRequestDtoV1'
+        approvedTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        billableAmount:
+          type: number
+          format: double
+          example: 2500
+        billableTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        breakTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        costAmount:
+          type: number
+          description: Represents an amount.
+          format: double
+          example: 5000
+        entries:
+          type: array
+          description: Represents a list of time entry info data transfer objects.
+          items:
+            $ref: '#/components/schemas/TimeEntryInfoDto'
+        expenseTotal:
+          type: number
+          description: Represents an amount.
+          format: double
+          example: 7500
+        expenses:
+          type: array
+          description: Represents a list of expense hydrated data transfer objects.
+          items:
+            $ref: '#/components/schemas/ExpenseHydratedDto'
+        pendingTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+        trackedTime:
+          type: string
+          description: Represents a time duration.
+          example: PT1H30M
+    TimeEntryInfoDto:
+      type: object
+      properties:
+        approvalRequestId:
+          type: string
+          description: Represents approval identifier across the system.
+          example: 5e4117fe8c625f38930d57b7
+        billable:
+          type: boolean
+          description: Indicates whether time entry is billable or not.
+          default: false
+        costRate:
+          $ref: '#/components/schemas/RateDto'
+        customFieldValues:
+          type: array
+          description: Represents a list of custom field value objects.
+          items:
+            $ref: '#/components/schemas/CustomFieldValueDto'
+        description:
+          type: string
+          description: Represents a time entry description.
+          example: This is a sample time entry description.
+        hourlyRate:
+          $ref: '#/components/schemas/RateDto'
+        id:
+          type: string
+          description: Represents time entry identifier across the system.
+          example: 5b715448b0798751107918ab
+        isLocked:
+          type: boolean
+          description: Indicates whether time entry is locked or not.
+          default: false
+        project:
+          $ref: '#/components/schemas/ProjectInfoDto'
+        tags:
+          type: array
+          description: Represents a list of tag objects.
+          items:
+            $ref: '#/components/schemas/TagDto'
+        task:
+          $ref: '#/components/schemas/TaskInfoDto'
+        timeInterval:
+          $ref: '#/components/schemas/TimeIntervalDto'
+        type:
+          type: string
+          description: Represents a time entry type enum.
+          example: REGULAR
+          enum:
+          - REGULAR
+          - BREAK
+          - HOLIDAY
+          - TIME_OFF
+      description: Represents a list of time entry info data transfer objects.
   securitySchemes:
     AddonKeyAuth:
       in: header
