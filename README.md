@@ -1,4 +1,4 @@
-# Clockify (clockify)
+# Clockify
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,67 +66,152 @@
 
 Clockify is a time tracking and timesheet platform used by teams to track work hours across projects with a timer, manual timesheets, kiosk check-in, scheduling, expense tracking, invoicing, and reporting. The Clockify REST API exposes workspaces, users, projects, tasks, tags, clients, time entries, reports, and webhooks, and authenticates with an X-Api-Key header.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/clockify/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/clockify/refs/heads/main/apis.yml)
+**Areas:** Time Tracking · Timesheets · Productivity · Project Management · Reporting · Invoicing · Workforce
 
-## Scope
+## Clockify on APIs.io
 
-- **Type:** Index
+Everything profiled for Clockify is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/clockify/](https://apis.io/providers/clockify/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (28)
 
-- Time Tracking
-- Timesheets
-- Productivity
-- Project Management
-- Reporting
-- Invoicing
-- Workforce
+- [Clockify REST API](https://apis.io/apis/clockify/rest-api/) — REST API for Clockify providing access to workspaces, users, groups, projects, tasks, clients, tags, time entries, reports, webhooks, and approvals.…
+- [Clockify Approval API](https://apis.io/apis/clockify/clockify-approval-api/) — The Approval API from Clockify — 5 operation(s) for approval.
+- [Clockify Audit Log Report API](https://apis.io/apis/clockify/clockify-audit-log-report-api/) — The Audit Log Report API from Clockify — 1 operation(s) for audit log report.
+- [Clockify Balance API](https://apis.io/apis/clockify/clockify-balance-api/) — The Balance API from Clockify — 2 operation(s) for balance.
+- [Clockify Client API](https://apis.io/apis/clockify/clockify-client-api/) — The Client API from Clockify — 2 operation(s) for client.
+- [Clockify Custom fields API](https://apis.io/apis/clockify/clockify-custom-fields-api/) — The Custom fields API from Clockify — 4 operation(s) for custom fields.
+- [Clockify Entity changes (Experimental) API](https://apis.io/apis/clockify/clockify-entity-changes-experimental-api/) — For use case see [Entity Changes Use Cases](#tag/Entity-Changes:-Use-cases)
+- [Clockify Expense API](https://apis.io/apis/clockify/clockify-expense-api/) — The Expense API from Clockify — 6 operation(s) for expense.
+- [Clockify Expense Report API](https://apis.io/apis/clockify/clockify-expense-report-api/) — The Expense Report API from Clockify — 1 operation(s) for expense report.
+- [Clockify Group API](https://apis.io/apis/clockify/clockify-group-api/) — The Group API from Clockify — 4 operation(s) for group.
+- [Clockify Holiday API](https://apis.io/apis/clockify/clockify-holiday-api/) — The Holiday API from Clockify — 3 operation(s) for holiday.
+- [Clockify Invoice API](https://apis.io/apis/clockify/clockify-invoice-api/) — The Invoice API from Clockify — 12 operation(s) for invoice.
+- [Clockify Policy API](https://apis.io/apis/clockify/clockify-policy-api/) — The Policy API from Clockify — 2 operation(s) for policy.
+- [Clockify Project API](https://apis.io/apis/clockify/clockify-project-api/) — The Project API from Clockify — 8 operation(s) for project.
+- [Clockify Scheduling API](https://apis.io/apis/clockify/clockify-scheduling-api/) — The Scheduling API from Clockify — 10 operation(s) for scheduling.
+- [Clockify Scheduling (Deprecated) API](https://apis.io/apis/clockify/clockify-scheduling-deprecated-api/) — This endpoint group contains deprecated endpoints from the [Scheduling](#tag/Scheduling) endpoint group.
+- [Clockify Shared Report API](https://apis.io/apis/clockify/clockify-shared-report-api/) — The Shared Report API from Clockify — 3 operation(s) for shared report.
+- [Clockify Tag API](https://apis.io/apis/clockify/clockify-tag-api/) — The Tag API from Clockify — 2 operation(s) for tag.
+- [Clockify Task API](https://apis.io/apis/clockify/clockify-task-api/) — The Task API from Clockify — 4 operation(s) for task.
+- [Clockify Team Report API](https://apis.io/apis/clockify/clockify-team-report-api/) — The Team Report API from Clockify — 1 operation(s) for team report.
+- [Clockify Template (Deprecated) API](https://apis.io/apis/clockify/clockify-template-deprecated-api/) — This endpoint group is deprecated and should not be used.
+- [Clockify Time entry API](https://apis.io/apis/clockify/clockify-time-entry-api/) — The Time entry API from Clockify — 6 operation(s) for time entry.
+- [Clockify Time Entry Report API](https://apis.io/apis/clockify/clockify-time-entry-report-api/) — The Time Entry Report API from Clockify — 3 operation(s) for time entry report.
+- [Clockify Time Off API](https://apis.io/apis/clockify/clockify-time-off-api/) — The Time Off API from Clockify — 4 operation(s) for time off.
+- [Clockify User API](https://apis.io/apis/clockify/clockify-user-api/) — The User API from Clockify — 8 operation(s) for user.
+- [Clockify Webhooks API](https://apis.io/apis/clockify/clockify-webhooks-api/) — The Webhooks API from Clockify — 5 operation(s) for webhooks.
+- [Clockify Workspace API](https://apis.io/apis/clockify/clockify-workspace-api/) — The Workspace API from Clockify — 8 operation(s) for workspace.
+- [Clockify Workspace (Deprecated) API](https://apis.io/apis/clockify/clockify-workspace-deprecated-api/) — This endpoint group contains deprecated endpoints from the [Workspace](#tag/Workspace) endpoint group.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Clockify REST API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-REST API for Clockify providing access to workspaces, users, groups, projects, tasks, clients, tags, time entries, reports, webhooks, and approvals. Authentication uses the X-Api-Key request header with a key generated from a user's Profile Settings; the API enforces a 10 requests per second per key rate limit and regional URL prefixes for EU and other workspaces.
+- [Clockify Agentic Access](https://apis.io/agentic-access/clockify/clockify-agentic-access/)
 
-- **Human URL:** [https://docs.clockify.me/](https://docs.clockify.me/)
-- **Base URL:** `https://api.clockify.me/api/v1`
+#### Collections (28)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Time Entries
-- Workspaces
-- Projects
-- Tasks
-- Users
-- Reports
-- Webhooks
-- API Key
+- [Clockify API](https://apis.io/collections/clockify/open-clockify/)
+- [Clockify Approval API](https://apis.io/collections/clockify/open-clockify-approval-api/)
+- [Clockify Approval Audit Log Report API](https://apis.io/collections/clockify/open-clockify-audit-log-report-api/)
+- [Clockify Approval Balance API](https://apis.io/collections/clockify/open-clockify-balance-api/)
+- [Clockify Approval Client API](https://apis.io/collections/clockify/open-clockify-client-api/)
+- [Clockify Approval Custom fields API](https://apis.io/collections/clockify/open-clockify-custom-fields-api/)
+- [Clockify Approval Entity changes (Experimental) API](https://apis.io/collections/clockify/open-clockify-entity-changes-experimental-api/)
+- [Clockify Approval Expense API](https://apis.io/collections/clockify/open-clockify-expense-api/)
+- [Clockify Approval Expense Report API](https://apis.io/collections/clockify/open-clockify-expense-report-api/)
+- [Clockify Approval Group API](https://apis.io/collections/clockify/open-clockify-group-api/)
+- [Clockify Approval Holiday API](https://apis.io/collections/clockify/open-clockify-holiday-api/)
+- [Clockify Approval Invoice API](https://apis.io/collections/clockify/open-clockify-invoice-api/)
+- [Clockify Approval Policy API](https://apis.io/collections/clockify/open-clockify-policy-api/)
+- [Clockify Approval Project API](https://apis.io/collections/clockify/open-clockify-project-api/)
+- [Clockify Approval Scheduling API](https://apis.io/collections/clockify/open-clockify-scheduling-api/)
+- [Clockify Approval Scheduling (Deprecated) API](https://apis.io/collections/clockify/open-clockify-scheduling-deprecated-api/)
+- [Clockify Approval Shared Report API](https://apis.io/collections/clockify/open-clockify-shared-report-api/)
+- [Clockify Approval Tag API](https://apis.io/collections/clockify/open-clockify-tag-api/)
+- [Clockify Approval Task API](https://apis.io/collections/clockify/open-clockify-task-api/)
+- [Clockify Approval Team Report API](https://apis.io/collections/clockify/open-clockify-team-report-api/)
+- [Clockify Approval Template (Deprecated) API](https://apis.io/collections/clockify/open-clockify-template-deprecated-api/)
+- [Clockify Approval Time entry API](https://apis.io/collections/clockify/open-clockify-time-entry-api/)
+- [Clockify Approval Time Entry Report API](https://apis.io/collections/clockify/open-clockify-time-entry-report-api/)
+- [Clockify Approval Time Off API](https://apis.io/collections/clockify/open-clockify-time-off-api/)
+- [Clockify Approval User API](https://apis.io/collections/clockify/open-clockify-user-api/)
+- …and 3 more published on APIs.io
 
-#### Properties
+#### Security (4)
 
-- [Documentation](https://docs.clockify.me/)
-- [A P I  Overview](https://clockify.me/help/getting-started/clockify-api-overview)
-- [Authentication](https://clockify.me/help/troubleshooting/general-api-troubleshooting/where-to-generate-api-key-for-account)
-- [Postman Collection](collections/clockify.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/clockify.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Clockify Authentication](https://apis.io/security/clockify/clockify-authentication/)
+- [Clockify Domain Security](https://apis.io/security/clockify/clockify-domain-security/)
+- [Clockify Trust Center](https://apis.io/security/clockify/clockify-trust-center/)
+- [Clockify Vulnerability Disclosure](https://apis.io/security/clockify/clockify-vulnerability-disclosure/)
 
-- [GitHub Organization](https://github.com/clockify)
-- [LinkedIn](https://www.linkedin.com/company/clockify)
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://clockify.me)
 - [Documentation](https://docs.clockify.me/)
 - [Pricing](https://clockify.me/pricing)
-- [Sign Up](https://app.clockify.me/en/signup)
-- [Help  Center](https://clockify.me/help)
-- [L L Ms Txt](https://api.clockify.me/llms.txt)
+- [Blog](https://clockify.me/blog/feed/)
+- [GitHub](https://github.com/clockify)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 30.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 41.6 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 31.6 |
+
+**Agent readiness 22.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/clockify/](https://apis.io/providers/clockify/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Clockify: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/clockify/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
